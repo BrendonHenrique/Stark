@@ -1,0 +1,18 @@
+<template>
+  <q-list>
+    <q-item v-for="nav in navs" clickable exact class="text-grey-6 text-h6 text-thin"
+    route :to="nav.to" :key="nav.label">
+      <q-item-section avatar>
+        <q-icon :name="nav.icon" />
+      </q-item-section>
+      <q-item-section>
+        <q-item-label>{{nav.label}}</q-item-label>
+      </q-item-section>
+    </q-item>
+  </q-list>
+</template>
+<script>
+  export default{
+    props:['navs']
+  }
+</script>
