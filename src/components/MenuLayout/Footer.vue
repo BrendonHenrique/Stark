@@ -1,6 +1,5 @@
 <template>
   <q-footer elevated class="primary">
-
     <div id="mobile-footer">
       <q-tabs>
         <q-route-tab
@@ -10,23 +9,17 @@
         :to="nav.to" />
       </q-tabs>
     </div>
-
     <div id="desktop-footer">
       <q-toolbar>
         <q-toolbar-title class="row">
-
           <img alt="garten logo" class="logo" src="statics/garten2.svg">
-
           <q-space />
-
           <p class="text-weight-thin text-subtitle3 q-mt-md">
-          {{date}}
+            {{date}}
           </p>
-
         </q-toolbar-title>
       </q-toolbar>
     </div>
-
   </q-footer>
 </template>
 

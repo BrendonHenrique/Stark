@@ -1,9 +1,9 @@
 <template>
   <div id="layout-drawer">
     <link href="https://fonts.googleapis.com/css?family=Orbitron&display=swap" rel="stylesheet">
-    <q-drawer  elevated bordered :value="drawerSide" content-class="bg-grey-3" :breakpoint="767"
+    <q-drawer elevated bordered :value="drawerSide" content-class="bg-grey-3" :breakpoint="767"
     :width="250" :side="side">
-      <slot></slot>
+      <slot>  </slot>
     </q-drawer>
   </div>
 </template>

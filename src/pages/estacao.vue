@@ -1,6 +1,6 @@
 <template>
   <q-page>
-    página principal
+    estação
   </q-page>
 </template>
 
