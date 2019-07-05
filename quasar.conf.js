@@ -50,7 +50,16 @@ module.exports = function (ctx) {
         'QSpace',
         'QAvatar',
         'QImg',
-        'QScrollArea'
+        'QScrollArea',
+        'QSpinnerGears',
+        'QSeparator',
+        'QCard',
+        'QCardSection',
+        'QCardActions',
+        'QBanner',
+        'QAvatar',
+        'QImg',
+        'QChip'
 
       ],
 

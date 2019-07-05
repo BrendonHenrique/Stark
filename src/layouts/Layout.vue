@@ -5,12 +5,11 @@
     <layout-header
     @openDrawerLeft="drawerLeft = !drawerLeft"
     @openDrawerRight="drawerRight = !drawerRight" >
-        <q-toolbar>
-          <q-toolbar-title class="q-pt-md text-h3 text-center">
-            Stark
-          </q-toolbar-title>
-        </q-toolbar>
-      </q-header>
+      <q-toolbar>
+        <q-toolbar-title class="q-pt-md text-h3 text-center">
+          Stark
+        </q-toolbar-title>
+      </q-toolbar>
     </layout-header>
     <!--  -->
 
@@ -28,7 +27,7 @@
 
     <!-- page inside content -->
     <q-page-container>
-      <router-view />
+        <router-view />
     </q-page-container>
     <!--  -->
 
@@ -40,11 +39,15 @@
 </template>
 
 <script>
-
 import {  mapGetters } from 'vuex'
+import Vue from 'vue'
+import SequentialEntrance from 'vue-sequential-entrance'
+import 'vue-sequential-entrance/vue-sequential-entrance.css'
+import AnimatedNumber from "animated-number-vue";
+Vue.use(SequentialEntrance)
+
 
 export default {
-
   data () {
     return {
       drawerLeft: true,
@@ -63,3 +66,11 @@ export default {
   }
 }
 </script>
+<style>
+  .fade-enter-active, .fade-leave-active {
+    transition: opacity .2s;
+  }
+  .fade-enter, .fade-leave-to /* .fade-leave-active em versões anteriores a 2.1.8 */ {
+    opacity: 0;
+  }
+</style>

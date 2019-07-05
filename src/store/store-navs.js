@@ -1,6 +1,3 @@
-import Vue from 'vue'
-
-
 const state = {
   navs: [
     {
@@ -29,7 +26,6 @@ const state = {
       to: '/configuracoes'
     }
   ],
-
 }
 
 const mutations = {}

@@ -2,7 +2,7 @@
   <q-layout>
     <q-page-container>
       <q-page>
-        <p>página principal</p>
+        <p>relatórios</p>
       </q-page>
     </q-page-container>
   </q-layout>
