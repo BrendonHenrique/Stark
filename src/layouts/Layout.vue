@@ -1,41 +1,47 @@
 <template>
-  <q-layout view="hHh lpR fFf">
+  <div>
+    <div class="blur">
 
-    <!-- header -->
-    <layout-header
-    @openDrawerLeft="drawerLeft = !drawerLeft"
-    @openDrawerRight="drawerRight = !drawerRight" >
-      <q-toolbar>
-        <q-toolbar-title class="q-pt-md text-h3 text-center">
-          Stark
-        </q-toolbar-title>
-      </q-toolbar>
-    </layout-header>
-    <!--  -->
+    </div>
+    <q-layout view="hHh lpR fFf">
 
-    <!-- left side bar -->
-    <layout-drawer :drawerSide="drawerLeft" :side="'left'">
-      <navigator :navs="navs"></navigator>
-    </layout-drawer>
-    <!-- -->
+      <!-- header -->
+      <layout-header
+      @openDrawerLeft="drawerLeft = !drawerLeft"
+      @openDrawerRight="drawerRight = !drawerRight" >
+        <q-toolbar>
+          <q-toolbar-title class="q-pt-md text-h3 text-center">
+            Stark
+          </q-toolbar-title>
+        </q-toolbar>
+      </layout-header>
+      <!--  -->
 
-    <!-- right side navbar -->
-    <layout-drawer :drawerSide="drawerRight" :side="'right'">
-      <user-painel />
-    </layout-drawer>
-    <!-- -->
+      <!-- left side bar -->
+      <layout-drawer :drawerSide="drawerLeft" :side="'left'">
+        <navigator :navs="navs"></navigator>
+      </layout-drawer>
+      <!-- -->
 
-    <!-- page inside content -->
-    <q-page-container>
-        <router-view />
-    </q-page-container>
-    <!--  -->
+      <!-- right side navbar -->
+      <layout-drawer :drawerSide="drawerRight" :side="'right'">
+        <user-painel />
+      </layout-drawer>
+      <!-- -->
 
-    <!-- footer -->
-    <layout-footer :navs="navs" />
-    <!-- -->
+      <!-- page inside content -->
+        <q-page-container>
+            <router-view />
+        </q-page-container>
+      <!--  -->
 
-  </q-layout>
+      <!-- footer -->
+      <layout-footer :navs="navs" />
+      <!-- -->
+
+    </q-layout>
+  </div>
+
 </template>
 
 <script>
@@ -67,10 +73,11 @@ export default {
 }
 </script>
 <style>
-  .fade-enter-active, .fade-leave-active {
-    transition: opacity .2s;
-  }
-  .fade-enter, .fade-leave-to /* .fade-leave-active em versões anteriores a 2.1.8 */ {
-    opacity: 0;
+  .blur{
+    filter: grayscale(0%) blur(1px) saturate(0.25) opacity(1);
+    -webkit-filter: grayscale(0%) blur(1px) saturate(0.25) opacity(1);
+    background-image: url(../assets/bg3.png);
+    background-repeat: no-repeat;
+    background-attachment: fixed;
   }
 </style>
