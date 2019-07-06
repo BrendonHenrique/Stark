@@ -13,20 +13,16 @@
   </q-header>
  </div>
 </template>
-<style>
+<style lang="stylus">
 
-  @media (max-width: 767px){
-    .left-nav-menu{
-      display:none;
-    }
-  }
+  @media (max-width: 767px)
+    .left-nav-menu
+      display none
 
-  .menu-header {
-    font-family: 'Great Vibes';
-  }
+  .menu-header
+    font-family 'Great Vibes'
 
-  .q-header{
-    height:5rem;
-  }
+  .q-header
+    height 5rem
 
 </style>

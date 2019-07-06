@@ -34,23 +34,18 @@
   }
 </script>
 
-<style>
+<style lang="stylus">
 
-  @media screen and (min-width:768px){
-    #mobile-footer{
-      display:none;
-    }
-  }
+  @media screen and (min-width:768px)
+    #mobile-footer
+      display none
 
-  @media (max-width: 767px){
-    #desktop-footer{
-      display:none;
-    }
-  }
+  @media (max-width: 767px)
+    #desktop-footer
+      display none
 
-  .logo{
-    height:4rem;
-    margin-top:8px;
-  }
+  .logo
+    height 4rem
+    margin-top 8px
 
 </style>

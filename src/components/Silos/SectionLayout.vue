@@ -19,4 +19,3 @@
     <q-separator color="grey-4" />
   </div>
 </template>
-

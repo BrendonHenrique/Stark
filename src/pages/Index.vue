@@ -8,5 +8,9 @@
   </q-layout>
 </template>
 
-<style>
+<style lang="stylus">
+
+  .q-page
+    background grey
+
 </style>

@@ -72,16 +72,14 @@
   }
 </script>
 
-<style>
+<style lang="stylus">
 
-  .silo_id{
-    position:absolute;
-    bottom: 0;
-    right: 10px;
-  }
+  .silo_id
+    position absolute
+    bottom 0
+    right 10px
 
-  .q-card{
-    font-family: 'Orbitron', sans-serif;
-  }
+  .q-card
+    font-family 'Orbitron', sans-serif
 
 </style>

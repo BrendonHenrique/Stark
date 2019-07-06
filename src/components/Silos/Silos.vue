@@ -86,50 +86,44 @@
   }
 </script>
 
-<style>
+<style lang="stylus">
 
-  @media (max-width: 480px) {
-    div.sticky {
-      position: relative;
-      font-family: Orbitron;
-      height:115px;
-      width: 42px;
-      position:fixed;
-      left:0;
-      top:40%;
-      background-color: rgba(48,58,66, 0.4);
-      -webkit-border-radius: 25px 25px 25px 25px;
-      border-radius: 25px 25px 25px 25px;
-      font-size: 20px;
-      z-index:1;
-    }
-  }
+  @media (max-width: 480px)
+    div.sticky
+      position relative
+      font-family Orbitron
+      height 115px
+      width 42px
+      position fixed
+      left 0
+      top 40%
+      background-color rgba(48,58,66, 0.4)
+      -webkit-border-radius 25px 25px 25px 25px
+      border-radius 25px 25px 25px 25px
+      font-size 20px
+      z-index 1
 
-  @media (min-width: 481px) {
-    div.sticky {
-      display:none
-    }
-  }
-  .card-silo{
-    transition: all .4s ease-in-out;
-    -webkit-animation: entering 2s;
-    animation: entering 2s;
-  }
-  .card-silo:hover{
-    transform: scale(1.05);
-    cursor: pointer;
-    -webkit-box-shadow: 0 4px 20px 6px #B5B5B5;
-    box-shadow: 0 4px 20px 6px #B5B5B5;
-    z-index:1;
-  }
-  @keyframes entering {
-    0%{
-      right: 100rem;
-    }
+  @media (min-width: 481px)
+    div.sticky
+      display none
 
-    100%{
-      right:0;
-    }
-  }
+  .card-silo
+    transition all .4s ease-in-out
+    -webkit-animation entering 2s
+    animation entering 2s
+
+  .card-silo:hover
+    transform scale(1.05)
+    cursor pointer
+    -webkit-box-shadow 0 4px 20px 6px #B5B5B5
+    box-shadow 0 4px 20px 6px #B5B5B5
+    z-index 1
+
+  @keyframes entering
+    from
+      right 100rem
+
+    to
+      right 0
 
 </style>

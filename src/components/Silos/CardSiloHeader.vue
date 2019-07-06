@@ -7,8 +7,3 @@
     </div>
   </q-card-section>
 </template>
-
-<script>
-  export default{
-  }
-</script>
