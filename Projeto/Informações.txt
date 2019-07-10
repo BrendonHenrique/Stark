@@ -1,0 +1,6 @@
+Termo-multiplex  -> leitor antigo de temperaturas do silo
+Digiplex -> leitor atual de temperaturas do silo
+
+Estrutura do silo -> Composta por uma quantidade de anéis, quantidade de pendulos , quantidade de sensores
+aneis[]pendulos[]sensores[]
+

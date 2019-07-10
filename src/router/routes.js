@@ -4,9 +4,9 @@ const routes = [
     path: '/',
     component: () => import('layouts/Layout.vue'),
     children: [
-      { path: '', component: () => import('pages/Index.vue') },
-      { path: '/silos', component: () => import('pages/Silos.vue') },
-      { path: '/estacao', component: () => import('pages/Estacao.vue') },
+      { path: '/', component: () => import('pages/Silos.vue') },
+      { path: '/termometria', component: () => import('pages/Termometria.vue') },
+      { path: '/estacao_meteorologica', component: () => import('pages/Estacao.vue') },
       { path: '/relatorios', component: () => import('pages/Relatorios.vue') },
       { path: '/configuracoes', component: () => import('pages/Configuracoes.vue') },
     ]

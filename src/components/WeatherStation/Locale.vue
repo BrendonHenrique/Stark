@@ -19,32 +19,25 @@ export default {
 }
 </script>
 
-<style scoped>
+<style scoped lang="stylus">
 
-  section {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
+  section
+    display flex
+    flex-direction column
+    align-items center
 
-  .location {
-    text-transform: uppercase;
-    font-weight: bold;
-  }
+ .location
+    text-transform uppercase
+    font-weight bold
 
-  .weather__description {
-    text-transform: lowercase;
-    margin-left: 10%;
-    margin-right: 10%;
-    text-align: center;
-  }
+ .weather__description
+    text-transform lowercase
+    margin-left 10%
+    margin-right 10%
+    text-align center
 
-  .weather__description:first-letter {
-    text-transform: uppercase;
-  }
+ .weather__icon
+    width 12em
+    padding-bottom 9em
 
-  .weather__icon {
-    width: 12em;
-    padding-bottom: 9em;
-  }
 </style>

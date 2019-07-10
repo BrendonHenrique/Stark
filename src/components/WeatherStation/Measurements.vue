@@ -70,46 +70,40 @@ export default {
 }
 </script>
 
-<style scoped>
-  .humidity img {
-      width: 38px;
-      height: 38px;
-      vertical-align: middle;
-  }
+<style scoped lang="stylus">
 
-  a {
-    text-decoration: none;
-    color: inherit;
-    transition: color .2s ease-in;
-  }
+  a
+    text-decoration none
+    color inherit
+    transition color .2s ease-in
 
-  section {
-    margin-left:5rem;
-    margin-top:12rem;
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-  }
+  .humidity
+    img
+      width 38px
+      height 38px
+      vertical-align middle
 
-  .temperature__value {
-    font-size: 7em;
-    color: rgba(255, 255, 255, 0.75);
-  }
+  section
+    margin-left 5rem
+    margin-top 12rem
+    display flex
+    flex-direction row
+    justify-content center
 
-  .temperature__right {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-  }
+  .temperature__value
+    font-size 7em
+    color rgba(255, 255, 255, 0.75)
 
-  .temperature__scale {
-    padding-top: 5px;
-    font-size: 2em;
-    font-weight: bold;
-    color: rgba(255, 255, 255, 0.75);
-  }
+  .temperature__right
+    display flex
+    flex-direction column
+    justify-content center
 
-  .humidity {
-    vertical-align: middle;
-  }
+  .temperature__scale
+    padding-top 5px
+    font-size 2em
+    font-weight bold
+    color rgba(255, 255, 255, 0.75)
+
+
 </style>

@@ -58,20 +58,20 @@ export default {
 }
 </script>
 
-<style scoped>
+<style scoped lang="stylus">
 
-  main {
-    height: 34rem;
-    width: 27rem;
-    background-position: center;
-    background-size: cover;
-    background-repeat: no-repeat;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-    align-items: center;
-    box-shadow: 0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22);
-    border-radius: 10px;
-  }
+  main
+    height 34rem
+    width 27rem
+    background-position center
+    background-size cover
+    background-repeat no-repeat
+    display flex
+    flex-direction column
+    justify-content space-around
+    align-items center
+    box-shadow 0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22)
+    border-radius 10px
+
 
 </style>

@@ -16,6 +16,5 @@
         </q-item-section>
       </q-item>
     </q-card-section>
-    <q-separator color="grey-4" />
   </div>
 </template>

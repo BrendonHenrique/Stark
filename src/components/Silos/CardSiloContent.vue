@@ -10,8 +10,6 @@
       </q-chip>
     </q-card-section>
 
-    <q-separator color="grey-4" />
-
     <sequential-entrance :delay="450" fromBottom>
 
       <section-layout>
@@ -21,7 +19,7 @@
           </q-btn>
         </template>
         <template v-slot:label>
-          Quantidade de sacos - {{silo.quantidade_sacos}}
+          Quantidade aproximada de sacos - {{silo.quantidade_sacos}}
         </template>
       </section-layout>
 
@@ -37,7 +35,7 @@
               Temperatura min - {{silo.sensor_temperatura.minima}} ºC
             </q-item-label>
             <q-item-label class="col">
-              Temperatura media - {{silo.sensor_temperatura.media}} ºC
+              Temperatura média - {{silo.sensor_temperatura.media}} ºC
             </q-item-label>
             <q-item-label class="col">
               Temperatura max - {{silo.sensor_temperatura.maxima}} ºC

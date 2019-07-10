@@ -1,19 +1,19 @@
 const state = {
   navs: [
     {
-      label: 'Página principal',
+      label: 'Silos',
       icon: 'home',
       to: '/'
     },
     {
-      label: 'Silos',
+      label: 'Termometria',
       icon: 'grain',
-      to: '/silos'
+      to: '/termometria'
     },
     {
       label: 'Estação meteorológica',
       icon: 'ac_unit',
-      to: '/estacao'
+      to: '/estacao_meteorologica'
     },
     {
       label: 'Relatórios',

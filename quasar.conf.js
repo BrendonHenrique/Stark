@@ -59,12 +59,14 @@ module.exports = function (ctx) {
         'QBanner',
         'QAvatar',
         'QImg',
-        'QChip'
-
+        'QChip',
+        'QDialog',
+        'QInput'
       ],
 
       directives: [
-        'Ripple'
+        'Ripple',
+        'ClosePopup'
       ],
 
       // Quasar plugins

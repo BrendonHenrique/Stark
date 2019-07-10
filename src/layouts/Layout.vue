@@ -1,47 +1,41 @@
 <template>
-  <div>
-    <div class="blur">
+  <q-layout view="hHh lpR fFf">
 
-    </div>
-    <q-layout view="hHh lpR fFf">
+    <!-- header -->
+    <layout-header
+    @openDrawerLeft="drawerLeft = !drawerLeft"
+    @openDrawerRight="drawerRight = !drawerRight" >
+      <q-toolbar>
+        <q-toolbar-title class="q-pt-md text-h3 text-center">
+          Stark
+        </q-toolbar-title>
+      </q-toolbar>
+    </layout-header>
+    <!--  -->
 
-      <!-- header -->
-      <layout-header
-      @openDrawerLeft="drawerLeft = !drawerLeft"
-      @openDrawerRight="drawerRight = !drawerRight" >
-        <q-toolbar>
-          <q-toolbar-title class="q-pt-md text-h3 text-center">
-            Stark
-          </q-toolbar-title>
-        </q-toolbar>
-      </layout-header>
-      <!--  -->
+    <!-- left side bar -->
+    <layout-drawer :drawerSide="drawerLeft" :side="'left'">
+      <drawer-nav :navs="navs"></drawer-nav>
+    </layout-drawer>
+    <!-- -->
 
-      <!-- left side bar -->
-      <layout-drawer :drawerSide="drawerLeft" :side="'left'">
-        <navigator :navs="navs"></navigator>
-      </layout-drawer>
-      <!-- -->
+    <!-- right side navbar -->
+    <layout-drawer :drawerSide="drawerRight" :side="'right'">
+      <user-painel />
+    </layout-drawer>
+    <!-- -->
 
-      <!-- right side navbar -->
-      <layout-drawer :drawerSide="drawerRight" :side="'right'">
-        <user-painel />
-      </layout-drawer>
-      <!-- -->
+    <!-- page inside content -->
+      <q-page-container>
+          <router-view />
+      </q-page-container>
+    <!--  -->
 
-      <!-- page inside content -->
-        <q-page-container>
-            <router-view />
-        </q-page-container>
-      <!--  -->
+    <!-- footer -->
+    <layout-footer :navs="navs" />
+    <!-- -->
 
-      <!-- footer -->
-      <layout-footer :navs="navs" />
-      <!-- -->
-
-    </q-layout>
-  </div>
-
+  </q-layout>
 </template>
 
 <script>
@@ -67,7 +61,7 @@ export default {
     'layout-header' : require('components/MenuLayout/Header.vue').default,
     'layout-footer' : require('components/MenuLayout/Footer.vue').default,
     'layout-drawer' : require('components/MenuLayout/Drawer.vue').default,
-    'navigator' : require('components/Navigator/Navigator.vue').default,
+    'drawer-nav' : require('components/DrawerNav/Nav.vue').default,
     'user-painel' : require('components/UserPainel/UserPainel.vue').default,
   }
 }
