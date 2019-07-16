@@ -10,7 +10,10 @@ const routes = [
       { path: '/relatorios', component: () => import('pages/Relatorios.vue') },
       { path: '/configuracoes', component: () => import('pages/Configuracoes.vue') },
     ]
-  }
+  },
+  { path: '/study', component: () =>
+  import('../../study/study.vue') },
+
 ]
 
 // Always leave this as last one

@@ -1,14 +1,12 @@
 <template>
-  <div class="row">
+  <div class="row justify-center">
     <div
       class="column reverse "
-      v-for="termometria in termometrias"
-      :key="termometria.id_pendulo">
-
+      :key="termometria.id_pendulo"
+      v-for="termometria in termometrias">
       <p class="text-thin text-h6 text-center ">
         P{{termometria.id_pendulo}}
       </p>
-
       <div
         v-for="sensor in termometria.sensores"
         :key="sensor.id_sensor"
@@ -21,7 +19,6 @@
         </q-chip>
         <br>
       </div>
-
     </div>
   </div>
 </template>
@@ -33,17 +30,13 @@ export default {
   props:[],
   computed:{
     ...mapGetters('termometrias',['termometrias']),
-  },
-  mounted(){
-    console.log(this.termometrias)
-  },
-  components:{
-    'termometria-pendulos':require('components/Termometria/Pendulo.vue').default
   }
 }
 </script>
 
-<style lang="stylus">
+<style lang="stylus" scoped>
+  div.row
+    flex-wrap nowrap
+
 
 </style>
-
