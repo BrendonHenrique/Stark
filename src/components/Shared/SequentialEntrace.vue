@@ -1,5 +1,5 @@
 <template>
-    <sequential-entrance :delay="delay">
+    <sequential-entrance fromBottom animation="bounceIn" :delay="delay">
       <slot></slot>
     </sequential-entrance>
 </template>
@@ -12,6 +12,6 @@ import 'vue-sequential-entrance/vue-sequential-entrance.css'
 Vue.use(SequentialEntrance);
 
 export default{
-  props:['delay'],
+  props:['delay'], 
 }
 </script>

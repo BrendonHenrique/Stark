@@ -1,56 +1,27 @@
 <template>
-  <div class="container ">
-    <div class="row justify-center">
-      <q-card class="bg-primary col-md-12 col-lg-8 col-sm-12 col-xs-12" style="border-radius:0px" >
-        <q-tabs
-          dense
-          inline-label
-          v-model="tab"
-          align="justify"
-          narrow-indicator
-          class="text-grey-4"
-          active-color="secundary"
-          indicator-color="secundary"
-        >
-          <q-tab name="termometria" label="Termometria" />
-          <q-tab name="historico" label="Histórico" />
-          <q-tab name="prod_armazenado" label="Produto armazenado" />
-          <q-tab name="aeracao" label="Possibilidades de aeração" />
-          <q-tab name="cores" label="Legenda de cores" />
-        </q-tabs>
-
-        <q-separator class="q-mt-xs" />
-
-        <q-tab-panels v-model="tab" animated>
-
-          <q-tab-panel class="termometria-panel" name="termometria">
-            <termometria-silo></termometria-silo>
-          </q-tab-panel>
-
-          <q-tab-panel name="prod_armazenado">
-            <div class="text-h6">Alarms</div>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit.
-          </q-tab-panel>
-
-          <q-tab-panel name="aeracao">
-            <div class="text-h6">Movies</div>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit.
-          </q-tab-panel>
-
-          <q-tab-panel name="cores">
-            <div class="text-h6">Movies</div>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit.
-          </q-tab-panel>
-
-          <q-tab-panel name="historico">
-            <div class="text-h6">Movies</div>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit.
-          </q-tab-panel>
-
-        </q-tab-panels>
-      </q-card>
-
-    </div>
+  <div>
+    <q-tabs 
+      dense inline-label v-model="tab" align="justify" narrow-indicator 
+      class="text-grey-4 menu-bar" active-color="secundary" indicator-color="secundary">
+      <q-tab v-for="item in tabs " :key="item.name" :name="item.name" :label="item.label" />
+    </q-tabs>
+    <q-tab-panels v-model="tab" animated > 
+      <q-tab-panel class="termometria-panel" name="termometria" >
+        <termometria-silo style="padding: 0 !important;"></termometria-silo>
+      </q-tab-panel>
+      <q-tab-panel name="prod_armazenado" >
+        <produto-armazenado />
+      </q-tab-panel>
+      <q-tab-panel name="historico">
+        <historico />
+      </q-tab-panel>
+      <q-tab-panel name="aeracao">
+        <aeracao />
+      </q-tab-panel>
+      <q-tab-panel name="cores">
+        <cores />
+      </q-tab-panel>
+    </q-tab-panels>
   </div>
 </template>
 
@@ -58,11 +29,38 @@
 export default {
   data(){
     return{
-      tab: 'termometria'
+      tab: 'termometria',
+      tabs: [
+        {
+          name:'termometria',
+          label:'Termometria'
+        },
+        {
+          name:'prod_armazenado',
+          label:'Produto armazenado'
+        },
+        {
+          name:'historico',
+          label:'Histórico'
+        },
+        {
+          name:'aeracao',
+          label:'Possibilidades de aeração'
+        },
+        {
+          name: 'cores',
+          label: 'Legenda de cores'
+        }
+      ]
+
     }
   },
   components:{
-    'termometria-silo':require('components/Termometria/Termometria.vue').default
+    'termometria-silo':require('../components/Termometria/Termometria').default,
+    'produto-armazenado':require('../components/Termometria/ProdutosArmazenados').default,
+    'historico': require('../components/Termometria/Historico').default,
+    'aeracao': require('../components/Termometria/Aeracao').default,
+    'cores': require('../components/Termometria/Cores').default,
   }
 
 }
@@ -70,10 +68,12 @@ export default {
 
 <style lang="stylus" scoped>
 
-  .q-card
-    font-family 'Orbitron', sans-serif
-
-  .termometria-panel
-    width 200%
-
+  .menu-bar
+    position fixed
+    top 5rem
+    left 0px
+    right 0
+    background-color $primary
+    z-index 1
+    
 </style>

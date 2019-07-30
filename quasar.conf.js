@@ -65,7 +65,8 @@ module.exports = function (ctx) {
         'QRouteTab',
         'QTabPanels',
         'QTabPanel',
-        'QSplitter'
+        'QSplitter',
+        'QSelect','
       ],
 
       directives: [
@@ -98,8 +99,8 @@ module.exports = function (ctx) {
       open: true // opens browser window automatically
     },
 
-    // animations: 'all', // --- includes all animations
-    animations: [],
+    animations: 'all', // --- includes all animations
+    // animations: [],
 
     ssr: {
       pwa: false

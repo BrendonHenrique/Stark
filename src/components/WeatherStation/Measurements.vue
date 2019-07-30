@@ -84,8 +84,8 @@ export default {
       vertical-align middle
 
   section
-    margin-left 5rem
-    margin-top 12rem
+    margin-left 3rem
+    margin-top 10rem
     display flex
     flex-direction row
     justify-content center

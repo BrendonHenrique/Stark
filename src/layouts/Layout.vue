@@ -14,19 +14,24 @@
     <!--  -->
 
     <!-- left side bar -->
-    <layout-drawer :drawerSide="drawerLeft" :side="'left'">
-      <drawer-nav :navs="navs"></drawer-nav>
+    <layout-drawer 
+    :side="'left'" 
+    :MiniState="MiniState"  
+    :drawerSide="drawerLeft" 
+    @mouseOut="MiniState = true"
+    @mouseOver="MiniState = false">
+      <drawer-nav :navs="navs" />
     </layout-drawer>
     <!-- -->
 
     <!-- right side navbar -->
-    <layout-drawer :drawerSide="drawerRight" :side="'right'">
+    <layout-drawer  :drawerSide="drawerRight" :side="'right'">
       <user-painel />
     </layout-drawer>
     <!-- -->
 
     <!-- page inside content -->
-      <q-page-container>
+      <q-page-container class="column justify-center" style="position: relative; top: 5vh;">
           <router-view />
       </q-page-container>
     <!--  -->
@@ -51,7 +56,8 @@ export default {
   data () {
     return {
       drawerLeft: true,
-      drawerRight: false
+      drawerRight: false,
+      MiniState: true
     }
   },
   computed:{
@@ -66,12 +72,3 @@ export default {
   }
 }
 </script>
-<style>
-  .blur{
-    filter: grayscale(0%) blur(1px) saturate(0.25) opacity(1);
-    -webkit-filter: grayscale(0%) blur(1px) saturate(0.25) opacity(1);
-    background-image: url(../assets/bg3.png);
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-  }
-</style>

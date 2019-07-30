@@ -289,9 +289,7 @@ const actions = {
 }
 
 const getters = {
-  termometrias: (state) => {
-    return state.termometrias;
-  }
+  termometrias: (state) => state.termometrias
 }
 
 

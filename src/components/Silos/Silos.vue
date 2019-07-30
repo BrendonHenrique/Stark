@@ -21,9 +21,9 @@
 
   export default{
     components:{
-      'card-silo-header': require('components/Silos/CardSiloHeader.vue').default,
-      'card-silo-content': require('components/Silos/CardSiloContent.vue').default,
-      'paginador-mobile': require('components/PaginadorDeSilos/Paginador.vue').default
+      'card-silo-header': require('./CardSiloHeader.vue').default,
+      'card-silo-content': require('./CardSiloContent.vue').default,
+      'paginador-mobile': require('./Paginador.vue').default
     },
     computed:{
       ...mapGetters('silos',['silos']),

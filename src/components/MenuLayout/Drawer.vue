@@ -1,7 +1,14 @@
 <template>
   <div id="layout-drawer">
-    <q-drawer elevated bordered :value="drawerSide" content-class="bg-grey-3" :breakpoint="767"
-    :width="220" :side="side">
+    <q-drawer 
+      elevated 
+      bordered 
+      overlay :value="drawerSide" content-class="bg-grey-3" :breakpoint="767"
+      :width="250" :side="side"  
+      :mini="MiniState" 
+      @mouseout="$emit('mouseOut')"
+      @mouseover="$emit('mouseOver')"
+    >
       <slot>  </slot>
     </q-drawer>
   </div>
@@ -9,19 +16,13 @@
 
 <script>
 export default{
-  props:['drawerSide','side']
+  props:['drawerSide','side','MiniState']
 }
 </script>
 <style lang="stylus">
 
-  @import url('https://fonts.googleapis.com/css?family=Open+Sans')
-
-
-  #layout-drawer
-    font-family 'Orbitron', sans-serif
-
   .q-router-link--exact-active
-    border-right 2px solid #303A42
+    border-right 1px solid #303A42
     color rgb(87, 110, 129) !important
 
   .q-item--clickable
