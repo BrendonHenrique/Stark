@@ -7,7 +7,7 @@
         <q-btn round class="text-thin text-h6 text-center q-mt-xs" size="15px">
           p{{termometria.id_pendulo}}
         </q-btn>
-        <sequential-entrace  style="overflow: hidden;" :delay="150">
+        <sequential-entrace :delay="50">
           <div
             v-for="sensor in termometria.sensores"
             :key="sensor.id_sensor">

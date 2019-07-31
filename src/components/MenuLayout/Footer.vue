@@ -1,5 +1,5 @@
 <template>
-  <q-footer elevated class="primary">
+  <q-footer elevated>
     <div id="mobile-footer">
       <q-tabs>
         <q-route-tab
@@ -39,14 +39,18 @@
 </script>
 
 <style lang="stylus">
-
+  
   @media screen and (min-width:768px)
     #mobile-footer
       display none
+        
+    .q-router-link--exact-active
+      color $primary !important
 
   @media (max-width: 767px)
     #desktop-footer
       display none
+
 
    @keyframes rotating {
     from {

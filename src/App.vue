@@ -1,5 +1,5 @@
 <template>
-  <div id="q-app">
+  <div id="q-app" >
     <router-view/>
   </div>
 </template>
@@ -9,3 +9,4 @@ export default {
   name: 'App'
 }
 </script>
+ 

@@ -21,9 +21,6 @@ export default{
 </script>
 <style lang="stylus">
 
-  .q-router-link--exact-active
-    border-right 1px solid #303A42
-    color rgb(87, 110, 129) !important
 
   .q-item--clickable
     vertical-align middle

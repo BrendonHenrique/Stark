@@ -66,7 +66,12 @@ module.exports = function (ctx) {
         'QTabPanels',
         'QTabPanel',
         'QSplitter',
-        'QSelect','
+        'QSelect',
+        'QColor',
+        'QPopupProxy',
+        'QStepper',
+        'QStep',
+        'QStepperNavigation'
       ],
 
       directives: [

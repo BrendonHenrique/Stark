@@ -2,10 +2,10 @@
   <div>
 
     <q-card-section style="height:220px;">
-      <q-avatar  class="silo_avatar absolute-center" size="180px" color="primary shadow-4 ">
+      <q-avatar  class="silo_avatar absolute-center" size="180px" color="secondary shadow-4 ">
         <q-img  src="assets/icons/silo.png" style="height: 180px;"  />
       </q-avatar>
-      <q-chip color="primary" text-color="grey-4" class="silo_id"
+      <q-chip color="accent" text-color="grey-4" class="silo_id"
         icon="info" size="10px" :label="`silo nº ${silo.id}`">
       </q-chip>
     </q-card-section>
@@ -14,7 +14,7 @@
 
       <section-layout>
         <template v-slot:avatar>
-          <q-btn dense color="primary" size="20px" round>
+          <q-btn dense color="secondary" size="20px" round>
             <q-img  src="assets/icons/bag.svg" style="width: 30px;margin-left:2px"  />
           </q-btn>
         </template>
@@ -25,7 +25,7 @@
 
       <section-layout>
         <template v-slot:avatar>
-          <q-btn dense color="primary"  size="20px" round >
+          <q-btn dense color="secondary"  size="20px" round >
             <q-img  src="assets/icons/warm.svg" style="width: 40px;margin-left:4.7px"  />
           </q-btn>
         </template>
@@ -46,7 +46,7 @@
 
       <section-layout>
         <template v-slot:avatar>
-          <q-btn dense color="primary" size="20px" round icon="" >
+          <q-btn dense color="secondary" size="20px" round icon="" >
             <q-img  src="assets/icons/co2.svg" style="width: 40px;"  />
           </q-btn>
         </template>

@@ -1,5 +1,5 @@
 <template>
-  <q-card-section class="bg-primary text-white">
+  <q-card-section class="bg-secondary text-white">
     <div class="text-h5 text-center">
       <slot>
 

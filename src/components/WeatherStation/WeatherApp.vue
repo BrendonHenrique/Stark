@@ -22,7 +22,7 @@
     </template>
 
     <template v-else>
-      <q-spinner-gears color="primary" size="9em" class="q-mt-xs"  />
+      <q-spinner-gears color="secondary" size="9em" class="q-mt-xs"  />
       <p class="q-mb-md text-h5">
         carregando..
       </p>

@@ -2,7 +2,7 @@
   <q-layout>
     <q-page-container>
       <q-page>
-        <silos-container></silos-container>
+        <silos />
       </q-page>
     </q-page-container>
   </q-layout>
@@ -11,7 +11,7 @@
   export default{
 
     components:{
-      'silos-container': require('components/Silos/Silos.vue').default
+      'silos': require('components/Silos/Silos.vue').default
     }
   }
 </script>
