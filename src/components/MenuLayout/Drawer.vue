@@ -4,7 +4,7 @@
       elevated 
       bordered 
       overlay :value="drawerSide" content-class="bg-grey-3" :breakpoint="767"
-      :width="250" :side="side"  
+      :width="300" :side="side"  
       :mini="MiniState" 
       @mouseout="$emit('mouseOut')"
       @mouseover="$emit('mouseOver')"

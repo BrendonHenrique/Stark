@@ -19,3 +19,9 @@
     props:['navs']
   }
 </script>
+
+<style lang="stylus">
+  .q-item__label
+    font-family 'Orbitron', sans-serif
+</style>
+

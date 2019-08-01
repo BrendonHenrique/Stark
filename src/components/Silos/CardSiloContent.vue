@@ -66,6 +66,9 @@
     components:{
       'section-layout': require('components/Silos/SectionLayout.vue').default,
       'sequential-entrace': require('components/Shared/SequentialEntrace.vue').default,
+    },
+    mounted(){
+      console.log(this.silo.termometria)
     }
   }
 </script>
@@ -79,5 +82,9 @@
 
   .q-card
     font-family 'Orbitron', sans-serif
+
+  .card-silo 
+    .q-card__section
+      padding 13px
 
 </style>

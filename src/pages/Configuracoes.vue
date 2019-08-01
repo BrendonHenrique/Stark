@@ -2,11 +2,16 @@
   <q-layout>
     <q-page-container>
       <q-page>
-        <p>configuracoes</p>
+        <configurador />
       </q-page>
     </q-page-container>
   </q-layout>
 </template>
 
-<style>
-</style>
+<script>
+export default {
+  components:{
+    'configurador': require('../components/Configuracoes/Configurador').default
+  }  
+}
+</script>

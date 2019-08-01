@@ -1,0 +1,62 @@
+<template>
+  <div class="row justify-center legenda-de-cores">
+    <q-card class="bg-grey-2 shadow-10 col-sm-10 col-xs-12 col-md-10 col-lg-5" style="border-radius:10px;">
+        <div class="row q-px-xs q-pt-md" v-for="item in cores" :key="item.label">
+            <q-input  
+              :rules="[val => !!val || 'Não deixe essa cor em branco']" 
+              filled v-model="item.valor" class="input-cores col-12 " :label="item.label">
+                <template v-slot:append>
+                    <q-btn round :style="{'background-color': item.valor}">
+                        <q-popup-proxy transition-show="scale" transition-hide="scale">
+                            <q-color  no-header v-model="item.valor" />
+                        </q-popup-proxy>
+                    </q-btn>
+                </template>
+            </q-input>
+        </div>
+        <gradiente-preview /> 
+        <save-button 
+          class="q-ma-md float-right"
+          :mensagem="'Você gostaria de salvar a legenda de cores?'"
+          @salvarAlteracoes="salvarLegendaDeCores"
+        />
+    </q-card>
+  </div>
+</template>
+
+<script>
+import {mapActions, mapGetters} from 'vuex'
+export default {
+  data() {
+    return {
+      cores: []
+    }
+  },
+  methods:{
+    ...mapActions('legenda_de_cores',['update_legenda_de_cores']),
+    salvarLegendaDeCores(){
+      this.update_legenda_de_cores(this.cores)
+    }
+  },
+  mounted(){
+    this.cores = this.legenda_de_cores
+  },
+  components:{
+    'save-button': require('../../Shared/SaveButton').default,
+    'gradiente-preview': require('../../Termometria/LegendaDeCores/GradientePreview').default
+  },
+  computed:{
+    ...mapGetters('legenda_de_cores',['legenda_de_cores'])
+  },
+};
+</script>
+
+<style lang="stylus" >
+  .legenda-de-cores
+    animation entry 1s
+
+  .input-cores
+    .q-field__label
+      overflow inherit
+  
+</style>

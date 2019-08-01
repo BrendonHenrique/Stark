@@ -1,5 +1,6 @@
 <template>
   <div id="q-app" >
+    <link href="https://fonts.googleapis.com/css?family=Orbitron&display=swap" rel="stylesheet">
     <router-view/>
   </div>
 </template>

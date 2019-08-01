@@ -1,0 +1,34 @@
+import Vue from 'vue'
+const vm = new Vue()
+
+const interface_Notify = (color, icon, message, position, timeout) => {
+  vm.$q.notify({
+    color,
+    icon,
+    message,
+    position,
+    timeout
+  })
+}
+
+class NotifyUser {
+
+  static success = (message) => {
+    interface_Notify('positive', 'done', message, 'top-right')
+  }
+
+  static warning = (message) => {
+    interface_Notify('warning', 'warning', message, 'top-right')
+  }
+
+  static error = (message) => {
+    interface_Notify('negative', 'error', message, 'top-right')
+  }
+
+  static info = (message) => {
+    interface_Notify('info', 'info', message, 'top-right', 6000)
+  }
+
+}
+
+export default NotifyUser;

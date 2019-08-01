@@ -56,11 +56,11 @@ export default {
     }
   },
   components:{
-    'termometria-silo':require('../components/Termometria/Termometria').default,
-    'produto-armazenado':require('../components/Termometria/ProdutosArmazenados').default,
-    'historico': require('../components/Termometria/Historico').default,
-    'aeracao': require('../components/Termometria/Aeracao').default,
-    'cores': require('../components/Termometria/Cores').default,
+    'termometria-silo':require('../components/Termometria/Main/Termometria').default,
+    'produto-armazenado':require('../components/Termometria/ProdutosArmazenados/ProdutosArmazenados').default,
+    'historico': require('../components/Termometria/Historico/Historico').default,
+    'aeracao': require('../components/Termometria/PossibilidadesDeAeracao/Aeracao').default,
+    'cores': require('../components/Termometria/LegendaDeCores/Cores').default,
   }
 
 }
@@ -75,5 +75,6 @@ export default {
     right 0
     background-color $primary
     z-index 1
+    font-family 'Orbitron', sans-serif
     
 </style>

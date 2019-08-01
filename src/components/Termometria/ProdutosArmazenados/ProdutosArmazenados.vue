@@ -4,15 +4,14 @@
             
             <!-- card header -->
             <avatar-header>
-                <transition-group enter-active-class="animated fadeIn" 
-                    leave-active-class="animated fadeOut">
-                <q-img v-for="item in produtos" :src="item.foto" :key="item.label" 
-                    style="height: 160px; width: 180px;" 
-                    v-show="produto_armazenado.nome == item.label"  
-                />
+                <transition-group enter-active-class="animated fadeIn" leave-active-class="animated fadeOut">
+                    <q-img v-for="item in produtos" :src="item.foto" :key="item.label" 
+                        style="height: 160px; width: 180px;" 
+                        v-show="produto.nome == item.label"  
+                    />
                 </transition-group>
                 <q-img  
-                    v-show="!produto_armazenado.nome"
+                    v-show="!produto.nome"
                     style="height: 280px; width: 160px;background-color:#DDDDDD;" 
                 />
             </avatar-header>
@@ -20,7 +19,7 @@
             <!-- Select -->
             <q-card-section>
                 <q-select outlined transition-show="jump-up" transition-hide="jump-down"
-                 v-model="produto_armazenado.nome" :options="getProdutos" label="Selecionar produto">
+                 v-model="produto.nome" :options="getProdutos" label="Selecionar produto">
                     <template v-slot:prepend>
                         <q-img   
                         style="height: 30px; width: 30px"
@@ -32,7 +31,7 @@
             
             <!-- Input variedade -->
             <q-card-section class="q-mt-lg">
-                <q-input outlined label="Variedade" v-model="produto_armazenado.variedade">
+                <q-input outlined label="Variedade" v-model="produto.variedade">
                     <template v-slot:prepend>
                         <q-icon name="edit" />
                     </template>
@@ -42,7 +41,7 @@
             
             <!-- input safra -->
             <q-card-section class="q-mt-lg">
-                <q-input outlined label="Safra" v-model="produto_armazenado.safra">
+                <q-input outlined label="Safra" v-model="produto.safra">
                     <template v-slot:prepend>
                         <q-icon name="calendar_today" />
                     </template>
@@ -52,7 +51,10 @@
             
             <!-- button salvar -->
             <q-card-actions class="row justify-end q-my-sm">
-                <q-btn label="salvar" /> 
+                <save-button        
+                :mensagem="'Você gostaria de salvar as informações sobre o produto armazenado ?'"
+                @salvarAlteracoes="salvarProdutoArmazenado"
+                />
             </q-card-actions>
             <!--  -->
             
@@ -61,55 +63,65 @@
 </template>
 
 <script>
+import {mapActions, mapGetters} from 'vuex'
+
 export default {
     data(){
         return{
             produtos:[
                 {
                     label:'Arroz',
-                    foto: '../../assets/rice-2.jpg'
+                    foto: '../../../assets/rice-2.jpg'
                 },
                 {
                     label:'Milho',
-                    foto: '../../assets/corn-2.jpg'
+                    foto: '../../../assets/corn-2.jpg'
                 },
                 {
                     label:'Soja',
-                    foto: '../../assets/soja-3.jpg'
+                    foto: '../../../assets/soja-3.jpg'
                 },
                 {
                     label:'Sorgo',
-                    foto: '../../assets/sorgo.jpg'
+                    foto: '../../../assets/sorgo.jpg'
                 },
                 {
                     label:'Trigo',
-                    foto: '../../assets/trigo.jpg'
+                    foto: '../../../assets/trigo.jpg'
                 },
                 {
                     label:'Cevada',
-                    foto: '../../assets/cevada.jpg'
+                    foto: '../../../assets/cevada.jpg'
                 },
                 {
                     label:'Outros',
-                    foto: '../../assets/outros.jpg'
+                    foto: '../../../assets/outros.jpg'
                 },
             ],
-            produto_armazenado:{
+            produto:{
                 nome:null,
                 variedade: null,
                 safra: null
             }
         }
     },
+    methods:{
+        ...mapActions('produto_armazenado',['update_produto_armazenado']),
+        salvarProdutoArmazenado(){
+            this.update_produto_armazenado(this.produto)
+        }
+    },
+    mounted(){
+       Object.assign(this.produto, this.produto_armazenado)
+    },  
     components:{
-        'avatar-header': require('../Shared/AvatarHeader.vue').default
+        'avatar-header': require('../../Shared/AvatarHeader.vue').default,
+        'save-button': require('../../Shared/SaveButton').default
     },
     computed:{
+        ...mapGetters('produto_armazenado',['produto_armazenado']),
         getProdutos(){
-            let labels = this.produtos.map( (val) => {
-                return val.label 
-            })
-            return labels
+            return  this.produtos.map( (val) =>  val.label)
         }
     }
 }
@@ -118,7 +130,7 @@ export default {
 <style lang="stylus" >
 
     .background-avatar 
-        background url('../../assets/wholegrains.jpg') no-repeat center 
+        background url('../../../assets/wholegrains.jpg') no-repeat center 
     .card-produto-armazenado
         border-radius 10px
         

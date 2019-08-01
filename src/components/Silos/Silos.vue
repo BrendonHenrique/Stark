@@ -2,7 +2,7 @@
   <q-list class="row">
   <paginador-mobile :silos="silos" />
     <q-item class="justify-center col-xs-12 col-sm-6 col-md-4 col-lg-4" v-for="(silo,index) in silos" :key="silo.id">
-      <q-card class="card-silo shadow-10" :class="`silo-${index+1}`" @click="openDigiplexDialog(index)">
+      <q-card class="card-silo shadow-10" :class="`silo-${index+1}`">
           <card-silo-header />
           <card-silo-content :silo="silo" />
       </q-card>
@@ -24,9 +24,7 @@
       ...mapGetters('silos',['silos']),
     },
     data(){
-      return{
-        digiplex_index: null
-      }
+      return{}
     },
     methods: {
     },

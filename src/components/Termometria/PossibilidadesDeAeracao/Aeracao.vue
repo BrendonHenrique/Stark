@@ -4,10 +4,7 @@
             
             <q-card-section class="row justify-center">
                 <q-img src="../../assets/fan.svg" style="width:60px;"/>
-            </q-card-section>
-
-            <!-- Funções de Aeração -->
-            
+            </q-card-section> 
 
         </q-card>
     </div>

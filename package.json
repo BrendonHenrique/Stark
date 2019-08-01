@@ -12,6 +12,7 @@
   "dependencies": {
     "@quasar/extras": "^1.0.0",
     "animated-number-vue": "^1.0.0",
+    "color-between": "^1.0.2",
     "hover.css": "^2.3.2",
     "quasar": "^1.0.0-beta.0",
     "vue-scrollto": "^2.15.0",
