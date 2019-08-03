@@ -1,6 +1,7 @@
 <template>
   <div id="layout-drawer">
     <q-drawer 
+      class="drawer-style"
       elevated 
       bordered 
       overlay :value="drawerSide" content-class="bg-grey-3" :breakpoint="767"
@@ -20,7 +21,6 @@ export default{
 }
 </script>
 <style lang="stylus">
-
 
   .q-item--clickable
     vertical-align middle

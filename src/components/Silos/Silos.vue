@@ -37,6 +37,7 @@
     transition all .4s ease-in-out
     -webkit-animation entering 2s
     animation entering 2s
+    border-radius 30px  
 
   .card-silo:hover
     transform scale(1.05)

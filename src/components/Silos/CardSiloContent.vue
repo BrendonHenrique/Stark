@@ -10,9 +10,9 @@
       </q-chip>
     </q-card-section>
 
-    <sequential-entrance :delay="450" fromBottom>
+    <sequential-entrance :delay="250" fromLeft>
 
-      <section-layout>
+      <section-layout class="card-infos">
         <template v-slot:avatar>
           <q-btn dense color="secondary" size="20px" round>
             <q-img  src="assets/icons/bag.svg" style="width: 30px;margin-left:2px"  />
@@ -23,7 +23,7 @@
         </template>
       </section-layout>
 
-      <section-layout>
+      <section-layout class="card-infos">
         <template v-slot:avatar>
           <q-btn dense color="secondary"  size="20px" round >
             <q-img  src="assets/icons/warm.svg" style="width: 40px;margin-left:4.7px"  />
@@ -44,7 +44,7 @@
         </template>
       </section-layout>
 
-      <section-layout>
+      <section-layout class="card-infos">
         <template v-slot:avatar>
           <q-btn dense color="secondary" size="20px" round icon="" >
             <q-img  src="assets/icons/co2.svg" style="width: 40px;"  />
@@ -74,6 +74,9 @@
 </script>
 
 <style lang="stylus">
+
+  div.card-infos
+    overflow hidden
 
   .silo_id
     position absolute

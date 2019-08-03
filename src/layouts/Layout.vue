@@ -31,7 +31,9 @@
     <!-- -->
 
     <!-- page inside content -->
-      <q-page-container class="column justify-center" style="position: relative; top: 5vh;">
+      <q-page-container class="column justify-center" 
+      style="position: relative; top: 2vh;
+      padding-top: 95.2px !important; padding-bottom:60px !important;">
           <router-view />
       </q-page-container>
     <!--  -->

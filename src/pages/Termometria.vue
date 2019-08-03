@@ -5,7 +5,7 @@
       class="text-grey-4 menu-bar" active-color="secundary" indicator-color="secundary">
       <q-tab v-for="item in tabs " :key="item.name" :name="item.name" :label="item.label" />
     </q-tabs>
-    <q-tab-panels v-model="tab" animated > 
+    <q-tab-panels class="bg-grey-10" v-model="tab" animated > 
       <q-tab-panel class="termometria-panel" name="termometria" >
         <termometria-silo style="padding: 0 !important;"></termometria-silo>
       </q-tab-panel>
@@ -15,7 +15,7 @@
       <q-tab-panel name="historico">
         <historico />
       </q-tab-panel>
-      <q-tab-panel name="aeracao">
+      <q-tab-panel style="height:75vh;" name="aeracao">
         <aeracao />
       </q-tab-panel>
       <q-tab-panel name="cores">
@@ -23,6 +23,7 @@
       </q-tab-panel>
     </q-tab-panels>
   </div>
+
 </template>
 
 <script>
@@ -48,8 +49,8 @@ export default {
           label:'Possibilidades de aeração'
         },
         {
-          name: 'cores',
-          label: 'Legenda de cores'
+          name:'cores',
+          label:'Legenda de cores'
         }
       ]
 

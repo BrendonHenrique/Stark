@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="row no-wrap justify-between q-mb-lg" >
+    <div class="row no-wrap justify-between q-mb-lg"  >
         <div
           class="column reverse pendulo "
           v-for="termometria in termometrias"
@@ -109,7 +109,11 @@ export default {
     width 130px
     padding 15px
     margin 10px 
-
+    
+    span
+      position relative
+      left -3px
+             
   .q-chip::after
     content: "|"
     position absolute 
