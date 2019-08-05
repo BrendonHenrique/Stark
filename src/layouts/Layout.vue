@@ -1,6 +1,5 @@
 <template>
-  <q-layout view="hHh lpR fFf">
-
+  <q-layout view="hHh lpR fFf" class="bg-grey-10">
     <!-- header -->
     <layout-header
     @openDrawerLeft="drawerLeft = !drawerLeft"
@@ -33,7 +32,8 @@
     <!-- page inside content -->
       <q-page-container class="column justify-center" 
       style="position: relative; top: 2vh;
-      padding-top: 95.2px !important; padding-bottom:60px !important;">
+      padding-top: 95.2px !important; padding-bottom:60px !important;"
+      >
           <router-view />
       </q-page-container>
     <!--  -->
@@ -51,7 +51,9 @@ import Vue from 'vue'
 import SequentialEntrance from 'vue-sequential-entrance'
 import 'vue-sequential-entrance/vue-sequential-entrance.css'
 import AnimatedNumber from "animated-number-vue";
+import VueAnime from 'vue-animejs';
 Vue.use(SequentialEntrance)
+Vue.use(VueAnime)
 
 
 export default {

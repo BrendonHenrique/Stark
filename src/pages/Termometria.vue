@@ -1,7 +1,7 @@
 <template>
   <div>
     <q-tabs 
-      dense inline-label v-model="tab" align="justify" narrow-indicator 
+      dense inline-label v-model="tab" align="justify" narrow-indicator style="z-index:4"
       class="text-grey-4 menu-bar" active-color="secundary" indicator-color="secundary">
       <q-tab v-for="item in tabs " :key="item.name" :name="item.name" :label="item.label" />
     </q-tabs>
@@ -46,7 +46,7 @@ export default {
         },
         {
           name:'aeracao',
-          label:'Possibilidades de aeração'
+          label:'Aeração'
         },
         {
           name:'cores',

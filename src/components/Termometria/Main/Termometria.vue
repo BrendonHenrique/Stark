@@ -5,7 +5,7 @@
           class="column reverse pendulo "
           v-for="termometria in termometrias"
           :key="termometria.id_pendulo">
-          <q-btn round class="text-thin text-h6 text-center q-mt-xs" size="15px">
+          <q-btn round class="text-thin text-h6 text-center text-black q-mt-sm" color="grey-2" size="15px">
             p{{termometria.id_pendulo + 1}}
           </q-btn>
           <sequential-entrace :delay="50">
@@ -118,7 +118,7 @@ export default {
     content: "|"
     position absolute 
     top 28px
-    left 47px
+    left 50px
     color grey
 
   .paginador-de-silos

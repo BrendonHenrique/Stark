@@ -1,14 +1,21 @@
 /*
 * Service that fetch and parse weather forecast from openweathermap.org.
 *
+* @author Jim Merioles <jimwisleymerioles@gmail.com>
 */
 class WeatherForecast {
     /*
     * Create WeatherForecast instance.
     */
     constructor() {
+        this.cloudiness = 0;
+        this.windSpeed = 0;
         this.humidity = 0;
+
         this.temperatureValue = 0;
+        this.temperatureHigh = 0;
+        this.temperatureLow = 0;
+
         this.location = ' ';
         this.description = 'Please connect to internet to fetch latest forecast :)';
         this.weatherIcon = require('../assets/icons/weather/cloud.svg');
@@ -21,7 +28,8 @@ class WeatherForecast {
     */
     update() {
         if (navigator.onLine) {
-            navigator.geolocation.getCurrentPosition(position => this.updateForecast(position));
+            navigator.geolocation.getCurrentPosition(position => this.updateForecast(position),
+            error => { }, {maximumAge:60000, timeout:5000, enableHighAccuracy:true});
         }
     }
 
@@ -66,11 +74,13 @@ class WeatherForecast {
                 main: {
                     humidity: 0,
                     temp: 0,
+                    temp_max: 0,
+                    temp_min: 0,
                 },
                 weather: [
                     {
                         id: 0,
-                        description: `Problema ao carregar dados da estação meteorológica`
+                        description: `There's a problem at the weather forecast server ¯\\_(ツ)_/¯`
                     }
                 ],
                 name: null,
@@ -86,8 +96,12 @@ class WeatherForecast {
     * @param {Object} data - Weather forecast json data.
     */
     populate(data) {
+        this.cloudiness = data.clouds.all;
+        this.windSpeed = data.wind.speed;
         this.humidity = data.main.humidity;
         this.temperatureValue = Math.round(data.main.temp);
+        this.temperatureHigh = Math.round(data.main.temp_max);
+        this.temperatureLow = Math.round(data.main.temp_min);
         this.location = this.formatLocation(data.name, data.sys.country);
         this.description = data.weather[0].description;
         this.weatherIcon = this.getWeatherIcon(data.weather[0].id);

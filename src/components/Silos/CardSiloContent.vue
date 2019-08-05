@@ -15,7 +15,7 @@
       <section-layout class="card-infos">
         <template v-slot:avatar>
           <q-btn dense color="secondary" size="20px" round>
-            <q-img  src="assets/icons/bag.svg" style="width: 30px;margin-left:2px"  />
+            <q-img  src="assets/icons/bag.png" style="width: 30px;margin-left:2px"  />
           </q-btn>
         </template>
         <template v-slot:label>

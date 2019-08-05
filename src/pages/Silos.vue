@@ -2,7 +2,7 @@
   <q-layout>
     <q-page-container>
       <q-page>
-        <silos />
+        <silos  />
       </q-page>
     </q-page-container>
   </q-layout>

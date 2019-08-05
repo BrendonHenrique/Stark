@@ -1,17 +1,16 @@
 <template>
   <div class="q-mx-lg">
-    <q-banner class="bg-grey-3">
-      <template v-slot:avatar>
-        <q-icon name="whatshot" color='red' />
-      </template>
-      <p class="text-grey-8">
-          
-      </p>
+    <q-banner style="height:50vh;border-radius:20px;box-shadow:3px 3px 10px 2px #FFFFFF" class="bg-grey-3">
+
+      <div class="row justify-center">
+        
+      </div>  
     </q-banner>
   </div>
 </template>
 
 <script>
+
   import {
     mapGetters
   } from 'vuex'

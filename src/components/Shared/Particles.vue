@@ -1,22 +1,18 @@
 <template>
-    <vue-particles
-    style="z-index:2;position:absolute;width: 97%;height: 15rem;"
-    
+    <vue-particles style="z-index:2;position:absolute;width: 100%;height: 23rem;"
         color="#7a5858"
         :particleOpacity="0.7"
-        :particlesNumber="180"
+        :particlesNumber="200"
         shapeType="circle"
-        :particleSize="1"
+        :particleSize="2"
         linesColor="#dedede"
         :linesWidth="1"
         :lineLinked="false"
         :lineOpacity="0.4"
         :linesDistance="150"
         :moveSpeed="6"
-        :hoverEffect="true"
-        hoverMode="grab"
-        :clickEffect="true"
-        clickMode="push"
+        :hoverEffect="false"
+        :clickEffect="false"
     ></vue-particles>
 </template>
 
@@ -32,7 +28,4 @@ export default {
     }
 }
 </script>
-
-<style>
-
-</style>
+ 

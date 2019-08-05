@@ -14,7 +14,10 @@
       <q-toolbar>
         <q-toolbar-title class="row">
             <div style="justify-content:center;justify-item:center;display:flex;">
-              <img src="statics/spinedLogo.1.svg" class="rotating">
+              <div v-anime="{ duration: 2000, translateX: 100 }">
+                <img src="statics/spinedLogo.1.svg" class="rotating" style="left:-100px;">
+              </div>
+
               <img src="statics/garten3.svg" style="width:300px;margin-left:5px;">
             </div>
           <q-space />

@@ -1,6 +1,7 @@
 <template>
     <div class="row justify-center container-produto-armazenado">
-        <q-card class="bg-grey-2 shadow-10 col-sm-5 col-xs-12 col-md-5 col-lg-4 card-produto-armazenado">
+        <q-card style="box-shadow:0 0 8px 1px #eae5e5;" 
+        class="bg-grey-2 shadow-10 col-sm-5 col-xs-12 col-md-5 col-lg-4 card-produto-armazenado">
             
             <!-- card header -->
             <avatar-header>

@@ -250,45 +250,6 @@ const state = {
             id_sensor:72,
             temperatura:random().toFixed(1)
           }]
-        },{
-          id_pendulo:6,
-          sensores:[{
-            id_sensor:61,
-            temperatura:random().toFixed(1)
-          },{
-            id_sensor:62,
-            temperatura:random().toFixed(1)
-          },{
-            id_sensor:63,
-            temperatura:random().toFixed(1)
-          },{
-            id_sensor:64,
-            temperatura:random().toFixed(1)
-          },{
-            id_sensor:65,
-            temperatura:random().toFixed(1)
-          },{
-            id_sensor:66,
-            temperatura:random().toFixed(1)
-          },{
-            id_sensor:67,
-            temperatura:random().toFixed(1)
-          },{
-            id_sensor:68,
-            temperatura:random().toFixed(1)
-          },{
-            id_sensor:69,
-            temperatura:random().toFixed(1)
-          },{
-            id_sensor:70,
-            temperatura:random().toFixed(1)
-          },{
-            id_sensor:71,
-            temperatura:random().toFixed(1)
-          },{
-            id_sensor:72,
-            temperatura:random().toFixed(1)
-          }]
         },
       ]
     },
@@ -501,45 +462,6 @@ const state = {
           }]
         },{
           id_pendulo:5,
-          sensores:[{
-            id_sensor:61,
-            temperatura:random().toFixed(1)
-          },{
-            id_sensor:62,
-            temperatura:random().toFixed(1)
-          },{
-            id_sensor:63,
-            temperatura:random().toFixed(1)
-          },{
-            id_sensor:64,
-            temperatura:random().toFixed(1)
-          },{
-            id_sensor:65,
-            temperatura:random().toFixed(1)
-          },{
-            id_sensor:66,
-            temperatura:random().toFixed(1)
-          },{
-            id_sensor:67,
-            temperatura:random().toFixed(1)
-          },{
-            id_sensor:68,
-            temperatura:random().toFixed(1)
-          },{
-            id_sensor:69,
-            temperatura:random().toFixed(1)
-          },{
-            id_sensor:70,
-            temperatura:random().toFixed(1)
-          },{
-            id_sensor:71,
-            temperatura:random().toFixed(1)
-          },{
-            id_sensor:72,
-            temperatura:random().toFixed(1)
-          }]
-        },{
-          id_pendulo:6,
           sensores:[{
             id_sensor:61,
             temperatura:random().toFixed(1)
@@ -826,47 +748,7 @@ const state = {
             id_sensor:72,
             temperatura:random().toFixed(1)
           }]
-        },{
-          id_pendulo:6,
-          sensores:[{
-            id_sensor:61,
-            temperatura:random().toFixed(1)
-          },{
-            id_sensor:62,
-            temperatura:random().toFixed(1)
-          },{
-            id_sensor:63,
-            temperatura:random().toFixed(1)
-          },{
-            id_sensor:64,
-            temperatura:random().toFixed(1)
-          },{
-            id_sensor:65,
-            temperatura:random().toFixed(1)
-          },{
-            id_sensor:66,
-            temperatura:random().toFixed(1)
-          },{
-            id_sensor:67,
-            temperatura:random().toFixed(1)
-          },{
-            id_sensor:68,
-            temperatura:random().toFixed(1)
-          },{
-            id_sensor:69,
-            temperatura:random().toFixed(1)
-          },{
-            id_sensor:70,
-            temperatura:random().toFixed(1)
-          },{
-            id_sensor:71,
-            temperatura:random().toFixed(1)
-          },{
-            id_sensor:72,
-            temperatura:random().toFixed(1)
-          }]
-        },
-      ]
+        }]
     }, 
   ]
 }

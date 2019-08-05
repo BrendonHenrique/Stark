@@ -1,6 +1,7 @@
 <template>
   <div class="row justify-center legenda-de-cores">
-    <q-card class="bg-grey-2 shadow-10 col-sm-10 col-xs-12 col-md-10 col-lg-5" style="border-radius:10px;">
+    <q-card class="bg-grey-2 shadow-10 col-sm-10 col-xs-12 col-md-10 col-lg-5" 
+    style="border-radius:10px;box-shadow:0 0 8px 1px #eae5e5;">
         <div class="row q-px-xs q-pt-md" v-for="item in cores" :key="item.label">
             <q-input  
               :rules="[val => !!val || 'Não deixe essa cor em branco']" 
