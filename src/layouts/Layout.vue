@@ -14,6 +14,7 @@
 
     <!-- left side bar -->
     <layout-drawer 
+    class="left-drawer"
     :side="'left'" 
     :MiniState="MiniState"  
     :drawerSide="drawerLeft" 
@@ -30,7 +31,7 @@
     <!-- -->
 
     <!-- page inside content -->
-      <q-page-container class="column justify-center" 
+      <q-page-container class="column justify-center bg-grey-10" 
       style="position: relative; top: 2vh;
       padding-top: 95.2px !important; padding-bottom:60px !important;"
       >
@@ -59,10 +60,13 @@ Vue.use(VueAnime)
 export default {
   data () {
     return {
-      drawerLeft: true,
+      drawerLeft: false,
       drawerRight: false,
       MiniState: true
     }
+  },
+  mounted(){
+    this.drawerLeft =! this.drawerLeft
   },
   computed:{
     ...mapGetters('navs', ['navs'])
@@ -76,3 +80,10 @@ export default {
   }
 }
 </script>
+
+<style lang="stylus">
+  @media (max-width: 767px)
+    .left-drawer
+      display none 
+
+</style>

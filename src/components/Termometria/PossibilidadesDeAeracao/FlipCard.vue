@@ -20,7 +20,7 @@ export default {
   name: 'FlipCard',
   props:['flipped'],
   components:{
-    'card-aeracao': require('../Termometria/PossibilidadesDeAeracao/CardAeracao').default,
+    'card-aeracao': require('./CardAeracao').default,
   }
 };
 </script>

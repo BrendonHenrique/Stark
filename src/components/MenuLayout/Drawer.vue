@@ -3,8 +3,9 @@
     <q-drawer 
       class="drawer-style"
       elevated 
+      persistent
       bordered 
-      overlay :value="drawerSide" content-class="bg-grey-3" :breakpoint="767"
+      :value="drawerSide" content-class="bg-grey-3" :breakpoint="767"
       :width="300" :side="side"  
       :mini="MiniState" 
       @mouseout="$emit('mouseOut')"
@@ -21,6 +22,11 @@ export default{
 }
 </script>
 <style lang="stylus">
+
+  .q-drawer 
+    height 98%
+    position fixed
+
 
   .q-item--clickable
     vertical-align middle

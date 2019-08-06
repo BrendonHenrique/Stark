@@ -1,6 +1,6 @@
 <template>
     <div class="row justify-center q-gutter-lg">
-        <q-btn style="position:relative;bottom:-25px;z-index:4;"  
+        <q-btn style="position:relative;top:7rem;z-index:4;"  
             :push="view.Funcoes_card" 
             @click="$emit('changeView')"
             round >
@@ -8,7 +8,7 @@
                 style="width:26px;color:grey;position:relative;left:.4px;top:1px;" />
         </q-btn>
             
-        <q-btn style="position:relative;bottom:-25px;z-index:4;" 
+        <q-btn style="position:relative;top:7rem;z-index:4;" 
         :push="view.Possibilidades_card " 
         @click="$emit('changeView')"
         round >

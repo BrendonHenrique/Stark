@@ -1,8 +1,8 @@
 <template>
   <q-list class="col-12">
-    <q-separator class="q-mb-md" inset />
+    <q-separator class="q-mb-sm" inset />
     <q-item dense v-for="item in possibilidades" 
-    :key="item.label" class="bg-grey-1 q-mb-xs" clickable v-ripple>
+    :key="item.label" class="bg-grey-1 q-my-lg" clickable v-ripple>
       <q-item-section avatar class="q-mr-md">
         <q-btn round size="sm" :color="item.isPossible ? 'positive' : 'negative' " />
       </q-item-section>

@@ -4,6 +4,8 @@ import navs from './store-navs'
 import silos from './store-silos' 
 import legenda_de_cores from './store-legenda-de-cores'
 import produto_armazenado from './store-produto-armazenado'
+import aeracao from './store-aeracao'
+
 Vue.use(Vuex)
 
 export default function () {
@@ -13,7 +15,8 @@ export default function () {
       navs,
       silos, 
       legenda_de_cores,
-      produto_armazenado
+      produto_armazenado,
+      aeracao
     }
   })
 
