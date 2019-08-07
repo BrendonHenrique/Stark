@@ -2,7 +2,7 @@
     <div class="col-11" :class="!isFlipped ? 'show' : 'hide'">
         <q-separator inset class="q-mb-md" />
          
-            <q-list class="col-12">
+            <!-- <q-list class="col-12">
                 <q-item dense v-for="item in aeracao.funcoes" 
                 :key="item.label" class="bg-grey-1 q-my-md" clickable v-ripple>
                 <q-item-section avatar class="q-mr-md">
@@ -10,9 +10,9 @@
                 </q-item-section>
                 <q-item-section class="text-grey-7">{{item.label}}</q-item-section>
                 </q-item>
-            </q-list>
+            </q-list> -->
         
-        <status-aerador :status_atual="'semi-auto'" />
+        <!-- <status-aerador :status_atual="'semi-auto'" /> -->
 
         <!-- <div class="row justify-inline">
               <q-input 

@@ -1,9 +1,12 @@
 <template>
     <div class="row justify-center" style="position: relative;top: 15px;">
         <q-btn 
+        flat
+        dense 
         class="bg-grey-3"
-        glossy
-        :label="status_atual" style="width:10rem;border-radius:6px;border:0.5px solid #9E9E9E" dense outline/>
+        :label="status_atual" 
+        style="width:10rem;border-radius:10px;border:1px solid #9E9E9E" 
+        />
     </div>
 </template>
 
@@ -11,8 +14,4 @@
 export default {
     props:['status_atual']
 }
-</script>
-
-<style>
-
-</style>
+</script> 

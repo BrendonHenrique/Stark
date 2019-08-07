@@ -34,9 +34,7 @@
 <style lang="stylus">
 
   .card-silo
-    transition all .4s ease-in-out
-    -webkit-animation entering 2s
-    animation entering 2s
+    transition all .4s ease-in-out 
     border-radius 30px  
 
   .card-silo:hover
@@ -45,12 +43,5 @@
     -webkit-box-shadow 0 4px 20px 6px #B5B5B5
     box-shadow 0 4px 20px 6px #B5B5B5
     z-index 1
-
-  @keyframes entering
-    from
-      right 100rem
-
-    to
-      right 0
-
+ 
 </style>

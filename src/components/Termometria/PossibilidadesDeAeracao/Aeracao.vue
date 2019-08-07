@@ -2,7 +2,7 @@
     <div class="row justify-center q-mb-xl possibilidades-de-aeracao" >
         <q-card
         style="height:28rem; box-shadow:0 0 8px 1px #eae5e5;"
-        class="bg-grey-3 col-sm-10 col-xs-12 col-md-8 col-lg-6">
+        class="bg-grey-3 col-sm-10 col-xs-12 col-md-6 col-lg-6">
             
             <particles />
             

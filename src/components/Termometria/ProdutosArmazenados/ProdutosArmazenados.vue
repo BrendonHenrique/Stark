@@ -131,7 +131,12 @@ export default {
 <style lang="stylus" >
 
     .background-avatar 
-        background url('../../../assets/wholegrains.jpg') no-repeat center 
+        background url('../../../assets/wholegrains.jpg')  no-repeat center center 
+        -webkit-background-size cover
+        -moz-background-size cover
+        -o-background-size cover
+        background-size cover
+
     .card-produto-armazenado
         border-radius 10px
         

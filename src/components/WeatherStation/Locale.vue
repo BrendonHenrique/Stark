@@ -36,8 +36,5 @@ export default {
     margin-right 10%
     text-align center
 
- .weather__icon
-    width 12em
-    padding-bottom 9em
 
 </style>

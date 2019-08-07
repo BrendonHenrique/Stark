@@ -13,7 +13,7 @@
         <produto-armazenado />
       </q-tab-panel>
       <q-tab-panel name="historico">
-        <historico />
+        <!-- <historico /> -->
       </q-tab-panel>
       <q-tab-panel name="aeracao">
         <aeracao />

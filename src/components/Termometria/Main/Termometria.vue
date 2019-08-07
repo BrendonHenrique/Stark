@@ -24,12 +24,14 @@
     </div>
 
     <div class="paginador-de-silos  row justify-center">
-      <q-card class="row bg-grey-4 shadow-24" style="width:150px;border-radius:18px;">
-        <q-btn round flat @click="anterior()" v-bind=can_scroll_up  icon="navigate_before" />
-        <div class="row absolute-center indice-paginador">
-          {{indice_paginador}}
+      <q-card class="row bg-grey-4 shadow-24">
+        <q-btn   flat @click="anterior()" v-bind=can_scroll_up class="navigate" icon="navigate_before" />
+        <div class="absolute-center indice-paginador">
+          <h4>
+            {{indice_paginador}}
+          </h4>
         </div>
-        <q-btn round class="row absolute-right" flat  @click="proximo()" v-bind=can_scroll_down icon="navigate_next" />
+        <q-btn   class="absolute-right navigate" flat  @click="proximo()" v-bind=can_scroll_down icon="navigate_next" />
       </q-card>
     </div>
   
@@ -120,7 +122,31 @@ export default {
     top 28px
     left 50px
     color grey
+  
 
+  @media (max-width: 767px)
+
+    .paginador-de-silos
+    
+      .q-card
+        position relative
+        bottom 15px
+        height 5rem
+        width  100%  
+    
+      .q-btn
+        font-size 2rem 
+        height 100%
+        width 20%
+         
+
+
+  @media screen and (min-width:768px)
+    .paginador-de-silos
+      display none
+        
+
+    
   .paginador-de-silos
     position fixed     
     right 0

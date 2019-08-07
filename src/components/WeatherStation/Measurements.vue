@@ -17,7 +17,7 @@
               <q-separator spaced color="grey-6" />
 
               <img src="~assets/icons/weather/rain.svg">
-              <span class="humidity__value">
+              <span class="rain__value">
                 <animated-number :value="rain_sensor_value" />
               </span>&percnt;
           </div>
@@ -71,21 +71,23 @@ export default {
 </script>
 
 <style scoped lang="stylus">
-
+ 
   a
     text-decoration none
     color inherit
     transition color .2s ease-in
 
   .humidity
+    position relative
+    left 7px
     img
       width 38px
       height 38px
       vertical-align middle
 
-  section
-    margin-left 3rem
-    margin-top 10rem
+  section 
+    height 12rem
+    width 8rem
     display flex
     flex-direction row
     justify-content center
@@ -98,6 +100,8 @@ export default {
     display flex
     flex-direction column
     justify-content center
+    position relative
+    left 15px 
 
   .temperature__scale
     padding-top 5px

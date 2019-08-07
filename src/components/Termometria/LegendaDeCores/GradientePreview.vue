@@ -1,12 +1,14 @@
 <template>
     <q-banner class="bg-grey-2">
         <template v-slot:avatar>
-            <q-btn class="q-ma-lg float-left" round 
+            <q-btn class="q-ma-xs float-left" round 
             :style="{  backgroundImage: gradiente_de_temperatura }"/>
         </template>
-        <p class="text-grey-8">
-            Resultado final para o gradiente de temperatura.
-        </p>
+        <div style="position:relative;top:15px;">
+            <p class="text-grey-8">
+                Resultado final para o gradiente de temperatura.
+            </p>
+        </div>
     </q-banner>
 </template>
 

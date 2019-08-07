@@ -27,7 +27,7 @@ class WeatherForecast {
     * Update forecast with fresh data from current location.
     */
     update() {
-        if (navigator.onLine) {
+        if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(position => this.updateForecast(position),
             error => { }, {maximumAge:60000, timeout:5000, enableHighAccuracy:true});
         }

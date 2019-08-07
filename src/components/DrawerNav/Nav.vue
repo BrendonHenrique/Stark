@@ -1,6 +1,5 @@
 <template>
-  <q-list>
-    <sequential-entrance delay="150" fromBottom>
+  <q-list> 
     <q-item v-for="nav in navs" clickable exact class="text-grey-6 text-h7 text-thin"
     route :to="nav.to" :key="nav.label">
       <q-item-section avatar>
@@ -9,8 +8,7 @@
       <q-item-section>
         <q-item-label>{{nav.label}}</q-item-label>
       </q-item-section>
-    </q-item>
-    </sequential-entrance>
+    </q-item> 
   </q-list>
 </template>
 <script>

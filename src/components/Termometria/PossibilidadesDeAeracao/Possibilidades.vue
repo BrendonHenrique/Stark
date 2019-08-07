@@ -4,7 +4,7 @@
     <q-item dense v-for="item in possibilidades" 
     :key="item.label" class="bg-grey-1 q-my-lg" clickable v-ripple>
       <q-item-section avatar class="q-mr-md">
-        <q-btn round size="sm" :color="item.isPossible ? 'positive' : 'negative' " />
+        <q-btn round size="md" :color="item.isPossible ? 'positive' : 'negative' " />
       </q-item-section>
       <q-item-section class="text-grey-7">{{item.label}}</q-item-section>
     </q-item>

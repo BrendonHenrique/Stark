@@ -1,33 +1,35 @@
 <template>
-  <main>
+  <main class="q-mt-xl q-pa-lg">
+    <div style="margin:0px auto;">
+      <template v-if="this.forecast.temperatureValue != 0">
+        <measurements
+        :value="this.forecast.temperatureValue"
+        :humidity="this.forecast.humidity"
+        :rain_sensor_value="2" />
 
-    <template v-if="this.forecast.temperatureValue != 0">
-      <wheater-measurements
-      :value="this.forecast.temperatureValue"
-      :humidity="this.forecast.humidity"
-      :rain_sensor_value="2" />
+        <locale
+        class="q-mt-md"
+        :location="this.forecast.location"
+        :icon="this.forecast.weatherIcon">
 
-      <wheater-locale
-      class="q-mt-md"
-      :location="this.forecast.location"
-      :icon="this.forecast.weatherIcon">
+          <span v-if="one_decimal_hour">0</span>
+          <animated-number :value="this.hours"/>
+          :
+          <span v-if="one_decimal_minutes">0</span>
+          <animated-number :value="this.minutes"/>
 
-        <span v-if="one_decimal_hour">0</span>
-        <animated-number :value="this.hours"/>
-        :
-        <span v-if="one_decimal_minutes">0</span>
-        <animated-number :value="this.minutes"/>
+        </locale>
+      </template>
 
-      </wheater-locale>
-    </template>
-
-    <template v-else>
-      <q-spinner-gears color="secondary" size="9em" class="q-mt-xs"  />
-      <p class="q-mb-md text-h5">
-        carregando..
-      </p>
-    </template>
-
+      <template v-else>
+        <div style="height:30rem;" class="column justify-center">
+          <q-spinner-gears color="secondary" size="10rem" class="q-mt-xs"  />
+          <p class="q-mb-md text-h5">
+            carregando..
+          </p>
+        </div>
+      </template>
+    </div>
   </main>
 </template>
 
@@ -44,8 +46,8 @@ export default {
   },
   components: {
     'animated-number':  require('../Shared/AnimatedNumber').default,
-    'wheater-measurements': require('./Measurements').default,
-    'wheater-locale': require('./Locale').default
+    'measurements': require('./Measurements').default,
+    'locale': require('./Locale').default
   },
   computed:{
     one_decimal_hour(){
@@ -61,7 +63,6 @@ export default {
 <style scoped lang="stylus">
 
   main
-    height 29rem
     width 19rem
     background-position center
     background-size cover

@@ -1,15 +1,14 @@
 <template>
   <div id="layout-drawer">
     <q-drawer 
-      class="drawer-style"
-      elevated 
-      persistent
+      overlay
       bordered 
-      :value="drawerSide" content-class="bg-grey-3" :breakpoint="767"
-      :width="300" :side="side"  
-      :mini="MiniState" 
-      @mouseout="$emit('mouseOut')"
-      @mouseover="$emit('mouseOver')"
+      :side="side"
+      :width="300" 
+      :breakpoint="767"
+      :value="drawerSide" 
+      class="drawer-style" 
+      content-class="bg-grey-3" 
     >
       <slot>  </slot>
     </q-drawer>
@@ -18,7 +17,7 @@
 
 <script>
 export default{
-  props:['drawerSide','side','MiniState']
+  props:['drawerSide','side']
 }
 </script>
 <style lang="stylus">

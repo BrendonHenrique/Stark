@@ -16,10 +16,7 @@
     <layout-drawer 
     class="left-drawer"
     :side="'left'" 
-    :MiniState="MiniState"  
-    :drawerSide="drawerLeft" 
-    @mouseOut="MiniState = true"
-    @mouseOver="MiniState = false">
+    :drawerSide="drawerLeft" >
       <drawer-nav :navs="navs" />
     </layout-drawer>
     <!-- -->
@@ -32,9 +29,8 @@
 
     <!-- page inside content -->
       <q-page-container class="column justify-center bg-grey-10" 
-      style="position: relative; top: 2vh;
-      padding-top: 95.2px !important; padding-bottom:60px !important;"
-      >
+      style="position: relative; top: 2vh; padding-top: 95.2px !important;
+      padding-bottom:60px !important;">
           <router-view />
       </q-page-container>
     <!--  -->
@@ -51,30 +47,23 @@ import {  mapGetters } from 'vuex'
 import Vue from 'vue'
 import SequentialEntrance from 'vue-sequential-entrance'
 import 'vue-sequential-entrance/vue-sequential-entrance.css'
-import AnimatedNumber from "animated-number-vue";
-import VueAnime from 'vue-animejs';
-Vue.use(SequentialEntrance)
-Vue.use(VueAnime)
-
+import AnimatedNumber from "animated-number-vue"; 
+Vue.use(SequentialEntrance) 
 
 export default {
   data () {
     return {
       drawerLeft: false,
-      drawerRight: false,
-      MiniState: true
+      drawerRight: false
     }
-  },
-  mounted(){
-    this.drawerLeft =! this.drawerLeft
   },
   computed:{
     ...mapGetters('navs', ['navs'])
   },
   components:{
-    'layout-header' : require('components/MenuLayout/Header.vue').default,
-    'layout-footer' : require('components/MenuLayout/Footer.vue').default,
-    'layout-drawer' : require('components/MenuLayout/Drawer.vue').default,
+    'layout-header' : require('./Header.vue').default,
+    'layout-footer' : require('./Footer.vue').default,
+    'layout-drawer' : require('./Drawer.vue').default,
     'drawer-nav' : require('components/DrawerNav/Nav.vue').default,
     'user-painel' : require('components/UserPainel/UserPainel.vue').default,
   }
