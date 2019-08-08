@@ -55,9 +55,17 @@ export default {
 <style lang="stylus" >
   .legenda-de-cores
     animation entry 1s
+    
 
+    
   .input-cores
     .q-field__label
       overflow inherit
-  
+      font-size 23px
+    
+    input 
+      font-size 18px
+
+
+
 </style>

@@ -15,6 +15,7 @@
 </template>
 <style lang="stylus">
 
+  
   @media (max-width: 767px)
     .left-nav-menu
       display none
@@ -23,6 +24,9 @@
     font-family 'Great Vibes'
 
   .q-header
-    height 5rem
+    height 4rem
+    
+    .ellipsis
+      overflow visible
 
 </style>

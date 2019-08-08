@@ -18,7 +18,7 @@
               <img src="statics/garten3.svg" style="width:300px;margin-left:5px;">
             </div>
           <q-space />
-          <p class="text-weight-thin text-subtitle3 q-mt-md">
+          <p class="q-mt-md" style="font-family: Libre Caslon Text">
             {{date}}
           </p>
         </q-toolbar-title>
@@ -39,6 +39,19 @@
 </script>
 
 <style lang="stylus">
+  
+  .q-router-link--exact-active
+    color black
+
+  .q-tabs 
+    height 5rem
+    
+    .q-tabs__content  
+      height 100%
+    
+    .q-tab__label 
+      font-size 15px
+      font-weight 600
   
   @media screen and (min-width:768px)
     #mobile-footer

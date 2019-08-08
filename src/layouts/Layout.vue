@@ -28,11 +28,15 @@
     <!-- -->
 
     <!-- page inside content -->
-      <q-page-container class="column justify-center bg-grey-10" 
-      style="position: relative; top: 2vh; padding-top: 95.2px !important;
-      padding-bottom:60px !important;">
-          <router-view />
-      </q-page-container>
+      <!-- style="position: relative; top: 2vh; padding-top: 95.2px !important;
+      padding-bottom:60px !important;" -->
+      <div class="column justify-center" style="height:100vh;">
+        <div class="col-12 bg-grey-10" >
+          <q-page-container  class="bg-grey-10">
+              <router-view />
+          </q-page-container>
+        </div>
+      </div>
     <!--  -->
 
     <!-- footer -->
@@ -71,6 +75,9 @@ export default {
 </script>
 
 <style lang="stylus">
+
+  @import url('https://fonts.googleapis.com/css?family=Libre+Caslon+Text&display=swap');
+
   @media (max-width: 767px)
     .left-drawer
       display none 

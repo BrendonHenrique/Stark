@@ -32,6 +32,28 @@
             </q-input>
         </div> -->
 
+        <q-btn label="Bottom" icon="keyboard_arrow_down" color="primary" @click="open('bottom')" />
+        
+            <q-dialog v-model="dialog" position="bottom" full-width>
+                <q-card>
+                
+                    <q-card-section class="row items-center no-wrap">
+                        <div>
+                            <div class="text-weight-bold">The Walker</div>
+                            <div class="text-grey">Fitz & The Tantrums</div>
+                        </div>
+
+                        <q-space />
+
+                        <q-btn flat round icon="fast_rewind" />
+                        <q-btn flat round icon="pause" />
+                        <q-btn flat round icon="fast_forward" />
+                        
+                    </q-card-section>
+                </q-card>
+            </q-dialog>
+        
+
         
     </div>
 </template>
@@ -41,9 +63,17 @@ import {mapActions} from 'vuex'
 import NotifyUsers from '../../../services/NotifyUser'
 
 export default {
+    data(){
+        return{
+            dialog: false
+        }
+    },
     props:['aeracao','isFlipped'],
     methods:{
         ...mapActions('aeracao',['update_infos_ambiente']),
+        open (position) { 
+            this.dialog = true
+        },
         SalvarInfosDeAmbiente(valor,label){
             let novas_infos = {valor,label}
             setTimeout( () => {

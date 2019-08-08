@@ -5,7 +5,7 @@
           class="column reverse pendulo "
           v-for="termometria in termometrias"
           :key="termometria.id_pendulo">
-          <q-btn round class="text-thin text-h6 text-center text-black q-mt-sm" color="grey-2" size="15px">
+          <q-btn round class="text-thin text-h6 text-center text-black q-mt-sm bg-grey-5" size="15px">
             p{{termometria.id_pendulo + 1}}
           </q-btn>
           <sequential-entrace :delay="50">
@@ -23,15 +23,21 @@
         </div>
     </div>
 
-    <div class="paginador-de-silos  row justify-center">
-      <q-card class="row bg-grey-4 shadow-24">
-        <q-btn   flat @click="anterior()" v-bind=can_scroll_up class="navigate" icon="navigate_before" />
+    <div class="paginador-de-silos  row justify-center ">
+      <q-card class="row bg-grey-5 ">
+        <q-btn  flat @click="anterior()" v-bind=can_scroll_up class="navigate"
+        icon="navigate_before" />
+        
         <div class="absolute-center indice-paginador">
-          <h4>
+          <h6>
             {{indice_paginador}}
-          </h4>
+          </h6>
         </div>
-        <q-btn   class="absolute-right navigate" flat  @click="proximo()" v-bind=can_scroll_down icon="navigate_next" />
+
+        <q-space />
+        
+        <q-btn  class=" navigate" flat  @click="proximo()" 
+          v-bind=can_scroll_down icon="navigate_next" />
       </q-card>
     </div>
   
@@ -125,34 +131,37 @@ export default {
   
 
   @media (max-width: 767px)
-
     .paginador-de-silos
-    
+      .q-btn__content
+
       .q-card
         position relative
-        bottom 15px
-        height 5rem
+        height 4.2rem
         width  100%  
-    
+
       .q-btn
-        font-size 2rem 
+        font-size 1.6rem 
         height 100%
         width 20%
-         
-
 
   @media screen and (min-width:768px)
     .paginador-de-silos
-      display none
-        
+      .q-card
+        position relative
+        height 3.5rem
+        width  15rem
+        border-radius 40px 
+       
+      .q-btn
+        font-size 1rem
 
-    
   .paginador-de-silos
     position fixed     
-    right 0
     bottom 65px
+    right 0
     left 0
     z-index 999
+
 
   .indice-paginador
     font-family 'Orbitron'
