@@ -9,24 +9,26 @@
       </q-tabs>
     </div>
     
-    <q-tab-panels class="bg-grey-10 " v-model="tab"  > 
-     
+    <q-tab-panels class="bg-grey-10" v-model="tab"  > 
+    
       <q-tab-panel class="termometria-panel" name="termometria" >
-        <termometria-silo></termometria-silo>
+          <termometria-silo />
       </q-tab-panel>
 
       <q-tab-panel name="prod_armazenado" >
-        <produto-armazenado />
+          <produto-armazenado />
       </q-tab-panel>
         
       <q-tab-panel name="historico">
         <!-- <historico /> -->
       </q-tab-panel>
+
       <q-tab-panel name="aeracao">
-        <aeracao />
+          <aeracao />
       </q-tab-panel>
+      
       <q-tab-panel name="cores">
-        <cores />
+          <cores />
       </q-tab-panel>
       
     </q-tab-panels>
@@ -68,14 +70,14 @@ export default {
     'termometria-silo':require('../components/Termometria/Main/Termometria').default,
     'produto-armazenado':require('../components/Termometria/ProdutosArmazenados/ProdutosArmazenados').default,
     'historico': require('../components/Termometria/Historico/Historico').default,
-    'aeracao': require('../components/Termometria/PossibilidadesDeAeracao/Aeracao').default,
+    'aeracao': require('../components/Termometria/Aeracao/Aeracao').default,
     'cores': require('../components/Termometria/LegendaDeCores/Cores').default,
   }
 
 }
 </script>
 
-<style lang="stylus" scoped>
+<style lang="stylus">
   
   .menu-bar
     position fixed
@@ -86,5 +88,4 @@ export default {
     z-index 4
     font-family 'Libre Caslon Text', serif
   
-
 </style>

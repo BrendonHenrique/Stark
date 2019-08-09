@@ -1,6 +1,6 @@
 <template>
   <div v-bind:class="!flipped ? 'flip-container flipped': 'flip-container'">
-    <div class="flipper">
+    <div class="flipper ">
       <div class="front">
           <card-aeracao>
             <slot name="front"></slot>

@@ -1,5 +1,5 @@
 <template>
-    <div class="row justify-center q-gutter-lg">
+    <div class="row justify-center q-gutter-lg q-mt-xs">
         <q-btn style="position:relative;top:7rem;z-index:4;"  
             :push="view.Funcoes_card" 
             @click="$emit('changeView')"

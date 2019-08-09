@@ -1,12 +1,14 @@
 <template>
   <q-list> 
-    <q-item v-for="nav in navs" clickable exact class="text-grey-6 text-h7 text-thin"
+    <q-item 
+    style="border-bottom: 0.2px solid #494949;"
+    v-for="nav in navs" clickable exact class="text-grey-4 text-h7 text-thin"
     route :to="nav.to" :key="nav.label">
       <q-item-section avatar>
-        <q-icon :name="nav.icon" />
+        <q-icon size="40px" :name="nav.icon" />
       </q-item-section>
       <q-item-section>
-        <q-item-label>{{nav.label}}</q-item-label>
+        <q-item-label class="text-h5 text-weight-thin">{{nav.label}}</q-item-label>
       </q-item-section>
     </q-item> 
   </q-list>
@@ -16,10 +18,9 @@
   export default{
     props:['navs']
   }
-</script>
+</script> 
 
-<style lang="stylus">
-  .q-item__label
-    font-family 'Orbitron', sans-serif
+<style lang="stylus" scoped>
+
 </style>
 

@@ -23,7 +23,9 @@
             maxlength="7"
             debounce="500"
             @input="salvarNovoEquilibrio"
-            dense
+            dense   
+            lazy-rules
+            :rules="[  val =>  val > 0 && val < 100 || 'Valor deve estar entre 0 e 100']"
             >
             <template v-slot:before>
                 <q-icon style="position:relative;right:4.3px;" name="schedule" />
@@ -46,7 +48,7 @@ export default {
     props:['equilibrio_higroscopico'], 
     data(){
         return{
-            novo_equilibrio: null
+            novo_equilibrio: 0
         }
     },
     mounted(){

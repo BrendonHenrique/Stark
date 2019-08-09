@@ -36,6 +36,8 @@
   .card-silo
     transition all .4s ease-in-out 
     border-radius 30px  
+    font-family 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif
+    font-size 20px
 
   .card-silo:hover
     transform scale(1.05)

@@ -1,7 +1,7 @@
 <template>
-    <div class="row justify-center container-produto-armazenado">
-        <q-card style="box-shadow:0 0 8px 1px #eae5e5;" 
-        class="bg-grey-2 shadow-10 col-sm-5 col-xs-12 col-md-5 col-lg-4 card-produto-armazenado">
+    <div class="row justify-center container-produto-armazenado" >
+        <q-card style="box-shadow:0 0 8px 1px #eae5e5; font-family: 'Libre Caslon Text', serif;" 
+        class="bg-grey-2 shadow-10 col-sm-10 col-xs-12 col-md-5 col-lg-4 card-produto-armazenado">
             
             <!-- card header -->
             <avatar-header>
@@ -20,7 +20,7 @@
             <!-- Select -->
             <q-card-section>
                 <q-select outlined transition-show="jump-up" transition-hide="jump-down"
-                 v-model="produto.nome" :options="getProdutos" label="Selecionar produto">
+                v-model="produto.nome" :options="getProdutos" label="Selecionar produto">
                     <template v-slot:prepend>
                         <q-img   
                         style="height: 30px; width: 30px"
@@ -139,8 +139,10 @@ export default {
 
     .card-produto-armazenado
         border-radius 10px
+
         
     .container-produto-armazenado
         animation entry 1s
+        font-family 'Libre Caslon Text', serif
 
 </style>

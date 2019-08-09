@@ -1,18 +1,13 @@
 <template>
-  <div id="layout-drawer">
-    <q-drawer 
-      overlay
-      bordered 
-      :side="side"
-      :width="300" 
-      :breakpoint="767"
-      :value="drawerSide" 
-      class="drawer-style" 
-      content-class="bg-grey-3" 
-    >
-      <slot>  </slot>
-    </q-drawer>
-  </div>
+  <q-drawer 
+    :width="250"
+    :side="side"
+    :breakpoint="767"
+    :value="drawerSide" 
+    class="drawer-style"  
+  >
+    <slot>  </slot>
+  </q-drawer>
 </template>
 
 <script>
@@ -21,24 +16,26 @@ export default{
 }
 </script>
 <style lang="stylus">
+  
+  .drawer-style
+    .q-drawer 
+      height 98%
+      position fixed
 
-  .q-drawer 
-    height 98%
-    position fixed
-
-
-  .q-item--clickable
-    vertical-align middle
-    -webkit-transform perspective(1px) translateZ(0)
-    transform perspective(1px) translateZ(0)
-    box-shadow 0 0 1px rgba(0, 0, 0, 0)
-    position relative
-    background #f0eded
-    -webkit-transition-property color
-    transition-property color
-    -webkit-transition-duration 0.7s
-    transition-duration 0.7s
-
+  .drawer-style
+    .q-item--clickable
+      vertical-align middle
+      -webkit-transform perspective(1px) translateZ(0)
+      transform perspective(1px) translateZ(0)
+      box-shadow 0 0 1px rgba(0, 0, 0, 0)
+      position relative
+      -webkit-transition-property color
+      transition-property color
+      -webkit-transition-duration 0.7s
+      transition-duration 0.7s
+      background-color: #353535
+      height 5rem
+  
   .q-item--clickable:before
     content ""
     position absolute
@@ -47,7 +44,7 @@ export default{
     bottom 0
     left 0
     right 0
-    background rgb(227, 227, 230)
+    background #2c2d30
     -webkit-transform scaleX(0)
     transform scaleX(0)
     -webkit-transform-origin 50%

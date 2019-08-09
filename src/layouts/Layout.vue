@@ -15,9 +15,9 @@
 
           <!-- left side bar -->
           <layout-drawer 
-          class="left-drawer"
-          :side="'left'" 
-          :drawerSide="drawerLeft" >
+            class="left-drawer"
+            :side="'left'" 
+            :drawerSide="drawerLeft" >
             <drawer-nav :navs="navs" />
           </layout-drawer>
           <!-- -->
@@ -32,7 +32,10 @@
           <layout-footer :navs="navs" />
           <!-- -->
           
+          <!-- Content -->
           <router-view />
+          <!--  -->
+      
       </q-page-container>
     <!--  -->
 
@@ -74,5 +77,9 @@ export default {
   @media (max-width: 767px)
     .left-drawer
       display none 
+
+  .q-drawer--left , .q-drawer--right
+    background-color: #353535
+
 
 </style>

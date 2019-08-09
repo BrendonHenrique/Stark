@@ -1,5 +1,5 @@
 <template>
-  <q-page id="wheater-content" class="wheater-layout app">
+  <q-page id="wheater-content" style="min-height:0;" class="fixed-center wheater-layout app">
     <sequential-entrance delay="150" fromBottom>
       <estacao-meteorologica class="app--weather"></estacao-meteorologica>
     </sequential-entrance>
