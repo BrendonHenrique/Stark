@@ -53,7 +53,43 @@ const state = {
             },{
               id_sensor:12,
               temperatura:random().toFixed(1)
-            }
+            },{
+              id_sensor:123,
+              temperatura:random().toFixed(1)
+            },{
+              id_sensor:22,
+              temperatura:random().toFixed(1)
+            },{
+              id_sensor:32,
+              temperatura:random().toFixed(1)
+            },{
+              id_sensor:42,
+              temperatura:random().toFixed(1)
+            },{
+              id_sensor:52,
+              temperatura:random().toFixed(1)
+            },{
+              id_sensor:62,
+              temperatura:random().toFixed(1)
+            },{
+              id_sensor:72,
+              temperatura:random().toFixed(1)
+            },{
+              id_sensor:82,
+              temperatura:random().toFixed(1)
+            },{
+              id_sensor:92,
+              temperatura:random().toFixed(1)
+            },{
+              id_sensor:102,
+              temperatura:random().toFixed(1)
+            },{
+              id_sensor:113,
+              temperatura:random().toFixed(1)
+            },{
+              id_sensor:122,
+              temperatura:random().toFixed(1)
+            },
           ]
         },{
           id_pendulo:1,

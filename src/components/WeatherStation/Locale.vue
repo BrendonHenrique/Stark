@@ -1,13 +1,13 @@
 <template>
     <section>
         <div class="location">
-        <div class="text-center text-h4">
-          <slot>
+          <div class="text-center text-h4">
+            <slot>
 
-          </slot>
-        </div>
-        <q-separator spaced color="grey-6" />
-         {{ location }}
+            </slot>
+          </div>
+          <q-separator spaced color="grey-6" />
+          {{ location }}
         </div>
         <img class="weather__icon" :src="icon">
     </section>
@@ -29,12 +29,11 @@ export default {
  .location
     text-transform uppercase
     font-weight bold
+    font-size 20px
+  
+  .weather__icon
+    width 160px
 
- .weather__description
-    text-transform lowercase
-    margin-left 10%
-    margin-right 10%
-    text-align center
 
 
 </style>

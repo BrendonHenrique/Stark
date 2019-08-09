@@ -1,28 +1,36 @@
 <template>
+  <div style="width: 100%;">
+
+    <section class="humidity">
+      <div>
+        <img src="~assets/icons/humidity.svg">
+        <span class="humidity__value">
+          <animated-number :value="humidity" />
+        </span>&percnt;
+      </div>
+
+      <div>
+        <img src="~assets/icons/weather/rain.svg">
+        <span class="rain__value">
+          <animated-number :value="rain_sensor_value" />
+        </span>&percnt;
+      </div>
+
+    </section>
+    
+    <span class="temperature__scale" >
+      <a href="#" @click.prevent="toggleTemperature">
+        &deg;{{ scaleSymbol }}
+      </a>
+    </span>
+    
     <section>
-        <div class="temperature__value">
+        <span class="temperature__value">
           <animated-number v-if="scaleSymbol === 'C'" :value="value" />
           <animated-number v-else :value="fValue" />
-        </div>
-        <div class="temperature__right">
-            <div class="temperature__scale">
-              <a href="#" @click.prevent="toggleTemperature">&deg;{{ scaleSymbol }}</a>
-            </div>
-            <div class="humidity">
-              <img src="~assets/icons/humidity.svg">
-              <span class="humidity__value">
-                <animated-number :value="humidity" />
-              </span>&percnt;
-
-              <q-separator spaced color="grey-6" />
-
-              <img src="~assets/icons/weather/rain.svg">
-              <span class="rain__value">
-                <animated-number :value="rain_sensor_value" />
-              </span>&percnt;
-          </div>
-        </div>
+        </span>
     </section>
+  </div>
 </template>
 
 <script>
@@ -48,6 +56,14 @@ export default {
       scale: 'Celcius'
     }
   },
+  methods: {
+      toFahrenheit(value) {
+        return Math.floor((value * 1.8) + 32);
+      },
+      toggleTemperature() {
+        (this.scale === 'Celcius')? this.scale = 'Fahrenheit' : this.scale = 'Celcius';
+      }
+  },
   components:{
     'animated-number': require('../Shared/AnimatedNumber').default
   },
@@ -56,15 +72,7 @@ export default {
       return this.scale.charAt(0);
     },
     fValue() {
-      return this.toFahrenheit(this.value);
-    }
-  },
-  methods: {
-    toFahrenheit(value) {
-      return Math.floor((value * 1.8) + 32);
-    },
-    toggleTemperature() {
-      (this.scale === 'Celcius')? this.scale = 'Fahrenheit' : this.scale = 'Celcius';
+        return this.toFahrenheit(this.value);
     }
   }
 }
@@ -75,39 +83,43 @@ export default {
   a
     text-decoration none
     color inherit
-    transition color .2s ease-in
+    transition color 
 
   .humidity
+    height 70px
     position relative
-    left 7px
+    left 0
+    top 0
+    display flex
+    justify-content space-between 
+
     img
-      width 38px
-      height 38px
+      width 58px
+      height 58px
       vertical-align middle
 
   section 
-    height 12rem
-    width 8rem
+    font-size 20px
+    height 7rem
+    width 100%
     display flex
     flex-direction row
     justify-content center
-
+  
   .temperature__value
-    font-size 7em
-    color rgba(255, 255, 255, 0.75)
-
-  .temperature__right
     display flex
     flex-direction column
     justify-content center
-    position relative
-    left 15px 
-
+    font-size 7em
+    color rgba(255, 255, 255, 0.75) 
+    
   .temperature__scale
-    padding-top 5px
+    position relative 
+    margin 10px 10px
+    right 20px
+    float right
     font-size 2em
     font-weight bold
     color rgba(255, 255, 255, 0.75)
-
 
 </style>

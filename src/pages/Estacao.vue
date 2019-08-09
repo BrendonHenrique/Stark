@@ -1,15 +1,9 @@
 <template>
-  <q-layout class="wheater-layout app">
-    <q-page-container>
-      <q-page id="wheater-content" class="absolute-center  q-mt-lg">
-
-        <sequential-entrance delay="150" fromBottom>
-          <estacao-meteorologica class="app--weather"></estacao-meteorologica>
-        </sequential-entrance>
-
-      </q-page>
-    </q-page-container>
-  </q-layout>
+  <q-page id="wheater-content" class="wheater-layout app">
+    <sequential-entrance delay="150" fromBottom>
+      <estacao-meteorologica class="app--weather"></estacao-meteorologica>
+    </sequential-entrance>
+  </q-page>
 </template>
 
 <script>
@@ -38,18 +32,13 @@ export default {
 
   @import url('https://fonts.googleapis.com/css?family=Open+Sans');
 
-  #wheater-content
-    position fixed
-    margin-top 6rem
 
   .wheater-layout
     position fixed
     font-family 'Orbitron', sans-serif
     -webkit-font-smoothing antialiased
     -moz-osx-font-smoothing grayscale
-    color rgba(255, 255, 255, 0.9)
-    width 100%
-    height 100%
+    color rgba(255, 255, 255, 0.9) 
 
   .app--weather
     cursor pointer

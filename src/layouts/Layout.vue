@@ -1,47 +1,40 @@
 <template>
-  <q-layout view="hHh lpR fFf" class="bg-grey-10">
-    <!-- header -->
-    <layout-header
-    @openDrawerLeft="drawerLeft = !drawerLeft"
-    @openDrawerRight="drawerRight = !drawerRight" >
-      <q-toolbar>
-        <q-toolbar-title class="q-pt-md text-h3 text-center">
-          Stark
-        </q-toolbar-title>
-      </q-toolbar>
-    </layout-header>
+  <q-layout view="hHh lpR fFf" class="bg-grey-10" >
+    
+    <!-- page content -->
+      <q-page-container class="bg-grey-10">
+          <layout-header
+            @openDrawerLeft="drawerLeft = !drawerLeft"
+            @openDrawerRight="drawerRight = !drawerRight" >
+            <q-toolbar>
+              <q-toolbar-title class="q-pt-md text-h3 text-center">
+                Stark
+              </q-toolbar-title>
+            </q-toolbar>
+          </layout-header>
+
+          <!-- left side bar -->
+          <layout-drawer 
+          class="left-drawer"
+          :side="'left'" 
+          :drawerSide="drawerLeft" >
+            <drawer-nav :navs="navs" />
+          </layout-drawer>
+          <!-- -->
+
+          <!-- right side navbar -->
+          <layout-drawer  :drawerSide="drawerRight" :side="'right'">
+            <user-painel />
+          </layout-drawer>
+          <!-- -->
+
+          <!-- footer -->
+          <layout-footer :navs="navs" />
+          <!-- -->
+          
+          <router-view />
+      </q-page-container>
     <!--  -->
-
-    <!-- left side bar -->
-    <layout-drawer 
-    class="left-drawer"
-    :side="'left'" 
-    :drawerSide="drawerLeft" >
-      <drawer-nav :navs="navs" />
-    </layout-drawer>
-    <!-- -->
-
-    <!-- right side navbar -->
-    <layout-drawer  :drawerSide="drawerRight" :side="'right'">
-      <user-painel />
-    </layout-drawer>
-    <!-- -->
-
-    <!-- page inside content -->
-      <!-- style="position: relative; top: 2vh; padding-top: 95.2px !important;
-      padding-bottom:60px !important;" -->
-      <div class="column justify-center" style="height:100vh;">
-        <div class="col-12 bg-grey-10" >
-          <q-page-container  class="bg-grey-10">
-              <router-view />
-          </q-page-container>
-        </div>
-      </div>
-    <!--  -->
-
-    <!-- footer -->
-    <layout-footer :navs="navs" />
-    <!-- -->
 
   </q-layout>
 </template>

@@ -1,20 +1,23 @@
 <template>
-  <div>
+  <q-page class="termometria-container">
     
-    <q-tabs 
-      dense inline-label v-model="tab" align="justify" narrow-indicator
-      class="text-grey-4 menu-bar" active-color="secundary" indicator-color="secundary">
-      <q-tab v-for="item in tabs " :key="item.name" :name="item.name" :label="item.label" />
-    </q-tabs>
+    <div style="height: 5rem;" class="tab-menu">
+      <q-tabs 
+        dense inline-label v-model="tab" align="justify" narrow-indicator
+        class="text-grey-4 menu-bar" active-color="secundary" indicator-color="secundary">
+        <q-tab v-for="item in tabs " :key="item.name" :name="item.name" :label="item.label" />
+      </q-tabs>
+    </div>
     
-    <q-tab-panels class="bg-grey-10 " v-model="tab" animated > 
+    <q-tab-panels class="bg-grey-10 " v-model="tab"  > 
+     
       <q-tab-panel class="termometria-panel" name="termometria" >
         <termometria-silo></termometria-silo>
       </q-tab-panel>
 
-          <q-tab-panel name="prod_armazenado" >
-            <produto-armazenado />
-          </q-tab-panel>
+      <q-tab-panel name="prod_armazenado" >
+        <produto-armazenado />
+      </q-tab-panel>
         
       <q-tab-panel name="historico">
         <!-- <historico /> -->
@@ -25,10 +28,10 @@
       <q-tab-panel name="cores">
         <cores />
       </q-tab-panel>
+      
     </q-tab-panels>
   
-  </div>
-
+  </q-page>
 </template>
 
 <script>
@@ -73,7 +76,7 @@ export default {
 </script>
 
 <style lang="stylus" scoped>
-
+  
   .menu-bar
     position fixed
     top 3.8rem

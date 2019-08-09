@@ -1,36 +1,34 @@
-<template>
-  <main class="q-mt-xl q-pa-lg">
-    <div style="margin:0px auto;">
-      <template v-if="this.forecast.temperatureValue != 0">
-        <measurements
-        :value="this.forecast.temperatureValue"
-        :humidity="this.forecast.humidity"
-        :rain_sensor_value="2" />
+<template> 
+  <main>
+    <template v-if="this.forecast.temperatureValue != 0">
+      <measurements
+      :value="this.forecast.temperatureValue"
+      :humidity="this.forecast.humidity"
+      :rain_sensor_value="2" />
 
-        <locale
-        class="q-mt-md"
-        :location="this.forecast.location"
-        :icon="this.forecast.weatherIcon">
+      <locale
+      class="q-mt-md"
+      :location="this.forecast.location"
+      :icon="this.forecast.weatherIcon">
 
-          <span v-if="one_decimal_hour">0</span>
-          <animated-number :value="this.hours"/>
-          :
-          <span v-if="one_decimal_minutes">0</span>
-          <animated-number :value="this.minutes"/>
+        <span v-if="one_decimal_hour">0</span>
+        <animated-number :value="this.hours"/>
+        :
+        <span v-if="one_decimal_minutes">0</span>
+        <animated-number :value="this.minutes"/>
 
-        </locale>
-      </template>
+      </locale>
+    </template>
 
-      <template v-else>
-        <div style="height:30rem;" class="column justify-center">
-          <q-spinner-gears color="secondary" size="10rem" class="q-mt-xs"  />
-          <p class="q-mb-md text-h5">
-            carregando..
-          </p>
-        </div>
-      </template>
-    </div>
-  </main>
+    <template v-else>
+      <div style="height:30rem;" class="column justify-center">
+        <q-spinner-gears color="secondary" size="10rem"  />
+        <p class="q-my-xl text-h5">
+          carregando..
+        </p>
+      </div>
+    </template>
+  </main> 
 </template>
 
 <script>
@@ -64,6 +62,7 @@ export default {
 
   main
     width 19rem
+    padding 10px 15px
     background-position center
     background-size cover
     background-repeat no-repeat
