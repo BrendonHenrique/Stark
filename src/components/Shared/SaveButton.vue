@@ -1,6 +1,9 @@
 <template>
-    <q-btn label="salvar" @click="salvar()" 
-        text-color="grey-9" icon-right="save" />
+    <q-btn 
+        class="save-button"
+        label="salvar" @click="salvar()" 
+        text-color="grey-9" icon-right="save" 
+        :disable="isDisabled" />
 </template>
 
 <script>
@@ -8,7 +11,7 @@
 import NotifyUsers from '../../services/NotifyUser'
 
 export default {
-    props:['mensagem'],
+    props:['mensagem','isDisabled'],
     methods:{
         salvar(){
             this.$q.dialog({

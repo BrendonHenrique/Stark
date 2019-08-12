@@ -28,14 +28,13 @@ export default {
 }
 </script>
 
-<style lang="stylus">
+<style lang="stylus" >
 
-  @import url('https://fonts.googleapis.com/css?family=Open+Sans');
 
 
   .wheater-layout
     position fixed
-    font-family 'Orbitron', sans-serif
+    font-family 'Libre Caslon Text', serif
     -webkit-font-smoothing antialiased
     -moz-osx-font-smoothing grayscale
     color rgba(255, 255, 255, 0.9) 

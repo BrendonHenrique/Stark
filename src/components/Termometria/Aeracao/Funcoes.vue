@@ -1,60 +1,61 @@
 <template>
-    <div class="col-11" :class="!isFlipped ? 'show' : 'hide'">
-        <q-separator inset class="q-mb-md" />
-         
-            <!-- <q-list class="col-12">
-                <q-item dense v-for="item in aeracao.funcoes" 
-                :key="item.label" class="bg-grey-1 q-my-md" clickable v-ripple>
-                <q-item-section avatar class="q-mr-md">
-                    <q-btn round size="sm" :color="item.isActivated ? 'positive' : 'negative' " />
-                </q-item-section>
-                <q-item-section class="text-grey-7">{{item.label}}</q-item-section>
-                </q-item>
-            </q-list> -->
+    <div>
         
-        <!-- <status-aerador :status_atual="'semi-auto'" /> -->
+       <q-banner dense class="bg-primary text-center" 
+        inline-actions style="border-top-left-radius: 20px;">
+            <span class="text-h5 text-grey-3">
+                Funcoes
+            </span>
+            <template v-slot:action>
+                <q-img src="../../../assets/icons/settings.png" 
+                style="width:34px;color:grey;" />
+            </template>
+        </q-banner>
+  
 
-        <!-- <div class="row justify-inline">
-              <q-input 
-                v-for="item in aeracao.infos.ambiente"
-                :key="item.label"
-                suffix="%"
-                bottom-slots 
-                maxlength="7"
+        <q-card-section  :class="!isFlipped ? 'show' : 'hide'">
+    
+            <p class="text-center text-subtitle1 q-mt-sm text-grey-9">
+                Selecione abaixo uma função para aerar o silo
+            </p>
+        
+            <div class=" row justify-center q-pa-md">
+                <q-btn-dropdown 
+                glossy
                 dense
-                style="width: 33.3%"  
-                debounce="500"
-                @input="SalvarInfosDeAmbiente(item.valor,item.label)"
-                v-model.number="item.valor">
-                <template v-slot:hint>
-                    {{item.label}}
-                </template>
-            </q-input>
-        </div> -->
-
-        <q-btn label="Bottom" icon="keyboard_arrow_down" color="primary" @click="open('bottom')" />
+                outline
+                color="primary" label="Funções disponíveis">
+                    
+                    <q-list>
+                        <q-item v-for="item in funcoes"
+                        :key="item.label"
+                        clickable v-close-popup @click="selecionarOpcao(item.label)">
+                            <q-item-section>
+                                <q-item-label>{{item.label}}</q-item-label>
+                            </q-item-section>
+                        </q-item>
+                    </q-list>
+                    
+                </q-btn-dropdown>
+            </div>
         
-            <q-dialog v-model="dialog" position="bottom" full-width>
+            <q-dialog v-model="dialog" position="bottom" >
                 <q-card>
-                
                     <q-card-section class="row items-center no-wrap">
                         <div>
                             <div class="text-weight-bold">The Walker</div>
                             <div class="text-grey">Fitz & The Tantrums</div>
                         </div>
-
                         <q-space />
-
                         <q-btn flat round icon="fast_rewind" />
                         <q-btn flat round icon="pause" />
                         <q-btn flat round icon="fast_forward" />
-                        
                     </q-card-section>
                 </q-card>
             </q-dialog>
-        
 
-        
+        </q-card-section>
+
     </div>
 </template>
 
@@ -68,18 +69,16 @@ export default {
             dialog: false
         }
     },
-    props:['aeracao','isFlipped'],
+    props:['funcoes','isFlipped'],
     methods:{
-        ...mapActions('aeracao',['update_infos_ambiente']),
-        open (position) { 
+        ...mapActions('aeracao',['update_funcoes_de_aeracao','update_possibilidades_de_aeracao']),
+        
+        selecionarOpcao (opcaoSelecionada) { 
+
+            this.update_funcoes_de_aeracao(opcaoSelecionada)
+            //    this.update_possibilidades_de_aeracao()
             this.dialog = true
-        },
-        SalvarInfosDeAmbiente(valor,label){
-            let novas_infos = {valor,label}
-            setTimeout( () => {
-                this.update_infos_ambiente(novas_infos)
-                NotifyUsers.success('As novas informações sobre o ambiente foram salvas com sucesso')
-            },500);
+
         }
     },
     components:{

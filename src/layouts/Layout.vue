@@ -64,8 +64,8 @@ export default {
     'layout-header' : require('./Header.vue').default,
     'layout-footer' : require('./Footer.vue').default,
     'layout-drawer' : require('./Drawer.vue').default,
-    'drawer-nav' : require('components/DrawerNav/Nav.vue').default,
-    'user-painel' : require('components/UserPainel/UserPainel.vue').default,
+    'drawer-nav'    : require('components/DrawerNav/Nav.vue').default,
+    'user-painel'   : require('components/UserPainel/UserPainel.vue').default,
   }
 }
 </script>

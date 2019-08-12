@@ -87,5 +87,5 @@ export default {
     background-color $primary
     z-index 4
     font-family 'Libre Caslon Text', serif
-  
+   
 </style>

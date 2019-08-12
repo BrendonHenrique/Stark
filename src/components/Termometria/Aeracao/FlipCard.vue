@@ -27,27 +27,12 @@ export default {
 
 <style lang="stylus" scoped>
 
-  i.frontFlipBtn,
-  i.backFlipBtn 
-    position absolute
-    right 20px
-    top 20px
-    color #FFFFFF
-
-  i 
-    &.backFlipBtn 
-      -webkit-transform rotateY(-180deg)
-      -moz-transform rotateY(-180deg)
-      -o-transform rotateY(-180deg)
-      -ms-transform rotateY(-180deg)
-      transform rotateY(-180deg)
 
   .flip-container 
     -webkit-perspective 1000
     -moz-perspective 1000
     -o-perspective 1000
     perspective 1000
-    min-height 120px
     &.flipped 
       .back 
         -webkit-transform rotateY(0deg)

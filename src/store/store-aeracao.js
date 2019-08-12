@@ -1,5 +1,5 @@
 import { stat } from "fs";
-
+ 
 const state = {
     aeracao:{
         infos:{
@@ -24,7 +24,7 @@ const state = {
         },
         possibilidades:[{
             label: 'Por Conservação',
-            isPossible: true
+            isPossible: false
         },
         {
             label: 'Por Secagem',
@@ -59,7 +59,6 @@ const state = {
             isActivated: false
         }] 
     }
-
 }
 
 const mutations = { 
@@ -69,11 +68,31 @@ const mutations = {
     update_infos_ambiente(state, payload){
         state.aeracao.infos.ambiente.forEach(element => {
             if(element.label == payload.label){
-                Object.assign(element, payload)
-                // console.log('encontrado : ' + element.valor)
-                // console.log('será substituido por  : ' + payload.valor)
+                Object.assign(element, payload) 
             }
         });
+    },
+    update_funcoes_de_aeracao(state, payload){
+        state.aeracao.funcoes.forEach(element => {
+            if(element.label == payload){
+                element.isActivated = true
+            }else{
+                element.isActivated = false
+            }
+        });
+
+        console.log(state.aeracao.funcoes)
+    },
+    update_possibilidades_de_aeracao(state, payload){
+        state.aeracao.possibilidades.forEach(element => {
+            if(element.label == payload){ 
+                element.isPossible = true
+            }else{
+                element.isPossible = false
+            }
+        });
+        
+        console.log(state.aeracao.possibilidades)
     }
 }   
 
@@ -83,6 +102,12 @@ const actions = {
     },
     update_infos_ambiente({commit}, payload){
         commit('update_infos_ambiente', payload)
+    },
+    update_funcoes_de_aeracao({commit}, payload){
+        commit('update_funcoes_de_aeracao', payload)
+    },
+    update_possibilidades_de_aeracao({commit}, payload){
+        commit('update_possibilidades_de_aeracao', payload)
     }
 }
 
