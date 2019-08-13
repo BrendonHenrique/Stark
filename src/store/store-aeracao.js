@@ -36,23 +36,23 @@ const state = {
         },
         {
             label: 'Por Emergência',
-            isPossible: true
+            isPossible: false
         }],
         funcoes:[{
             label: 'Manual',
             isActivated: false
         },
         {
-            label: 'Auto',
+            label: 'Automática',
             isActivated: false
         },
         {
-            label: 'Semi Auto',
+            label: 'Semi Automática',
             isActivated: false
         },
         {
             label: 'Forçado',
-            isActivated: true
+            isActivated: false
         },
         {
             label: 'Expurgo',
@@ -80,8 +80,6 @@ const mutations = {
                 element.isActivated = false
             }
         });
-
-        console.log(state.aeracao.funcoes)
     },
     update_possibilidades_de_aeracao(state, payload){
         state.aeracao.possibilidades.forEach(element => {
@@ -91,8 +89,6 @@ const mutations = {
                 element.isPossible = false
             }
         });
-        
-        console.log(state.aeracao.possibilidades)
     }
 }   
 
@@ -112,7 +108,14 @@ const actions = {
 }
 
 const getters = { 
-    aeracao: (state) => state.aeracao
+    aeracao: (state) => state.aeracao,
+    funcoes_de_aeracao: (state) => state.aeracao.funcoes,
+    possibilidades_de_aeracao: (state) => state.aeracao.possibilidades,
+    get_funcao_de_aeracao_ativa: (state) => {
+        return state.aeracao.funcoes.filter( element => {
+            return element.isActivated
+        });
+    }
 }
 
 

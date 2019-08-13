@@ -1,9 +1,7 @@
 <template>
-    <div class="row justify-center q-mb-xl possibilidades-de-aeracao" >
+    <div class="row justify-center aeracao-container" >
        
-        <q-card
-        style="height:30rem; box-shadow:0 0 8px 1px #eae5e5;"
-        class="bg-grey-3 col-sm-9 col-xs-12 col-md-6 col-lg-6">
+        <q-card class="bg-grey-3 col-sm-12 col-xs-12 col-md-8 col-lg-6 card-de-aeracao">
             <particles />
             
             <div class="row">
@@ -15,10 +13,8 @@
                     </div>
                 </div>
 
-                <div 
-                style="z-index:3!important"
-                class="col-xs-7 col-sm-8 col-md-8 col-lg-8">
-                    <flip-card :flipped="flipped" class="flip-card">
+                <div class="col-xs-7 col-sm-8 col-md-8 col-lg-8 flip-card">
+                    <flip-card :flipped="flipped" class="">
     
                         <template slot="front"> 
                             <possibilidades :possibilidades="aeracao.possibilidades"/>
@@ -78,16 +74,23 @@ export default {
 <style lang="stylus">
     
     .front
-        height 390px
+        height 400px
         margin-bottom 20px
 
 
-    .possibilidades-de-aeracao
+    .aeracao-container
         animation entry 1s
         font-family 'Libre Caslon Text', serif
         font-size 20px
 
-    
+    .card-de-aeracao
+        height 32rem 
+        padding 15px
+        box-shadow 0 0 8px 1px #eae5e5
+
+    .flip-card 
+        z-index 3!important
+
     .activated
         animation entry 1s  
      

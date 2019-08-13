@@ -73,7 +73,9 @@ module.exports = function (ctx) {
         'QStep',
         'QStepperNavigation',
         'QExpansionItem',
-        'QBtnDropdown'
+        'QBtnDropdown',
+        'QTooltip',
+        'QToggle'
       ],
 
       directives: [

@@ -1,31 +1,29 @@
 <template>
   <div>
-    
     <q-banner dense class="bg-primary text-center" 
     inline-actions style="border-top-left-radius: 20px;">
-        <span class="text-h5 text-grey-3 ">
+        <span class="text-h6 text-grey-3 ">
           Possibilidades
         </span>
       <template v-slot:action>
         <q-img src="../../../assets/icons/possibilities.png" 
-        style="width:36px;color:grey;" />
+        style="width:36px;" />
       </template>
     </q-banner>
   
-    <q-card-section>
-    
-      
-      <q-list>
-        <q-item  v-for="item in possibilidades" 
-        :key="item.label" clickable v-ripple>
-          <q-item-section avatar>
-            <q-btn round size="md" class="shadow-7" :color="item.isPossible ? 'positive' : 'negative' " />
-          </q-item-section>
-          <q-item-section class="text-grey-9">{{item.label}}</q-item-section>
-        </q-item>
-      </q-list>
-  
-    </q-card-section>
+    <q-list class="possibilidades-container">
+      <q-item class="possibilidades" v-for="item in possibilidades" 
+      :key="item.label" clickable v-ripple>
+        <q-item-section avatar>
+          <q-btn round size="md" class="shadow-7" :color="item.isPossible ? 'positive' : 'negative' " />
+        </q-item-section>
+
+        <span class="text-grey-9 possibiilidades-label">
+          {{item.label}}
+        </span>
+
+      </q-item>
+    </q-list>
 
   </div>
 </template>
@@ -35,3 +33,18 @@ export default {
   props:['possibilidades']
 }
 </script>
+
+<style scoped lang="stylus">
+
+  .possibiilidades-label
+    font-size 19px
+    padding 10px 0
+
+  .possibilidades-container
+    padding 5px 0
+
+  .possibilidades
+    padding 5px
+    margin-bottom 15px
+
+</style>

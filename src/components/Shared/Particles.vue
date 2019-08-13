@@ -1,8 +1,9 @@
 <template>
-    <vue-particles style="z-index:2;position:absolute;width: 100%;height: 23rem;"
+    <vue-particles 
+        style="z-index:2;position:absolute;width: 97%;height: 95%;"
         color="#7a5858"
         :particleOpacity="0.7"
-        :particlesNumber="200"
+        :particlesNumber="150"
         shapeType="circle"
         :particleSize="2"
         linesColor="#dedede"
@@ -21,11 +22,6 @@ import Vue from 'vue'
 import VueParticles from 'vue-particles'
 Vue.use(VueParticles)
 
-export default {
-    mounted() {
-    },
-    methods:{
-    }
-}
+export default {}
 </script>
  

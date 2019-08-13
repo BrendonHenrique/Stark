@@ -1,11 +1,11 @@
 <template>
     <q-avatar class="shadow-12"  
     style="
-    width:120px;height:120px;
+    width:150px;height:150px;
     border-radius:100px;
-    z-index:2"
+    z-index:3"
     >
         <q-img src="../../../assets/fan-final4.jpg" 
-        style="height:130px;position:relative;top:-7px;filter:grayscale(60%);" />
+        style="height:150px;position:relative;filter:grayscale(60%);" />
     </q-avatar>
 </template> 

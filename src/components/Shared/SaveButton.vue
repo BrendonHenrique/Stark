@@ -3,7 +3,8 @@
         class="save-button"
         label="salvar" @click="salvar()" 
         text-color="grey-9" icon-right="save" 
-        :disable="isDisabled" />
+        :disable="isDisabled" > 
+        </q-btn>
 </template>
 
 <script>
