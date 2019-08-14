@@ -2,7 +2,7 @@
   <div>
     <q-banner dense class="bg-primary text-center" 
     inline-actions style="border-top-left-radius: 20px;">
-        <span class="text-h6 text-grey-3 ">
+        <span class="possibilidades-header text-h6 text-grey-3 ">
           Possibilidades
         </span>
       <template v-slot:action>
@@ -35,6 +35,14 @@ export default {
 </script>
 
 <style scoped lang="stylus">
+
+  @media screen and (min-width:350px)
+    .possibilidades-header
+      font-size 1rem
+    
+    .possibiilidades-label
+      font-size 17px !important
+
 
   .possibiilidades-label
     font-size 19px

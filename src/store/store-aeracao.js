@@ -44,7 +44,17 @@ const state = {
         },
         {
             label: 'Automática',
-            isActivated: false
+            isActivated: false,
+            processos:[
+                {
+                    label:'Conservação',
+                    isActivated: false
+                },
+                {
+                    label:'Secagem',
+                    isActivated: false
+                }
+            ]
         },
         {
             label: 'Semi Automática',
@@ -81,6 +91,19 @@ const mutations = {
             }
         });
     },
+    updatate_processo_de_aeracao_automatica(state, payload){
+        state.aeracao.funcoes.forEach(element => {
+            if(element.label == 'Automática'){
+                element.processos.forEach(processos => {
+                    if(processos.label == payload){
+                        processos.isActivated = true
+                    }else{
+                        processos.isActivated = false
+                    }
+                })
+            }
+        });
+    },  
     update_possibilidades_de_aeracao(state, payload){
         state.aeracao.possibilidades.forEach(element => {
             if(element.label == payload){ 
@@ -104,6 +127,9 @@ const actions = {
     },
     update_possibilidades_de_aeracao({commit}, payload){
         commit('update_possibilidades_de_aeracao', payload)
+    },
+    updatate_processo_de_aeracao_automatica({commit}, payload){
+        commit('updatate_processo_de_aeracao_automatica', payload)
     }
 }
 
@@ -112,10 +138,24 @@ const getters = {
     funcoes_de_aeracao: (state) => state.aeracao.funcoes,
     possibilidades_de_aeracao: (state) => state.aeracao.possibilidades,
     get_funcao_de_aeracao_ativa: (state) => {
+        
         return state.aeracao.funcoes.filter( element => {
             return element.isActivated
         });
-    }
+    },
+    get_funcao_automatica_ativa: (state) => {
+        let funcao
+        state.aeracao.funcoes.filter( element => {
+            if(element.label == 'Automática'){
+               element.processos.filter(processos => {
+                    if(processos.isActivated){
+                        funcao = processos.label
+                    }
+                })
+            }
+        })
+        return funcao
+    },
 }
 
 

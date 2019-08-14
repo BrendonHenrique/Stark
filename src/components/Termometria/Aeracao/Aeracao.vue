@@ -4,7 +4,7 @@
         <q-card class="bg-grey-3 col-sm-12 col-xs-12 col-md-8 col-lg-6 card-de-aeracao">
             <particles />
             
-            <div class="row">
+            <div class="row justify-between">
                 
                 <div class="q-pt-md col-xs-5 col-sm-4 col-md-4 col-lg-4">
                     <div class="column items-center">
@@ -13,7 +13,7 @@
                     </div>
                 </div>
 
-                <div class="col-xs-7 col-sm-8 col-md-8 col-lg-8 flip-card">
+                <div class="col-xs-6 col-sm-8 col-md-8 col-lg-8 flip-card">
                     <flip-card :flipped="flipped" class="">
     
                         <template slot="front"> 
@@ -72,11 +72,8 @@ export default {
 </script> 
 
 <style lang="stylus">
-    
     .front
-        height 400px
         margin-bottom 20px
-
 
     .aeracao-container
         animation entry 1s
@@ -84,8 +81,8 @@ export default {
         font-size 20px
 
     .card-de-aeracao
-        height 32rem 
         padding 15px
+        height 40rem !important
         box-shadow 0 0 8px 1px #eae5e5
 
     .flip-card 

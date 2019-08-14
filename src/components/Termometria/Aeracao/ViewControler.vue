@@ -1,8 +1,8 @@
 <template>
-    <div class="row justify-center q-gutter-lg ">
+    <div class="row justify-center absolute-bottom q-mb-sm">
         <q-btn   
             style="z-index:4;"
-            class="view-controler-button"
+            class="view-controler-button q-mr-lg"
             :push="view.Funcoes_card" 
             @click="$emit('changeView')"
             round >
