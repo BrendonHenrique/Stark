@@ -79,36 +79,41 @@
 
                     </div>
           
-                    <div class='row justify-between q-gutter-sm q-px-xs' 
+                    <div class='row justify-center q-gutter-lg q-pa-sm' 
                     v-if='funcaoAtiva == "Semi Automática"'>
 
 
                         <q-input 
                         v-model.number="novasInfosAmbiente.ua_max"
-                        :rules="[  val =>  val > 0 && val < 100 || 'Valor de porcentagem deve estar entre 0 e 100']"
+                        :rules="[  
+                            val =>  val > 0 && val < 100 || 'Valor de porcentagem deve estar entre 0 e 100',
+                            val =>  val > this.novasInfosAmbiente.ua_min || 'O valor de umidade máxima deve ser maior que a mínima'
+                        ]"
                         class="semi-automatica-inputs col-xs-11 col-sm-3 col-md-3 col-lg-3" 
                         label="UA MAX" suffix="%"/>
                         
                     
                         <q-input 
                         v-model.number="novasInfosAmbiente.ua_min"
-                        :rules="[  val =>  val > 0 && val < 100 || 'Valor de porcentagem deve estar entre 0 e 100']"
+                        :rules="[  
+                            val =>  val > 0 && val < 100 || 'Valor de porcentagem deve estar entre 0 e 100',
+                            val =>  val < this.novasInfosAmbiente.ua_max || 'O valor de umidade mínima deve ser menor que a máxima'
+                        ]"
                         class="semi-automatica-inputs col-xs-11 col-sm-3 col-md-3 col-lg-3" 
                         label="UA MIN" suffix="%"/>
                         
                         <q-input 
                         v-model.number="novasInfosAmbiente.ta_max"
-                        :rules="[  val =>  !val || 'Insira um valor de temperatura válido']"
+                        :rules="[  val =>  !!val || 'Insira um valor de temperatura válido']"
                         class="semi-automatica-inputs col-xs-11 col-sm-3 col-md-3 col-g-3 q-mb-sm" 
                         label="TA MAX" suffix="ºC"/>
 
-                        <!-- <save-button
-                        style="margin-top:35px;margin-left: 25px;"
+                        <save-button
+                        class="q-mt-lg"
                         :isDisabled="valorIncorreto"
                         @salvarAlteracoes="salvarInfosAmbiente" 
-                        :mensagem="`Deseja salvar ${novo_equilibrio} como o valor higroscópico atual ?`"
-                        /> -->
-
+                        :mensagem="`Deseja salvar as informações de temperatura e umidade  ?`"
+                        />
 
                     </div>
 
@@ -142,7 +147,8 @@ export default {
                 ua_max: 0,
                 ua_min: 0,
                 ta_max: 0,
-            }
+            },
+            valorIncorreto: false
         }
     },
     mounted(){
@@ -188,10 +194,7 @@ export default {
             })
         },
         salvarInfosAmbiente(){
-            setTimeout(() => {
-                this.update_infos_ambiente(this.novasInfosAmbiente);
-                NotifyUser.info('Informações de ambiente atualizada');
-            }, 500);
+            this.update_infos_ambiente(this.novasInfosAmbiente);
         }
     },
     watch:{
@@ -207,6 +210,15 @@ export default {
         ...mapGetters('aeracao',['get_funcao_de_aeracao_ativa','get_funcao_automatica_ativa','get_infos_ambiente']), 
         funcaoAtiva(){
             return this.get_funcao_de_aeracao_ativa[0].label 
+        },
+        UmidadeAmbienteMinima(){
+            return this.novasInfosAmbiente.ua_min;    
+        },
+        UmidadeAmbienteMaxima(){
+            return this.novasInfosAmbiente.ua_max;    
+        },
+        TemperaturaAmbienteMaxima(){
+            return this.novasInfosAmbiente.ta_max;    
         }
     },
     components:{
@@ -214,12 +226,16 @@ export default {
         'save-button': require('../../Shared/SaveButton').default,
     },
     watch:{
-        novasInfosAmbiente(infos){
-            
-            // infos.ua_min > 0 && infos.ua_min < 100 ? this.valorIncorreto = false : this.valorIncorreto = true
-            // infos.ua_max > 0 && infos.ua_min < 100 ? this.valorIncorreto = false : this.valorIncorreto = true
-            // !infos.ta_max ? this.valorIncorreto = false : this.valorIncorreto = true
-
+        UmidadeAmbienteMinima(valor){
+            valor > 0 && valor < 100 ? this.valorIncorreto = false : this.valorIncorreto = true;
+            valor > this.novasInfosAmbiente.ua_max ? this.valorIncorreto = false :  this.valorIncorreto = true;
+        },
+        UmidadeAmbienteMaxima(valor){
+            valor > 0 && valor < 100 ? this.valorIncorreto = false : this.valorIncorreto = true;
+            valor < this.novasInfosAmbiente.ua_min ? this.valorIncorreto = false :  this.valorIncorreto = true;
+        },
+        TemperaturaAmbienteMaxima(valor){
+            valor == '' ? this.valorIncorreto = true :  this.valorIncorreto = false;
         }
     }
 }
@@ -277,7 +293,4 @@ export default {
         -o-animation rotating 5s linear infinite
         animation rotating 5s linear infinite
 
-        
-
-        
 </style>

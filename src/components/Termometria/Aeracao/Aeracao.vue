@@ -1,10 +1,10 @@
 <template>
     <div class="row justify-center aeracao-container" >
        
-        <q-card class="bg-grey-3 col-sm-12 col-xs-12 col-md-8 col-lg-6 card-de-aeracao">
+        <q-card class="bg-grey-3 col-sm-12 col-xs-12 col-md-8 col-lg-6">
             <particles />
             
-            <div class="row justify-between">
+            <div class="row justify-between  card-de-aeracao">
                 
                 <div class="q-pt-md col-xs-5 col-sm-4 col-md-4 col-lg-4">
                     <div class="column items-center">
@@ -75,6 +75,16 @@ export default {
     .front
         margin-bottom 20px
 
+
+    @media (min-width: 481px) {
+        height 40rem !important
+    }
+
+    @media (min-width: 320px) and (max-width: 480px) 
+        .card-de-aeracao
+            height 52rem !important 
+    
+
     .aeracao-container
         animation entry 1s
         font-family 'Libre Caslon Text', serif
@@ -82,7 +92,6 @@ export default {
 
     .card-de-aeracao
         padding 15px
-        height 40rem !important
         box-shadow 0 0 8px 1px #eae5e5
 
     .flip-card 
