@@ -58,7 +58,7 @@
 
                         <q-btn 
                             label="Secagem" 
-                            @click="salvar('Secagem') ">
+                            @click="ativarFuncaoAutomaticaPor('Secagem') ">
                             <q-icon 
                             color="red"
                             class="icon-funcao-automatica"
@@ -68,7 +68,7 @@
 
                         <q-btn 
                             label="Conservação" 
-                            @click="salvar('Conservação')"
+                            @click="ativarFuncaoAutomaticaPor('Conservação')"
                             >
                             <q-icon 
                             color="red"
@@ -81,21 +81,34 @@
           
                     <div class='row justify-between q-gutter-sm q-px-xs' 
                     v-if='funcaoAtiva == "Semi Automática"'>
-                    
-                        <q-input class="col-xs-11 col-sm-3 col-md-3 col-lg-3" label="UA MAX">
-                            <template v-slot:append>
-                                <q-avatar style="width:40px;height:40px;">
-                                    <img style="width:40px;height:40px;" src="../../../assets/icons/whater-max.svg">
-                                </q-avatar>
-                            </template>
-                    
-                        </q-input>
-                    
-                        <q-input class="col-xs-11 col-sm-3 col-md-3 col-lg-3" label="UA MIN">
-                        </q-input>
 
-                        <q-input class="col-xs-11 col-sm-3 col-md-3 col-g-3 q-mb-sm" label="TA MAX">
-                        </q-input>
+
+                        <q-input 
+                        v-model.number="novasInfosAmbiente.ua_max"
+                        :rules="[  val =>  val > 0 && val < 100 || 'Valor de porcentagem deve estar entre 0 e 100']"
+                        class="semi-automatica-inputs col-xs-11 col-sm-3 col-md-3 col-lg-3" 
+                        label="UA MAX" suffix="%"/>
+                        
+                    
+                        <q-input 
+                        v-model.number="novasInfosAmbiente.ua_min"
+                        :rules="[  val =>  val > 0 && val < 100 || 'Valor de porcentagem deve estar entre 0 e 100']"
+                        class="semi-automatica-inputs col-xs-11 col-sm-3 col-md-3 col-lg-3" 
+                        label="UA MIN" suffix="%"/>
+                        
+                        <q-input 
+                        v-model.number="novasInfosAmbiente.ta_max"
+                        :rules="[  val =>  !val || 'Insira um valor de temperatura válido']"
+                        class="semi-automatica-inputs col-xs-11 col-sm-3 col-md-3 col-g-3 q-mb-sm" 
+                        label="TA MAX" suffix="ºC"/>
+
+                        <!-- <save-button
+                        style="margin-top:35px;margin-left: 25px;"
+                        :isDisabled="valorIncorreto"
+                        @salvarAlteracoes="salvarInfosAmbiente" 
+                        :mensagem="`Deseja salvar ${novo_equilibrio} como o valor higroscópico atual ?`"
+                        /> -->
+
 
                     </div>
 
@@ -117,6 +130,7 @@
 <script> 
 import {mapActions, mapGetters} from 'vuex'
 import NotifyUsers from '../../../services/NotifyUser'
+import NotifyUser from '../../../services/NotifyUser';
 
 export default {
     props:['funcoes','isFlipped'], 
@@ -124,11 +138,19 @@ export default {
         return{ 
             funcaoSelecionada:'',
             funcaoManual:'',
+            novasInfosAmbiente:{
+                ua_max: 0,
+                ua_min: 0,
+                ta_max: 0,
+            }
         }
+    },
+    mounted(){
+        Object.assign(this.novasInfosAmbiente, this.get_infos_ambiente)
     },
     methods:{
         ...mapActions('aeracao',['update_funcoes_de_aeracao',
-        'updatate_processo_de_aeracao_automatica']),
+        'update_processo_de_aeracao_automatica','update_infos_ambiente']),
         selecionarOpcao (opcaoSelecionada) { 
             this.update_funcoes_de_aeracao(opcaoSelecionada)
             this.funcaoSelecionada = opcaoSelecionada 
@@ -141,29 +163,35 @@ export default {
                 return 'Desligado'
             } 
         },
-        salvar(funcao){
+        ativarFuncaoAutomaticaPor(funcao){
             this.$q.dialog({
                 title: 'Confirmação',
-            message: `Deseja confirmar o inicio do processo de aeração por ${funcao} ?`, 
-            cancel: true,
-            position: 'top',
-            persistent: true,
-            cancel:{
-                label:'cancelar',
-                color:'negative'
-            },
-            ok:{
-                label:'confirmar',
-                color:'positive'
-            }
+                message: `Deseja confirmar o inicio do processo de aeração por ${funcao} ?`, 
+                cancel: true,
+                position: 'top',
+                persistent: true,
+                cancel:{
+                    label:'cancelar',
+                    color:'negative'
+                },
+                ok:{
+                    label:'confirmar',
+                    color:'positive'
+                }
             })
             .onOk( () => {
-                this.updatate_processo_de_aeracao_automatica(funcao)
+                this.update_processo_de_aeracao_automatica(funcao)
                 NotifyUsers.info(`Processo de aeração por ${funcao} iniciada.`)
             })
             .onCancel( () => {
                 NotifyUsers.info(`Processo de aeração por ${funcao} cancelada`)
             })
+        },
+        salvarInfosAmbiente(){
+            setTimeout(() => {
+                this.update_infos_ambiente(this.novasInfosAmbiente);
+                NotifyUser.info('Informações de ambiente atualizada');
+            }, 500);
         }
     },
     watch:{
@@ -176,19 +204,32 @@ export default {
         }
     },
     computed:{
-        ...mapGetters('aeracao',['get_funcao_de_aeracao_ativa',
-        'get_funcao_automatica_ativa']), 
+        ...mapGetters('aeracao',['get_funcao_de_aeracao_ativa','get_funcao_automatica_ativa','get_infos_ambiente']), 
         funcaoAtiva(){
             return this.get_funcao_de_aeracao_ativa[0].label 
         }
     },
     components:{
         'status-aerador': require('./StatusAerador').default,
+        'save-button': require('../../Shared/SaveButton').default,
+    },
+    watch:{
+        novasInfosAmbiente(infos){
+            
+            // infos.ua_min > 0 && infos.ua_min < 100 ? this.valorIncorreto = false : this.valorIncorreto = true
+            // infos.ua_max > 0 && infos.ua_min < 100 ? this.valorIncorreto = false : this.valorIncorreto = true
+            // !infos.ta_max ? this.valorIncorreto = false : this.valorIncorreto = true
+
+        }
     }
 }
 </script>
 
 <style lang="stylus">
+
+    .semi-automatica-inputs
+        font-size 20px
+
     .show
         display initial 
 

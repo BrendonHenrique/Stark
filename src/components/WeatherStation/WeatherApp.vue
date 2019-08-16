@@ -21,10 +21,10 @@
     </template>
 
     <template v-else>
-      <div style="height:30rem;" class="column justify-center">
-        <q-spinner-gears color="secondary" size="10rem"  />
-        <p class="q-my-xl text-h5">
-          carregando..
+      <div style="height:25rem;" class="column justify-center">
+        <q-spinner-gears color="secondary" size="200px"  />
+        <p class="q-my-xl text-center text-h4">
+          Carregando...
         </p>
       </div>
     </template>

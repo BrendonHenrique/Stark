@@ -35,7 +35,10 @@ export default{
       transition-duration 0.7s
       background-color: #353535
       height 5rem
-  
+      
+      &:hover 
+        border-left 2px solid red
+        
   .drawer-style
     .q-item--clickable:before
       content ""

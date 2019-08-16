@@ -1,5 +1,6 @@
 <template>
     <div class="equilibrio-higroscopico">
+        
         <q-input 
             class="q-mb-md infos-equilibrio-input"
             v-model="equilibrio_higroscopico.equilibrio" 
@@ -24,9 +25,8 @@
             bottom-slots 
             suffix="%"
             maxlength="7"
-            debounce="500"
             lazy-rules
-            :rules="[  val =>  val > 0 && val < 100 || 'Valor deve estar entre 0 e 100']"
+            :rules="[  val =>  val > 0 && val < 100 || 'Valor de porcentagem deve estar entre 0 e 100']"
             >
             <template v-slot:before>
                 <q-icon size="36px" name="schedule" />
@@ -51,6 +51,7 @@
         :mensagem="`Deseja salvar ${novo_equilibrio} como o valor higroscópico atual ?`">
         </save-button>
 
+        
     </div>
 </template>
 

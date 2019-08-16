@@ -1,7 +1,7 @@
 <template>
   <q-page id="wheater-content" style="min-height:0;" class="fixed-center wheater-layout app">
     <sequential-entrance delay="150" fromBottom>
-      <estacao-meteorologica class="app--weather"></estacao-meteorologica>
+      <wheater-app class="app--weather" />
     </sequential-entrance>
   </q-page>
 </template>
@@ -11,7 +11,7 @@ import WeatherApp from 'components/WeatherStation/WeatherApp.vue'
 
 export default {
   components: {
-    'estacao-meteorologica': require('components/WeatherStation/WeatherApp.vue').default
+    'wheater-app': require('components/WeatherStation/WeatherApp.vue').default
   },
 
   data() {
