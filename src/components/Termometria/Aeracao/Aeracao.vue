@@ -4,7 +4,7 @@
         <q-card class="bg-grey-3 col-sm-12 col-xs-12 col-md-8 col-lg-6">
             <particles />
             
-            <div class="row justify-between  card-de-aeracao">
+            <div class="row justify-between  card-de-aeracao" style="box-shadow: 1px 1px 10px #eae5e5;">
                 
                 <div class="q-pt-md col-xs-5 col-sm-4 col-md-4 col-lg-4">
                     <div class="column items-center">
@@ -76,13 +76,14 @@ export default {
         margin-bottom 20px
 
 
-    @media (min-width: 481px) {
-        height 40rem !important
-    }
+    @media (min-width: 481px)
+        .card-de-aeracao
+            height 40rem 
+    
 
     @media (min-width: 320px) and (max-width: 480px) 
         .card-de-aeracao
-            height 52rem !important 
+            height 52rem 
     
 
     .aeracao-container
@@ -91,8 +92,7 @@ export default {
         font-size 20px
 
     .card-de-aeracao
-        padding 15px
-        box-shadow 0 0 8px 1px #eae5e5
+        padding 15px 
 
     .flip-card 
         z-index 3!important

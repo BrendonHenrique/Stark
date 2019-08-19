@@ -29,37 +29,40 @@ const state = {
             label: 'Por Emergência',
             isPossible: false
         }],
-        funcoes:[{
-        label: 'Manual',
-        isActivated: false
-        },
-        {
-            label: 'Automática',
-            isActivated: false,
-            processos:[
-                {
-                    label:'Conservação',
-                    isActivated: false
-                },
-                {
-                    label:'Secagem',
-                    isActivated: false
-                }
-            ]
-        },
-        {
-            label: 'Semi Automática',
-            isActivated: false,
-            
-        },
-        {
-            label: 'Forçado',
-            isActivated: false
-        },
-        {
-            label: 'Expurgo',
-            isActivated: false
-        }] 
+        funcoes:[
+            {
+                label: 'Manual',
+                isActivated: true
+            },
+            {
+                label: 'Automática',
+                isActivated: false,
+                processos:
+                [
+                    {
+                        label:'Conservação',
+                        isActivated: false
+                    },
+                    {
+                        label:'Secagem',
+                        isActivated: false
+                    }
+                ]
+            },
+            {
+                label: 'Semi Automática',
+                isActivated: false,
+                
+            },
+            {
+                label: 'Forçado',
+                isActivated: false
+            },
+            {
+                label: 'Expurgo',
+                isActivated: false
+            }
+        ] 
     }
 }
 
@@ -71,11 +74,16 @@ const mutations = {
         Object.assign(state.aeracao.infos.ambiente, payload) 
     },
     update_funcoes_de_aeracao(state, payload){
+    
         state.aeracao.funcoes.forEach(element => {
             if(element.label == payload){
                 element.isActivated = true
             }else{
                 element.isActivated = false
+                if(element.label == 'Automática'){
+                   element.processos[0].isActivated = false;
+                   element.processos[1].isActivated = false;
+                }
             }
         });
     },
@@ -100,6 +108,15 @@ const mutations = {
                 element.isPossible = false
             }
         });
+    },
+    set_funcao_manual(state, payload){
+        state.aeracao.funcoes[0].isActivated = payload
+    },
+    set_funcao_forcada(state, payload){
+        state.aeracao.funcoes[3].isActivated = payload
+    },
+    set_funcao_de_expurgo(state, payload){
+        state.aeracao.funcoes[4].isActivated = payload
     }
 }   
 
@@ -118,6 +135,15 @@ const actions = {
     },
     update_processo_de_aeracao_automatica({commit}, payload){
         commit('update_processo_de_aeracao_automatica', payload);
+    },
+    set_funcao_manual({commit}, payload){
+        commit('set_funcao_manual', payload)
+    },
+    set_funcao_de_expurgo({commit}, payload){
+        commit('set_funcao_de_expurgo', payload)
+    },
+    set_funcao_forcada({commit}, payload){
+        commit('set_funcao_forcada', payload)
     }
 }
 

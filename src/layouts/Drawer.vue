@@ -22,6 +22,7 @@ export default{
       height 98%
       position fixed
 
+
   .drawer-style
     .q-item--clickable
       vertical-align middle
@@ -37,7 +38,7 @@ export default{
       height 5rem
       
       &:hover 
-        border-left 2px solid red
+        border-left 2px solid red 
         
   .drawer-style
     .q-item--clickable:before

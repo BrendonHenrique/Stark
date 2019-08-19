@@ -22,7 +22,8 @@
                     <q-list>
                         <q-item v-for="item in funcoes"
                         :key="item.label"
-                        clickable v-close-popup @click="selecionarOpcao(item.label)">
+                        clickable v-close-popup 
+                        @click="selecionarOpcao(item.label)">
                             <q-item-section>
                                 <q-item-label>{{item.label}}</q-item-label>
                             </q-item-section>
@@ -30,31 +31,28 @@
                     </q-list>
                 </q-btn-dropdown>
             </div>
-            <div 
-            v-if="this.get_funcao_de_aeracao_ativa.length > 0"
-            class="bg-grey-3 text-grey-9 card-aeracao-ativa" style="font-size: 18px;">
+            <div class="bg-grey-3 text-grey-9 card-aeracao-ativa" style="font-size: 18px;">
 
                 <div class='container-funcao-selecionada column items-center'>
                     <span class="q-mb-sm" style="text-align: center;">
                         Função selecionada 
                     </span>
                     <strong>
-                        {{funcaoAtiva}}   
+                        {{funcaoSelecionada}}   
                     </strong>
                 </div>
             
                 <div class='container-funcao-selecionada q-mt-sm'>
                     
-                    <div v-if='funcaoAtiva == "Manual"' 
+                    <div v-show='funcaoSelecionada == "Manual"' 
                         class="column items-center">
                         Ligar/Desligar 
-                        <q-toggle v-model="funcaoManual" 
-                        :label="funcaoManualToggle()"/>
+                        <q-toggle v-model="funcaoManualLigada"  :label="funcaoManualLigada ? 'Ligada' : 'Desligada'"
+                        color="green" checked-icon="check" unchecked-icon="clear"
+                        />
                     </div>
 
-                    <div v-if='funcaoAtiva == "Automática"'
-                        class="row justify-center q-gutter-sm" 
-                        > 
+                    <div v-show='funcaoSelecionada == "Automática"' class="row justify-center q-gutter-sm" > 
 
                         <q-btn 
                             label="Secagem" 
@@ -80,7 +78,7 @@
                     </div>
           
                     <div class='row justify-center q-gutter-lg q-pa-sm' 
-                    v-if='funcaoAtiva == "Semi Automática"'>
+                    v-show='funcaoSelecionada == "Semi Automática"'>
 
 
                         <q-input 
@@ -117,12 +115,18 @@
 
                     </div>
 
-                    <div v-if='funcaoAtiva == "Forçado" '>
-                        Forçado
+                    <div v-show='funcaoSelecionada == "Forçado" ' class="column items-center">
+                        Ligar/Desligar 
+                        <q-toggle v-model="funcaoForcadoLigada" :label="funcaoForcadoLigada ? 'Ligada' : 'Desligada'"
+                        color="green" checked-icon="check" unchecked-icon="clear"
+                        />
                     </div>
 
-                    <div v-if='funcaoAtiva== "Expurgo" '>
-                        Expurgo
+                    <div v-show='funcaoSelecionada == "Expurgo"' class="column items-center">
+                        Ligar/Desligar 
+                        <q-toggle v-model="funcaoExpurgoLigada" :label="funcaoExpurgoLigada ? 'Ligada' : 'Desligada'"
+                        color="green" checked-icon="check" unchecked-icon="clear"
+                        />
                     </div>
 
                 </div>
@@ -142,7 +146,12 @@ export default {
     data(){
         return{ 
             funcaoSelecionada:'',
-            funcaoManual:'',
+            funcaoManualLigada:false,
+            funcaoConservacaoLigada:false,
+            funcaoSecagemLigada: false,
+            funcaoSemiAutomaticaLigada: false,
+            funcaoForcadoLigada: false,
+            funcaoExpurgoLigada: false,
             novasInfosAmbiente:{
                 ua_max: 0,
                 ua_min: 0,
@@ -153,23 +162,28 @@ export default {
     },
     mounted(){
         Object.assign(this.novasInfosAmbiente, this.get_infos_ambiente)
+        this.funcaoSelecionada = this.get_funcao_de_aeracao_ativa[0].label
+        this.updateView()
     },
     methods:{
         ...mapActions('aeracao',['update_funcoes_de_aeracao',
-        'update_processo_de_aeracao_automatica','update_infos_ambiente']),
+        'update_processo_de_aeracao_automatica','update_infos_ambiente',
+        'set_funcao_manual','set_funcao_forcada','set_funcao_de_expurgo']),
         selecionarOpcao (opcaoSelecionada) { 
-            this.update_funcoes_de_aeracao(opcaoSelecionada)
+            
             this.funcaoSelecionada = opcaoSelecionada 
+            this.updateView()
         }, 
-        funcaoManualToggle(){
-            if(this.funcaoManual){
-                return 'Ligado'
-            }
-            else{
-                return 'Desligado'
-            } 
-        },
         ativarFuncaoAutomaticaPor(funcao){
+
+            if(funcao == 'Secagem'){
+                this.funcaoSecagemLigada = true
+                this.funcaoConservacaoLigada = false
+            }else{
+                this.funcaoSecagemLigada = false
+                this.funcaoConservacaoLigada = true
+            }
+
             this.$q.dialog({
                 title: 'Confirmação',
                 message: `Deseja confirmar o inicio do processo de aeração por ${funcao} ?`, 
@@ -191,19 +205,20 @@ export default {
             })
             .onCancel( () => {
                 NotifyUsers.info(`Processo de aeração por ${funcao} cancelada`)
-            })
+            });
+
         },
         salvarInfosAmbiente(){
+            this.funcaoSemiAutomaticaLigada = true;
             this.update_infos_ambiente(this.novasInfosAmbiente);
-        }
-    },
-    watch:{
-        funcaoManual(isActivated){
-            if(isActivated){
-                NotifyUsers.info('Aerador ligado')
-            }else{
-                NotifyUsers.info('Aerador desligado')
-            }
+        },
+        updateView(){
+            this.funcaoManualLigada = this.funcoes[0].isActivated
+            this.funcaoConservacaoLigada = this.funcoes[1].processos[0].isActivated
+            this.funcaoSecagemLigada = this.funcoes[1].processos[1].isActivated
+            this.funcaoSemiAutomaticaLigada = this.funcoes[2].isActivated
+            this.funcaoForcadoLigada = this.funcoes[3].isActivated
+            this.funcaoExpurgoLigada = this.funcoes[4].isActivated
         }
     },
     computed:{
@@ -225,7 +240,16 @@ export default {
         'status-aerador': require('./StatusAerador').default,
         'save-button': require('../../Shared/SaveButton').default,
     },
-    watch:{
+    watch:{ 
+        funcaoExpurgoLigada(valor){
+            this.set_funcao_de_expurgo(valor)
+        },
+        funcaoForcadoLigada(valor){
+            this.set_funcao_forcada(valor)
+        },
+        funcaoManualLigada(valor){
+            this.set_funcao_manual(valor)
+        },
         UmidadeAmbienteMinima(valor){
             valor > 0 && valor < 100 ? this.valorIncorreto = false : this.valorIncorreto = true;
             valor > this.novasInfosAmbiente.ua_max ? this.valorIncorreto = false :  this.valorIncorreto = true;

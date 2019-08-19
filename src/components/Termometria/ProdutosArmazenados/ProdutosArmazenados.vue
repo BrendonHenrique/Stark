@@ -57,7 +57,7 @@
                 @salvarAlteracoes="salvarProdutoArmazenado"
                 />
             </q-card-actions>
-            <!--  -->
+            <!--  --> 
             
         </q-card>
     </div>
@@ -130,6 +130,13 @@ export default {
 
 <style lang="stylus" >
 
+    .container-produto-armazenado
+        .q-field__native 
+            font-size 19px
+        
+        .q-field__label 
+            font-size 21px 
+            
     .background-avatar 
         background url('../../../assets/wholegrains.jpg')  no-repeat center center 
         -webkit-background-size cover
