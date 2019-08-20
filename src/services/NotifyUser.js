@@ -1,3 +1,9 @@
+ 
+/*
+* Interface de notificação ao usuário  
+* Para usar importe no arquivo e utilize NotifyUser.{um dos métodos estáticos}(mensagem a ser enviada) 
+*/
+
 import Vue from 'vue'
 const vm = new Vue()
 

@@ -51,7 +51,6 @@
         :mensagem="`Deseja salvar ${novo_equilibrio} como o valor higroscópico atual ?`">
         </save-button>
 
-        
     </div>
 </template>
 

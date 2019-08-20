@@ -1,11 +1,11 @@
 <template>
   <div>
-    <div class="row no-wrap justify-between q-mb-xl"  >
+    <div class="row no-wrap justify-between q-mb-xl">
       <div
         class="column reverse pendulo "
         v-for="termometria in termometrias"
         :key="termometria.id_pendulo">
-        <q-btn round class="text-thin text-h6 text-center text-black q-mt-sm bg-grey-5" size="15px">
+        <q-btn round class="text-thin text-h6 text-center text-black q-mt-sm bg-grey-5 indicador-do-pendulo" size="15px">
           p{{termometria.id_pendulo + 1}}
         </q-btn>
         <sequential-entrace :delay="50">
@@ -23,7 +23,7 @@
       </div>
     </div>
 
-    <div class="paginador-de-silos  row justify-center ">
+    <div class="paginador-de-silos  row justify-center">
       <q-card class="row bg-grey-5 ">
         <q-btn  flat @click="anterior()" v-bind=can_scroll_up class="navigate"
         icon="navigate_before" />
@@ -34,7 +34,7 @@
         </div>
         <q-space />
         <q-btn  class=" navigate" flat  @click="proximo()" 
-          v-bind=can_scroll_down icon="navigate_next" />
+          v-bind=can_scroll_down icon="navigate_next"/>
       </q-card>
     </div>
   
@@ -104,6 +104,10 @@ export default {
 </script>
 
 <style lang="stylus" scoped>
+  
+  .indicador-do-pendulo
+    position relative
+    right 2px 
 
   .pendulo
     border-width bold  
@@ -112,7 +116,7 @@ export default {
     border-radius 80px
     align-items center
     width 130px
-    padding 15px
+    padding 10px 10px 3px 13px
     margin 10px 
     
     span
@@ -123,7 +127,7 @@ export default {
     content: "|"
     position absolute 
     top 28px
-    left 50px
+    left 47px
     color grey
   
 

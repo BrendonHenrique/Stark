@@ -14,12 +14,11 @@
 
 <script>
     import {mapGetters} from 'vuex'
-    
+
     export default {
         props: ['cores'],
         computed:{
             ...mapGetters('legenda_de_cores',['gradiente_de_temperatura'])
         }
     }
-
 </script>

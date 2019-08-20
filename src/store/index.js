@@ -1,3 +1,7 @@
+/*
+* Import dos módulos 
+* Registro dos módulos a serem utilizados no vuex
+*/
 import Vue from 'vue'
 import Vuex from 'vuex'
 import navs from './store-navs'
@@ -7,9 +11,7 @@ import produto_armazenado from './store-produto-armazenado'
 import aeracao from './store-aeracao'
 
 Vue.use(Vuex)
-
 export default function () {
-
   const Store = new Vuex.Store({
     modules: {
       navs,

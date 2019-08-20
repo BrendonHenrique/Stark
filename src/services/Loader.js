@@ -1,3 +1,9 @@
+/*
+* Loader de engrenagens 
+* Para iniciar importar no arquivo e usar loader.initLoader()
+* Para finalizar loader.finishLoader()
+*/
+
 import Vue from 'vue'
 import { QSpinnerGears } from 'quasar'
 const vm  = new Vue()

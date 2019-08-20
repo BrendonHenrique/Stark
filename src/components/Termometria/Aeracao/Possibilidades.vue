@@ -43,7 +43,6 @@ export default {
     .possibiilidades-label
       font-size 17px !important
 
-
   .possibiilidades-label
     font-size 19px
     padding 10px 0

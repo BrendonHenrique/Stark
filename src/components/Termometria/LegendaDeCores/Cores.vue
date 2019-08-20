@@ -56,8 +56,6 @@ export default {
   .legenda-de-cores
     animation entry 1s
     
-
-    
   .input-cores
     .q-field__label
       overflow inherit
@@ -65,7 +63,5 @@ export default {
     
     input 
       font-size 18px
-
-
 
 </style>
