@@ -2,9 +2,9 @@
   <div>
     <q-banner dense class="bg-primary text-center" 
     inline-actions style="border-top-left-radius: 20px;">
-        <span class="possibilidades-header text-h6 text-grey-3 ">
-          Possibilidades
-        </span>
+      <span class="possibilidades-header text-h6 text-grey-3 ">
+        Possibilidades
+      </span>
       <template v-slot:action>
         <q-img src="../../../assets/icons/possibilities.png" 
         style="width:36px;" />

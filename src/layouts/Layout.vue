@@ -1,7 +1,7 @@
 <template>
   <q-layout view="hHh lpR fFf" class="bg-grey-10" >
     
-    <!-- page content -->
+    <!-- conteúdo das páginas -->
       <q-page-container class="bg-grey-10">
           <layout-header
             @openDrawerLeft="drawerLeft = !drawerLeft"
@@ -13,7 +13,7 @@
             </q-toolbar>
           </layout-header>
 
-          <!-- left side bar -->
+          <!-- Menu da lateral esquerda -->
           <layout-drawer 
             class="left-drawer"
             :side="'left'" 
@@ -22,7 +22,7 @@
           </layout-drawer>
           <!-- -->
 
-          <!-- right side navbar -->
+          <!-- Menu da lateral direita -->
           <layout-drawer  :drawerSide="drawerRight" :side="'right'">
             <user-painel />
           </layout-drawer>
@@ -32,8 +32,8 @@
           <layout-footer :navs="navs" />
           <!-- -->
           
-          <!-- Content -->
-          <router-view />
+          <!-- Rotas -->
+          <router-view class="rotas-de-conteudo" :class='{opacityContainer: drawerLeft || drawerRight}'/>
           <!--  -->
       
       </q-page-container>
@@ -44,11 +44,6 @@
 
 <script>
 import {  mapGetters } from 'vuex'
-import Vue from 'vue'
-import SequentialEntrance from 'vue-sequential-entrance'
-import 'vue-sequential-entrance/vue-sequential-entrance.css'
-import AnimatedNumber from "animated-number-vue"; 
-Vue.use(SequentialEntrance) 
 
 export default {
   data () {
@@ -81,5 +76,10 @@ export default {
   .q-drawer--left , .q-drawer--right
     background-color: #353535
 
+  .rotas-de-conteudo
+    transition 0.6s linear 
+
+  .opacityContainer 
+    opacity: 0.4
 
 </style>

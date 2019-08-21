@@ -1,26 +1,14 @@
 <template>
     <div class="row justify-center absolute-bottom q-mb-sm">
-        <q-btn   
-            style="z-index:4;"
-            class="view-controler-button q-mr-lg"
-            :push="view.Funcoes_card" 
-            @click="$emit('changeView')"
-            round >
-            <q-img src="../../../assets/icons/possibilities.png"
-                class="view-controler-image" 
-                />
+        <q-btn style="z-index:4;" class="view-controler-button q-mr-lg"
+        :push="view.Funcoes_card"  @click="$emit('changeView')" round >
+            <q-img src="../../../assets/icons/possibilities.png" class="view-controler-image"/>
         </q-btn>
             
-        <q-btn 
-        style="z-index:4;"
-        :push="view.Possibilidades_card " 
-        @click="$emit('changeView')"
-        round >
-            <q-img src="../../../assets/icons/settings.png"
-            class="view-controler-image" 
-            />
+        <q-btn style="z-index:4;" :push="view.Possibilidades_card" 
+        @click="$emit('changeView')" round >
+            <q-img src="../../../assets/icons/settings.png" class="view-controler-image" />
         </q-btn>
-        
     </div>
 </template>
 

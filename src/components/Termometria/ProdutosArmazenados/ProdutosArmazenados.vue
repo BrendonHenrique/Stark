@@ -116,7 +116,7 @@ export default {
        Object.assign(this.produto, this.produto_armazenado)
     },  
     components:{
-        'avatar-header': require('../../Shared/AvatarHeader.vue').default,
+        'avatar-header': require('./AvatarHeader.vue').default,
         'save-button': require('../../Shared/SaveButton').default
     },
     computed:{

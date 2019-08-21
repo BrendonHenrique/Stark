@@ -1,6 +1,7 @@
 <template>
     <div class="equilibrio-higroscopico">
         
+        <!-- Inputs de equilibrio higroscópico -->
         <q-input 
             class="q-mb-md infos-equilibrio-input"
             v-model="equilibrio_higroscopico.equilibrio" 
@@ -17,8 +18,6 @@
                 </span>
             </template>
         </q-input>
-
-
         <q-input  
             class="infos-equilibrio-input"
             v-model.number="novo_equilibrio" 
@@ -37,6 +36,7 @@
                 </span>
             </template>
         </q-input>
+        <!--  -->
         
         <q-tooltip v-if="valorIncorreto">
             <span class="infos-equilibrio-input">

@@ -4,13 +4,13 @@ const state = {
     aeracao:{
         infos:{
             equilibrio_higroscopico:{
-                atual: 0,
+                atual: '',
                 equilibrio: 9.564,
            },
             ambiente:{
-                ua_max: 0,
-                ua_min: 0,
-                ta_max: 0,
+                ua_max: '',
+                ua_min: '',
+                ta_max: '',
             }
         },
         possibilidades:[{
@@ -32,7 +32,7 @@ const state = {
         funcoes:[
             {
                 label: 'Manual',
-                ligada: true
+                ligada: false
             },
             {
                 label: 'Automática',
@@ -74,7 +74,6 @@ const mutations = {
         Object.assign(state.aeracao.infos.ambiente, payload) 
     },
     update_funcoes_de_aeracao(state, payload){
-    
         state.aeracao.funcoes.forEach(element => {
             if(element.label == payload){
                 element.ligada = true
@@ -120,6 +119,9 @@ const mutations = {
         state.aeracao.funcoes[1].ligada = true
         state.aeracao.funcoes[1].processos[1].ligada = payload
     },
+    set_funcao_semi_automatica(state, payload){
+        state.aeracao.funcoes[2].ligada = payload
+    },
     set_funcao_forcada(state, payload){
         state.aeracao.funcoes[3].ligada = payload
     },
@@ -158,6 +160,9 @@ const actions = {
     },
     set_funcao_automatica_por_conservacao({commit}, payload){
         commit('set_funcao_automatica_por_conservacao', payload)
+    },
+    set_funcao_semi_automatica({commit}, payload){
+        commit('set_funcao_semi_automatica', payload)
     }
 }
 

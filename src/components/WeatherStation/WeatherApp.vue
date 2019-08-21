@@ -1,11 +1,15 @@
 <template> 
   <main>
     <template v-if="this.forecast.temperatureValue != 0">
+      
+      <!-- Medidas de umidade e porcentagem de possibilidade da chuva -->
       <measurements
       :value="this.forecast.temperatureValue"
       :humidity="this.forecast.humidity"
       :rain_sensor_value="2" />
+      <!--  -->
 
+      <!-- Temperatura, horas e localização -->
       <locale
       class="q-mt-md"
       :location="this.forecast.location"
@@ -18,21 +22,27 @@
         <animated-number :value="this.minutes"/>
 
       </locale>
+      <!--  -->
+    
     </template>
 
-    <template v-else>
+    <!-- Spinner de loading -->
+    <template v-else> 
       <div style="height:25rem;" class="column justify-center">
-        <q-spinner-gears color="secondary" size="200px"  />
-        <p class="q-my-xl text-center text-h4">
+        <q-spinner-gears color="secondary" size="150px"  />
+        <p class="q-my-xl text-center text-h5">
           Carregando...
         </p>
       </div>
     </template>
+    <!--  -->
+
   </main> 
 </template>
 
 <script>
 import WeatherForecast from '../../services/WeatherForecast'
+import AnimatedNumber from "animated-number-vue"; 
 
 export default {
   data() {
@@ -48,6 +58,8 @@ export default {
     'locale': require('./Locale').default
   },
   computed:{
+
+    // Métodos auxiliares para preencher as horas e os minutos com um zero à esquerda 
     one_decimal_hour(){
      return new Date().getHours().toString().length == 1 ? true : false
     },
@@ -72,6 +84,5 @@ export default {
     align-items center
     box-shadow 0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22)
     border-radius 10px
-
 
 </style>

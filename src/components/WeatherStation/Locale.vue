@@ -1,15 +1,19 @@
 <template>
     <section>
-        <div class="location">
-          <div class="text-center text-h4">
-            <slot>
+      <div class="location q-mt-lg">
+        <div class="text-center text-h4">
+          <slot>
 
-            </slot>
-          </div>
-          <q-separator spaced color="grey-6" />
-          {{ location }}
+          </slot>
         </div>
-        <img class="weather__icon" :src="icon">
+        <q-separator spaced color="grey-6" />
+
+        <!-- Localização atual pega pela geolocalização do browser -->
+        {{ location }}
+        <!--  -->
+
+      </div>
+      <img class="weather__icon" :src="icon">
     </section>
 </template>
 
@@ -33,7 +37,5 @@ export default {
   
   .weather__icon
     width 160px
-
-
 
 </style>

@@ -1,18 +1,25 @@
 <template>
     <div class="row justify-center aeracao-container" >
        
+        <!-- Card de controle de aeração -->
         <q-card class="bg-grey-3 col-sm-12 col-xs-12 col-md-8 col-lg-6">
-            <particles />
             
-            <div class="row justify-between  card-de-aeracao" style="box-shadow: 1px 1px 10px #eae5e5;">
+            <!-- Efeito de background -->
+            <particles />
+            <!--  -->
+            
+            <div class="row justify-between  card-de-aeracao" >
                 
+                <!-- Parte esquerda do card, contém as informações sobre equilibrio higroscópico -->
                 <div class="q-pt-md col-xs-5 col-sm-4 col-md-4 col-lg-4">
                     <div class="column items-center">
                         <avatar class="q-mb-md" />
                         <infos-equilibrio  :equilibrio_higroscopico="aeracao.infos.equilibrio_higroscopico"/>
                     </div>
                 </div>
+                <!--  -->
 
+                <!-- Parte direita do card, contém o card de possibilidades de aeração e de funções -->
                 <div class="col-xs-6 col-sm-8 col-md-8 col-lg-8 flip-card">
                     <flip-card :flipped="flipped" class="">
     
@@ -26,12 +33,16 @@
     
                     </flip-card>
                 </div>
+                <!--  -->
 
             </div>
 
+            <!-- Controlador de visualização entre cards de possibilidade e vocês -->
             <view-controler :view="card_view" @changeView="changeView"/> 
+            <!--  -->
 
         </q-card>
+        <!--  -->
                 
     </div>
 </template>
@@ -53,6 +64,7 @@ export default {
         ...mapGetters('aeracao',['aeracao'])
     },
     methods:{
+        // Altera a visualização entre os cards de possibilidade e de funções pelo flip-card
         changeView(){
             this.card_view.Possibilidades_card = !this.card_view.Possibilidades_card 
             this.card_view.Funcoes_card = !this.card_view.Funcoes_card 
@@ -68,28 +80,30 @@ export default {
         'flip-card': require('./FlipCard').default,
         'funcoes': require('./Funcoes').default
     },
-}
+} 
 </script> 
+
 
 <style lang="stylus">
     .front
         margin-bottom 20px
-
-
-    @media (min-width: 481px)
-        .card-de-aeracao
-            height 40rem 
     
-
-    @media (min-width: 320px) and (max-width: 480px) 
-        .card-de-aeracao
-            height 52rem 
-    
+    @media screen and (max-width: 600px) {
+        .aeracao-container {
+            height 52rem
+        }
+    }
+    @media screen and (min-width: 601px) {
+        .aeracao-container {
+            height 40rem
+        }
+    }
 
     .aeracao-container
         animation entry 1s
         font-family 'Libre Caslon Text', serif
         font-size 20px
+        box-shadow 1px 1px 10px #eae5e5
 
     .card-de-aeracao
         padding 15px 

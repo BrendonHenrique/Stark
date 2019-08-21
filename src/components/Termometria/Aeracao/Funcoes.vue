@@ -92,41 +92,58 @@
                     <!--  -->
 
                     <!-- aeração Semi automática -->
-                    <div class='row justify-center q-gutter-lg q-pa-sm' 
-                    v-show='funcaoSelecionada == "Semi Automática"'>
-
-                        <!-- FIX IT -->
-                        <q-input 
-                        v-model.number="novasInfosAmbiente.ua_max"
-                        :rules="[  
-                            val =>  val > 0 && val < 100 || 'Valor de porcentagem deve estar entre 0 e 100',
-                            val =>  val > this.novasInfosAmbiente.ua_min || 'O valor de umidade máxima deve ser maior que a mínima'
-                        ]"
-                        class="semi-automatica-inputs col-xs-11 col-sm-3 col-md-3 col-lg-3" 
-                        label="UA MAX" suffix="%"/>
+                    <div  v-show='funcaoSelecionada == "Semi Automática"'>
                         
-                    
-                        <q-input 
-                        v-model.number="novasInfosAmbiente.ua_min"
-                        :rules="[  
-                            val =>  val > 0 && val < 100 || 'Valor de porcentagem deve estar entre 0 e 100',
-                            val =>  val < this.novasInfosAmbiente.ua_max || 'O valor de umidade mínima deve ser menor que a máxima'
-                        ]"
-                        class="semi-automatica-inputs col-xs-11 col-sm-3 col-md-3 col-lg-3" 
-                        label="UA MIN" suffix="%"/>
-                        
-                        <q-input 
-                        v-model.number="novasInfosAmbiente.ta_max"
-                        :rules="[  val =>  !!val || 'Insira um valor de temperatura válido']"
-                        class="semi-automatica-inputs col-xs-11 col-sm-3 col-md-3 col-g-3 q-mb-sm" 
-                        label="TA MAX" suffix="ºC"/>
+                        <q-form class='row justify-center q-gutter-lg q-pa-sm'>
 
-                        <save-button
-                        class="q-mt-xl"
-                        :isDisabled="valorIncorreto"
-                        @salvarAlteracoes="salvarInfosAmbiente" 
-                        :mensagem="`Deseja salvar as informações de temperatura e umidade  ?`"
-                        />
+                            <!-- Valor de umidade ambiente máxima -->
+                            <q-input 
+                            v-model.number="novasInfosAmbiente.ua_max"
+                            :rules="[  
+                                val =>  val > 0 && val < 100 || 'Valor de porcentagem deve estar entre 0 e 100',
+                                val =>  val > this.novasInfosAmbiente.ua_min || 'O valor de umidade máxima deve ser maior que a mínima'
+                            ]"
+                            class="semi-automatica-inputs col-xs-11 col-sm-3 col-md-3 col-lg-3" 
+                            label="UA MAX" suffix="%"/>
+                            <!--  -->
+                            
+                            <!-- Valor de umidade ambiente mínima -->
+                            <q-input 
+                            v-model.number="novasInfosAmbiente.ua_min"
+                            :rules="[  
+                                val =>  val > 0 && val < 100 || 'Valor de porcentagem deve estar entre 0 e 100',
+                                val =>  val < this.novasInfosAmbiente.ua_max || 'O valor de umidade mínima deve ser menor que a máxima'
+                            ]"
+                            class="semi-automatica-inputs col-xs-11 col-sm-3 col-md-3 col-lg-3" 
+                            label="UA MIN" suffix="%"/>
+                            <!--  -->
+                            
+                            <!-- Valor de temperatura ambiente máxima -->
+                            <q-input 
+                            v-model.number="novasInfosAmbiente.ta_max"
+                            :rules="[  val =>  !!val || 'Insira um valor de temperatura válido']"
+                            class="semi-automatica-inputs col-xs-11 col-sm-3 col-md-3 col-g-3 q-mb-sm" 
+                            label="TA MAX" suffix="ºC"/>
+                            <!--  -->
+
+                            <!-- Aviso caso os valores não sejam válidos -->
+                            <q-tooltip v-if="valorIncorreto">
+                                <span class="infos-equilibrio-input">
+                                    Insira um valor válido nas informações de ambiente 
+                                </span>
+                            </q-tooltip>
+                            <!--  -->
+                            
+                            <!-- botão para enviar os valores acima para vuex -->
+                            <save-button
+                            class="q-mt-xl"
+                            :isDisabled="valorIncorreto"
+                            @salvarAlteracoes="salvarInfosAmbiente" 
+                            :mensagem="`Deseja salvar as informações de temperatura e umidade  ?`"
+                            />
+                            <!--  -->
+
+                        </q-form>
 
                     </div>
                     <!--  -->
@@ -181,7 +198,7 @@ export default {
                 ua_min: 0,
                 ta_max: 0,
             },
-            valorIncorreto: false
+            valorIncorreto: true
         }
     },
     mounted(){
@@ -196,8 +213,8 @@ export default {
     },
     methods:{
         ...mapActions('aeracao',
-        ['update_funcoes_de_aeracao','update_infos_ambiente','set_funcao_manual','set_funcao_forcada',
-        'set_funcao_de_expurgo','set_funcao_automatica_por_secagem','set_funcao_automatica_por_conservacao']),
+        ['update_infos_ambiente','set_funcao_manual','set_funcao_forcada','set_funcao_de_expurgo',
+        'set_funcao_automatica_por_secagem','set_funcao_automatica_por_conservacao','set_funcao_semi_automatica']),
         
         // Interface de aplicação entre o q-select na view e o state/vuex 
         selecionarOpcao (opcaoSelecionada) { 
@@ -229,6 +246,7 @@ export default {
         salvarInfosAmbiente(){
             this.funcaoSemiAutomaticaLigada = true;
             this.update_infos_ambiente(this.novasInfosAmbiente);
+            this.set_funcao_semi_automatica(true)
         },
         
         // Atualiza a view com as informações do store
@@ -244,20 +262,22 @@ export default {
     computed:{
         ...mapGetters('aeracao',['get_funcao_de_aeracao_ativa','get_funcao_automatica_ativa','get_infos_ambiente']), 
 
+        // Retorna a umidade mínima de dentro do objeto
         UmidadeAmbienteMinima(){
             return this.novasInfosAmbiente.ua_min;    
         },
         
+        // Retorna a umidade máxima de dentro do objeto
         UmidadeAmbienteMaxima(){
             return this.novasInfosAmbiente.ua_max;    
         },
-        
+        // Retorna  a temperatura de ambiente máxima de dentro do objeto
         TemperaturaAmbienteMaxima(){
             return this.novasInfosAmbiente.ta_max;    
         }
     },
     watch:{ 
-        // Prevenir duas funções de aeralção ligadas ao mesmo tempo   
+        // Prevenir duas funções de aeração ligadas ao mesmo tempo   
         funcaoSelecionada(funcaoAtual, antigaFuncao){ 
             if(antigaFuncao == 'Manual' && this.funcaoManualLigada) this.funcaoManualLigada = false;
             if(antigaFuncao == 'Automática' ){
@@ -272,7 +292,7 @@ export default {
             if(antigaFuncao == 'Expurgo' && this.funcaoExpurgoLigada) this.funcaoExpurgoLigada = false;
         },
         
-        // As demais funções abaixo fazem o trigger de on/off entre as aerações
+        // As demais funções abaixo fazem o trigger de on/off entre as aerações e envia para o vuex
         funcaoExpurgoLigada(valor){
             if(valor){
                 NotifyUsers.info('Função Expurgo ligada')
@@ -281,7 +301,7 @@ export default {
             }
             this.set_funcao_de_expurgo(valor)
         },
-       funcaoForcadoLigada(valor){
+        funcaoForcadoLigada(valor){
             if(valor){
                 NotifyUsers.info('Função Forçada ligada')
             }else{
@@ -289,7 +309,7 @@ export default {
             }
             this.set_funcao_forcada(valor)
         },
-       funcaoManualLigada(valor){
+        funcaoManualLigada(valor){
             if(valor){
                 NotifyUsers.info('Função Manual ligada')
             }else{
@@ -310,21 +330,19 @@ export default {
             this.set_funcao_automatica_por_secagem(valor)
         },
 
-        // Informações de ambiente utilizadas na aeração semi automática
+        // Verificação de valores válidos para desabilitar o botão de salvar
         UmidadeAmbienteMinima(valor){
-            console.log(valor)
             valor > 0 && valor < 100 ? this.valorIncorreto = false : this.valorIncorreto = true;
-            valor > this.novasInfosAmbiente.ua_max ? this.valorIncorreto = false :  this.valorIncorreto = true;
+            valor > this.novasInfosAmbiente.ua_max ? this.valorIncorreto = true :  this.valorIncorreto = false;
         },
         UmidadeAmbienteMaxima(valor){
-            console.log(valor)
             valor > 0 && valor < 100 ? this.valorIncorreto = false : this.valorIncorreto = true;
-            valor < this.novasInfosAmbiente.ua_min ? this.valorIncorreto = false :  this.valorIncorreto = true;
+            valor < this.novasInfosAmbiente.ua_min ? this.valorIncorreto = true :  this.valorIncorreto = false;
         },
         TemperaturaAmbienteMaxima(valor){
-            console.log(valor)
             valor == '' ? this.valorIncorreto = true :  this.valorIncorreto = false;
-        }
+        },
+
     },
     components:{
         'status-aerador': require('./StatusAerador').default,
@@ -334,6 +352,9 @@ export default {
 </script>
 
 <style lang="stylus">
+
+    .infos-equilibrio-input
+        font-size 16px
 
     .semi-automatica-inputs
         font-size 20px

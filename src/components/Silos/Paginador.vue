@@ -1,7 +1,8 @@
 <template>
+  <!-- Páginador entre os silos , para resoluções menores que 384px de largura -->
   <div class="paginador">
     <div class="row">
-      <q-btn  v-scroll-to="{ element: scrollUp, duration: 100, offset: -70}"
+      <q-btn  v-scroll-to="{ element: scrollUp, duration: 100}"
       color="primary" icon="keyboard_arrow_up"
       v-bind=can_scroll_up
       round />
@@ -10,12 +11,13 @@
       {{scroll_value}}
     </div>
     <div class="row absolute-bottom">
-      <q-btn v-scroll-to="{ element: scrollDown , duration: 100, offset: -70}"
+      <q-btn v-scroll-to="{ element: scrollDown , duration: 100}"
       color="primary" icon="keyboard_arrow_down"
       v-bind=can_scroll_down
       round />
     </div>
   </div>
+  <!--  -->
 </template>
 
 <script>
@@ -39,6 +41,8 @@ export default {
     window.removeEventListener ('scroll', this.handleScroll);
   },
   computed:{
+    
+    // controlador do scroll 
     scrollUp(){
       let next_value = this.scroll_value - 1;
       return `.silo-${next_value}`
@@ -47,6 +51,8 @@ export default {
       let next_value = this.scroll_value + 1;
       return `.silo-${next_value}`
     },
+    
+    // Verificador de possibilidade de scroll
     can_scroll_up(){
       return this.scroll_value <= 1 ? {
         disable: true
@@ -60,19 +66,20 @@ export default {
       } : {
         disable: false
       }
-    },
+    }
+
   },
   methods:{
     handleScroll () {
-      this.scroll_value = parseInt(((window.scrollY/550)+1).toFixed(1))
+      this.scroll_value = parseInt(((window.scrollY/500)+1).toFixed(1))
     }
   }
 }
 </script>
 
 <style lang="stylus">
-
-  @media (max-width: 480px)
+  
+  @media (min-width: 320px) and (max-width: 480px) 
     div.paginador
       position relative
       font-family Orbitron

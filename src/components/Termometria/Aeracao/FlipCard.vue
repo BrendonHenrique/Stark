@@ -1,18 +1,32 @@
 <template>
+  <!-- Card com efeito de virar no eixo Y -->
   <div v-bind:class="!flipped ? 'flip-container flipped': 'flip-container'">
     <div class="flipper ">
+      
+      <!-- Parte da frente do card -->
       <div class="front">
-          <card-aeracao>
-            <slot name="front"></slot>
-          </card-aeracao>
+        <q-card class="card-style">
+          <slot name="front">
+
+          </slot>
+        </q-card>
       </div>
+      <!--  -->
+      
+      <!-- Parte de trás do card  -->
       <div class="back">
-        <card-aeracao>
-          <slot name="back"></slot>
-        </card-aeracao>  
+        <q-card class="card-style">
+          <slot name="back">
+
+          </slot>
+        </q-card>
       </div>
+      <!--  -->
+
     </div>
   </div>
+  <!--  -->
+
 </template>
 
 <script>
@@ -20,13 +34,16 @@ export default {
   name: 'FlipCard',
   props:['flipped'],
   components:{
-    'card-aeracao': require('./CardAeracao').default,
   }
 };
 </script>
 
 <style lang="stylus" scoped>
 
+  .card-style 
+    border-radius 20px 0 20px 0
+    z-index 2 box-shadow 0 2px 10px 3px #C0C0C0
+    background-color #FFFFFF
 
   .flip-container 
     -webkit-perspective 1000

@@ -1,27 +1,51 @@
 <template>
-  <q-drawer 
-    :width="250"
-    :side="side"
-    :breakpoint="767"
-    :value="drawerSide" 
-    class="drawer-style"  
-  >
-    <slot>  </slot>
-  </q-drawer>
+  <div>
+
+    <q-drawer v-if="side == 'left'"
+      :width="250"
+      :side="side"
+      :breakpoint="767"
+      :value="drawerSide" 
+      class="drawer-style" 
+      :content-class='{leftDrawerShadow : drawerSide }'>
+      <slot>  </slot>
+    </q-drawer>
+    
+    <q-drawer v-if="side == 'right'"
+      :width="250"
+      :side="side"
+      :breakpoint="767"
+      :value="drawerSide" 
+      class="drawer-style" 
+      :content-class='{rightDrawerShadow : drawerSide }'>
+      <slot>  </slot>
+    </q-drawer>
+
+  </div>
 </template>
 
 <script>
 export default{
-  props:['drawerSide','side']
+  props:['drawerSide','side'],
 }
 </script>
 <style lang="stylus">
   
+  .leftDrawerShadow 
+    transition 0.8s linear 
+    box-shadow: -30px 0px 45px 7px #dff
+
+  .rightDrawerShadow 
+    transition 0.8s linear 
+    box-shadow: 30px 0px 45px 7px #dff
+
   .drawer-style
     .q-drawer 
       height 98%
       position fixed
-
+    
+    .q-router-link--exact-active 
+      color: #f55a66 !important
 
   .drawer-style
     .q-item--clickable
@@ -65,5 +89,6 @@ export default{
     .q-item--clickable:hover:before, .q-item--clickable:focus:before, .q-item--clickable:active:before
       -webkit-transform scaleX(1)
       transform scaleX(1)
-
+    
+  
 </style>

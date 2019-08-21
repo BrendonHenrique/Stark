@@ -30,8 +30,6 @@ export default {
 
 <style lang="stylus" >
 
-
-
   .wheater-layout
     position fixed
     font-family 'Libre Caslon Text', serif
@@ -47,6 +45,5 @@ export default {
     a
       &:hover
         color rgba(0, 0, 0, 0.5)
-
 
 </style>
