@@ -32,11 +32,11 @@ export default{
 <style lang="stylus">
   
   .leftDrawerShadow 
-    transition 0.8s linear 
+    transition all 0.3s linear 
     box-shadow: -30px 0px 45px 7px #dff
 
   .rightDrawerShadow 
-    transition 0.8s linear 
+    transition all 0.3s linear 
     box-shadow: 30px 0px 45px 7px #dff
 
   .drawer-style

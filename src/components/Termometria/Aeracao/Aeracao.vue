@@ -37,7 +37,7 @@
 
             </div>
 
-            <!-- Controlador de visualização entre cards de possibilidade e vocês -->
+            <!-- Controlador de visualização altera entre funções de aeração e possibilidades -->
             <view-controler :view="card_view" @changeView="changeView"/> 
             <!--  -->
 

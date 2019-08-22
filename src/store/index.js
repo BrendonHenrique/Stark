@@ -1,6 +1,5 @@
 /*
-* Import dos módulos 
-* Registro dos módulos a serem utilizados no vuex
+* Registro dos módulos utilizados no vuex
 */
 import Vue from 'vue'
 import Vuex from 'vuex'

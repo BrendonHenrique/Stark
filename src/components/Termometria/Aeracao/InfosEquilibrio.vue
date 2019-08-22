@@ -18,6 +18,7 @@
                 </span>
             </template>
         </q-input>
+        
         <q-input  
             class="infos-equilibrio-input"
             v-model.number="novo_equilibrio" 

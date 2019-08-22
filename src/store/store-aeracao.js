@@ -1,5 +1,6 @@
 import { stat } from "fs";
- 
+// Gerênciador de estado das informações contidas em Aeracao.vue e seus componentes filhos
+// As informações são a respeito das funções de aeração e das possibilidades de aeração no silo
 const state = {
     aeracao:{
         infos:{
@@ -73,19 +74,6 @@ const mutations = {
     update_infos_ambiente(state, payload){
         Object.assign(state.aeracao.infos.ambiente, payload) 
     },
-    update_funcoes_de_aeracao(state, payload){
-        state.aeracao.funcoes.forEach(element => {
-            if(element.label == payload){
-                element.ligada = true
-            }else{
-                element.ligada = false
-                if(element.label == 'Automática'){
-                   element.processos[0].ligada = false;
-                   element.processos[1].ligada = false;
-                }
-            }
-        });
-    },
     update_processo_de_aeracao_automatica(state, payload){
         state.aeracao.funcoes.forEach(element => {
             if(element.label == 'Automática'){
@@ -98,26 +86,18 @@ const mutations = {
                 })
             }
         });
-    },  
-    update_possibilidades_de_aeracao(state, payload){
-        state.aeracao.possibilidades.forEach(element => {
-            if(element.label == payload){ 
-                element.isPossible = true
-            }else{
-                element.isPossible = false
-            }
-        });
     },
     set_funcao_manual(state, payload){
         state.aeracao.funcoes[0].ligada = payload
     },
     set_funcao_automatica_por_conservacao(state, payload){
-        state.aeracao.funcoes[1].ligada = true
         state.aeracao.funcoes[1].processos[0].ligada = payload
     },
     set_funcao_automatica_por_secagem(state,payload){
-        state.aeracao.funcoes[1].ligada = true
         state.aeracao.funcoes[1].processos[1].ligada = payload
+    },
+    set_funcao_automatica(state, payload){
+        state.aeracao.funcoes[1].ligada = payload
     },
     set_funcao_semi_automatica(state, payload){
         state.aeracao.funcoes[2].ligada = payload
@@ -137,12 +117,6 @@ const actions = {
     update_infos_ambiente({commit}, payload){
         commit('update_infos_ambiente', payload);
     },
-    update_funcoes_de_aeracao({commit}, payload){
-        commit('update_funcoes_de_aeracao', payload);
-    },
-    update_possibilidades_de_aeracao({commit}, payload){
-        commit('update_possibilidades_de_aeracao', payload);
-    },
     update_processo_de_aeracao_automatica({commit}, payload){
         commit('update_processo_de_aeracao_automatica', payload);
     },
@@ -154,6 +128,9 @@ const actions = {
     },
     set_funcao_forcada({commit}, payload){
         commit('set_funcao_forcada', payload)
+    },
+    set_funcao_automatica({commit}, payload){
+        commit('set_funcao_automatica', payload)
     },
     set_funcao_automatica_por_secagem({commit},payload){
         commit('set_funcao_automatica_por_secagem', payload)
@@ -190,7 +167,6 @@ const getters = {
     },
     get_infos_ambiente: (state) => state.aeracao.infos.ambiente,
 }
-
 
 export default {
 

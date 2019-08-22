@@ -1,6 +1,6 @@
 <template>
   <q-page>
-
+    <p> Configurações </p>
   </q-page>
 </template>
 

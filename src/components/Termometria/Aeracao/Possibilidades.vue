@@ -1,5 +1,7 @@
 <template>
   <div>
+
+    <!-- Header do card -->
     <q-banner dense class="bg-primary text-center" 
     inline-actions style="border-top-left-radius: 20px;">
       <span class="possibilidades-header text-h6 text-grey-3 ">
@@ -10,7 +12,12 @@
         style="width:36px;" />
       </template>
     </q-banner>
+    <!--  -->
   
+    <!-- Listagem das possibilidades de aeração com sinalização 
+    vermelho(não é possivel aerar)
+    verde(é possivel aerar) 
+    seguida do nome da função -->
     <q-list class="possibilidades-container">
       <q-item class="possibilidades" v-for="item in possibilidades" 
       :key="item.label" clickable v-ripple>
@@ -24,6 +31,7 @@
 
       </q-item>
     </q-list>
+    <!--  -->
 
   </div>
 </template>
