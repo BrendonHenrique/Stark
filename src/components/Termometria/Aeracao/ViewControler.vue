@@ -1,5 +1,8 @@
 <template>
+
+    <!-- Componente para controle de visualização do Flip-Card, ele vira o flip-card -->
     <div class="row justify-center absolute-bottom q-mb-sm">
+
         <q-btn style="z-index:4;" class="view-controler-button q-mr-lg"
         :push="view.Funcoes_card"  @click="$emit('changeView')" round >
             <q-img src="../../../assets/icons/possibilities.png" class="view-controler-image"/>
@@ -9,7 +12,10 @@
         @click="$emit('changeView')" round >
             <q-img src="../../../assets/icons/settings.png" class="view-controler-image" />
         </q-btn>
+
     </div>
+    <!--  -->
+
 </template>
 
 <script>

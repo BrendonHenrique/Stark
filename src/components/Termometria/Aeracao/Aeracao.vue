@@ -2,13 +2,13 @@
     <div class="row justify-center aeracao-container" >
        
         <!-- Card de controle de aeração -->
-        <q-card class="bg-grey-3 col-sm-12 col-xs-12 col-md-8 col-lg-6">
+        <q-card class="card-de-aeracao bg-grey-3 col-sm-12 col-xs-12 col-md-8 col-lg-6">
             
             <!-- Efeito de background -->
             <particles />
             <!--  -->
             
-            <div class="row justify-between  card-de-aeracao" >
+            <div class="row justify-between" >
                 
                 <!-- Parte esquerda do card, contém as informações sobre equilibrio higroscópico -->
                 <div class="q-pt-md col-xs-5 col-sm-4 col-md-4 col-lg-4">
@@ -103,10 +103,10 @@ export default {
         animation entry 1s
         font-family 'Libre Caslon Text', serif
         font-size 20px
-        box-shadow 1px 1px 10px #eae5e5
 
     .card-de-aeracao
         padding 15px 
+        box-shadow 1px 1px 10px #eae5e5
 
     .flip-card 
         z-index 3!important

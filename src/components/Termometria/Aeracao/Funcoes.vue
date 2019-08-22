@@ -206,8 +206,8 @@ export default {
         Object.assign(this.novasInfosAmbiente, this.get_infos_ambiente)
         
         // Inicialização da view com a função automática préviamente ativada 
-        if(this.get_funcao_de_aeracao_ativa[0].label) this.funcaoSelecionada = this.get_funcao_de_aeracao_ativa[0].label 
-        
+        if(this.get_funcao_de_aeracao_ativa.length > 0) this.funcaoSelecionada = this.get_funcao_de_aeracao_ativa[0].label 
+        console.log(this.funcaoSelecionada == '')
         // Atualização da view com as informações do store
         this.updateView() 
     },
@@ -217,10 +217,16 @@ export default {
         'set_funcao_automatica_por_secagem','set_funcao_automatica_por_conservacao','set_funcao_semi_automatica']),
         
         // Interface de aplicação entre o q-select na view e o state/vuex 
-        selecionarOpcao (opcaoSelecionada) { 
-            dialogPromise(`Deseja alterar o processo de aeração ? O processo de aeração atual será desligado.`)
-            .then( () => this.funcaoSelecionada = opcaoSelecionada )
-            .catch( () => NotifyUsers.info('Função de aeração não alterada.'))
+        selecionarOpcao (opcaoSelecionada) {
+            
+            // Se não houver nenhuma função selecionada, não é necessário confirmar que a função será sobrescrita 
+            if(this.funcaoSelecionada == ''){
+                this.funcaoSelecionada = opcaoSelecionada
+            }else{
+                dialogPromise(`Deseja alterar o processo de aeração ? O processo de aeração ${this.funcaoSelecionada} será desligado.`)
+                .then( () => this.funcaoSelecionada = opcaoSelecionada )
+                .catch( () => NotifyUsers.info('Função de aeração não alterada.'))
+            }
         },   
 
         // Envia o processo para o store e lá ativa a função automática e o processo a ser utilizado dentro dela. 
