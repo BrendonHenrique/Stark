@@ -1,1 +1,0 @@
-Ao selecionar as funções é necessário reiniciar o estado de todas as outras informações das outras funções.
