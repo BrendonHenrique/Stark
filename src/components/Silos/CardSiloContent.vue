@@ -44,21 +44,21 @@
             <q-item-label class="col">
               <div>
                 <div class="text-weight-thin">Temperatura min</div>
-                <div class="text-grey-8">{{silo.sensor_temperatura.minima}} ºC</div>
+                <div class="text-grey-8">{{silo.temperatura.minima}} ºC</div>
               </div>
             </q-item-label>
             
             <q-item-label class="col">  
               <div>
                 <div class="text-weight-thin">Temperatura média</div>
-                <div class="text-grey-8">{{silo.sensor_temperatura.media}} ºC</div>
+                <div class="text-grey-8">{{silo.temperatura.media}} ºC</div>
               </div>
             </q-item-label>
 
             <q-item-label class="col">
               <div>
                 <div class="text-weight-thin">Temperatura max</div>
-                <div class="text-grey-8">{{silo.sensor_temperatura.maxima}} ºC</div>
+                <div class="text-grey-8">{{silo.temperatura.maxima}} ºC</div>
               </div>
             </q-item-label>
 
@@ -90,8 +90,15 @@
 </template>
 
 <script>
+  import { mapActions } from 'vuex'
   export default{
     props:['silo'],
+    methods:{
+      ...mapActions('silos',['updateMinMedMaxTemp'])
+    },
+    mounted(){
+      this.updateMinMedMaxTemp(this.silo.id)
+    },
     components:{
       'section-layout': require('components/Silos/SectionLayout.vue').default,
       'sequential-entrace': require('components/Shared/SequentialEntrace.vue').default,

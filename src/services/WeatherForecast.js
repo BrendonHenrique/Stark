@@ -1,8 +1,3 @@
-/*
-* Service that fetch and parse weather forecast from openweathermap.org.
-*
-* @author Jim Merioles <jimwisleymerioles@gmail.com>
-*/
 class WeatherForecast {
     /*
     * Create WeatherForecast instance.

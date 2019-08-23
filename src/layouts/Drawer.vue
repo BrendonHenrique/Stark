@@ -5,9 +5,10 @@
       :width="250"
       :side="side"
       :breakpoint="767"
-      :value="drawerSide" 
-      class="drawer-style" 
-      :content-class='{leftDrawerShadow : drawerSide }'>
+      :value="openedDrawer" 
+      class="drawer-style"
+      @hide="$emit('hideDrawerLeft')"
+      :content-class='{leftDrawerShadow : openedDrawer }'>
       <slot>  </slot>
     </q-drawer>
     
@@ -15,9 +16,11 @@
       :width="250"
       :side="side"
       :breakpoint="767"
-      :value="drawerSide" 
+      :value="openedDrawer" 
       class="drawer-style" 
-      :content-class='{rightDrawerShadow : drawerSide }'>
+      @hide="$emit('hideDrawerRight')"
+      :persistent='true'
+      :content-class='{rightDrawerShadow : openedDrawer }'>
       <slot>  </slot>
     </q-drawer>
 
@@ -26,7 +29,15 @@
 
 <script>
 export default{
-  props:['drawerSide','side'],
+  props:['openedDrawer','side'],
+  mounted(){
+    console.log(this.openedDrawer);
+  },
+  methods:{
+    alert(){
+        
+    }
+  }
 }
 </script>
 <style lang="stylus">

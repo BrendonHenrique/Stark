@@ -4,8 +4,8 @@
     <!-- conteúdo das páginas -->
       <q-page-container class="bg-grey-10">
           <layout-header
-            @openDrawerLeft="drawerLeft = !drawerLeft"
-            @openDrawerRight="drawerRight = !drawerRight" >
+            @openDrawerLeft="openedDrawerLeft = !openedDrawerLeft"
+            @openDrawerRight="openedDrawerRight = !openedDrawerRight" >
             <q-toolbar>
               <q-toolbar-title class="q-pt-md text-h3 text-center">
                 Stark
@@ -17,13 +17,17 @@
           <layout-drawer 
             class="left-drawer"
             :side="'left'" 
-            :drawerSide="drawerLeft" >
+            @hideDrawerLeft="openedDrawerLeft = false"
+            :openedDrawer="openedDrawerLeft">
             <drawer-nav :navs="navs" />
           </layout-drawer>
           <!-- -->
 
           <!-- Menu da lateral direita -->
-          <layout-drawer  :drawerSide="drawerRight" :side="'right'">
+          <layout-drawer  
+          :openedDrawer="openedDrawerRight" 
+          :side="'right'"
+          @hideDrawerRight="openedDrawerRight = false">
             <user-painel />
           </layout-drawer>
           <!-- -->
@@ -33,7 +37,7 @@
           <!-- -->
           
           <!-- Rotas -->
-          <router-view class="rotas-de-conteudo" :class='{opacityContainer: drawerLeft || drawerRight}'/>
+          <router-view class="rotas-de-conteudo" :class='{opacityContainer: openedDrawerLeft || openedDrawerRight}'/>
           <!--  -->
       
       </q-page-container>
@@ -48,8 +52,8 @@ import {  mapGetters } from 'vuex'
 export default {
   data () {
     return {
-      drawerLeft: false,
-      drawerRight: false
+      openedDrawerLeft: false,
+      openedDrawerRight: false
     }
   },
   computed:{
