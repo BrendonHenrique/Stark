@@ -1,7 +1,6 @@
 # Quasar App
 
-> WIP
-    * Diagrama dos componentes *  
+> * Diagrama dos componentes *  
 
 ![](./Stark.jpg)
  
