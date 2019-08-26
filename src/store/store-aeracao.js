@@ -68,12 +68,17 @@ const state = {
 }
 
 const mutations = { 
+    // Integrada
     update_equilibrio_higroscopico_atual(state, payload){
         state.aeracao.infos.equilibrio_higroscopico.atual = payload
     },
+    
+    // Passado pra store separado 
     update_infos_ambiente(state, payload){
         Object.assign(state.aeracao.infos.ambiente, payload) 
     },
+    
+    // Nao utilizando
     update_processo_de_aeracao_automatica(state, payload){
         state.aeracao.funcoes.forEach(element => {
             if(element.label == 'Automática'){
@@ -87,27 +92,29 @@ const mutations = {
             }
         });
     },
-    set_funcao_manual(state, payload){
-        state.aeracao.funcoes[0].ligada = payload
-    },
-    set_funcao_automatica_por_conservacao(state, payload){
-        state.aeracao.funcoes[1].processos[0].ligada = payload
-    },
-    set_funcao_automatica_por_secagem(state,payload){
-        state.aeracao.funcoes[1].processos[1].ligada = payload
-    },
-    set_funcao_automatica(state, payload){
-        state.aeracao.funcoes[1].ligada = payload
-    },
-    set_funcao_semi_automatica(state, payload){
-        state.aeracao.funcoes[2].ligada = payload
-    },
-    set_funcao_forcada(state, payload){
-        state.aeracao.funcoes[3].ligada = payload
-    },
-    set_funcao_de_expurgo(state, payload){
-        state.aeracao.funcoes[4].ligada = payload
-    },
+    
+    // Integrada
+        set_funcao_manual(state, payload){
+            state.aeracao.funcoes[0].ligada = payload
+        },
+        set_funcao_automatica_por_conservacao(state, payload){
+            state.aeracao.funcoes[1].processos[0].ligada = payload
+        },
+        set_funcao_automatica_por_secagem(state,payload){
+            state.aeracao.funcoes[1].processos[1].ligada = payload
+        },
+        set_funcao_automatica(state, payload){
+            state.aeracao.funcoes[1].ligada = payload
+        },
+        set_funcao_semi_automatica(state, payload){
+            state.aeracao.funcoes[2].ligada = payload
+        },
+        set_funcao_forcada(state, payload){
+            state.aeracao.funcoes[3].ligada = payload
+        },
+        set_funcao_de_expurgo(state, payload){
+            state.aeracao.funcoes[4].ligada = payload
+        },
 }   
 
 const actions = {
@@ -117,6 +124,7 @@ const actions = {
     update_infos_ambiente({commit}, payload){
         commit('update_infos_ambiente', payload);
     },
+    // Nao utilizando
     update_processo_de_aeracao_automatica({commit}, payload){
         commit('update_processo_de_aeracao_automatica', payload);
     },
@@ -144,14 +152,23 @@ const actions = {
 }
 
 const getters = { 
+    // Integrado
     aeracao: (state) => state.aeracao,
+
+    // Integrado
     funcoes_de_aeracao: (state) => state.aeracao.funcoes,
+
+    // Integrado
     possibilidades_de_aeracao: (state) => state.aeracao.possibilidades,
+    
+    // Integrado
     get_funcao_de_aeracao_ativa: (state) => {
         return state.aeracao.funcoes.filter( element => {
             return element.ligada;
         });
     },
+
+    // Nao utilizando
     get_funcao_automatica_ativa: (state) => {
         let funcao;
         state.aeracao.funcoes.filter( element => {
@@ -165,6 +182,8 @@ const getters = {
         })
         return funcao;
     },
+
+    // Passado pra store separado 
     get_infos_ambiente: (state) => state.aeracao.infos.ambiente,
 }
 

@@ -34,13 +34,13 @@ silos:[
       }
     ],
     equilibrio_higroscopico:{
-      atual: String,
+      atual: Number,
       equilibrio: Number,
     },
-    infos_ambiente:{
-      ua_max: String,
-      ua_min: String,
-      ta_max: String,
+    ambiente:{
+      ua_max: Number,
+      ua_min: Number,
+      ta_max: Number,
     },
     aeradores:[
       {

@@ -62,26 +62,26 @@ const actions = {
 
 const getters = { 
     
-    legenda_de_cores: (state) => {
-      return state.legenda_de_cores
-    },
+  legenda_de_cores: (state) => {
+    return state.legenda_de_cores
+  },
 
-    gradiente_de_temperatura: (state) => {
-      let cores_do_gradiente = state.legenda_de_cores.filter( (valor) => {
-        return valor.label == 'Temperaturas baixas' || valor.label == 'Temperaturas altas'
-      })
-      return `linear-gradient(90deg, ${cores_do_gradiente[0].valor}, ${cores_do_gradiente[1].valor})` 
-    },
+  gradiente_de_temperatura: (state) => {
+    let cores_do_gradiente = state.legenda_de_cores.filter( (valor) => {
+      return valor.label == 'Temperaturas baixas' || valor.label == 'Temperaturas altas'
+    })
+    return `linear-gradient(90deg, ${cores_do_gradiente[0].valor}, ${cores_do_gradiente[1].valor})` 
+  },
 
-    cores_do_gradiente: (state) =>{
-      return state.legenda_de_cores.filter( (valor) => {
-        return valor.label == 'Temperaturas baixas' || valor.label == 'Temperaturas altas'
-      })
-    },
+  cores_do_gradiente: (state) =>{
+    return state.legenda_de_cores.filter( (valor) => {
+      return valor.label == 'Temperaturas baixas' || valor.label == 'Temperaturas altas'
+    })
+  },
 
-    configuracoes_de_cores: (state) => {
-      return state.configuracoes_de_cores
-    }
+  configuracoes_de_cores: (state) => {
+    return state.configuracoes_de_cores
+  }
 }
 
 export default {

@@ -8,6 +8,8 @@ import silos from './store-silos'
 import legenda_de_cores from './store-legenda-de-cores'
 import produto_armazenado from './store-produto-armazenado'
 import aeracao from './store-aeracao'
+import integracao from '../models/Silos/integracao'
+import ambiente from './store-ambiente'
 
 Vue.use(Vuex)
 export default function () {
@@ -17,7 +19,9 @@ export default function () {
       silos, 
       legenda_de_cores,
       produto_armazenado,
-      aeracao
+      aeracao,
+      integracao,
+      ambiente
     }
   })
 

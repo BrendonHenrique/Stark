@@ -60,8 +60,12 @@ export default {
             flipped: true
         }
     },
+    mounted(){
+        // console.log(this.aeracao)
+    },
     computed:{
-        ...mapGetters('aeracao',['aeracao'])
+        ...mapGetters('aeracao',['aeracao']),
+
     },
     methods:{
         // Altera a visualização entre os cards de possibilidade e de funções pelo flip-card

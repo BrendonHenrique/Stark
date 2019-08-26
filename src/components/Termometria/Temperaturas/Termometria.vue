@@ -57,7 +57,7 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
+import { mapGetters, mapActions } from 'vuex'
 import TempToColor from '../../../services/TempToColor'
 import Vue from 'vue'
 import SequentialEntrance from 'vue-sequential-entrance'
@@ -75,7 +75,7 @@ export default {
   computed:{ 
     ...mapGetters('legenda_de_cores',['cores_do_gradiente','configuracoes_de_cores']),
     ...mapGetters('silos',['silos']),
-    
+
     // Controles de páginação entre as termometrias dos silos 
     podeNavegarParaTras(){
       return this.indice_paginador <= 1 ? {
@@ -99,7 +99,7 @@ export default {
     'sequential-entrace': require('../../Shared/SequentialEntrace').default
   },
   methods:{
-    
+
     // Converte temperatura em cores
     tempToColor(temp){
       return TempToColor.parse(this, temp / this.configuracoes_de_cores.temperatura_alta)
@@ -158,6 +158,8 @@ export default {
 
   @media (max-width: 767px)
     .paginador-de-silos
+      padding-bottom 10px
+      
       .q-btn__content
 
       .q-card

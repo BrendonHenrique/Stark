@@ -78,7 +78,7 @@
         <template v-slot:label>
           <div>
               <div class="text-weight-thin">Co2 </div>
-              <div class="text-grey-8">{{silo.sensor_co2}} ppm</div>
+              <div class="text-grey-8">{{silo.co2}} ppm</div>
           </div>
         </template>
       </section-layout>
@@ -94,7 +94,7 @@
   export default{
     props:['silo'],
     methods:{
-      ...mapActions('silos',['updateMinMedMaxTemp'])
+      ...mapActions('integracao',['updateMinMedMaxTemp'])
     },
     mounted(){
       this.updateMinMedMaxTemp(this.silo.id)

@@ -207,7 +207,7 @@ export default {
         // Inicialização das informações dos inputs para informações de ambiente da aeração semi automática
         Object.assign(this.novasInfosAmbiente, this.get_infos_ambiente)
         
-        // Inicialização da view com a função automática préviamente ativada 
+        // Inicialização da view com a função ativada 
         if(this.get_funcao_de_aeracao_ativa.length > 0) this.funcaoSelecionada = this.get_funcao_de_aeracao_ativa[0].label 
         
         
@@ -306,7 +306,7 @@ export default {
         }
     },
     computed:{
-        ...mapGetters('aeracao',['get_funcao_de_aeracao_ativa','get_funcao_automatica_ativa','get_infos_ambiente']), 
+        ...mapGetters('aeracao',['get_funcao_de_aeracao_ativa','get_infos_ambiente']), 
 
         // Retorna a umidade mínima de dentro do objeto
         UmidadeAmbienteMinima(){

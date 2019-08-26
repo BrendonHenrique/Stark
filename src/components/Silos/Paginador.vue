@@ -1,5 +1,5 @@
 <template>
-  <!-- Páginador entre os silos , para resoluções menores que 384px de largura -->
+  <!-- Páginador entre os silos , para width menores que 384px -->
   <div class="paginador">
     <div class="row">
       <q-btn  v-scroll-to="{ element: scrollUp, duration: 100}"
@@ -26,7 +26,7 @@ import Vue from 'vue'
 Vue.use(VueScrollTo)
 
 export default {
-  props:['silos'],
+  props:['quantidade_de_silos'],
   data(){
     return{
       scroll_value: 1,
@@ -61,7 +61,7 @@ export default {
       }
     },
     can_scroll_down(){
-      return this.scroll_value >= this.silos.length ? {
+      return this.scroll_value >= this.quantidade_de_silos ? {
         disable: true
       } : {
         disable: false

@@ -31,7 +31,7 @@
 export default{
   props:['openedDrawer','side'],
   mounted(){
-    console.log(this.openedDrawer);
+    // console.log(this.openedDrawer);
   },
   methods:{
     alert(){
@@ -52,7 +52,7 @@ export default{
 
   .drawer-style
     .q-drawer 
-      height 98%
+      height 100%
       position fixed
     
     .q-router-link--exact-active 
