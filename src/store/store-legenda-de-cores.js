@@ -50,14 +50,12 @@ const mutations =  {
 } 
 
 const actions = { 
-
   update_legenda_de_cores({commit}, payload){
     commit('update_legenda_de_cores', payload)
   },
   update_configuracoes_de_cores({commit}, payload){
     commit('update_configuracoes_de_cores', payload)
   }
-
 }
 
 const getters = { 

@@ -6,19 +6,19 @@
       <!-- Pêndulo -->
       <div
         class="column reverse pendulo "
-        v-for="termometria in termometrias"
-        :key="termometria.id_pendulo">
+        v-for="pendulo in silo_view.pendulos"
+        :key="pendulo.id_pendulo">
         
         <!-- Número sinalizador do pêndulo -->
         <q-btn round class="text-thin text-h6 text-center text-black q-mt-sm bg-grey-5 indicador-do-pendulo" size="15px">
-          p{{termometria.id_pendulo + 1}}
+          p{{pendulo.id_pendulo + 1}}
         </q-btn>
         <!--  -->
         
         <!-- Sensores -->
         <sequential-entrace :delay="50">
           <div
-            v-for="sensor in termometria.sensores"
+            v-for="sensor in pendulo.sensores"
             :key="sensor.id_sensor">
             <q-chip class="q-mt-sm" :style="{'background-color': tempToColor(sensor.temperatura)}">
               <q-avatar color="grey" text-color="white">
@@ -29,30 +29,9 @@
           </div>
         </sequential-entrace>
           <!--  -->
-
       </div>
       <!--  -->
-
     </div>
-
-    <!-- Paginador dos silos -->
-    <div class="paginador-de-silos  row justify-center">
-      <q-card class="row bg-grey-5 ">
-        <q-btn  flat @click="anterior()" 
-        v-bind=podeNavegarParaTras class="navigate"
-        icon="navigate_before" />
-        <div class="absolute-center indice-paginador">
-          <h6>
-            {{indice_paginador}}
-          </h6>
-        </div>
-        <q-space />
-        <q-btn  class=" navigate" flat  @click="proximo()" 
-          v-bind=podeNavegarParaFrente icon="navigate_next"/>
-      </q-card>
-    </div>
-    <!--  -->
-  
   </div>
 </template>
 
@@ -65,66 +44,35 @@ import 'vue-sequential-entrance/vue-sequential-entrance.css'
 Vue.use(SequentialEntrance) 
 
 export default {
-  props:[],
+  props:['index_silo'], 
   data(){
     return{
-      indice_paginador: 1,
-      termometrias: []
-    }
-  },
-  computed:{ 
-    ...mapGetters('legenda_de_cores',['cores_do_gradiente','configuracoes_de_cores']),
-    ...mapGetters('silos',['silos']),
-
-    // Controles de páginação entre as termometrias dos silos 
-    podeNavegarParaTras(){
-      return this.indice_paginador <= 1 ? {
-        disable: true
-      } : {
-        disable: false
-      }
-    },
-    podeNavegarParaFrente(){
-      return this.indice_paginador >= this.silos.length ? {
-        disable: true
-      } : {
-        disable: false
-      }
+      silo_view: {}
     }
   },
   mounted(){
-    this.getTermometria(this.indice_paginador)
-  },
+    // this.getTemperaturas(this.index_silo);
+    console.log(this.silo_by_id(this.index_silo))
+  },  
+  computed:{ 
+    ...mapGetters('legenda_de_cores',['cores_do_gradiente','configuracoes_de_cores','silo_by_id']),
+  }, 
   components:{
     'sequential-entrace': require('../../Shared/SequentialEntrace').default
   },
-  methods:{
-
+  methods:{ 
     // Converte temperatura em cores
     tempToColor(temp){
       return TempToColor.parse(this, temp / this.configuracoes_de_cores.temperatura_alta)
     },
-
-    // Pega valores da termometria pelo índice
-    getTermometria(indice){
-      this.termometrias  = null
-      let termomeria_aux = this.silos.filter( (silo) =>{
-        if(silo.id == indice){
-          return silo.termometria
-        }  
-      })
-      this.termometrias = termomeria_aux[0].termometria
-    },
-
-    //Paginador de navegação das termometrias dos silos   
-    proximo(){
-      this.indice_paginador++
-      this.getTermometria(this.indice_paginador)
-    },
-    anterior(){
-      this.indice_paginador--
-      this.getTermometria(this.indice_paginador)
-    },
+    getTemperaturas(index){
+      Object.assign(this.silo_view, this.silo_by_id(index));
+    }
+  },
+  watch:{
+    index_silo(index){
+      this.getTemperaturas(index)
+    } 
   }
 }
 </script>

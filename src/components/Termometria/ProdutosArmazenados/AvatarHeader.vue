@@ -1,4 +1,4 @@
-<template>
+<template functional>
      <div class="background-avatar">
         <q-card-section class="card-section-avatar row justify-center">
             <q-avatar class="avatar" size="160px">

@@ -1,4 +1,4 @@
-<template>
+<template functional>
   <q-card-section>
     <q-item>
       <q-item-section avatar>

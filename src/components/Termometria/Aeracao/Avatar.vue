@@ -1,4 +1,4 @@
-<template>
+<template functional>
     <!-- Avatar com a imagem do aerador, usada em Aeracao.vue  -->
     <q-avatar class="shadow-12"  
     style="width:150px;height:150px; border-radius:100px; z-index:3">

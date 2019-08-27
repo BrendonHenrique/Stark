@@ -73,7 +73,7 @@ export default {
 <style scoped lang="stylus">
 
   main
-    width 19rem
+    width 24rem
     padding 10px 15px
     background-position center
     background-size cover

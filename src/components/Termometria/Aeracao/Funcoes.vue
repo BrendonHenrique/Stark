@@ -214,7 +214,8 @@ export default {
         // Atualização da view com as informações do store
         this.updateView() 
 
-        // Atualização da variável com a função automatica ligada para prevenir avisos desnecessários se o usuário ativar a mesma função automática duas vezes
+        // Atualização da variável com a função automatica ligada para prevenir 
+        // avisos desnecessários se o usuário ativar a mesma função automática duas vezes
         if(this.funcaoAutomaticaLigada){
             if(this.funcaoConservacaoLigada){
                 this.ultimaFuncaoAutomatica = 'Conservação'
@@ -222,11 +223,13 @@ export default {
                 this.ultimaFuncaoAutomatica = 'Secagem'
             }
         }
+
     },
     methods:{
         ...mapActions('aeracao',
         ['update_infos_ambiente','set_funcao_manual','set_funcao_forcada','set_funcao_de_expurgo','set_funcao_automatica',
         'set_funcao_automatica_por_secagem','set_funcao_automatica_por_conservacao','set_funcao_semi_automatica']),
+        ...mapActions('integracao',['update_funcao_de_aeracao']),
         
         // Verifica se possui uma função ativa no momento , se houver será possível avisar o usuário que a função será sobrescrita quando ele selecionar outra 
         hasFuncaoAtiva(){

@@ -94,7 +94,7 @@
   export default{
     props:['silo'],
     methods:{
-      ...mapActions('integracao',['updateMinMedMaxTemp'])
+      ...mapActions('silos',['updateMinMedMaxTemp'])
     },
     mounted(){
       this.updateMinMedMaxTemp(this.silo.id)

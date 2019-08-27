@@ -1,4 +1,4 @@
-<template>
+<template functional>
     <div class="row justify-center">
         <q-card
         style="box-shadow:0 0 8px 1px #eae5e5;" 

@@ -1,8 +1,6 @@
 <template>
   <q-page id="wheater-content" style="min-height:0;" class="fixed-center wheater-layout app">
-    <sequential-entrance delay="150" fromBottom>
-      <wheater-app class="app--weather" />
-    </sequential-entrance>
+    <wheater-app class="app--weather" />
   </q-page>
 </template>
 
@@ -39,7 +37,8 @@ export default {
 
   .app--weather
     cursor pointer
-    background linear-gradient(180deg, rgb(134, 141, 158) 15%, rgb(192, 197, 212) 90%)
+    background: url('../assets/bg-estacao.jpg') ;
+    text-shadow 1px 1px #1b1919
 
   .app
     a

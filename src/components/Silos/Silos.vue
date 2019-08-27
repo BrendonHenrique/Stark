@@ -2,7 +2,7 @@
   <q-list class="row">
 
     <!-- Páginador de silos para mobile  -->
-    <paginador-mobile :quantidade_de_silos="silos.length" />
+    <!-- <paginador-mobile :quantidade_de_silos="silos.length" /> -->
     <!--  -->
     
     <!-- Silos -->
@@ -29,8 +29,8 @@
       'paginador-mobile': require('./Paginador.vue').default
     },
     computed:{
-      ...mapGetters('integracao',['silos']),
-    }
+      ...mapGetters('silos',['silos']),
+    }, 
   }
 </script>
 

@@ -10,31 +10,35 @@
     </div>
     
     <q-tab-panels class="bg-grey-10" v-model="tab" > 
-    
+      
       <q-tab-panel class="termometria-panel" name="termometria" >
-          <termometria-silo />
+          <termometria-silo :index_silo="index_silo" />
       </q-tab-panel>
 
+<!--     
       <q-tab-panel name="prod_armazenado" >
           <produto-armazenado />
-      </q-tab-panel>
+      </q-tab-panel> -->
         
-      <q-tab-panel name="historico">
+      <!-- <q-tab-panel name="historico"> -->
         <!-- <historico /> -->
-      </q-tab-panel>
+      <!-- </q-tab-panel> -->
 
-      <q-tab-panel name="aeracao">
+      <!-- <q-tab-panel name="aeracao">
           <aeracao />
-      </q-tab-panel>
+      </q-tab-panel> -->
       
       
     </q-tab-panels>
+
+    <paginador :silos_length='silos_length' @proximoSilo="proximoSilo" @siloAnterior="siloAnterior" />
 
   
   </q-page>
 </template>
 
 <script>
+import {mapGetters, mapActions} from 'vuex'
 export default {
   data(){
     return{
@@ -60,17 +64,28 @@ export default {
         //   name:'cores',
         //   label:'Legenda de cores'
         // }
-      ]
-
+      ],
+      index_silo: 0, 
     }
+  },
+  methods:{
+    proximoSilo(indice){
+      this.index_silo = indice
+    },
+    siloAnterior(indice){
+      this.index_silo = indice
+    },
+  },
+  computed:{
+    ...mapGetters('silos',['silos_length']),
   },
   components:{
     'termometria-silo':require('../components/Termometria/Temperaturas/Termometria').default,
     'produto-armazenado':require('../components/Termometria/ProdutosArmazenados/ProdutosArmazenados').default,
     'historico': require('../components/Termometria/Historico/Historico').default,
     'aeracao': require('../components/Termometria/Aeracao/Aeracao').default,
+    'paginador': require('../components/Termometria/Paginador/PaginadorDeSilo').default
   }
-
 }
 </script>
 
