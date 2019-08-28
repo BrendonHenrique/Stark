@@ -13,8 +13,11 @@
                 <!-- Parte esquerda do card, contém as informações sobre equilibrio higroscópico -->
                 <div class="q-pt-md col-xs-5 col-sm-4 col-md-4 col-lg-4">
                     <div class="column items-center">
+                        <infos-equilibrio  
+                        :equilibrio_higroscopico="get_equilibrio_higroscopico(index_silo)"
+                        />
                         <avatar class="q-mb-md" />
-                        <infos-equilibrio  :equilibrio_higroscopico="aeracao.infos.equilibrio_higroscopico"/>
+                        <!-- :index_silo="index_silo" -->
                     </div>
                 </div>
                 <!--  -->
@@ -24,11 +27,15 @@
                     <flip-card :flipped="flipped" class="">
     
                         <template slot="front"> 
-                            <possibilidades :possibilidades="aeracao.possibilidades"/>
+                            <possibilidades 
+                            :index_silo="index_silo"
+                            /> 
                         </template>
     
                         <template slot="back"> 
-                            <funcoes :funcoes="aeracao.funcoes" :isFlipped="flipped" />
+                            <funcoes 
+                            :index_silo="index_silo"
+                            />
                         </template>
     
                     </flip-card>
@@ -51,21 +58,18 @@
 import {mapGetters} from 'vuex'
 
 export default {
+    props:['index_silo'],
     data(){
         return{
             card_view:{
                 Possibilidades_card: true,
                 Funcoes_card: false,
             }, 
-            flipped: true
+            flipped: true,
         }
     },
-    mounted(){
-        // console.log(this.aeracao)
-    },
     computed:{
-        ...mapGetters('aeracao',['aeracao']),
-
+        ...mapGetters('silos',['get_equilibrio_higroscopico']),
     },
     methods:{
         // Altera a visualização entre os cards de possibilidade e de funções pelo flip-card
@@ -73,7 +77,10 @@ export default {
             this.card_view.Possibilidades_card = !this.card_view.Possibilidades_card 
             this.card_view.Funcoes_card = !this.card_view.Funcoes_card 
             this.flipped = !this.flipped
-        }
+        },
+    },
+    mounted(){
+        // this.get_equilibrio_higroscopico(this.index_silo)
     },
     components:{
         'particles': require('../../Shared/Particles').default,
@@ -84,6 +91,13 @@ export default {
         'flip-card': require('./FlipCard').default,
         'funcoes': require('./Funcoes').default
     },
+    watch:{
+        index_silo(index){
+            this.index_silo = index
+            console.log(this.get_equilibrio_higroscopico(this.index_silo))
+            
+        },
+    }
 } 
 </script> 
 

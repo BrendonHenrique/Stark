@@ -6,7 +6,7 @@
       <!-- Pêndulo -->
       <div
         class="column reverse pendulo "
-        v-for="pendulo in silo_view.pendulos"
+        v-for="pendulo in pendulos"
         :key="pendulo.id_pendulo">
         
         <!-- Número sinalizador do pêndulo -->
@@ -47,15 +47,15 @@ export default {
   props:['index_silo'], 
   data(){
     return{
-      silo_view: {}
+      pendulos: []
     }
   },
   mounted(){
-    // this.getTemperaturas(this.index_silo);
-    console.log(this.silo_by_id(this.index_silo))
+    this.getTemperaturas(this.index_silo); 
   },  
   computed:{ 
-    ...mapGetters('legenda_de_cores',['cores_do_gradiente','configuracoes_de_cores','silo_by_id']),
+    ...mapGetters('legenda_de_cores',['cores_do_gradiente','configuracoes_de_cores']),
+    ...mapGetters('silos',['silo_by_id']),
   }, 
   components:{
     'sequential-entrace': require('../../Shared/SequentialEntrace').default
@@ -66,7 +66,7 @@ export default {
       return TempToColor.parse(this, temp / this.configuracoes_de_cores.temperatura_alta)
     },
     getTemperaturas(index){
-      Object.assign(this.silo_view, this.silo_by_id(index));
+      this.pendulos = this.silo_by_id(index).pendulos
     }
   },
   watch:{

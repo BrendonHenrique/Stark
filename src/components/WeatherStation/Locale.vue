@@ -33,7 +33,7 @@ export default {
  .location
     text-transform uppercase
     font-weight bold
-    font-size 20px
+    font-size 25px
   
   .weather__icon
     width 160px

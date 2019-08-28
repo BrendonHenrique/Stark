@@ -15,19 +15,17 @@
           <termometria-silo :index_silo="index_silo" />
       </q-tab-panel>
 
-<!--     
-      <q-tab-panel name="prod_armazenado" >
-          <produto-armazenado />
-      </q-tab-panel> -->
-        
-      <!-- <q-tab-panel name="historico"> -->
-        <!-- <historico /> -->
-      <!-- </q-tab-panel> -->
-
-      <!-- <q-tab-panel name="aeracao">
-          <aeracao />
-      </q-tab-panel> -->
+      <q-tab-panel name="prod_armazenado" style="min-height: 47rem;" >
+          <produto-armazenado :index_silo="index_silo" />
+      </q-tab-panel> 
       
+      <q-tab-panel name="historico"> 
+        <!-- <historico /> -->
+      </q-tab-panel>
+
+      <q-tab-panel name="aeracao">
+          <aeracao :index_silo="index_silo" />
+      </q-tab-panel>
       
     </q-tab-panels>
 

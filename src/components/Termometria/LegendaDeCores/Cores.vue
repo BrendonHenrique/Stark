@@ -1,5 +1,5 @@
 <template>
-  <div class="row justify-center legenda-de-cores">
+  <div class="row legenda-de-cores">
     
     <!-- Car para criação da legenda de cores -->
     <q-card class="bg-grey-2 shadow-10 col-sm-10 col-xs-12 col-md-10 col-lg-5" 
@@ -68,7 +68,11 @@ export default {
 
 <style lang="stylus" >
   .legenda-de-cores
+    min-width 100%
     animation entry 1s
+    display flex 
+    justify-content center 
+    justify-items center 
     
   .input-cores
     .q-field__label

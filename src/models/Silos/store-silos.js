@@ -56,12 +56,9 @@ const mutations = {
 
   // Atualiza o produto armazenado no respectivo silo correspondente ao id passado 
   update_produto_armazenado(state, payload) {
-    const {
-      id_silo,
-      ...produto_armazenado
-    } = payload
+    const {id_silo,produto} = payload
     const silo = getSiloById(state.silos, id_silo)
-    Object.assign(silo.produto_armazenado, produto_armazenado)
+    Object.assign(silo.produto_armazenado, produto)
   },
 
   /**
@@ -131,14 +128,14 @@ const getters = {
 
   // get das funções de aeração recebendo id do silo e id do aerador
   get_funcoes_de_aeracao: (state, getters) => (id_silo, id_aerador) => {
-    let silo = getters.getSiloById(state.silos, id_silo)
+    let silo = getters.silo_by_id(id_silo)
     let aerador = getAeradorById(silo.aeradores, id_aerador)
     return aerador.funcoes
   },
 
   // get das possibilidades de aeração recebendo id do silo 
   get_possibilidades_de_aeracao: (state, getters) => (id_silo) => {
-    let silo = getters.getSiloById(state.silos, id_silo)
+    let silo = getters.silo_by_id(id_silo)
     return silo.possibilidades_aeracao
   },
 
@@ -150,16 +147,15 @@ const getters = {
 
   // get do equilibrio_higroscopico recebendo id do silo 
   get_equilibrio_higroscopico: (state, getters) => (id_silo) => {
-    let silo = getters.getSiloById(state.silos, id_silo)
+    let silo = getters.silo_by_id(id_silo)
     return silo.equilibrio_higroscopico
   },
 
   // get do produto armazenado recebendo o id do silo 
   get_produto_armazenado: (state, getters) => (id_silo) => {
-    let silo = getters.getSiloById(state.silos, id_silo)
+    let silo = getters.silo_by_id(id_silo)
     return silo.produto_armazenado
   },
-
 
 }
 

@@ -1,5 +1,5 @@
 <template>
-  <q-page id="wheater-content" style="min-height:0;" class="fixed-center wheater-layout app">
+  <q-page id="wheater-content" style="" class="wheater-layout app">
     <wheater-app class="app--weather" />
   </q-page>
 </template>
@@ -29,7 +29,11 @@ export default {
 <style lang="stylus" >
 
   .wheater-layout
-    position fixed
+    padding 15px
+    display flex
+    justify-content center
+    justify-items center 
+    min-width 100%
     font-family 'Libre Caslon Text', serif
     -webkit-font-smoothing antialiased
     -moz-osx-font-smoothing grayscale
@@ -39,6 +43,9 @@ export default {
     cursor pointer
     background: url('../assets/bg-estacao.jpg') ;
     text-shadow 1px 1px #1b1919
+    height 38rem
+    width 26rem
+    font-size 20px
 
   .app
     a

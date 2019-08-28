@@ -20,7 +20,8 @@
             <!-- Select -->
             <q-card-section>
                 <q-select outlined transition-show="jump-up" transition-hide="jump-down"
-                v-model="produto.nome" :options="getProdutos" label="Selecionar produto">
+                v-model="produto.nome" :options="getOpcoesDeProdutos"  label="Selecionar produto"
+                :rules="[val => !!val || 'Selecione um produto']">
                     <template v-slot:prepend>
                         <q-img   
                         style="height: 30px; width: 30px"
@@ -32,7 +33,8 @@
             
             <!-- Input variedade -->
             <q-card-section class="q-mt-lg">
-                <q-input outlined label="Variedade" v-model="produto.variedade">
+                <q-input outlined label="Variedade" v-model="produto.variedade"
+                :rules="[val => !!val || 'Insira a variedade do produto']">
                     <template v-slot:prepend>
                         <q-icon name="edit" />
                     </template>
@@ -42,7 +44,8 @@
             
             <!-- input safra -->
             <q-card-section class="q-mt-lg">
-                <q-input outlined label="Safra" v-model="produto.safra">
+                <q-input outlined label="Safra" v-model="produto.safra"
+                :rules="[val => !!val || 'Insira a safra do produto']">
                     <template v-slot:prepend>
                         <q-icon name="calendar_today" />
                     </template>
@@ -54,7 +57,7 @@
             <q-card-actions class="row justify-end q-my-sm">
                 <save-button        
                 :mensagem="'Você gostaria de salvar as informações sobre o produto armazenado ?'"
-                @salvarAlteracoes="salvarProdutoArmazenado"
+                @salvarAlteracoes="update_produto_armazenado({id_silo: index_silo, produto})"
                 />
             </q-card-actions>
             <!--  --> 
@@ -67,6 +70,7 @@
 import {mapActions, mapGetters} from 'vuex'
 
 export default {
+    props:['index_silo'],
     data(){
         return{
             produtos:[
@@ -107,23 +111,35 @@ export default {
         }
     },
     methods:{
-        ...mapActions('produto_armazenado',['update_produto_armazenado']),
-        salvarProdutoArmazenado(){
-            this.update_produto_armazenado(this.produto)
+        ...mapActions('silos',['update_produto_armazenado']),
+        getProdutoArmazenado(index){
+            const {produto_armazenado} = this.silo_by_id(index)
+            return produto_armazenado
+        },
+        atualizaProduto(){
+            Object.assign(this.produto, this.getProdutoArmazenado(this.index_silo))
         }
     },
     mounted(){
-       Object.assign(this.produto, this.produto_armazenado)
+        this.atualizaProduto()
     },  
     components:{
         'avatar-header': require('./AvatarHeader.vue').default,
         'save-button': require('../../Shared/SaveButton').default
     },
     computed:{
-        ...mapGetters('produto_armazenado',['produto_armazenado']),
-        getProdutos(){
+        ...mapGetters('silos',['silo_by_id']),
+        produtoNome(){
+            return this.produto.nome
+        },
+        getOpcoesDeProdutos(){
             return  this.produtos.map( (val) =>  val.label)
         }
+    },
+    watch:{
+        index_silo(index){
+            this.atualizaProduto()
+        },
     }
 }
 </script>
@@ -131,6 +147,8 @@ export default {
 <style lang="stylus" >
 
     .container-produto-armazenado
+        margin-bottom 4rem
+
         .q-field__native 
             font-size 19px
         

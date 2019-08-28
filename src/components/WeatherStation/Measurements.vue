@@ -113,18 +113,17 @@ export default {
       vertical-align middle
 
   section 
-    font-size 20px
     height 7rem
     width 100%
     display flex
     flex-direction row
     justify-content center
-  
+
   .temperature__value
+    font-size 10rem
     display flex
     flex-direction column
     justify-content center
-    font-size 7em
     color rgba(255, 255, 255, 0.75) 
     
   .temperature__scale

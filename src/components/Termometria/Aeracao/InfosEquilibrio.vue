@@ -58,8 +58,6 @@
 <script>
  
 import {mapGetters, mapActions} from 'vuex' 
-import { setTimeout } from 'timers';
-import NotifyUser from '../../../services/NotifyUser';
 
 export default {
     props:['equilibrio_higroscopico'], 
@@ -70,16 +68,17 @@ export default {
         }
     },
     mounted(){
-        this.novo_equilibrio = this.aeracao.infos.equilibrio_higroscopico.atual
+        console.log(this.equilibrio_higroscopico)
+        // this.novo_equilibrio = this.aeracao.infos.equilibrio_higroscopico.atual
     },  
     methods:{
-        ...mapActions('aeracao',['update_equilibrio_higroscopico_atual']),
-        salvarNovoEquilibrio(){
-            this.update_equilibrio_higroscopico_atual(this.novo_equilibrio)
-        }
+        // ...mapActions('aeracao',['update_equilibrio_higroscopico_atual']),
+        // salvarNovoEquilibrio(){
+        //     this.update_equilibrio_higroscopico_atual(this.novo_equilibrio)
+        // }
     },
     computed:{
-        ...mapGetters('aeracao',['aeracao'])
+        // ...mapGetters('aeracao',['aeracao'])
     },
     components:{
         'save-button': require('../../Shared/SaveButton').default,

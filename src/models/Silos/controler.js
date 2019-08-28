@@ -109,7 +109,7 @@ export function buildSilos(silos_length) {
       ],
       equilibrio_higroscopico: {
         atual: '',
-        equilibrio: random(0, 100),
+        equilibrio: parseFloat(random(0, 100)).toFixed(1),
       },
       aeradores: buildAeradores(parseInt(random(1, 2).toFixed(0)))
     })
