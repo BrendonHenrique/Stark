@@ -8,9 +8,8 @@
               <slot>
               </slot>
             </q-toolbar-title>
-            <q-btn flat @click="$emit('openDrawerRight')" round dense icon="person" />
         </q-toolbar>
-    </div>
+    </div>  
   </q-header>
 </template>
 <style lang="stylus">

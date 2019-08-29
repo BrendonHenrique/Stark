@@ -15,13 +15,10 @@
           <termometria-silo :index_silo="index_silo" />
       </q-tab-panel>
 
-      <q-tab-panel name="prod_armazenado" style="min-height: 47rem;" >
+      <q-tab-panel class="produto-armazenado-panel" name="prod_armazenado" >
           <produto-armazenado :index_silo="index_silo" />
       </q-tab-panel> 
-      
-      <q-tab-panel name="historico"> 
-        <!-- <historico /> -->
-      </q-tab-panel>
+    
 
       <q-tab-panel name="aeracao">
           <aeracao :index_silo="index_silo" />
@@ -30,7 +27,6 @@
     </q-tab-panels>
 
     <paginador :silos_length='silos_length' @proximoSilo="proximoSilo" @siloAnterior="siloAnterior" />
-
   
   </q-page>
 </template>
@@ -51,17 +47,9 @@ export default {
           label:'Produto armazenado'
         },
         {
-          name:'historico',
-          label:'Histórico'
-        },
-        {
           name:'aeracao',
           label:'Aeração'
         },
-        // {
-        //   name:'cores',
-        //   label:'Legenda de cores'
-        // }
       ],
       index_silo: 0, 
     }
@@ -80,7 +68,6 @@ export default {
   components:{
     'termometria-silo':require('../components/Termometria/Temperaturas/Termometria').default,
     'produto-armazenado':require('../components/Termometria/ProdutosArmazenados/ProdutosArmazenados').default,
-    'historico': require('../components/Termometria/Historico/Historico').default,
     'aeracao': require('../components/Termometria/Aeracao/Aeracao').default,
     'paginador': require('../components/Termometria/Paginador/PaginadorDeSilo').default
   }
@@ -89,6 +76,17 @@ export default {
 
 <style lang="stylus">
   
+  .produto-armazenado-panel
+    min-height calc(92vh - 129px)
+    display flex
+    align-items center
+    justify-content center
+
+  .termometria-panel 
+    min-height calc(92vh - 129px)
+    display flex
+    align-items center
+
   .menu-bar-termometria
     position fixed
     top 3.8rem

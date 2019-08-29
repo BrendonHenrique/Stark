@@ -1,41 +1,28 @@
 <template>
   <div>
 
-    <q-drawer v-if="side == 'left'"
+    <q-drawer
       :width="250"
-      :side="side"
       :breakpoint="767"
       :value="openedDrawer" 
       class="drawer-style"
-      @hide="$emit('hideDrawerLeft')"
+      @click="$emit('hideDrawerLeft')"
       :content-class='{leftDrawerShadow : openedDrawer }'>
       <slot>  </slot>
     </q-drawer>
-    
-    <q-drawer v-if="side == 'right'"
-      :width="250"
-      :side="side"
-      :breakpoint="767"
-      :value="openedDrawer" 
-      class="drawer-style" 
-      @hide="$emit('hideDrawerRight')"
-      :persistent='true'
-      :content-class='{rightDrawerShadow : openedDrawer }'>
-      <slot>  </slot>
-    </q-drawer>
-
+     
   </div>
 </template>
 
 <script>
 export default{
-  props:['openedDrawer','side'],
+  props:['openedDrawer'],
   mounted(){
     // console.log(this.openedDrawer);
   },
   methods:{
     alert(){
-        
+        console.log(this.openedDrawer)
     }
   }
 }

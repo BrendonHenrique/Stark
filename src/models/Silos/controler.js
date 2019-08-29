@@ -14,14 +14,17 @@ export function getAeradorById(arr, id) {
 
 export function buildPendulos(pendulos_size, sensores_size) {
   let pendulo = [],
-    sensores = []
+    sensores = [],
+    index_sensor = 0
+    
   for (let i = 0; i < pendulos_size; i++) {
     sensores = []
     for (let j = 0; j < sensores_size; j++) {
       sensores.push({
-        id_sensor: j,
+        id_sensor: index_sensor,
         temperatura: parseFloat(random(10, 40).toFixed(1))
       })
+      index_sensor++
     }
     pendulo.push({
       id_pendulo: i,
@@ -89,7 +92,7 @@ export function buildSilos(silos_length) {
         variedade: '',
         safra: ''
       },
-      pendulos: buildPendulos(12, 12),
+      pendulos: buildPendulos(12, 22),
       possibilidades_aeracao: [{
           label: 'Por Conservação',
           isPossible: false

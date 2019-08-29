@@ -1,6 +1,5 @@
 <template>
   <q-list> 
-    <sequential-entrace fromRight >
       <q-item 
       style="border-bottom: 0.2px solid #494949;"
       v-for="nav in navs" clickable exact class="text-grey-4 text-h7 text-thin"
@@ -12,21 +11,11 @@
           <q-item-label class="text-h5 text-weight-thin">{{nav.label}}</q-item-label>
         </q-item-section>
       </q-item> 
-    </sequential-entrace>
-
   </q-list>
 </template>
 <script>
 
   export default{
     props:['navs'],
-    components:{
-      'sequential-entrace': require('../Shared/SequentialEntrace').default
-    }
   }
-</script> 
-
-<style lang="stylus" scoped>
-
-</style>
-
+</script>  

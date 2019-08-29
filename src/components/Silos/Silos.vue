@@ -1,9 +1,6 @@
 <template>
   <q-list class="row">
 
-    <!-- Páginador de silos para mobile  -->
-    <!-- <paginador-mobile :quantidade_de_silos="silos.length" /> -->
-    <!--  -->
     
     <!-- Silos -->
     <q-item class="justify-center col-xs-12 col-sm-6 col-md-4 col-lg-4" 
@@ -26,7 +23,6 @@
     components:{
       'card-silo-header': require('./CardSiloHeader.vue').default,
       'card-silo-content': require('./CardSiloContent.vue').default,
-      'paginador-mobile': require('./Paginador.vue').default
     },
     computed:{
       ...mapGetters('silos',['silos']),

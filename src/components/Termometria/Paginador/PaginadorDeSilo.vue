@@ -1,6 +1,6 @@
 <template>
 <!-- Paginador dos silos -->
-    <div class="paginador-de-silos  row justify-center">
+    <div class="paginador-de-silos-container  row justify-center">
         <q-card class="row bg-grey-5 ">
         <q-btn  flat @click="anterior()" 
         v-bind=podeNavegarParaTras class="navigate"
@@ -56,42 +56,55 @@ export default {
 }
 </script>
 
-<style lang="stylus">
+<style lang="stylus"> 
+
+    ::-webkit-scrollbar {
+        width: 2px;
+    }
+
+    ::-webkit-scrollbar-track {
+        box-shadow: inset 0 0 5px grey; 
+        border-radius: 5px;
+    }
+    
+    ::-webkit-scrollbar-thumb {
+        background: $primary; 
+        border-radius: 10px;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+        background: #b30000; 
+    }
 
   @media (max-width: 767px)
-    .paginador-de-silos
-      padding-bottom 10px
+    .paginador-de-silos-container
       
-      .q-btn__content
-
       .q-card
         position relative
         height 4.2rem
         width  100%  
 
       .q-btn
-        font-size 1.6rem 
+        font-size 1rem 
         height 100%
         width 20%
 
   @media screen and (min-width:768px)
-    .paginador-de-silos
+    .paginador-de-silos-container
       .q-card
         position relative
-        height 3.5rem
-        width  15rem
-        border-radius 40px 
+        height 4.2rem
+        width  100%  
        
       .q-btn
         font-size 1rem
 
-  .paginador-de-silos
-    position fixed     
-    bottom 65px
-    right 0
-    left 0
-    z-index 999
-
+    .paginador-de-silos-container   
+        position relative
+        height 4rem
+        align-items flex-end
+        margin-top 8px
+     
   .indice-paginador
     font-family 'Orbitron'
 

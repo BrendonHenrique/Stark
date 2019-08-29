@@ -16,30 +16,25 @@
           <!-- Menu da lateral esquerda -->
           <layout-drawer 
             class="left-drawer"
-            :side="'left'" 
             @hideDrawerLeft="openedDrawerLeft = false"
             :openedDrawer="openedDrawerLeft">
-            <drawer-nav :navs="navs" />
-          </layout-drawer>
-          <!-- -->
+          
+            <sequential-entrace fromRight >
+              <drawer-nav :navs="navs" />
+            </sequential-entrace>
 
-          <!-- Menu da lateral direita -->
-          <layout-drawer  
-          :openedDrawer="openedDrawerRight" 
-          :side="'right'"
-          @hideDrawerRight="openedDrawerRight = false">
-            <user-painel />
           </layout-drawer>
-          <!-- -->
+
+          <!-- Rotas -->
+          <router-view class="rotas-de-conteudo" :class='{opacityContainer: openedDrawerLeft}'/>
+          <!--  -->
+      
+ 
 
           <!-- footer -->
           <layout-footer :navs="navs" />
           <!-- -->
           
-          <!-- Rotas -->
-          <router-view class="rotas-de-conteudo" :class='{opacityContainer: openedDrawerLeft || openedDrawerRight}'/>
-          <!--  -->
-      
       </q-page-container>
     <!--  -->
 
@@ -53,7 +48,6 @@ export default {
   data () {
     return {
       openedDrawerLeft: false,
-      openedDrawerRight: false
     }
   },
   computed:{
@@ -64,7 +58,7 @@ export default {
     'layout-footer' : require('./Footer.vue').default,
     'layout-drawer' : require('./Drawer.vue').default,
     'drawer-nav'    : require('components/DrawerNav/Nav.vue').default,
-    'user-painel'   : require('components/UserPainel/UserPainel.vue').default,
+    'sequential-entrace': require('../components/Shared/SequentialEntrace').default
   }
 }
 </script>
@@ -77,7 +71,7 @@ export default {
     .left-drawer
       display none 
 
-  .q-drawer--left , .q-drawer--right
+  .q-drawer--left 
     background-color: #353535
 
   .rotas-de-conteudo

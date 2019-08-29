@@ -147,6 +147,7 @@ export default {
 <style lang="stylus" >
 
     .container-produto-armazenado
+        width 100%
         margin-bottom 4rem
 
         .q-field__native 
@@ -164,7 +165,6 @@ export default {
 
     .card-produto-armazenado
         border-radius 10px
-
         
     .container-produto-armazenado
         animation entry 1s
