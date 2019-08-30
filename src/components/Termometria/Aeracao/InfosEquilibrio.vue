@@ -4,7 +4,7 @@
         <!-- Inputs de equilibrio higroscópico -->
         <q-input 
             class="q-mb-md infos-equilibrio-input"
-            v-model="equilibrio_higroscopico.equilibrio" 
+            v-model.number="novoEquilibrioHigroscopico.equilibrio" 
             bottom-slots 
             suffix="%"
             readonly 
@@ -21,7 +21,7 @@
         
         <q-input  
             class="infos-equilibrio-input"
-            v-model.number="novo_equilibrio" 
+            v-model.number="novoEquilibrioHigroscopico.atual" 
             bottom-slots 
             suffix="%"
             maxlength="7"
@@ -49,7 +49,7 @@
         style="margin-top:35px;margin-left: 25px;"
         :isDisabled="valorIncorreto"
         @salvarAlteracoes="salvarNovoEquilibrio" 
-        :mensagem="`Deseja salvar ${novo_equilibrio} como o valor higroscópico atual ?`">
+        :mensagem="`Deseja salvar ${novoEquilibrioHigroscopico.atual} como o valor higroscópico atual ?`">
         </save-button>
 
     </div>
@@ -60,32 +60,47 @@
 import {mapGetters, mapActions} from 'vuex' 
 
 export default {
-    props:['equilibrio_higroscopico'], 
+    props:['equilibrio_higroscopico','index_silo'], 
     data(){
         return{
-            novo_equilibrio: 0,
+            novoEquilibrioHigroscopico:{
+                atual: '',
+                equilibrio: '',
+            },
             valorIncorreto: true
         }
     },
     mounted(){
-        console.log(this.equilibrio_higroscopico)
-        // this.novo_equilibrio = this.aeracao.infos.equilibrio_higroscopico.atual
+        this.getEquilibrioDoStore(this.index_silo)
     },  
     methods:{
-        // ...mapActions('aeracao',['update_equilibrio_higroscopico_atual']),
-        // salvarNovoEquilibrio(){
-        //     this.update_equilibrio_higroscopico_atual(this.novo_equilibrio)
-        // }
+        ...mapActions('silos',['update_equilibrio_higroscopico_atual']),
+        salvarNovoEquilibrio(){
+            this.update_equilibrio_higroscopico_atual({
+            index_silo: this.index_silo,
+            novoEquilibrio: this.novoEquilibrioHigroscopico.atual
+            } )
+        },
+        getEquilibrioDoStore(novoIndex){
+            Object.assign(this.novoEquilibrioHigroscopico, 
+            this.get_equilibrio_higroscopico(novoIndex))
+        }
     },
     computed:{
-        // ...mapGetters('aeracao',['aeracao'])
+        ...mapGetters('silos',['get_equilibrio_higroscopico']),
+        novoEquilibrio(){
+            return this.novoEquilibrioHigroscopico.atual
+        }
     },
     components:{
         'save-button': require('../../Shared/SaveButton').default,
     },
     watch:{
-        novo_equilibrio(valor){
+        novoEquilibrio(valor){
             valor > 0 && valor < 100 ? this.valorIncorreto = false : this.valorIncorreto = true
+        },
+        index_silo(novoIndex){
+            this.getEquilibrioDoStore(novoIndex)
         }
     }
 }

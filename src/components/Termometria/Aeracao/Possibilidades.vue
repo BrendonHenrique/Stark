@@ -19,7 +19,8 @@
     verde(é possivel aerar) 
     seguida do nome da função -->
     <q-list class="possibilidades-container">
-      <q-item class="possibilidades" v-for="item in possibilidades" 
+      <q-item class="possibilidades" 
+      v-for="item in get_possibilidades_de_aeracao(index_silo)" 
       :key="item.label" clickable v-ripple>
         <q-item-section avatar>
           <q-btn round size="md" class="shadow-7" :color="item.isPossible ? 'positive' : 'negative' " />
@@ -37,8 +38,16 @@
 </template>
 
 <script>
+import {  mapGetters } from 'vuex'
+
 export default {
-  props:['possibilidades']
+  props:['index_silo','index_aerador'],
+  computed: {
+    ...mapGetters('silos',['get_possibilidades_de_aeracao']),
+  }, 
+  updated(){
+    console.log(this.index_aerador)
+  }
 }
 </script>
 

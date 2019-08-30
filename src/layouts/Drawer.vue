@@ -17,14 +17,6 @@
 <script>
 export default{
   props:['openedDrawer'],
-  mounted(){
-    // console.log(this.openedDrawer);
-  },
-  methods:{
-    alert(){
-        console.log(this.openedDrawer)
-    }
-  }
 }
 </script>
 <style lang="stylus">

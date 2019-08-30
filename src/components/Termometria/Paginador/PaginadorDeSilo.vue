@@ -7,7 +7,7 @@
         icon="navigate_before" />
         <div class="absolute-center indice-paginador">
             <h6>
-            {{indice_paginador + 1}}
+            Silo nº {{indice_paginador + 1}}
             </h6>
         </div>
         <q-space />

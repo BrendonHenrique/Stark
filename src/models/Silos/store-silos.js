@@ -46,12 +46,11 @@ const mutations = {
    * e atualiza o store
    */
   update_equilibrio_higroscopico_atual(state, payload) {
-    const {
-      id_silo,
-      ...novoEquilibrio
-    } = payload
-    let silo = getSiloById(state.silos, id_silo)
-    Object.assign(silo.equilibrio_higroscopico, novoEquilibrio)
+    const { index_silo, 
+      novoEquilibrio } = payload 
+
+    let silo = getSiloById(state.silos, index_silo)
+    silo.equilibrio_higroscopico.atual = novoEquilibrio 
   },
 
   // Atualiza o produto armazenado no respectivo silo correspondente ao id passado 
@@ -96,7 +95,7 @@ const actions = {
   }, payload) {
     commit('updateMinMedMaxTemp', payload)
   },
-  set_equilibrio_higroscopico_atual({
+  update_equilibrio_higroscopico_atual({
     commit
   }, payload) {
     commit('update_equilibrio_higroscopico_atual', payload);
@@ -124,6 +123,11 @@ const getters = {
 
   silos_length: (state) => {
     return state.silos.length
+  },
+
+  aeradores_length: (state,getters) => (id_silo) => { 
+    const  {aeradores} =  getters.silo_by_id(id_silo)
+    return  aeradores.length
   },
 
   // get das funções de aeração recebendo id do silo e id do aerador

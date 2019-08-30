@@ -19,8 +19,7 @@
           <produto-armazenado :index_silo="index_silo" />
       </q-tab-panel> 
     
-
-      <q-tab-panel name="aeracao">
+      <q-tab-panel class="aeracao-panel" name="aeracao">
           <aeracao :index_silo="index_silo" />
       </q-tab-panel>
       
@@ -76,16 +75,25 @@ export default {
 
 <style lang="stylus">
   
-  .produto-armazenado-panel
-    min-height calc(92vh - 129px)
+
+  panel(height){
+    min-height calc(height - 129px)
     display flex
     align-items center
+  } 
+
+  .produto-armazenado-panel
+    panel(92vh)
     justify-content center
 
   .termometria-panel 
-    min-height calc(92vh - 129px)
-    display flex
+    panel(92vh)
     align-items center
+
+  .aeracao-panel
+    panel(91vh)
+    justify-content center
+    padding 0 0;
 
   .menu-bar-termometria
     position fixed
