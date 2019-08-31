@@ -28,18 +28,15 @@
 
                 <!-- Parte direita do card, contém o card de possibilidades de aeração e de funções -->
                 <div class="col-xs-6 col-sm-8 col-md-8 col-lg-8 flip-card">
-                    <flip-card :flipped="flipped" class="">
+                    <flip-card :flipped="flipped">
     
                         <template slot="front"> 
-                            <!-- Envia id do silo e do aerador -->
                             <possibilidades 
-                            :index_aerador="id_aerador"
                             :index_silo="index_silo"
                             /> 
                         </template>
     
                         <template slot="back"> 
-                            <!-- Envia id do silo e do aerador -->
                             <funcoes 
                             :index_aerador="id_aerador"
                             :index_silo="index_silo"
@@ -58,13 +55,13 @@
         <paginador-de-aerador 
         :id_aerador="id_aerador"
         @updateId_aerador="updateAerador" 
-        :aeradores_length="aeradores_length(index_silo)" />
+        :aeradores_length="quantidadeDeAeradores" />
 
     </div>
 </template>
 
 <script>
-import {mapGetters} from 'vuex'
+import SiloController from '../../../Controllers/Silos/Controller'
 
 export default {
     props:['index_silo'],
@@ -79,9 +76,11 @@ export default {
         }
     },
     computed:{
-        ...mapGetters('silos',['get_equilibrio_higroscopico','aeradores_length']),
         equilibrioHigroscopico(){
-            return this.get_equilibrio_higroscopico(this.index_silo)
+            return SiloController.getEquilibrioHigroscopico(this.index_silo)
+        },
+        quantidadeDeAeradores(){
+            return SiloController.getQuantidadeDeAeradores(this.index_silo)
         }
     },
     methods:{
@@ -94,10 +93,7 @@ export default {
             this.card_view.Funcoes_card = !this.card_view.Funcoes_card 
             this.flipped = !this.flipped
         }
-    },
-    mounted(){
-        // this.get_equilibrio_higroscopico(this.index_silo)
-    },
+    }, 
     components:{
         'particles': require('../../Shared/Particles').default,
         'avatar': require('./Avatar').default,
@@ -107,12 +103,7 @@ export default {
         'flip-card': require('./FlipCard').default,
         'funcoes': require('./Funcoes').default,
         'paginador-de-aerador' :  require('./paginadorAerador').default 
-    },
-    watch:{
-        id_aerador(index){
-            // console.log(index)
-        },
-    }
+    }, 
 } 
 </script> 
 

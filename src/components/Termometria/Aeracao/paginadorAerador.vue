@@ -1,35 +1,23 @@
 <template>
-    <div>
-        
-        
-        <q-pagination
-        v-model="indice_paginador"
-        :max="aeradores_length"
-        :direction-links="true"
-        @input="$emit('updateId_aerador', indice_paginador)"
-        />
-
-    </div>
+  <q-pagination
+  v-model="indice"
+  :max="aeradores_length"
+  :direction-links="true"
+  />
 </template>
 
 <script>
+
 export default {
     props:['aeradores_length','id_aerador'],
     data(){
         return{
-            indice_paginador: 1,
+          indice: 1,
         }
     },
-    computed:{ 
-    },
-    methods:{
-        proximo(){
-            this.$emit('proximoAerador',this.indice_paginador)
-        },
-        anterior(){
-            this.$emit('proximoAerador',this.indice_paginador)
-        }
-    }
+    updated(){
+      this.$emit('updateId_aerador',this.indice)
+    },  
 }
 </script>
 

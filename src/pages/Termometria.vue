@@ -25,13 +25,17 @@
       
     </q-tab-panels>
 
-    <paginador :silos_length='silos_length' @proximoSilo="proximoSilo" @siloAnterior="siloAnterior" />
+    <paginador 
+    :silos_length="quantidadeDeSilos" 
+    @proximoSilo="proximoSilo" 
+    @siloAnterior="siloAnterior" />
   
   </q-page>
 </template>
 
 <script>
-import {mapGetters, mapActions} from 'vuex'
+import SiloController from '../Controllers/Silos/Controller'
+
 export default {
   data(){
     return{
@@ -62,7 +66,9 @@ export default {
     },
   },
   computed:{
-    ...mapGetters('silos',['silos_length']),
+    quantidadeDeSilos(){
+      return SiloController.getQuantidadeDeSilos()
+    },
   },
   components:{
     'termometria-silo':require('../components/Termometria/Temperaturas/Termometria').default,
@@ -83,7 +89,9 @@ export default {
   } 
 
   .produto-armazenado-panel
-    panel(92vh)
+    height 78.5vh !important
+    display flex
+    align-items center
     justify-content center
 
   .termometria-panel 
@@ -91,7 +99,9 @@ export default {
     align-items center
 
   .aeracao-panel
-    panel(91vh)
+    height 78.5vh !important
+    display flex
+    align-items center
     justify-content center
     padding 0 0;
 

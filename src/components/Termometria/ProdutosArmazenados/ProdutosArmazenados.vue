@@ -57,7 +57,7 @@
             <q-card-actions class="row justify-end q-my-sm">
                 <save-button        
                 :mensagem="'Você gostaria de salvar as informações sobre o produto armazenado ?'"
-                @salvarAlteracoes="update_produto_armazenado({id_silo: index_silo, produto})"
+                @salvarAlteracoes="SiloControler.updateProdutoArmazenado({id_silo: index_silo, produto})"
                 />
             </q-card-actions>
             <!--  --> 
@@ -67,7 +67,7 @@
 </template>
 
 <script>
-import {mapActions, mapGetters} from 'vuex'
+import SiloController from '../../../Controllers/Silos/Controller'
 
 export default {
     props:['index_silo'],
@@ -111,9 +111,8 @@ export default {
         }
     },
     methods:{
-        ...mapActions('silos',['update_produto_armazenado']),
-        getProdutoArmazenado(index){
-            const {produto_armazenado} = this.silo_by_id(index)
+        getProdutoArmazenado(){
+            const {produto_armazenado} = SiloController.getSiloById(this.index_silo)
             return produto_armazenado
         },
         atualizaProduto(){
@@ -128,7 +127,6 @@ export default {
         'save-button': require('../../Shared/SaveButton').default
     },
     computed:{
-        ...mapGetters('silos',['silo_by_id']),
         produtoNome(){
             return this.produto.nome
         },

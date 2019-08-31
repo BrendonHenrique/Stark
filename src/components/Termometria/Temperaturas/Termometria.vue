@@ -5,30 +5,34 @@
 
       <!-- Pêndulo -->
       <div
-        class="column reverse pendulo "
+        class="pendulo "
         v-for="pendulo in pendulos"
         :key="pendulo.id_pendulo">
         
-        <!-- Número sinalizador do pêndulo -->
-        <q-btn round class="text-thin text-h6 text-center text-black q-mt-sm bg-grey-5 indicador-do-pendulo" size="15px">
-          p{{pendulo.id_pendulo + 1}}
-        </q-btn>
-        <!--  -->
         
         <!-- Sensores -->
-        <sequential-entrace :delay="50">
+        <sequential-entrace :delay="50" class="column reverse">
           <div
+            class="column"
             v-for="sensor in pendulo.sensores"
             :key="sensor.id_sensor">
             <q-chip class="q-mt-sm" :style="{'background-color': tempToColor(sensor.temperatura)}">
               <q-avatar color="grey" text-color="white">
-                {{sensor.id_sensor}}
+                {{sensor.id_sensor + 1}}
               </q-avatar>
               {{sensor.temperatura}} ºC
             </q-chip>
           </div>
         </sequential-entrace>
           <!--  -->
+      
+        <!-- Número sinalizador do pêndulo -->
+        <q-btn round class="text-thin text-h6 text-center text-black 
+        q-mt-sm bg-grey-5 indicador-do-pendulo" size="15px">
+          p{{pendulo.id_pendulo + 1}}
+        </q-btn>
+        <!--  -->
+
       </div>
       <!--  -->
     </div>
@@ -42,6 +46,7 @@ import Vue from 'vue'
 import SequentialEntrance from 'vue-sequential-entrance'
 import 'vue-sequential-entrance/vue-sequential-entrance.css'
 Vue.use(SequentialEntrance) 
+import SiloController from '../../../Controllers/Silos/Controller'
 
 export default {
   props:['index_silo'], 
@@ -54,8 +59,8 @@ export default {
     this.getTemperaturas(this.index_silo); 
   },  
   computed:{ 
-    ...mapGetters('legenda_de_cores',['cores_do_gradiente','configuracoes_de_cores']),
-    ...mapGetters('silos',['silo_by_id']),
+    ...mapGetters('legenda_de_cores',
+    ['cores_do_gradiente','configuracoes_de_cores']),
   }, 
   components:{
     'sequential-entrace': require('../../Shared/SequentialEntrace').default
@@ -66,7 +71,7 @@ export default {
       return TempToColor.parse(this, temp / this.configuracoes_de_cores.temperatura_alta)
     },
     getTemperaturas(index){
-      this.pendulos = this.silo_by_id(index).pendulos
+      this.pendulos = SiloController.getSiloById(this.index_silo).pendulos
     }
   },
   watch:{
@@ -81,7 +86,7 @@ export default {
   
   .indicador-do-pendulo
     position relative
-    right 2px 
+    left 27px 
 
   .pendulo
     border-width bold  

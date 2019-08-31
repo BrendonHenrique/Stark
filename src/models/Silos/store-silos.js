@@ -2,13 +2,17 @@ import {
   stat
 } from "fs";
 
-import {random, getSiloById, getAeradorById, buildPendulos, buildAeradores, buildSilos, } from './controler'
+import {random, getSiloById, getAeradorById, 
+  buildPendulos, buildAeradores, buildSilos, } from './SiloUtils'
 
 const state = {
-  silos: buildSilos(parseInt(random(2,10).toFixed()))
+  silos: buildSilos(parseInt(random(2,10).toFixed())),
 }
 
 const mutations = {
+  updateTest(state,payload){
+    state.test = payload
+  },
   /*
    *  Atualiza a propriedade temperatura do silo , pegando pelo id do silo todos os sensores e atualiza
    *  com os valores mínimo, médio e máximo de temperatura para cada silo
@@ -113,6 +117,8 @@ const actions = {
 }
 
 const getters = {
+  test: (state) => state.test, 
+
   // retorna a lista de silos 
   silos: (state) => state.silos,
     
@@ -151,8 +157,7 @@ const getters = {
 
   // get do equilibrio_higroscopico recebendo id do silo 
   get_equilibrio_higroscopico: (state, getters) => (id_silo) => {
-    let silo = getters.silo_by_id(id_silo)
-    return silo.equilibrio_higroscopico
+    return getters.silo_by_id(id_silo).equilibrio_higroscopico
   },
 
   // get do produto armazenado recebendo o id do silo 

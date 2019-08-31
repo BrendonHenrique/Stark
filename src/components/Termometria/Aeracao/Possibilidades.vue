@@ -20,7 +20,7 @@
     seguida do nome da função -->
     <q-list class="possibilidades-container">
       <q-item class="possibilidades" 
-      v-for="item in get_possibilidades_de_aeracao(index_silo)" 
+      v-for="item in possibilidades" 
       :key="item.label" clickable v-ripple>
         <q-item-section avatar>
           <q-btn round size="md" class="shadow-7" :color="item.isPossible ? 'positive' : 'negative' " />
@@ -38,15 +38,27 @@
 </template>
 
 <script>
-import {  mapGetters } from 'vuex'
+import SiloController from '../../../Controllers/Silos/Controller'
 
 export default {
-  props:['index_silo','index_aerador'],
-  computed: {
-    ...mapGetters('silos',['get_possibilidades_de_aeracao']),
+  props:['index_silo'],
+  data(){
+    return{
+      possibilidades: null
+    }
+  },
+  methods: {
+    getPossibilidadesDeAeracao(){
+      this.possibilidades = SiloController.getPossibilidadesDeAeracao(this.index_silo)
+    }
   }, 
-  updated(){
-    console.log(this.index_aerador)
+  mounted(){
+    this.getPossibilidadesDeAeracao()
+  },
+  watch:{
+    index_silo(novoValor){
+      this.getPossibilidadesDeAeracao()
+    }, 
   }
 }
 </script>

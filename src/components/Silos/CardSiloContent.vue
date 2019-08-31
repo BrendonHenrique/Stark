@@ -90,14 +90,12 @@
 </template>
 
 <script>
-  import { mapActions } from 'vuex'
+  import SiloController from '../../Controllers/Silos/Controller'
   export default{
-    props:['silo'],
-    methods:{
-      ...mapActions('silos',['updateMinMedMaxTemp'])
-    },
+    props:['silo'], 
+    
     mounted(){
-      this.updateMinMedMaxTemp(this.silo.id)
+      SiloController.updateMinMedMaxTemp(this.silo.id)
     },
     components:{
       'section-layout': require('components/Silos/SectionLayout.vue').default,

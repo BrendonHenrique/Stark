@@ -14,8 +14,8 @@
         -->
 
         <card-silo-header />
-
         <card-silo-content :silo="silo" />
+      
       </q-card>
     </q-item>
     <!--  -->
@@ -24,16 +24,17 @@
 </template>
 
 <script>
-  import { mapGetters } from 'vuex'
+  import SiloController from '../../Controllers/Silos/Controller'
   import Vue from 'vue'
-
   export default{
+    computed:{
+      silos(){
+        return SiloController.getSilos()
+      }
+    },  
     components:{
       'card-silo-header': require('./CardSiloHeader.vue').default,
       'card-silo-content': require('./CardSiloContent.vue').default,
-    },
-    computed:{
-      ...mapGetters('silos',['silos']),
     }, 
   }
 </script>
