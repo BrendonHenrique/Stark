@@ -56,11 +56,10 @@
 </template>
 
 <script>
- 
-import {mapGetters, mapActions} from 'vuex' 
+import SiloController from '../../../Controllers/Silos/Controller'
 
 export default {
-    props:['equilibrio_higroscopico','index_silo'], 
+    props:['index_silo'], 
     data(){
         return{
             novoEquilibrioHigroscopico:{
@@ -74,23 +73,21 @@ export default {
         this.getEquilibrioDoStore(this.index_silo)
     },  
     methods:{
-        ...mapActions('silos',['update_equilibrio_higroscopico_atual']),
         salvarNovoEquilibrio(){
-            this.update_equilibrio_higroscopico_atual({
+            SiloController.updateEquilibrioHigroscopicoAtual(this.$store, {
             index_silo: this.index_silo,
             novoEquilibrio: this.novoEquilibrioHigroscopico.atual
-            } )
+            })
         },
         getEquilibrioDoStore(novoIndex){
             Object.assign(this.novoEquilibrioHigroscopico, 
-            this.get_equilibrio_higroscopico(novoIndex))
+            SiloController.getEquilibrioHigroscopico(novoIndex))
         }
     },
     computed:{
-        ...mapGetters('silos',['get_equilibrio_higroscopico']),
         novoEquilibrio(){
             return this.novoEquilibrioHigroscopico.atual
-        }
+        }, 
     },
     components:{
         'save-button': require('../../Shared/SaveButton').default,

@@ -5,7 +5,7 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 import navs from './store-navs'
 import legenda_de_cores from './store-legenda-de-cores'
-import silos from '../models/Silos/store-silos'
+import silos from './store-silos'
 import ambiente from './store-ambiente'
 
 Vue.use(Vuex)

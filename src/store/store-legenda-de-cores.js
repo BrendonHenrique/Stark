@@ -37,7 +37,6 @@ const state = {
       temperatura_min: 10,
       temperatura_alta: 40
     }
-     
 }
 
 const mutations =  {

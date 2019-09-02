@@ -57,7 +57,7 @@
             <q-card-actions class="row justify-end q-my-sm">
                 <save-button        
                 :mensagem="'Você gostaria de salvar as informações sobre o produto armazenado ?'"
-                @salvarAlteracoes="SiloControler.updateProdutoArmazenado({id_silo: index_silo, produto})"
+                @salvarAlteracoes="enviarProdutoParaStore"
                 />
             </q-card-actions>
             <!--  --> 
@@ -107,7 +107,8 @@ export default {
                 nome:null,
                 variedade: null,
                 safra: null
-            }
+            },
+            SiloController
         }
     },
     methods:{
@@ -117,6 +118,10 @@ export default {
         },
         atualizaProduto(){
             Object.assign(this.produto, this.getProdutoArmazenado(this.index_silo))
+        },
+        enviarProdutoParaStore(){
+            SiloController.updateProdutoArmazenado(this.$store, 
+            {id_silo: this.index_silo, produto: this.produto})
         }
     },
     mounted(){

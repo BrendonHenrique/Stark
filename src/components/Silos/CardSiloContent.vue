@@ -93,9 +93,8 @@
   import SiloController from '../../Controllers/Silos/Controller'
   export default{
     props:['silo'], 
-    
     mounted(){
-      SiloController.updateMinMedMaxTemp(this.silo.id)
+      SiloController.updateMinMedMaxTemp(this.$store, this.silo.id)
     },
     components:{
       'section-layout': require('components/Silos/SectionLayout.vue').default,

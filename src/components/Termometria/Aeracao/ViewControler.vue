@@ -1,6 +1,8 @@
 <template>
 
-    <!-- Componente para controle de visualização do Flip-Card, ele vira o flip-card -->
+    <!-- Componente para controle de visualização do Flip-Card, baiscamente 
+    cria duas faces para o card, uma na frente e o outra atrás , e ao clicar nos botões
+    ele vira o card -->
     <div class="row justify-center  q-mb-lg view-controller ">
 
         <q-btn style="z-index:3;" class="view-controler-button q-mr-lg"

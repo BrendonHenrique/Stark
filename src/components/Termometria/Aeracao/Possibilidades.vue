@@ -1,6 +1,6 @@
 <template>
+  <!-- Card de possibilidades de aeração -->
   <div>
-
     <!-- Header do card -->
     <q-banner dense class="bg-primary text-center" 
     inline-actions style="border-top-left-radius: 20px;">
@@ -35,6 +35,7 @@
     <!--  -->
 
   </div>
+  <!--  -->
 </template>
 
 <script>

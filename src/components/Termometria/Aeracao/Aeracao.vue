@@ -8,7 +8,8 @@
             <particles />
             <!--  -->
             
-            <!-- Controlador de visualização altera entre funções de aeração e possibilidades -->
+            <!-- Controlador de visualização altera a face do flipcard
+            entre funções de aeração e possibilidades de aeração -->
             <view-controler :view="card_view" @changeView="changeView"/> 
             <!--  -->
 
@@ -19,7 +20,6 @@
                     <div class="column items-center">
                         <avatar class="q-mb-md" />
                         <infos-equilibrio  
-                        :equilibrio_higroscopico="equilibrioHigroscopico"
                         :index_silo="index_silo"
                         />
                     </div>
@@ -76,9 +76,6 @@ export default {
         }
     },
     computed:{
-        equilibrioHigroscopico(){
-            return SiloController.getEquilibrioHigroscopico(this.index_silo)
-        },
         quantidadeDeAeradores(){
             return SiloController.getQuantidadeDeAeradores(this.index_silo)
         }

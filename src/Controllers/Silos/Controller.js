@@ -1,21 +1,20 @@
 
-import store from '../../models/Silos/store-silos' 
+import store from '../../store/store-silos' 
+import vuexStore from '../../store/index' 
+const {state,getters,mutations, actions} = store; 
 
-const {state,getters,mutations,actions} = store; 
-  
+import {getAeradorById } from '../../utils/SiloUtils'
 /**
  * A classe controler faz a interface de todas as ações do store do silo 
  * Útil para não repetir os imports dos getters e actions em todos os componentes
- * que usarem esse store 
+ * 
+ * As ações que necessitam ser comitadas devem receber a referência do store passando como argumento
+ * ex: SiloController.updateProdutoArmazenado(this.$store) 
  */
 export default class SiloController { 
   
   static getSilos() {
     return state.silos
-  }
-
-  static updateMinMedMaxTemp(id_silo){
-    mutations.updateMinMedMaxTemp(state, id_silo)
   }
 
   static getQuantidadeDeSilos(){
@@ -24,12 +23,6 @@ export default class SiloController {
 
   static getSiloById(id_silo){
     return getters.silo_by_id(state)(id_silo)
-  }
-
-  static updateProdutoArmazenado(payload){
-    if(payload){
-      mutations.update_produto_armazenado(state, payload)
-    }
   }
 
   static getEquilibrioHigroscopico(id_silo){
@@ -42,6 +35,31 @@ export default class SiloController {
 
   static getPossibilidadesDeAeracao(id_silo){  
     return this.getSiloById(id_silo).possibilidades_aeracao
+  }
+
+  static getFuncoesDeAeracao(id_silo,id_aerador){
+    return getters.get_funcoes_de_aeracao(state,getters)(id_silo, id_aerador)
+  }
+
+  static getFuncaoDeAeracaoLigada(id_silo, id_aerador){
+    let funcoes = this.getFuncoesDeAeracao(id_silo,id_aerador)
+    return funcoes.filter(funcao_de_aeracao => funcao_de_aeracao.ligada)
+  }
+  
+  static updateProdutoArmazenado(store, payload){ 
+    store.dispatch('silos/update_produto_armazenado',payload)
+  }
+
+  static updateMinMedMaxTemp(store, id_silo){
+    store.dispatch('silos/updateMinMedMaxTemp', id_silo)
+  }
+
+  static updateEquilibrioHigroscopicoAtual(store, id_silo){
+    store.dispatch('silos/update_equilibrio_higroscopico_atual', id_silo)
+  }
+
+  static updateFuncaoDeAeracaoLigada(store, payload){
+    store.dispatch('silos/update_funcao_de_aeracao', payload)
   }
 
 }

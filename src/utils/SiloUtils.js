@@ -41,7 +41,7 @@ export function buildAeradores(aerador_length) {
       id: index,
       funcoes: [{
           label: 'Manual',
-          ligada: false
+          ligada: true
         },
         {
           label: 'Automática',
