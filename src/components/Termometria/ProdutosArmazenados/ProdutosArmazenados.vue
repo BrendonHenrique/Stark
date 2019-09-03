@@ -120,8 +120,7 @@ export default {
             Object.assign(this.produto, this.getProdutoArmazenado(this.index_silo))
         },
         enviarProdutoParaStore(){
-            SiloController.updateProdutoArmazenado(this.$store, 
-            {id_silo: this.index_silo, produto: this.produto})
+            SiloController.updateProdutoArmazenado({id_silo: this.index_silo, produto: this.produto})
         }
     },
     mounted(){

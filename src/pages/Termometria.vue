@@ -1,7 +1,7 @@
 <template>
   <q-page class="termometria-container">
     
-    <div style="height: 5rem;" class="tab-menu">
+    <div class="tab-menu">
       <q-tabs 
         dense inline-label v-model="tab" align="justify" narrow-indicator
         class="text-grey-4 menu-bar-termometria" active-color="secundary" indicator-color="secundary">
@@ -9,23 +9,23 @@
       </q-tabs>
     </div>
     
-    <q-tab-panels class="bg-grey-10" v-model="tab" > 
+    <q-tab-panels class="bg-grey-10" v-model="tab"> 
       
       <q-tab-panel class="termometria-panel" name="termometria" >
-          <termometria-silo :index_silo="index_silo" />
+        <termometria-silo :index_silo="index_silo" />
       </q-tab-panel>
 
       <q-tab-panel class="produto-armazenado-panel" name="prod_armazenado" >
-          <produto-armazenado :index_silo="index_silo" />
+        <produto-armazenado :index_silo="index_silo" />
       </q-tab-panel> 
     
       <q-tab-panel class="aeracao-panel" name="aeracao">
-          <aeracao :index_silo="index_silo" />
+        <aeracao :index_silo="index_silo" />
       </q-tab-panel>
       
     </q-tab-panels>
-
-    <paginador 
+    
+    <paginador
     :silos_length="quantidadeDeSilos" 
     @proximoSilo="proximoSilo" 
     @siloAnterior="siloAnterior" />
@@ -82,36 +82,22 @@ export default {
 <style lang="stylus">
   
 
-  panel(height){
-    min-height calc(height - 129px)
-    display flex
-    align-items center
-  } 
-
   .produto-armazenado-panel
-    height 78.5vh !important
+    min-height calc(90.5vh - 129px)
     display flex
     align-items center
     justify-content center
 
   .termometria-panel 
-    panel(92vh)
-    align-items center
-
+    min-height calc(90.5vh - 129px)
+  
   .aeracao-panel
-    height 78.5vh !important
-    display flex
-    align-items center
-    justify-content center
-    padding 0 0;
-
+    min-height calc(90.5vh - 129px)
+  
   .menu-bar-termometria
-    position fixed
-    top 3.8rem
-    left 0px
-    right 0
     background-color $primary
-    z-index 4
+    z-index 5
+    height 3rem
     font-family 'Libre Caslon Text', serif
    
 </style>

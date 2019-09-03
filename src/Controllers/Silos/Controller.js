@@ -1,9 +1,12 @@
 
-import store from '../../store/store-silos' 
+import storeSilos from '../../store/store-silos' 
+const {state,getters,mutations, actions} = storeSilos; 
+
 import vuexStore from '../../store/index' 
-const {state,getters,mutations, actions} = store; 
+const store = vuexStore()
 
 import {getAeradorById } from '../../utils/SiloUtils'
+
 /**
  * A classe controler faz a interface de todas as ações do store do silo 
  * Útil para não repetir os imports dos getters e actions em todos os componentes
@@ -12,7 +15,7 @@ import {getAeradorById } from '../../utils/SiloUtils'
  * ex: SiloController.updateProdutoArmazenado(this.$store) 
  */
 export default class SiloController { 
-  
+
   static getSilos() {
     return state.silos
   }
@@ -46,19 +49,19 @@ export default class SiloController {
     return funcoes.filter(funcao_de_aeracao => funcao_de_aeracao.ligada)
   }
   
-  static updateProdutoArmazenado(store, payload){ 
+  static updateProdutoArmazenado(payload){ 
     store.dispatch('silos/update_produto_armazenado',payload)
   }
 
-  static updateMinMedMaxTemp(store, id_silo){
+  static updateMinMedMaxTemp(id_silo){
     store.dispatch('silos/updateMinMedMaxTemp', id_silo)
   }
 
-  static updateEquilibrioHigroscopicoAtual(store, id_silo){
-    store.dispatch('silos/update_equilibrio_higroscopico_atual', id_silo)
+  static updateEquilibrioHigroscopicoAtual(payload){
+    store.dispatch('silos/update_equilibrio_higroscopico_atual', payload)
   }
 
-  static updateFuncaoDeAeracaoLigada(store, payload){
+  static updateFuncaoDeAeracaoLigada(payload){
     store.dispatch('silos/update_funcao_de_aeracao', payload)
   }
 

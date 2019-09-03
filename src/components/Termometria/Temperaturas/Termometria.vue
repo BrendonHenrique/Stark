@@ -1,41 +1,38 @@
 <template>
-  <div>
-    
-    <div class="row no-wrap justify-between q-mb-xl">
+  <div class="row no-wrap justify-between">
 
-      <!-- Pêndulo -->
-      <div
-        class="pendulo "
-        v-for="pendulo in pendulos"
-        :key="pendulo.id_pendulo">
-        
-        
-        <!-- Sensores -->
-        <sequential-entrace :delay="50" class="column reverse">
-          <div
-            class="column"
-            v-for="sensor in pendulo.sensores"
-            :key="sensor.id_sensor">
-            <q-chip class="q-mt-sm" :style="{'background-color': tempToColor(sensor.temperatura)}">
-              <q-avatar color="grey" text-color="white">
-                {{sensor.id_sensor + 1}}
-              </q-avatar>
-              {{sensor.temperatura}} ºC
-            </q-chip>
-          </div>
-        </sequential-entrace>
-          <!--  -->
+    <!-- Pêndulo -->
+    <div
+      class="pendulo "
+      v-for="pendulo in pendulos"
+      :key="pendulo.id_pendulo">
       
-        <!-- Número sinalizador do pêndulo -->
-        <q-btn round class="text-thin text-h6 text-center text-black 
-        q-mt-sm bg-grey-5 indicador-do-pendulo" size="15px">
-          p{{pendulo.id_pendulo + 1}}
-        </q-btn>
+      
+      <!-- Sensores -->
+      <sequential-entrace :delay="50" class="column reverse">
+        <div
+          class="column"
+          v-for="sensor in pendulo.sensores"
+          :key="sensor.id_sensor">
+          <q-chip class="q-mt-sm" :style="{'background-color': tempToColor(sensor.temperatura)}">
+            <q-avatar color="grey" text-color="white">
+              {{sensor.id_sensor + 1}}
+            </q-avatar>
+            {{sensor.temperatura}} ºC
+          </q-chip>
+        </div>
+      </sequential-entrace>
         <!--  -->
-
-      </div>
+    
+      <!-- Número sinalizador do pêndulo -->
+      <q-btn round class="text-thin text-h6 text-center text-black 
+      q-mt-sm bg-grey-5 indicador-do-pendulo" size="15px">
+        p{{pendulo.id_pendulo + 1}}
+      </q-btn>
       <!--  -->
+
     </div>
+    <!--  -->
   </div>
 </template>
 

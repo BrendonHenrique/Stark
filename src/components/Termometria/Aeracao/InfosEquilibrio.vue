@@ -74,7 +74,7 @@ export default {
     },  
     methods:{
         salvarNovoEquilibrio(){
-            SiloController.updateEquilibrioHigroscopicoAtual(this.$store, {
+            SiloController.updateEquilibrioHigroscopicoAtual({
             index_silo: this.index_silo,
             novoEquilibrio: this.novoEquilibrioHigroscopico.atual
             })

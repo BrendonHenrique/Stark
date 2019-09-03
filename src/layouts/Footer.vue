@@ -1,7 +1,7 @@
 <template>
   <q-footer elevated>
     <div id="mobile-footer">
-      <q-tabs>
+      <q-tabs class="mobile-tabs">
         <q-route-tab
           v-for="nav in navs" :key="nav.label"
           :icon="nav.icon"
@@ -43,7 +43,7 @@
   .q-router-link--exact-active
     color black
 
-  .q-tabs 
+  .mobile-tabs
     height 5rem
     
     .q-tabs__content  

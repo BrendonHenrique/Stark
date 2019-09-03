@@ -47,8 +47,7 @@ const mutations = {
    */
   update_equilibrio_higroscopico_atual(state, payload) {
     const { index_silo, 
-      novoEquilibrio } = payload 
-
+    novoEquilibrio } = payload 
     let silo = getSiloById(state.silos, index_silo)
     silo.equilibrio_higroscopico.atual = novoEquilibrio 
   },

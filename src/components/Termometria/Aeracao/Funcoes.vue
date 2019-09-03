@@ -2,9 +2,7 @@
     <div>
        
        <!-- Header do card de funções -->
-       <q-banner 
-        dense 
-        inline-actions 
+       <q-banner dense inline-actions 
         class="bg-primary text-center funcoes-header">
             <span class="text-h6 text-grey-3">
                 Funcoes
@@ -17,7 +15,7 @@
         <!--  -->
         
         <!-- Card de funções -->
-        <div :class="!isFlipped ? 'show' : 'hide'">
+        <div v-show="!isFlipped">
                         
             <!-- Select com os options das funções de aeração possíveis -->
             <p class="text-center text-subtitle1 q-pa-sm text-grey-10">
@@ -50,6 +48,7 @@
                     <strong>
                         {{funcaoSelecionada}}   
                     </strong>
+                    
                 </div>
             
                 <div class='container-funcao-selecionada q-mt-sm'>
@@ -57,12 +56,23 @@
                     <!-- aeração manual -->
                     <div v-show='funcaoSelecionada == "Manual"' 
                         class="column items-center">
-                        Ligar/Desligar 
-                        <q-toggle 
-                        @input="SiloController.updateFuncaoDeAeracaoLigada($store, {index_silo,index_aerador,label:'Manual',ligada: funcaoManualLigada})"
-                        v-model="funcaoManualLigada"  :label="funcaoManualLigada ? 'Ligada' : 'Desligada'"
-                        color="green" checked-icon="check" unchecked-icon="clear"
-                        />
+                        Ligar/Desligar
+                        
+                        <div class="row inline">   
+                            
+                            <q-toggle 
+                            @input="enviarFuncaoDeAeracaoParaStore('Manual',funcaoManualLigada)"
+                            v-model="funcaoManualLigada"  :label="funcaoManualLigada ? 'Ligada' : 'Desligada'"
+                            color="green" checked-icon="check" unchecked-icon="clear"
+                            />
+
+                            <q-icon 
+                            v-show="funcaoManualLigada"
+                            color="red"
+                            class="icon-funcao-ativa"
+                            name="settings"/>
+
+                        </div>
                     </div>
                     <!--  -->
 
@@ -73,9 +83,9 @@
                             label="Secagem" 
                             @click="ativarFuncaoAutomaticaPor('Secagem') ">
                             <q-icon 
-                            color="red"
-                            class="icon-funcao-automatica"
                             v-show="funcaoSecagemLigada"
+                            color="red"
+                            class="icon-funcao-ativa"
                             name="settings"/>
                         </q-btn>
 
@@ -84,9 +94,9 @@
                             @click="ativarFuncaoAutomaticaPor('Conservação')"
                             >
                             <q-icon 
-                            color="red"
-                            class="icon-funcao-automatica"
                             v-show="funcaoConservacaoLigada"
+                            color="red"
+                            class="icon-funcao-ativa"
                             name="settings"/>
                         </q-btn>
 
@@ -94,73 +104,104 @@
                     <!--  -->
 
                     <!-- aeração Semi automática -->
-                    <div  class='row justify-center q-gutter-lg q-pa-sm' v-show='funcaoSelecionada == "Semi Automática"'>
+                    <div v-show='funcaoSelecionada == "Semi Automática"'>
+                        <div class='row justify-between q-gutter-sm q-pa-sm'>
+                       
+                            <!-- Valor de umidade ambiente máxima -->
+                            <q-input 
+                            v-model.number="novasInfosAmbiente.umidade_relativa_do_ar_max"
+                            :rules="[  
+                                val =>  val > 0 && val < 100 || 'Valor de porcentagem deve estar entre 0 e 100',
+                                val =>  val > this.novasInfosAmbiente.umidade_relativa_do_ar_min || 'O valor de umidade máxima deve ser maior que a mínima'
+                            ]"
+                            class="semi-automatica-inputs col-xs-11 col-sm-3 col-md-3 col-lg-3" 
+                            label="UA MAX" suffix="%"/>
+                            <!--  -->
                         
-                        <!-- Valor de umidade ambiente máxima -->
-                        <q-input 
-                        v-model.number="novasInfosAmbiente.umidade_relativa_do_ar_max"
-                        :rules="[  
-                            val =>  val > 0 && val < 100 || 'Valor de porcentagem deve estar entre 0 e 100',
-                            val =>  val > this.novasInfosAmbiente.umidade_relativa_do_ar_min || 'O valor de umidade máxima deve ser maior que a mínima'
-                        ]"
-                        class="semi-automatica-inputs col-xs-11 col-sm-3 col-md-3 col-lg-3" 
-                        label="UA MAX" suffix="%"/>
-                        <!--  -->
+                            <!-- Valor de umidade ambiente mínima -->
+                            <q-input 
+                            v-model.number="novasInfosAmbiente.umidade_relativa_do_ar_min"
+                            :rules="[  
+                                val =>  val > 0 && val < 100 || 'Valor de porcentagem deve estar entre 0 e 100',
+                                val =>  val < this.novasInfosAmbiente.umidade_relativa_do_ar_max || 'O valor de umidade mínima deve ser menor que a máxima'
+                            ]"
+                            class="semi-automatica-inputs col-xs-11 col-sm-3 col-md-3 col-lg-3" 
+                            label="UA MIN" suffix="%"/>
+                            <!--  -->
                         
-                        <!-- Valor de umidade ambiente mínima -->
-                        <q-input 
-                        v-model.number="novasInfosAmbiente.umidade_relativa_do_ar_min"
-                        :rules="[  
-                            val =>  val > 0 && val < 100 || 'Valor de porcentagem deve estar entre 0 e 100',
-                            val =>  val < this.novasInfosAmbiente.umidade_relativa_do_ar_max || 'O valor de umidade mínima deve ser menor que a máxima'
-                        ]"
-                        class="semi-automatica-inputs col-xs-11 col-sm-3 col-md-3 col-lg-3" 
-                        label="UA MIN" suffix="%"/>
-                        <!--  -->
-                        
-                        <!-- Valor de temperatura ambiente máxima -->
-                        <q-input 
-                        v-model.number="novasInfosAmbiente.temperatura_ambiente_max"
-                        :rules="[  val =>  !!val || 'Insira um valor de temperatura válido']"
-                        class="semi-automatica-inputs col-xs-11 col-sm-3 col-md-3 col-g-3 q-mb-sm" 
-                        label="TA MAX" suffix="ºC"/>
-                        <!--  -->
+                            <!-- Valor de temperatura ambiente máxima -->
+                            <q-input 
+                            v-model.number="novasInfosAmbiente.temperatura_ambiente_max"
+                            :rules="[  val =>  !!val || 'Insira um valor de temperatura válido']"
+                            class="semi-automatica-inputs col-xs-11 col-sm-3 col-md-3 col-g-3" 
+                            label="TA MAX" suffix="ºC"/>
+                            <!--  -->
 
-                        <!-- Aviso caso os valores não sejam válidos -->
-                        <q-tooltip v-if="valorIncorreto">
-                            <span class="infos-equilibrio-input">
-                                Insira um valor válido nas informações de ambiente 
-                            </span>
-                        </q-tooltip>
-                        <!--  -->
+                            <!-- Aviso caso os valores não sejam válidos -->
+                            <q-tooltip v-if="valorIncorreto">
+                                <span class="infos-equilibrio-input">
+                                    Insira um valor válido nas informações de ambiente 
+                                </span>
+                            </q-tooltip>
+                            <!--  -->
+                        </div>
                         
-                        <!-- botão para enviar os valores acima para vuex -->
-                        <save-button
-                        class="q-mt-xl"
-                        :isDisabled="valorIncorreto"
-                        @salvarAlteracoes="salvarInfosAmbiente" 
-                        :mensagem="`Deseja salvar as informações de ambiente e ativar a aeração semi automática  ?`"
-                        />
-                        <!--  -->
+                        <!-- botão para enviar os valores acima para o store -->
+                        <div class="row justify-center">
+                            <save-button
+                            :isDisabled="valorIncorreto"
+                            @salvarAlteracoes="salvarInfosAmbiente" 
+                            :mensagem="`Deseja salvar as informações de ambiente e ativar a aeração semi automática  ?`"
+                            />
 
+                            <q-icon 
+                            
+                            style="bottom:15px;"
+                            color="red"
+                            class="icon-funcao-ativa"
+                            name="settings"/>
+
+                        </div>
+                        
                     </div>
                     <!--  -->
 
                     <!-- aeração forçada -->
                     <div v-show='funcaoSelecionada == "Forçado" ' class="column items-center">
                         Ligar/Desligar 
-                        <q-toggle v-model="funcaoForcadoLigada" :label="funcaoForcadoLigada ? 'Ligada' : 'Desligada'"
-                        color="green" checked-icon="check" unchecked-icon="clear"
-                        />
+                        <div class='row inline'>
+                            <q-toggle 
+                            v-model="funcaoForcadoLigada" :label="funcaoForcadoLigada ? 'Ligada' : 'Desligada'"
+                            @input="enviarFuncaoDeAeracaoParaStore('Forçado',funcaoForcadoLigada)"
+                            color="green" checked-icon="check" unchecked-icon="clear"
+                            />
+
+                            <q-icon 
+                            v-show="funcaoForcadoLigada"
+                            color="red"
+                            class="icon-funcao-ativa"
+                            name="settings"/>
+                            </div>
                     </div>
                     <!--  -->
 
                     <!-- Expurgo -->
                     <div v-show='funcaoSelecionada == "Expurgo"' class="column items-center">
                         Ligar/Desligar 
-                        <q-toggle v-model="funcaoExpurgoLigada" :label="funcaoExpurgoLigada ? 'Ligada' : 'Desligada'"
-                        color="green" checked-icon="check" unchecked-icon="clear"
-                        />
+                        
+                        <div class="row inline">
+                            <q-toggle 
+                            v-model="funcaoExpurgoLigada" :label="funcaoExpurgoLigada ? 'Ligada' : 'Desligada'"
+                            @input="enviarFuncaoDeAeracaoParaStore('Expurgo',funcaoExpurgoLigada)"
+                            color="green" checked-icon="check" unchecked-icon="clear"
+                            />
+                            
+                            <q-icon 
+                            v-show="funcaoExpurgoLigada"
+                            color="red"
+                            class="icon-funcao-ativa"
+                            name="settings"/>
+                        </div>
                     </div>
                     <!--  -->
 
@@ -206,34 +247,38 @@ export default {
         }
     }, 
     mounted(){
-         
-        // Inicialização da view com a função ativada
+        
+        // Inicialização do componente com a função ativada
         this.getFuncaoAtiva()
-
-        // Atualização da view com as informações do store
-        this.updateView() 
 
         // Inicialização das informações dos inputs para informações de ambiente da aeração semi automática
         Object.assign(this.novasInfosAmbiente, InfosAmbienteController.getInfosAmbiente())
 
-        // Atualização da variável com a função automatica ligada para prevenir 
-        // avisos desnecessários se o usuário ativar a mesma função automática duas vezes
-        if(this.funcaoAutomaticaLigada){
-            if(this.funcaoConservacaoLigada){
-                this.ultimaFuncaoAutomatica = 'Conservação'
-            }else{
-                this.ultimaFuncaoAutomatica = 'Secagem'
-            }
-        }
-
     },
     methods:{
-        
-        // Pega a função ativa no store
+        procuraProcessoLigado(arr){
+            return arr.filter( element => element.ligada)
+        },
+        // Pega a função ativa do store e atualiza o componente
         getFuncaoAtiva(){
             let funcoesDeAeracaoLigada = SiloController.getFuncaoDeAeracaoLigada(this.index_silo, this.index_aerador)
+            
             if(funcoesDeAeracaoLigada.length > 0) {
                 this.funcaoSelecionada = funcoesDeAeracaoLigada[0].label
+                
+                if(funcoesDeAeracaoLigada[0].processos != undefined){
+                    let processoLigado = this.procuraProcessoLigado(funcoesDeAeracaoLigada[0].processos)
+                    if(processoLigado[0].label == 'Conservação'){
+                        this.funcaoConservacaoLigada = processoLigado[0].ligada
+                    }else if (processoLigado[0].label == 'Secagem'){
+                        this.funcaoSecagemLigada = processoLigado[0].ligada
+                    }  
+                }
+
+                if(this.funcaoSelecionada == 'Manual') this.funcaoManualLigada = funcoesDeAeracaoLigada[0].ligada
+                if(this.funcaoSelecionada == 'Semi Automática') this.funcaoSemiAutomaticaLigada = funcoesDeAeracaoLigada[0].ligada
+                if(this.funcaoSelecionada == 'Forçado') this.funcaoForcadoLigada = funcoesDeAeracaoLigada[0].ligada
+                if(this.funcaoSelecionada == 'Expurgo') this.funcaoExpurgoLigada = funcoesDeAeracaoLigada[0].ligada
             }
         },
 
@@ -247,7 +292,8 @@ export default {
             }            
         },
         
-        // Interface de aplicação entre o q-select na view e o state/vuex 
+        // Após o usuário selecionar uma opção , essa opção é guardada em this.funcaoSelecionada
+        // E nessa função é testado se o usuário quer sobrescrever a função já ativa
         selecionarOpcao (opcaoSelecionada) {
 
             // Se não houver nenhuma função selecionada, não é necessário confirmar que a função será sobrescrita 
@@ -263,12 +309,11 @@ export default {
                     this.funcaoSelecionada = opcaoSelecionada
                 }
             }
-            this.updateView()
         },   
 
         // Envia o processo para o store e lá ativa a função automática e o processo a ser utilizado dentro dela. 
         ativarFuncaoAutomaticaPor(funcao){
-            
+
             // Teste permite não dar aviso desnecessário , por exemplo caso o usuário clique no mesmo processo automático de aeração duas vezes
             if(this.ultimaFuncaoAutomatica != funcao){
 
@@ -277,36 +322,26 @@ export default {
                     
                     // Inicialização do processo de aeração automática
                     this.funcaoAutomaticaLigada = true
-
-                    SiloController.updateFuncaoDeAeracaoLigada(this.$store, 
-                    {index_silo,index_aerador,label:'Automatica',ligada: this.funcaoAutomaticaLigada})
-                       
+                    
+                   this.enviarFuncaoDeAeracaoParaStore('Automática',this.funcaoAutomaticaLigada)
                     // Me certifico de que não irei possuir dois processos automáticos ligados ao mesmo tempo
                     // E em seguida envio a atualização para o store
                     if(funcao == 'Secagem' && !this.funcaoSecagemLigada ){
-                        
                         this.funcaoSecagemLigada = true
                         this.funcaoConservacaoLigada = false
-                
-                        SiloController.updateFuncaoDeAeracaoLigada(this.$store, 
-                        {index_silo,index_aerador,label:'Secagem',ligada: this.funcaoSecagemLigada})
-
                     }else if(funcao == 'Conservação' && !this.funcaoConservacaoLigada){
                         this.funcaoConservacaoLigada = true
                         this.funcaoSecagemLigada = false
-
-                        SiloController.updateFuncaoDeAeracaoLigada(this.$store, 
-                        {index_silo,index_aerador,label:'Secagem',ligada: this.funcaoConservacaoLigada})
-
                     }
+
+                    this.enviarFuncaoDeAeracaoParaStore('Secagem',this.funcaoSecagemLigada)
+                    this.enviarFuncaoDeAeracaoParaStore('Conservação',this.funcaoConservacaoLigada)
                     NotifyUsers.info(`Processo de aeração por ${funcao} iniciada`)
                     this.ultimaFuncaoAutomatica = funcao
-                
                 })
                 .catch( ()=>{
                     NotifyUsers.info(`Processo de aeração por ${funcao} cancelada`)
                 }); 
-            
             }
         },
 
@@ -314,18 +349,14 @@ export default {
         salvarInfosAmbiente(){
             this.funcaoSemiAutomaticaLigada = true
             InfosAmbienteController.updateInfosAmbiente(this.novasInfosAmbiente)
+            this.enviarFuncaoDeAeracaoParaStore('Semi Automática',this.funcaoSemiAutomaticaLigada)
         },
-        
-        // Atualiza a view com as informações do store
-        updateView(){
-            let funcoesDeAeracao = SiloController.getFuncoesDeAeracao(this.index_silo, this.index_aerador)
-            this.funcaoManualLigada = funcoesDeAeracao[0].ligada
-            this.funcaoConservacaoLigada = funcoesDeAeracao[1].processos[0].ligada
-            this.funcaoSecagemLigada = funcoesDeAeracao[1].processos[1].ligada
-            this.funcaoSemiAutomaticaLigada = funcoesDeAeracao[2].ligada
-            this.funcaoForcadoLigada = funcoesDeAeracao[3].ligada
-            this.funcaoExpurgoLigada = funcoesDeAeracao[4].ligada
-        },
+
+        enviarFuncaoDeAeracaoParaStore(nomeDafuncao, variavelDaFuncao ){
+            SiloController.updateFuncaoDeAeracaoLigada( 
+            {index_silo:this.index_silo,index_aerador: this.index_aerador,
+            label:nomeDafuncao,ligada: variavelDaFuncao})
+        }
  
     },
     computed:{
@@ -333,17 +364,15 @@ export default {
         funcoes(){
             return SiloController.getFuncoesDeAeracao(this.index_silo, this.index_aerador).map( element => element.label)
         },
-
         // Retorna a umidade mínima de dentro do objeto
         UmidadeAmbienteMinima(){
             return this.novasInfosAmbiente.umidade_relativa_do_ar_min;    
         },
-        
         // Retorna a umidade máxima de dentro do objeto
         UmidadeAmbienteMaxima(){
             return this.novasInfosAmbiente.umidade_relativa_do_ar_max;    
         },
-        // Retorna  a temperatura de ambiente máxima de dentro do objeto
+        // Retorna a temperatura de ambiente máxima de dentro do objeto
         TemperaturaAmbienteMaxima(){
             return this.novasInfosAmbiente.temperatura_ambiente_max;    
         },
@@ -351,34 +380,49 @@ export default {
     },
     watch:{ 
         // Método serve para prevenir duas funções de aeração ligadas ao mesmo tempo, 
-        // observa o ligamento de uma função e desliga as demais caso estejam ligadas
-        // e por consequencia da alteração do estado os watchers abaixo atualizam o store        
-        funcaoSelecionada(funcaoAtual, antigaFuncao){ 
-
-            if(antigaFuncao == 'Manual' && this.funcaoManualLigada) this.funcaoManualLigada = false;
+        // observa o ligamento de uma função e desliga caso o usuário tenha selecionado
+        // uma outra opção sem desligar a anterior   
+        funcaoSelecionada(funcaoAtual, antigaFuncao){
+            
+            if(antigaFuncao == 'Manual'){
+                this.funcaoManualLigada = false;
+                this.enviarFuncaoDeAeracaoParaStore('Manual',this.funcaoManualLigada)
+            } 
             if(antigaFuncao == 'Automática' ){
-
                 this.funcaoAutomaticaLigada = false
-
-                if(this.funcaoConservacaoLigada){
-                    this.funcaoConservacaoLigada = false
-                }else if(this.funcaoSecagemLigada){
-                    this.funcaoSecagemLigada = false
-                }
+                this.enviarFuncaoDeAeracaoParaStore('Automática',this.funcaoAutomaticaLigada)
             }
-            if(antigaFuncao == 'Semi Automática' && this.funcaoSemiAutomaticaLigada ) this.funcaoSemiAutomaticaLigada = false
-            if(antigaFuncao == 'Forçado' && this.funcaoForcadoLigada) this.funcaoForcadoLigada = false
-            if(antigaFuncao == 'Expurgo' && this.funcaoExpurgoLigada) this.funcaoExpurgoLigada = false
+             if(this.ultimaFuncaoAutomatica  == 'Conservação'){
+                this.ultimaFuncaoAutomatica = ''
+                this.funcaoConservacaoLigada = false
+                this.enviarFuncaoDeAeracaoParaStore('Conservação',this.funcaoConservacaoLigada)
+            }
+            if(this.ultimaFuncaoAutomatica  == 'Secagem'){
+                this.ultimaFuncaoAutomatica = ''
+                this.funcaoSecagemLigada = false
+                this.enviarFuncaoDeAeracaoParaStore('Secagem',this.funcaoSecagemLigada)
+            }
+            if(antigaFuncao == 'Semi Automática'){
+                this.funcaoSemiAutomaticaLigada = false
+                this.enviarFuncaoDeAeracaoParaStore('Semi Automática',this.funcaoSemiAutomaticaLigada)
+            }
+            if(antigaFuncao == 'Forçado') {
+                this.funcaoForcadoLigada = false
+                this.enviarFuncaoDeAeracaoParaStore('Forçado',this.funcaoForcadoLigada)
+            }
+            if(antigaFuncao == 'Expurgo'){
+                this.funcaoExpurgoLigada = false
+                this.enviarFuncaoDeAeracaoParaStore('Expurgo',this.funcaoExpurgoLigada)
+            } 
         },
         
-        // As demais funções abaixo fazem o chaveamento de on/off entre as funções e envia para o store 
+        // As demais funções abaixo fazem o aviso ao usuário  
         funcaoSemiAutomaticaLigada(valor){
-            SiloController.updateFuncaoDeAeracaoLigada({
-                id_silo: this.index_silo, 
-                id_aerador: this.index_aerador, 
-                label:'Semi Automática',
-                ligada: valor
-            })
+            if(valor){
+                NotifyUsers.info('Função semi automática ligada')
+            }else{
+                NotifyUsers.info('Função semi automática desligada')
+            }
         },
         funcaoExpurgoLigada(valor){
             if(valor){
@@ -386,28 +430,13 @@ export default {
             }else{
                 NotifyUsers.info('Função Expurgo desligada')
             }
-
-            SiloController.updateFuncaoDeAeracaoLigada({
-                id_silo: this.index_silo, 
-                id_aerador: this.index_aerador, 
-                label:'Expurgo',
-                ligada: valor
-            })
-
         },
         funcaoForcadoLigada(valor){
             if(valor){
                 NotifyUsers.info('Função Forçada ligada')
             }else{
                 NotifyUsers.info('Função Forçada desligada')
-            }
-
-            SiloController.updateFuncaoDeAeracaoLigada({
-                id_silo: this.index_silo, 
-                id_aerador: this.index_aerador, 
-                label:'Forçado',
-                ligada: valor
-            })
+            } 
         },
         funcaoManualLigada(valor){
             if(valor){
@@ -415,19 +444,8 @@ export default {
             }else{
                 NotifyUsers.info('Função Manual desligada')
             }
-            
-            
-        },
-        funcaoAutomaticaLigada(valor){
-            
-            SiloController.updateFuncaoDeAeracaoLigada({
-                id_silo: this.index_silo, 
-                id_aerador: this.index_aerador, 
-                label:'Automática',
-                ligada: valor
-            })
-        },
-
+        }, 
+       
         // Ambas as funções abaixo são sub processos da função automática
         // e ao ligar emitem NotifyUser no method 'ativarFuncaoAutomaticaPor(Nome da função)'
         // Por isso tem tratamento para notificação do usuário apenas para valor == false  
@@ -435,26 +453,11 @@ export default {
             if(!valor){
                 NotifyUsers.info('Função automática por Conservação desligada')
             }
-            
-            SiloController.updateFuncaoDeAeracaoLigada({
-                id_silo: this.index_silo, 
-                id_aerador: this.index_aerador, 
-                label:'Conservação',
-                ligada: valor
-            })
-
         },
         funcaoSecagemLigada(valor){
             if(!valor){
                 NotifyUsers.info('Função automática por Secagem desligada')
             }
-
-            SiloController.updateFuncaoDeAeracaoLigada({
-                id_silo: this.index_silo, 
-                id_aerador: this.index_aerador, 
-                label:'Secagem',
-                ligada: valor
-            })
         },
 
         // Verificação de valores válidos para desabilitar o botão de salvar
@@ -524,7 +527,7 @@ export default {
         }
     }
 
-    .icon-funcao-automatica
+    .icon-funcao-ativa
         position relative 
         -webkit-animation rotating 5s linear infinite
         -moz-animation rotating 5s linear infinite

@@ -1,6 +1,6 @@
 <template>
 <!-- Paginador dos silos -->
-    <div class="paginador-de-silos-container  row justify-center">
+    <div class="paginador-de-silos-container row justify-center vertical-bottom">
         <q-card class="row bg-grey-5 ">
         <q-btn  flat @click="anterior()" 
         v-bind=podeNavegarParaTras class="navigate"
@@ -76,34 +76,26 @@ export default {
         background: #b30000; 
     }
 
-  @media (max-width: 767px)
     .paginador-de-silos-container
-      
-      .q-card
-        position relative
-        height 4.2rem
-        width  100%  
+        height 4rem
+        width 100%
 
+        .q-card
+            position relative
+            height 4.2rem
+            width  100%  
+
+  @media (max-width: 767px)
+    .paginador-de-silos-container 
       .q-btn
         font-size 1rem 
         height 100%
         width 20%
 
   @media screen and (min-width:768px)
-    .paginador-de-silos-container
-      .q-card
-        position relative
-        height 4.2rem
-        width  100%  
-       
+    .paginador-de-silos-container 
       .q-btn
         font-size 1rem
-
-    .paginador-de-silos-container   
-        position relative
-        height 4rem
-        align-items flex-end
-        margin-top 8px
      
   .indice-paginador
     font-family 'Orbitron'

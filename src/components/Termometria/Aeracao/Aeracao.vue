@@ -1,8 +1,8 @@
 <template>
-    <div class="row justify-center aeracao-container q-pa-sm" >
-       
-        <!-- Card de controle de aeração -->
-        <q-card class="card-de-aeracao bg-grey-3 col-sm-12 col-xs-12 col-md-8 col-lg-6">
+    <!-- Card de controle de aeração -->
+    <div class='row justify-center items-center'>
+        
+        <q-card class="card-de-aeracao bg-grey-3 col-sm-12 col-xs-12 col-md-12 col-lg-8">
             
             <!-- Efeito de background -->
             <particles />
@@ -29,20 +29,21 @@
                 <!-- Parte direita do card, contém o card de possibilidades de aeração e de funções -->
                 <div class="col-xs-6 col-sm-8 col-md-8 col-lg-8 flip-card">
                     <flip-card :flipped="flipped">
-    
+
                         <template slot="front"> 
                             <possibilidades 
                             :index_silo="index_silo"
                             /> 
                         </template>
-    
+
                         <template slot="back"> 
                             <funcoes 
+                            :isFlipped="flipped"
                             :index_aerador="id_aerador"
                             :index_silo="index_silo"
                             />
                         </template>
-    
+
                     </flip-card>
                 </div>
                 <!--  -->
@@ -50,14 +51,11 @@
             </div>
 
         </q-card>
-        <!--  -->
-            
-        <paginador-de-aerador 
-        :id_aerador="id_aerador"
-        @updateId_aerador="updateAerador" 
-        :aeradores_length="quantidadeDeAeradores" />
-
+    
     </div>
+    
+    <!--  -->
+
 </template>
 
 <script>
@@ -110,17 +108,17 @@ export default {
         margin-bottom 20px
     
     @media screen and (max-width: 600px) {
-        .aeracao-container {
+        .card-de-aeracao {
             height 52rem
         }
     }
     @media screen and (min-width: 601px) {
-        .aeracao-container {
+        .card-de-aeracao {
             height 40rem
         }
     }
 
-    .aeracao-container
+    .card-de-aeracao
         animation entry 1s
         font-family 'Libre Caslon Text', serif
         font-size 20px
