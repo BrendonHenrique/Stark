@@ -65,7 +65,7 @@ const mutations = {
    * exemplo @input="update_funcao_de_aeracao({id_silo: 1, id_aerador: 1, ligada:funcaoManualLigada , label:'Manual'})"
    */
   update_funcao_de_aeracao(state, payload) {
-
+    
     const {
       index_silo,
       index_aerador,
@@ -136,6 +136,7 @@ const getters = {
   // get das funções de aeração recebendo id do silo e id do aerador
   get_funcoes_de_aeracao: (state, getters) => (id_silo, id_aerador) => {
     let silo = getSiloById(state.silos, id_silo)
+    console.log(silo)
     let aerador = getAeradorById(silo.aeradores, id_aerador)
     return aerador.funcoes
   },

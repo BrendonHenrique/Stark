@@ -169,7 +169,17 @@ export default {
         border-radius 10px
         
     .container-produto-armazenado
-        animation entry 1s
+        animation entry 0.2s
         font-family 'Libre Caslon Text', serif
+
+    @keyframes entry
+        from
+            opacity 0
+            transform scale(0.9)
+
+        to
+            opacity 1
+            transform scale(1)
+            
 
 </style>

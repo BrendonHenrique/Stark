@@ -62,6 +62,7 @@ export default class SiloController {
   }
 
   static updateFuncaoDeAeracaoLigada(payload){
+    console.log(payload)
     store.dispatch('silos/update_funcao_de_aeracao', payload)
   }
 

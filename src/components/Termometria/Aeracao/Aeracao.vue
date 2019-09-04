@@ -32,6 +32,7 @@
 
                         <template slot="front"> 
                             <possibilidades 
+                            :index_aerador="id_aerador"
                             :index_silo="index_silo"
                             /> 
                         </template>
@@ -106,37 +107,22 @@ export default {
 <style lang="stylus">
     .front
         margin-bottom 20px
-    
-    @media screen and (max-width: 600px) {
-        .card-de-aeracao {
-            height 52rem
-        }
-    }
-    @media screen and (min-width: 601px) {
-        .card-de-aeracao {
-            height 40rem
-        }
-    }
 
     .card-de-aeracao
-        animation entry 1s
+        height 52rem !important
+        animation entry 0.2s !important
         font-family 'Libre Caslon Text', serif
         font-size 20px
-
-    .card-de-aeracao
         padding 15px 
         box-shadow 1px 1px 10px #eae5e5
 
     .flip-card 
         z-index 3!important
-
-    .activated
-        animation entry 1s  
      
     @keyframes entry
         from
             opacity 0
-            transform scale(0.95)
+            transform scale(0.9)
 
         to
             opacity 1

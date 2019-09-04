@@ -1,6 +1,6 @@
 <template>
     <vue-particles 
-        style="z-index:2;position:absolute;width: 97%;height: 95%;"
+        style="z-index:2;position:absolute;width: 100%;height: 100%;bottom:0;right: 0"
         color="#7a5858"
         :particleOpacity="0.7"
         :particlesNumber="150"
@@ -11,7 +11,7 @@
         :lineLinked="false"
         :lineOpacity="0.4"
         :linesDistance="150"
-        :moveSpeed="6"
+        :moveSpeed="7"
         :hoverEffect="false"
         :clickEffect="false"
     ></vue-particles>
