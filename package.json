@@ -13,6 +13,7 @@
     "@quasar/extras": "^1.0.0",
     "animated-number-vue": "^1.0.0",
     "color-between": "^1.0.2",
+    "heatmap.js": "^2.0.5",
     "quasar": "^1.0.0-beta.0",
     "vue-particles": "^1.0.9",
     "vue-scrollto": "^2.15.0",

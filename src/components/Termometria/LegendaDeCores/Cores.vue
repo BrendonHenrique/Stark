@@ -12,7 +12,41 @@
           filled v-model="item.valor" class="input-cores col-12 " :label="item.label">
             <template v-slot:append>
               <q-btn class="shadow-6" round :style="{'background-color': item.valor}">
-                <q-popup-proxy transition-show="scale" transition-hide="scale">
+               
+                <q-popup-proxy transition-show="scale" transition-hide="scale" class="popup-proxy-temperaturas">
+                    <q-banner class="bg-grey-3 banner-temperaturas-baixas" v-show="item.label == 'Temperaturas baixas' " >
+                      <template v-slot:avatar>
+                        <q-icon name="color_lens" color="secondary" size="30px" />
+                      </template>
+                      <strong>
+                        Informe um valor para as temperaturas baixas
+                      </strong>
+                      <br>
+                      <span>
+                        Obs: As temperaturas na termometria mais próximas desse valor terá a cor que você escolher abaixo.
+                      </span>
+                      <q-input label="Temperatura baixa" 
+                      v-model="temperaturaBaixa" 
+                      suffix="ºC"
+                      @input="CoresController.updateTemperaturaBaixa(temperaturaBaixa)"></q-input>
+                    </q-banner>
+
+                    <q-banner v-show="item.label == 'Temperaturas altas' ">
+                      <template v-slot:avatar>
+                        <q-icon name="color_lens" color="secondary" size="30px" />
+                      </template>
+                      <strong>
+                        Informe um valor para as temperaturas altas
+                      </strong>
+                      <br>
+                      <span>
+                        Obs: As temperaturas na termometria mais próximas desse valor terá a cor que você escolher abaixo.
+                      </span>
+                      <q-input label="Temperatura alta" 
+                      v-model="temperaturaAlta" 
+                      suffix="ºC"
+                      @input="CoresController.updateTemperaturaAlta(temperaturaAlta)"></q-input>
+                    </q-banner>
                     <q-color  no-header v-model="item.valor" />
                 </q-popup-proxy>
               </q-btn>
@@ -22,7 +56,7 @@
       <!--  -->
       
       <!-- Prévia do gradiente de temperaturas -->
-      <gradiente-preview /> 
+      <gradiente-preview :gradiente="gradienteDeTemperatura"/> 
       <!--  -->
 
       <!-- Botão para salvar as informações -->
@@ -40,29 +74,36 @@
 </template>
 
 <script>
-import {mapActions, mapGetters} from 'vuex'
+import CoresController from '../../../Controllers/LegendaDeCores/Controller'
+
 export default {
   data() {
     return {
-      cores: []
+      cores: [],
+      CoresController,
+      temperaturaBaixa: '',
+      temperaturaAlta: ''
     }
   },
   methods:{
-    ...mapActions('legenda_de_cores',['update_legenda_de_cores']),
     salvarLegendaDeCores(){
-      this.update_legenda_de_cores(this.cores)
+      CoresController.updateLegendaDeCores(this.cores)
     }
   },
   mounted(){
-    this.cores = this.legenda_de_cores
+    this.cores = CoresController.getLegendaDeCores()
+    this.temperaturaBaixa = CoresController.getTemperaturaBaixa()
+    this.temperaturaAlta = CoresController.getTemperaturaAlta()
   },
   components:{
     'save-button': require('../../Shared/SaveButton').default,
     'gradiente-preview': require('../../Termometria/LegendaDeCores/GradientePreview').default
   },
   computed:{
-    ...mapGetters('legenda_de_cores',['legenda_de_cores'])
-  },
+    gradienteDeTemperatura(){
+      return CoresController.getGradienteDeTemperatura()
+    }
+  }
 };
 </script>
 
@@ -81,5 +122,12 @@ export default {
     
     input 
       font-size 18px
+
+  div.q-menu.scroll
+    width 22rem !important
+
+    .q-field__label
+      font-size 1.2em
+      color black
 
 </style>

@@ -9,7 +9,9 @@
       
       
       <!-- Sensores -->
-      <sequential-entrace :delay="50" class="column reverse">
+      <!-- class="column reverse" -->
+      <sequential-entrace :delay="50" 
+      >
         <div
           class="column"
           v-for="sensor in pendulo.sensores"

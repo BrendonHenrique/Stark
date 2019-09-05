@@ -5,8 +5,6 @@ const {state,getters,mutations, actions} = storeSilos;
 import vuexStore from '../../store/index' 
 const store = vuexStore()
 
-import {getAeradorById } from '../../utils/SiloUtils'
-
 /**
  * A classe controler faz a interface de todas as ações do store do silo 
  * Útil para não repetir os imports dos getters e actions em todos os componentes
@@ -62,7 +60,6 @@ export default class SiloController {
   }
 
   static updateFuncaoDeAeracaoLigada(payload){
-    console.log(payload)
     store.dispatch('silos/update_funcao_de_aeracao', payload)
   }
 

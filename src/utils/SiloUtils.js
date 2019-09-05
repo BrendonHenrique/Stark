@@ -1,16 +1,6 @@
-// Funções responsáveis pela construção de uma estrutura para os silos e também para fazer buscas
+// Funções responsáveis pela construção de uma estrutura para os silos e para fazer buscas
 
-export function random(min, max) {
-  return Math.random() * (max - min) + min
-}
-
-export function getSiloById(arr, id) {
-  return arr.find(silo => silo.id == id)
-}
-
-export function getAeradorById(arr, id) {
-  return arr.find(aerador => aerador.id == id)
-}
+// construtores
 
 export function buildPendulos(pendulos_size, sensores_size) {
   let pendulo = [],
@@ -111,12 +101,26 @@ export function buildSilos(silos_length) {
         }
       ],
       equilibrio_higroscopico: {
-        atual: '',
+        atual: parseFloat(random(0, 100)).toFixed(1),
         equilibrio: parseFloat(random(0, 100)).toFixed(1),
       },
       aeradores: buildAeradores(parseInt(random(1, 2).toFixed(0)))
     })
   }
   return silos
+}
+
+// Buscadores
+
+export function random(min, max) {
+  return Math.random() * (max - min) + min
+}
+
+export function getSiloById(arr, id) {
+  return arr.find(silo => silo.id == id)
+}
+
+export function getAeradorById(arr, id) {
+  return arr.find(aerador => aerador.id == id)
 }
 

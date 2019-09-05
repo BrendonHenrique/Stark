@@ -136,7 +136,6 @@ const getters = {
   // get das funções de aeração recebendo id do silo e id do aerador
   get_funcoes_de_aeracao: (state, getters) => (id_silo, id_aerador) => {
     let silo = getSiloById(state.silos, id_silo)
-    console.log(silo)
     let aerador = getAeradorById(silo.aeradores, id_aerador)
     return aerador.funcoes
   },

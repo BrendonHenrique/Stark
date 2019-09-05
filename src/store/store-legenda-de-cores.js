@@ -1,5 +1,3 @@
-import { stat } from "fs";
-
 const state = { 
     legenda_de_cores: [{
         label: "Curto",
@@ -34,7 +32,7 @@ const state = {
         valor: "#ff1212"
       }],
     configuracoes_de_cores: {
-      temperatura_min: 10,
+      temperatura_baixa: 0,
       temperatura_alta: 40
     }
 }
@@ -45,7 +43,15 @@ const mutations =  {
   },
   update_configuracoes_de_cores(state, payload){
     Object.assign(state.configuracoes_de_cores, payload)
-  }
+  },
+  update_temperatura_alta(state, payload){
+    state.configuracoes_de_cores.temperatura_alta = payload
+    console.log(state.configuracoes_de_cores.temperatura_alta )
+  },
+  update_temperatura_baixa(state, payload){
+    state.configuracoes_de_cores.temperatura_baixa = payload
+  },
+
 } 
 
 const actions = { 
@@ -54,7 +60,14 @@ const actions = {
   },
   update_configuracoes_de_cores({commit}, payload){
     commit('update_configuracoes_de_cores', payload)
-  }
+  },
+  update_temperatura_alta({commit}, payload){
+    commit('update_temperatura_alta', payload)
+  },
+  update_temperatura_baixa({commit}, payload){
+    commit('update_temperatura_baixa', payload)
+  },
+
 }
 
 const getters = { 
@@ -78,7 +91,12 @@ const getters = {
 
   configuracoes_de_cores: (state) => {
     return state.configuracoes_de_cores
-  }
+  },
+
+  temperatura_baixa: (state, getters) => state.configuracoes_de_cores.temperatura_baixa, 
+
+  temperatura_alta: (state, getters) =>  state.configuracoes_de_cores.temperatura_alta, 
+  
 }
 
 export default {
