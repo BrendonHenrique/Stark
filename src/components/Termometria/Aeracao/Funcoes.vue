@@ -253,7 +253,6 @@ export default {
         // Pega a função ativa do store e atualiza o componente
         getFuncaoAtiva(index_silo){
 
-            
             let funcoes = SiloController.getFuncoesDeAeracao(index_silo, this.index_aerador)
 
             this.funcaoManualLigada = funcoes[0].ligada

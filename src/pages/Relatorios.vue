@@ -3,7 +3,7 @@
     <q-page-container>
       <q-page>
         <div class='container'>
-          <div class='box'>
+          <div class='box' :style="heatmapBoxStyle">
             
           </div>
         </div>
@@ -17,17 +17,33 @@ import h337 from 'heatmap.js'
 import {buildPendulos} from '../utils/SiloUtils'
 
 export default {
+  data(){
+    return{
+      heatmapBoxStyle:{
+        height: '1000px',
+        width: '1000px'
+      }
+    }
+  },
   mounted(){
-    
+  
     let heatmapInstance = h337.create({
       container: document.querySelector('.box'),
-      backgroundColor: 'black',
-      opacity: '.5',
-      radius: 60
+      backgroundColor: '#0000ff',
+      opacity: '1',
+      radius: 80
     })
 
-    var pendulos = buildPendulos(15,19)
+    var qtdPendulo = 13,
+    qtdSensor = 13
+
+    this.heatmapBoxStyle.height = qtdSensor >= 12 ? `${60 * qtdSensor }px` : '700px'
+    this.heatmapBoxStyle.width  = qtdPendulo >= 12 ? `${60 * qtdPendulo }px` : '700px'   
+
+    var pendulos = buildPendulos(qtdPendulo,qtdSensor)
     var points = []
+
+    console.log(this.heatmapBoxStyle.height, this.heatmapBoxStyle.width )
 
     for (let id_pendulo = 0; id_pendulo < pendulos.length; id_pendulo++) {
       
@@ -38,8 +54,8 @@ export default {
         Object.assign(penduloReference.sensores[id_sensor],{
           id_sensor : penduloReference.sensores[id_sensor].id_sensor,
           temperatura : penduloReference.sensores[id_sensor].temperatura,
-          x : (id_pendulo + 1) * 50,
-          y : 800 - ( 40 * (id_sensor + 1))
+          x : (id_pendulo + 1) * 60,
+          y : 1000 - ( 60 * (id_sensor + 1))
         })
 
         let ponto = {
@@ -48,7 +64,6 @@ export default {
           value: penduloReference.sensores[id_sensor].temperatura
         }
         points.push(ponto)
-        console.log(ponto)
       }
     }
     
@@ -73,9 +88,11 @@ export default {
     display flex
     height 100vh
     width 100%
+  
+  canvas 
+    height 100%
+    width 100%
     
-  .box
-    width  800px
-    height 800px
+    
 
 </style>
