@@ -9,7 +9,6 @@
 </template>
 <script>
   export default{
-
     components:{
       'silos': require('components/Silos/Silos.vue').default
     }

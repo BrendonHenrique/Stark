@@ -1,6 +1,5 @@
 <template>
   <q-page class="termometria-container">
-    
     <div class="tab-menu">
       <q-tabs 
         dense inline-label v-model="tab" align="justify" narrow-indicator
@@ -24,12 +23,12 @@
       </q-tab-panel>
       
     </q-tab-panels>
-    
+   
     <paginador
     :silos_length="quantidadeDeSilos" 
     @proximoSilo="proximoSilo" 
     @siloAnterior="siloAnterior" />
-  
+
   </q-page>
 </template>
 
@@ -74,7 +73,7 @@ export default {
     'termometria-silo':require('../components/Termometria/Temperaturas/Termometria').default,
     'produto-armazenado':require('../components/Termometria/ProdutosArmazenados/ProdutosArmazenados').default,
     'aeracao': require('../components/Termometria/Aeracao/Aeracao').default,
-    'paginador': require('../components/Termometria/Paginador/PaginadorDeSilo').default
+    'paginador': require('../components/Termometria/Paginador/PaginadorDeSilo').default,
   }
 }
 </script>

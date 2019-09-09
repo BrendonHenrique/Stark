@@ -1,7 +1,6 @@
 
 import storeSilos from '../../store/store-silos' 
 const {state,getters,mutations, actions} = storeSilos; 
-
 import vuexStore from '../../store/index' 
 const store = vuexStore()
 

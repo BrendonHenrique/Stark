@@ -29,8 +29,6 @@
           <router-view class="rotas-de-conteudo" :class='{opacityContainer: openedDrawerLeft}'/>
           <!--  -->
       
- 
-
           <!-- footer -->
           <layout-footer :navs="navs" />
           <!-- -->

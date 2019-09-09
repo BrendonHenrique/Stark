@@ -1,17 +1,10 @@
 <template>
-  <div class="row no-wrap justify-between">
-
-    <!-- Pêndulo -->
+  <!-- <div class="row no-wrap justify-between">
     <div
       class="pendulo "
       v-for="pendulo in pendulos"
       :key="pendulo.id_pendulo">
-      
-      
-      <!-- Sensores -->
-      <!-- class="column reverse" -->
-      <sequential-entrace :delay="50" 
-      >
+      <sequential-entrace :delay="50">
         <div
           class="column"
           v-for="sensor in pendulo.sensores"
@@ -24,18 +17,19 @@
           </q-chip>
         </div>
       </sequential-entrace>
-        <!--  -->
-    
-      <!-- Número sinalizador do pêndulo -->
       <q-btn round class="text-thin text-h6 text-center text-black 
       q-mt-sm bg-grey-5 indicador-do-pendulo" size="15px">
         p{{pendulo.id_pendulo + 1}}
       </q-btn>
-      <!--  -->
-
     </div>
-    <!--  -->
-  </div>
+  </div> -->
+
+  <div style="min-height: calc(100vh - 129px - 4rem);display:flex;justify-content:center;align-items:center;">
+    <mapa-de-calor :pendulos="this.pendulos" />
+  </div> 
+
+
+
 </template>
 
 <script>
@@ -62,7 +56,8 @@ export default {
     ['cores_do_gradiente','configuracoes_de_cores']),
   }, 
   components:{
-    'sequential-entrace': require('../../Shared/SequentialEntrace').default
+    'sequential-entrace': require('../../Shared/SequentialEntrace').default,
+    'mapa-de-calor': require('../../MapaDeCalor/MapaDeCarlor').default
   },
   methods:{ 
     // Converte temperatura em cores
