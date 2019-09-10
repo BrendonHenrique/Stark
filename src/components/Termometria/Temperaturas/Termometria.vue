@@ -24,22 +24,18 @@
     </div>
   </div> -->
 
-  <div style="min-height: calc(100vh - 129px - 4rem);display:flex;justify-content:center;align-items:center;">
-    <mapa-de-calor :pendulos="this.pendulos" />
-  </div> 
-
-
+  <mapa-de-calor :pendulos="this.pendulos" />
 
 </template>
 
 <script>
-import { mapGetters, mapActions } from 'vuex'
 import TempToColor from '../../../services/TempToColor'
 import Vue from 'vue'
 import SequentialEntrance from 'vue-sequential-entrance'
 import 'vue-sequential-entrance/vue-sequential-entrance.css'
 Vue.use(SequentialEntrance) 
 import SiloController from '../../../Controllers/Silos/Controller'
+import CoresController from '../../../Controllers/LegendaDeCores/Controller'
 
 export default {
   props:['index_silo'], 
@@ -48,13 +44,9 @@ export default {
       pendulos: []
     }
   },
-  mounted(){
+  beforeMount(){
     this.getTemperaturas(this.index_silo); 
   },  
-  computed:{ 
-    ...mapGetters('legenda_de_cores',
-    ['cores_do_gradiente','configuracoes_de_cores']),
-  }, 
   components:{
     'sequential-entrace': require('../../Shared/SequentialEntrace').default,
     'mapa-de-calor': require('../../MapaDeCalor/MapaDeCarlor').default
@@ -62,7 +54,7 @@ export default {
   methods:{ 
     // Converte temperatura em cores
     tempToColor(temp){
-      return TempToColor.parse(this, temp / this.configuracoes_de_cores.temperatura_alta)
+      return TempToColor.parse(this, temp / Corescontroller.getConfiguracoesDeCores())
     },
     getTemperaturas(index){
       this.pendulos = SiloController.getSiloById(this.index_silo).pendulos

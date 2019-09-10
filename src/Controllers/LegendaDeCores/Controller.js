@@ -15,7 +15,7 @@ export default class CoresController{
         return getters.gradiente_de_temperatura(state)
     }
 
-    static coresDoGradiente(){
+    static getCoresDoGradiente(){
         return getters.cores_do_gradiente(state)
     }
 

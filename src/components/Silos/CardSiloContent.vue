@@ -7,7 +7,7 @@
         <q-img  src="assets/icons/silo.png" style="height: 180px;"  />
       </q-avatar>
       <q-chip color="accent" text-color="grey-4" class="silo_id"
-        icon="info" size="10px" :label="`silo nº ${silo.id}`">
+        icon="info" size="10px" :label="`silo nº ${silo.id + 1}`">
       </q-chip>
     </q-card-section>
     <!--  -->
