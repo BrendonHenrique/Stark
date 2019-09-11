@@ -4,6 +4,7 @@
 <script>
 import {buildRandomicPendulos, buildPendulos} from '../../utils/SiloUtils'
 import h337 from 'heatmap.js'
+import { setTimeout } from 'timers';
 export default {
   props:['pendulos'],
   data(){
@@ -16,7 +17,8 @@ export default {
         minHeight: '',
         minWidth:  '', 
       }, 
-      data:[]
+      data:[],
+      heatmapInstance: null
     }
   },
   methods:{
@@ -37,52 +39,69 @@ export default {
     },
     getQuantidadeDePendulos(pendulos){
       return pendulos.length
+    },
+    montarMapa(){
+      this.data = []
+      // let penduloGerado = this.pendulos
+      let penduloGerado = buildRandomicPendulos()
+      let espacoEntrePontos = 100 
+      let posicaoDeInicio = 80
+      this.setHeight(this.getMaiorPenduloLength(penduloGerado) * espacoEntrePontos  + posicaoDeInicio - 20)
+      this.setWidth(this.getQuantidadeDePendulos(penduloGerado) * espacoEntrePontos + posicaoDeInicio - 20 )
+      let x_position = posicaoDeInicio 
+      penduloGerado.map( pendulo => {
+      let y_position = parseInt(this.boxStyle.height)  - posicaoDeInicio  
+        pendulo.sensores.map( sensor => {
+          let ponto = {
+            value: sensor.temperatura,
+            x : x_position,  
+            y : y_position
+          } 
+          y_position -= espacoEntrePontos  
+          this.data.push(ponto)
+        })
+        x_position += espacoEntrePontos  
+      })
+    },
+    instanciarHeatMap(){
+      this.heatmapInstance = h337.create({
+        container: document.querySelector('.box-heatmap'),
+        opacity: '0.5',
+        radius: 80,
+        gradient: {
+          '.1': 'blue',
+          '.9': 'red',
+          '.95': 'white'
+        }
+      })
+    },
+    inserirDados(){
+      var max = 40
+      var min = 10
+      var data = {
+        max,
+        min, 
+        data: this.data,
+      }
+      this.heatmapInstance.setData(data)
     }
   },
   beforeMount(){ 
-    let penduloGerado = buildRandomicPendulos()
-    let espacoEntrePontos = 100 
-    let posicaoDeInicio = 80
-    this.setHeight(this.getMaiorPenduloLength(penduloGerado) * espacoEntrePontos  + posicaoDeInicio - 20)
-    this.setWidth(this.getQuantidadeDePendulos(penduloGerado) * espacoEntrePontos + posicaoDeInicio - 20 )
-    let x_position = posicaoDeInicio 
-    penduloGerado.map( pendulo => {
-    let y_position = parseInt(this.boxStyle.height)  - posicaoDeInicio  
-      pendulo.sensores.map( sensor => {
-        let ponto = {
-          value: sensor.temperatura,
-          x : x_position,  
-          y : y_position
-        } 
-        y_position -= espacoEntrePontos  
-        this.data.push(ponto)
-      })
-      x_position += espacoEntrePontos  
-    })
+    this.montarMapa()
   },
   mounted(){
-    let heatmapInstance = h337.create({
-      container: document.querySelector('.box-heatmap'),
-      opacity: '0.5',
-      radius: 80,
-      gradient: {
-        '.1': 'blue',
-        '.9': 'red',
-        '.95': 'white'
-      }
-    })
-    var max = 40
-    var min = 10
-    var data = {
-      max,
-      min, 
-      data: this.data,
-    }
-    heatmapInstance.setData(data)
+    this.instanciarHeatMap()
+    this.inserirDados()
   },
   watch:{
     pendulos(newValue){
-      console.log(newValue)
+      this.montarMapa()
+      this.inserirDados(this.data)
+      this.heatmapInstance._renderer.ctx.canvas.style.minHeight = parseInt(this.boxStyle.height)  
+      this.heatmapInstance._renderer.ctx.canvas.style.minWidth = parseInt(this.boxStyle.width)
+      this.heatmapInstance._renderer.ctx.canvas.height = parseInt(this.boxStyle.height)
+      this.heatmapInstance._renderer.ctx.canvas.width = parseInt(this.boxStyle.width)
+      this.heatmapInstance.repaint()
     }
   }
 }

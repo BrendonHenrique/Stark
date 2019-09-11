@@ -8,7 +8,7 @@
       </q-tabs>
 
 
-    <q-tab-panels class="bg-grey-10" v-model="tab" style="margin-top: 5rem;margin-bottom:5rem" > 
+    <q-tab-panels class="bg-grey-10" v-model="tab" style="margin-top: 2rem;margin-bottom:5rem" > 
     
       <q-tab-panel class="legenda-de-cores" name="cores" >
           <cores />

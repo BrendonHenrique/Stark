@@ -46,7 +46,6 @@ const mutations =  {
   },
   update_temperatura_alta(state, payload){
     state.configuracoes_de_cores.temperatura_alta = payload
-    console.log(state.configuracoes_de_cores.temperatura_alta )
   },
   update_temperatura_baixa(state, payload){
     state.configuracoes_de_cores.temperatura_baixa = payload

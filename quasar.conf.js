@@ -77,7 +77,9 @@ module.exports = function (ctx) {
         'QTooltip',
         'QToggle',
         'QPagination',
-        'QForm'
+        'QForm',
+        'QFab',
+        'QFabAction'
       ],
 
       directives: [

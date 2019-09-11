@@ -32,7 +32,7 @@ export default {
     padding 15px
     display flex
     justify-content center
-    justify-items center 
+    align-items center 
     min-width 100%
     font-family 'Libre Caslon Text', serif
     -webkit-font-smoothing antialiased
@@ -42,10 +42,11 @@ export default {
   .app--weather
     cursor pointer
     background: url('../assets/bg-estacao.jpg') ;
-    text-shadow 1px 1px #1b1919
+    text-shadow 2px 2px #1b1919
     height 38rem
     width 26rem
-    font-size 20px
+    font-size 25px
+    transform scale(0.8)
 
   .app
     a

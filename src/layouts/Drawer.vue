@@ -2,7 +2,7 @@
   <div>
 
     <q-drawer
-      :width="250"
+      :width="240"
       :breakpoint="767"
       :value="openedDrawer" 
       class="drawer-style"
@@ -49,7 +49,7 @@ export default{
       -webkit-transition-duration 0.7s
       transition-duration 0.7s
       background-color: #353535
-      height 5rem
+      height 4rem
       
       &:hover 
         border-left 2px solid red 

@@ -1,10 +1,9 @@
 <template>
   <q-list class="row">
-
     
     <!-- Silos -->
     <q-item class="justify-center col-xs-12 col-sm-6 col-md-4 col-lg-4" 
-    v-for="(silo,index) in silos" :key="silo.id" style="padding: 20px 16px !important; ">
+    v-for="(silo,index) in silos" :key="silo.id" style="padding: 20px 16px !important; transform: scale(0.8);">
       <q-card style="box-shadow:0 0 8px 1px #eae5e5;" class="card-silo shadow-10" :class="`silo-${index+1}`">
         <!-- colocar botão com evento no header para ir aos relatórios do silo
         utilizando como conteúdo do trigger o id do silo clicado na header

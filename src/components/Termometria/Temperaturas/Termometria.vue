@@ -1,34 +1,35 @@
 <template>
-  <!-- <div class="row no-wrap justify-between">
-    <div
-      class="pendulo "
-      v-for="pendulo in pendulos"
-      :key="pendulo.id_pendulo">
-      <sequential-entrace :delay="50">
-        <div
-          class="column"
-          v-for="sensor in pendulo.sensores"
-          :key="sensor.id_sensor">
-          <q-chip class="q-mt-sm" :style="{'background-color': tempToColor(sensor.temperatura)}">
-            <q-avatar color="grey" text-color="white">
-              {{sensor.id_sensor + 1}}
-            </q-avatar>
-            {{sensor.temperatura}} ºC
-          </q-chip>
-        </div>
-      </sequential-entrace>
-      <q-btn round class="text-thin text-h6 text-center text-black 
-      q-mt-sm bg-grey-5 indicador-do-pendulo" size="15px">
-        p{{pendulo.id_pendulo + 1}}
-      </q-btn>
-    </div>
-  </div> -->
+  <div>
+    <!-- <div class="row no-wrap justify-between ">
+      <div
+        class="pendulo column justify-end "
+        v-for="pendulo in pendulos"
+        :key="pendulo.id_pendulo">
+        <sequential-entrace :delay="50">
+          <div
+            v-for="sensor in pendulo.sensores"
+            :key="sensor.id_sensor + key">
+            <q-chip class="q-mt-sm " :style="{'background-color': tempToColor(sensor.temperatura)}">
+              <q-avatar color="grey" text-color="white">
+                {{sensor.id_sensor + 1}}
+              </q-avatar>
+              {{sensor.temperatura}} ºC
+            </q-chip>
+          </div>
+        </sequential-entrace>
+        <q-btn round class="text-thin text-h6 text-center text-black 
+        q-mt-sm bg-grey-5 indicador-do-pendulo" size="15px">
+          p{{pendulo.id_pendulo + 1}}
+        </q-btn>
+      </div>
+    </div> -->
+    <mapa-de-calor :pendulos="this.pendulos" />
 
-  <mapa-de-calor :pendulos="this.pendulos" />
-
+  </div>
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
 import TempToColor from '../../../services/TempToColor'
 import Vue from 'vue'
 import SequentialEntrance from 'vue-sequential-entrance'
@@ -41,11 +42,17 @@ export default {
   props:['index_silo'], 
   data(){
     return{
-      pendulos: []
+      pendulos: [],
+      key: 1
     }
   },
+  computed:{ 
+    ...mapGetters('legenda_de_cores',['cores_do_gradiente']),
+     
+  }, 
   beforeMount(){
     this.getTemperaturas(this.index_silo); 
+     
   },  
   components:{
     'sequential-entrace': require('../../Shared/SequentialEntrace').default,
@@ -53,16 +60,18 @@ export default {
   },
   methods:{ 
     // Converte temperatura em cores
-    tempToColor(temp){
-      return TempToColor.parse(this, temp / Corescontroller.getConfiguracoesDeCores())
+    tempToColor(temperatura){
+      return TempToColor.parse(this, temperatura / CoresController.getConfiguracoesDeCores().temperatura_alta)
     },
     getTemperaturas(index){
+      this.pendulos = []
       this.pendulos = SiloController.getSiloById(this.index_silo).pendulos
     }
   },
   watch:{
     index_silo(index){
-      this.getTemperaturas(index)
+      this.getTemperaturas(index) 
+      this.key =  index * Math.random()
     } 
   }
 }
@@ -72,7 +81,6 @@ export default {
   
   .indicador-do-pendulo
     position relative
-    left 27px 
 
   .pendulo
     border-width bold  

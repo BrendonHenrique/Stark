@@ -66,6 +66,9 @@ export default {
       scale: 'Celcius'
     }
   },
+  mounted(){
+    // console.log(this.humidity)
+  },
   methods: {
       // Converte a temperatura para Fahrenheit 
       toFahrenheit(value) {

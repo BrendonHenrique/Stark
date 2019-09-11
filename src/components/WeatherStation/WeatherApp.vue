@@ -6,7 +6,7 @@
       <measurements
       :value="this.forecast.temperatureValue"
       :humidity="this.forecast.humidity"
-      :rain_sensor_value="2" />
+      :rain_sensor_value="this.forecast.cloudiness" />
       <!--  -->
 
       <!-- Temperatura, horas e localização -->
@@ -51,7 +51,7 @@ export default {
       minutes: new Date().getMinutes(),
       hours: new Date().getHours()
     }
-  },
+  }, 
   components: {
     'animated-number':  require('../Shared/AnimatedNumber').default,
     'measurements': require('./Measurements').default,
@@ -84,5 +84,6 @@ export default {
     align-items center
     box-shadow 0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22)
     border-radius 10px
+    box-shadow 1px 1px 15px 1px white
 
 </style>

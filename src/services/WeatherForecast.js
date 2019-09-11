@@ -53,7 +53,7 @@ class WeatherForecast {
     async getForecast(coordinates) {
         let appId = 'a3e7bdc246b811691b06aab13ccb0dbb';
         let endpoint = `https://api.openweathermap.org/data/2.5/weather?lat=${coordinates.latitude}&lon=${coordinates.longitude}&appid=${appId}&units=metric`;
-
+        
         let response = await fetch(endpoint);
 
         return await response.json();
