@@ -2,10 +2,10 @@ import {
   stat
 } from "fs";
 
-import {random, getSiloById, getAeradorById, buildSilos } from '../utils/SiloUtils'
+import {random,buildRandomicSilos, getSiloById, getAeradorById, buildSilos } from '../utils/SiloUtils'
 
 const state = {
-  silos: buildSilos(parseInt(random(2,10).toFixed())),
+  silos: buildRandomicSilos(),
 }
 
 const mutations = {

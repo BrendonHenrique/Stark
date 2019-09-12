@@ -59,7 +59,9 @@ export default {
 <style lang="stylus"> 
 
     ::-webkit-scrollbar {
-        width: 2px;
+        width: 10px;
+        background-color: $secondary; 
+        height: 10px;
     }
 
     ::-webkit-scrollbar-track {
@@ -68,7 +70,7 @@ export default {
     }
     
     ::-webkit-scrollbar-thumb {
-        background: $primary; 
+        background-color: $primary; 
         border-radius: 10px;
     }
 

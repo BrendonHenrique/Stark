@@ -23,8 +23,8 @@
         </q-btn>
       </div>
     </div> -->
-    <mapa-de-calor :pendulos="this.pendulos" />
-
+    <!-- <mapa-de-calor :pendulos="this.pendulos" /> -->
+    <div class='box-heatmap' :style="boxStyle" />
   </div>
 </template>
 
@@ -37,28 +37,122 @@ import 'vue-sequential-entrance/vue-sequential-entrance.css'
 Vue.use(SequentialEntrance) 
 import SiloController from '../../../Controllers/Silos/Controller'
 import CoresController from '../../../Controllers/LegendaDeCores/Controller'
+import {buildRandomicPendulos, buildPendulos} from '../../../utils/SiloUtils'
+import h337 from 'heatmap.js'
+import { setInterval } from 'timers';
+
 
 export default {
   props:['index_silo'], 
   data(){
     return{
       pendulos: [],
-      key: 1
+      key: 1,
+      heightValue : 0,
+      widthValue : 0,
+      boxStyle:{
+        height: '',
+        width:  '', 
+        minHeight: '',
+        minWidth:  '', 
+      }, 
+      data:[],
+      heatmapInstance: null
+
     }
   },
   computed:{ 
-    ...mapGetters('legenda_de_cores',['cores_do_gradiente']),
-     
+    ...mapGetters('legenda_de_cores',['cores_do_gradiente']),     
   }, 
   beforeMount(){
     this.getTemperaturas(this.index_silo); 
-     
+    this.montarMapa()     
   },  
+  mounted(){
+    this.instanciarHeatMap()
+    this.inserirDados()
+  },
   components:{
     'sequential-entrace': require('../../Shared/SequentialEntrace').default,
     'mapa-de-calor': require('../../MapaDeCalor/MapaDeCarlor').default
   },
   methods:{ 
+    // Mapa de calor 
+    setHeight(value){
+      this.boxStyle.height = `${value}px`
+      this.boxStyle.minHeight = `${value}px`
+        if(this.heatmapInstance){
+          this.heatmapInstance._renderer.ctx.canvas.height = value 
+          this.heatmapInstance._renderer.ctx.canvas.style.minHeight = value  
+        }
+      },
+    setWidth(value){
+      this.boxStyle.width = `${value}px`
+      this.boxStyle.minWidth = `${value}px`
+      if(this.heatmapInstance){
+        this.heatmapInstance._renderer.ctx.canvas.width = value 
+        this.heatmapInstance._renderer.ctx.canvas.style.minWidth = value 
+      }
+    },
+    getMaiorPenduloLength(pendulos){
+      let pendulosLength = [] 
+        pendulos.map( pendulo => {
+          pendulosLength.push(pendulo.sensores.length)
+      })
+      return parseInt(Math.max(...pendulosLength))
+    },
+    getQuantidadeDePendulos(pendulos){
+      return pendulos.length
+    },
+    montarMapa(){
+      this.data = []
+      let penduloGerado = this.pendulos
+      let espacoEntrePontos = 100 
+      let posicaoDeInicio = 80
+      this.setHeight(this.getMaiorPenduloLength(penduloGerado) * espacoEntrePontos  + posicaoDeInicio - 20)
+      this.setWidth(this.getQuantidadeDePendulos(penduloGerado) * espacoEntrePontos + posicaoDeInicio - 20 )
+      let x_position = posicaoDeInicio 
+      penduloGerado.map( pendulo => {
+      let y_position = parseInt(this.boxStyle.height)  - posicaoDeInicio  
+        pendulo.sensores.map( sensor => {
+          let ponto = {
+            value: sensor.temperatura,
+            x : x_position,  
+            y : y_position
+          } 
+          y_position -= espacoEntrePontos  
+          this.data.push(ponto)
+        })
+        x_position += espacoEntrePontos  
+      })
+    },
+    instanciarHeatMap(){
+      let container = document.querySelector(".box-heatmap");
+      this.heatmapInstance = h337.create({
+        container: container,
+        opacity: '0.5',
+        radius: 80,
+        gradient: {
+          '.1': 'blue',
+          '.9': 'red',
+          '.95': 'white'
+        }
+      })
+
+    },
+    inserirDados(){
+      var max = 40
+      var min = 10
+      var data = {
+        max,
+        min, 
+        data: this.data,
+      }
+      this.heatmapInstance.repaint()
+      this.heatmapInstance.setData(data)
+      this.heatmapInstance.repaint()
+    },
+    // Desenho dos pêndulos e sensores
     // Converte temperatura em cores
     tempToColor(temperatura){
       return TempToColor.parse(this, temperatura / CoresController.getConfiguracoesDeCores().temperatura_alta)
@@ -72,13 +166,21 @@ export default {
     index_silo(index){
       this.getTemperaturas(index) 
       this.key =  index * Math.random()
+    },
+    pendulos(newPendulo){
+      // this.instanciarHeatMap()
+      this.montarMapa()
+      setInterval( () => {
+        this.inserirDados(this.data)
+        this.heatmapInstance.repaint()
+      },1000)
     } 
   }
 }
 </script>
 
-<style lang="stylus" scoped>
-  
+<style lang="stylus" >
+
   .indicador-do-pendulo
     position relative
 

@@ -82,7 +82,7 @@ export default {
   
 
   .produto-armazenado-panel
-    min-height calc(90.5vh - 129px)
+    min-height calc(91.5vh - 129px)
     display flex
     align-items center
     justify-content center
@@ -91,7 +91,7 @@ export default {
     min-height calc(90.5vh - 129px)
   
   .aeracao-panel
-    min-height calc(90.5vh - 129px)
+    min-height calc(91.5vh - 129px)
   
   .menu-bar-termometria
     background-color $primary
