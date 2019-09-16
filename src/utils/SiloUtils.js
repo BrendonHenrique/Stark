@@ -27,11 +27,11 @@ export function buildRandomicPendulos(){
   let pendulo = [],
   sensores = [],
   index_sensor = 0,
-  pendulos_size = parseInt(random(1, 25).toFixed(1))
+  pendulos_size = parseInt(random(10, 25).toFixed(1))
   
   for (let i = 0; i < pendulos_size; i++) {
     sensores = []
-    for (let j = 0; j < parseInt(random(1, 25).toFixed(1)); j++) {
+    for (let j = 0; j < parseInt(random(10, 25).toFixed(1)); j++) {
       sensores.push({
         id_sensor: index_sensor,
         temperatura: parseFloat(random(10, 40).toFixed(1))
