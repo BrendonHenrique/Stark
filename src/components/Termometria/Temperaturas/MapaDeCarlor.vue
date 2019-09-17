@@ -1,7 +1,5 @@
 <template>
-  <div style="height: 130vh;display:flex;align-items:center;justify-content:center;">
-    <div class='box-heatmap' :style="boxStyle" style="transform:scale(0.6);"/>
-  </div>
+    <div class='box-heatmap' :style="boxStyle"/>
 </template>
 <script>
 import h337 from 'heatmap.js'
@@ -112,14 +110,18 @@ export default {
   },
   watch:{
     boxStyleHeight(newvalue, oldvalue){
-      setTimeout( () => {
-        this.reRender()
-      },0)
+      for (let index = 0; index < 2; index++) {
+        setTimeout( () => {
+          this.reRender()
+        },10)
+      }
     },
     boxStyleWidth(newvalue, oldvalue){
-      setTimeout( () => {
-        this.reRender()
-      },0)
+      for (let index = 0; index < 2; index++) {
+        setTimeout( () => {
+          this.reRender()
+        },10)
+      }
     },
     pendulos(){
       this.removerHeatMap()
@@ -135,4 +137,7 @@ export default {
 </script>
 
 <style lang="stylus">
+  canvas 
+    margin-left 7px
+    
 </style>

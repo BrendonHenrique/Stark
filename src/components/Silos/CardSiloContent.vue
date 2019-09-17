@@ -17,7 +17,7 @@
       <!-- Quantidade de sacos -->
       <section-layout class="card-infos">
         <template v-slot:avatar>
-          <q-btn dense color="secondary" size="20px" round>
+          <q-btn glossy dense color="secondary" size="20px" round>
             <q-img  src="assets/icons/bag.png" style="width: 30px;margin-left:2px"  />
           </q-btn>
         </template>
@@ -33,7 +33,7 @@
       <!-- Temperaturas mínima , média e máxima -->
       <section-layout class="card-infos">
         <template v-slot:avatar>
-          <q-btn dense color="secondary"  size="20px" round >
+          <q-btn glossy  dense color="secondary"  size="20px" round >
             <q-img  src="assets/icons/warm.svg" style="width: 40px;margin-left:4.7px"  />
           </q-btn>
         </template> 
@@ -71,7 +71,7 @@
       <!-- Co2 -->
       <section-layout class="card-infos">
         <template v-slot:avatar>
-          <q-btn dense color="secondary" size="20px" round icon="" >
+          <q-btn glossy dense color="secondary" size="20px" round icon="" >
             <q-img  src="assets/icons/co2.svg" style="width: 40px;"  />
           </q-btn>
         </template>

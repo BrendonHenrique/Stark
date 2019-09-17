@@ -1,9 +1,11 @@
 <template>
   <div>
-    <pendulos  :pendulos="this.pendulos" v-show="showPendulos"/>
-    <mapa-de-calor :pendulos="this.pendulos" v-show="showMapa"/>
+    
+    <mapa-de-calor :pendulos="this.pendulos" v-show="showMapa" style="right:1rem;"/>
 
-    <div class="absolute-bottom-right q-mb-sm q-mr-sm">
+    <pendulos  :pendulos="this.pendulos" v-show="showPendulos" /> 
+    
+    <div style="z-index:4;margin-bottom:9rem;" class="fixed-bottom-right q-mb-sm q-mr-sm">
       <q-fab  color="grey-5" persistent text-color="black" icon="keyboard_arrow_left" direction="left">
         <q-fab-action color="grey-5" text-color="black" icon="whatshot" @click="mostrarMapaDeCalor">
           <q-tooltip anchor="top middle" self="bottom middle" :offset="[10, 10]" :content-style="{fontSize:'15px'}">
@@ -16,7 +18,7 @@
           </q-tooltip>
         </q-fab-action>
       </q-fab>
-    </div>
+    </div> 
 
   </div>
 </template>
@@ -30,12 +32,15 @@ export default {
     return{
       pendulos: [],
       key: 1, 
-      showPendulos:true,
-      showMapa:false
+      showPendulos:false,
+      showMapa:true
     }
   },
   beforeMount(){
-    this.getTemperaturas(this.index_silo) 
+    this.getTemperaturas(this.index_silo)
+    console.log(this.$route.params.id) 
+  },  
+  mounted(){
   },  
   components:{
     'mapa-de-calor': require('./MapaDeCarlor').default,

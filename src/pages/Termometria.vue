@@ -1,5 +1,5 @@
 <template>
-  <q-page class="termometria-container">
+  <q-page class="termometria-container" >
     <div class="tab-menu">
       <q-tabs 
         dense inline-label v-model="tab" align="justify" narrow-indicator
@@ -11,7 +11,7 @@
     <q-tab-panels class="bg-grey-10" v-model="tab"> 
       
       <q-tab-panel class="termometria-panel" name="termometria" >
-        <termometria-silo :index_silo="index_silo" />
+        <termometria-silo :index_silo="index_silo"/>
       </q-tab-panel>
 
       <q-tab-panel class="produto-armazenado-panel" name="prod_armazenado" >
@@ -25,6 +25,7 @@
     </q-tab-panels>
    
     <paginador
+    style="position:fixed;bottom:4rem;"
     :silos_length="quantidadeDeSilos" 
     @proximoSilo="proximoSilo" 
     @siloAnterior="siloAnterior" />
@@ -80,18 +81,28 @@ export default {
 
 <style lang="stylus">
   
+  .q-panel 
+    margin-bottom 4rem
 
   .produto-armazenado-panel
-    min-height calc(91.5vh - 129px)
+    min-height calc(80.5vh - 129px)
     display flex
     align-items center
     justify-content center
 
+
   .termometria-panel 
-    min-height calc(90.5vh - 129px)
+    min-height calc(90.5vh)
+    margin-bottom 5rem
+    display flex
+    align-items center
   
   .aeracao-panel
     min-height calc(91.5vh - 129px)
+    display  flex
+    align-items center 
+    justify-content center
+    width 100% 
   
   .menu-bar-termometria
     background-color $primary

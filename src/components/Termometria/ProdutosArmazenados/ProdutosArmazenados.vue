@@ -150,7 +150,6 @@ export default {
 
     .container-produto-armazenado
         width 100%
-        margin-bottom 4rem
 
         .q-field__native 
             font-size 19px

@@ -44,7 +44,7 @@
     color black
 
   .mobile-tabs
-    height 5rem
+    height 4rem
     
     .q-tabs__content  
       height 100%

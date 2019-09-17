@@ -11,7 +11,7 @@
                 </h6>
             </div>
             <q-space />
-            <q-btn  class=" navigate" flat  @click="proximo()" 
+            <q-btn  class="navigate" flat  @click="proximo()" 
                 v-bind=podeNavegarParaFrente icon="navigate_next"/>
         </q-card>
     </div>
@@ -57,28 +57,20 @@ export default {
 
 <style lang="stylus"> 
 
-
     .paginador-de-silos-container
         height 4rem
         width 100%
-
+        z-index 5
+        
         .q-card
             position relative
             height 4.2rem
             width  100%  
-
-    @media (max-width: 767px)
-        .paginador-de-silos-container 
-            .q-btn
-                font-size 1rem 
-                height 100%
-                width 20%
-
-    @media screen and (min-width:768px)
-        .paginador-de-silos-container 
+    
+    .paginador-de-silos-container 
         .q-btn
             font-size 1rem
-     
+
     .indice-paginador
         font-family 'Orbitron'
     
