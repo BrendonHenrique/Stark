@@ -1,8 +1,13 @@
 <template>
+    <!--  container para inserir o nó do canvas com o mapa de calor -->
     <div class='box-heatmap' :style="boxStyle"/>
+    <!--  -->
 </template>
 <script>
+// Import para criação do heatmap
 import h337 from 'heatmap.js'
+import CoresController from '../../../Controllers/LegendaDeCores/Controller'
+
 export default {
   props:['pendulos'],
   data(){
@@ -15,6 +20,7 @@ export default {
       heatmapInstance: null
     }
   },
+  // getters da propriedade do elemento box-heatmap
   computed:{
     boxStyleHeight(){
       return this.boxStyle.height
@@ -24,12 +30,14 @@ export default {
     }
   },
   methods:{
+    // setters para alterar as propriedades do elemento box-heatmap
     setHeight(value){
       this.boxStyle.height = `${value}px`
     },
     setWidth(value){
       this.boxStyle.width = `${value}px`
     },
+    // set da altura do box-heatmap com base no maior pêndulo 
     getMaiorPenduloLength(pendulos){
       let pendulosLength = [] 
         pendulos.map( pendulo => {
@@ -37,15 +45,20 @@ export default {
       })
       return parseInt(Math.max(...pendulosLength))
     },
+    // set do width do box-heatmap
     getQuantidadeDePendulos(pendulos){
       return pendulos.length
     },
+    // Util para recriar o nodo
     removerHeatMap(){
       const $ = document.querySelector.bind(document);
-      var d = $(".box-heatmap");
-      var d_interno = $(".heatmap-canvas");
-      var noRemovido = d.removeChild(d_interno);
+      let boxHeatmap = $(".box-heatmap");
+      if(boxHeatmap){
+        let canvas = $(".heatmap-canvas");
+        let noRemovido = boxHeatmap.removeChild(canvas);
+      }
     },
+    // Instancia o heatmap no nodo box-heatmap   
     instanciarHeatMap(){
       const $ = document.querySelector.bind(document);
       this.heatmapInstance = h337.create({
@@ -59,6 +72,8 @@ export default {
         }
       })
     },
+    // Cria o mapa de calor baseando-se nos pêndulos vindos como props ( this.pendulos )
+    // Utiliza como inicio do eixo y o height do box-heatmap e inicio do x é 0
     montarMapa(){
       this.data = []
       let penduloGerado = this.pendulos
@@ -81,9 +96,12 @@ export default {
         x_position  = x_position   + espacoEntrePontos 
       })
     },
+    // Valores abaixo serão utilizados como parametro para a cor na escala do mapa de calor
+    // Ambos os valores são configurados na página de configurações nos inputs de temperatura baixa e alta respectivamente
+    // Aqui também insiro o mapa montado na instância do heatmap
     inserirDados(){
-      var max = 40
-      var min = 10
+      var max = CoresController.getTemperaturaAlta()
+      var min = CoresController.getTemperaturaBaixa()
       var data = {
         max,
         min, 
@@ -91,6 +109,7 @@ export default {
       }
       this.heatmapInstance.setData(data)
     },
+    // Re-cria o mapa de calor , é utilizada quando as dimensões do container é alterada
     reRender(){
       this.removerHeatMap()
       this.instanciarHeatMap()
@@ -101,13 +120,18 @@ export default {
       this.inserirDados(this.data)
     },
   },
+  // Antes de montar o componente o mapa de calor é montado, isso é a estrutura à ser usada é montada , mas ainda não instanciado
   beforeMount(){ 
     this.montarMapa()   
   },
+  // Instancia o mapa de calor e insere os dados
   mounted(){
     this.instanciarHeatMap()
     this.inserirDados()
+    console.log(CoresController.getTemperaturaBaixa())
+    console.log(CoresController.getTemperaturaAlta())
   },
+  // Observadores para recriar o mapa 
   watch:{
     boxStyleHeight(newvalue, oldvalue){
       for (let index = 0; index < 2; index++) {
@@ -139,5 +163,4 @@ export default {
 <style lang="stylus">
   canvas 
     margin-left 7px
-    
 </style>

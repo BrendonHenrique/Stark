@@ -1,21 +1,26 @@
 <template>
   <q-page>
     <div style="height: 5rem;" class="tab-menu">
+      
+      <!-- Tabs para navegação na página de configurações -->
       <q-tabs 
         dense inline-label v-model="tab" align="justify" narrow-indicator
         class="text-grey-4 menu-bar-configuraces" active-color="secundary" indicator-color="secundary">
+        <!-- possibilidades  de navegação -->
         <q-tab v-for="item in tabs " :key="item.name" :name="item.name" :label="item.label" />
+        <!--  -->
       </q-tabs>
-
+      <!--  -->
 
     <q-tab-panels class="bg-grey-10" v-model="tab" style="margin-top: 2rem;margin-bottom:5rem" > 
-    
+
+      <!-- Acesso as configurações de cores  -->
       <q-tab-panel class="legenda-de-cores" name="cores" >
           <cores />
       </q-tab-panel>
+      <!--  -->
       
     </q-tab-panels>
-
 
     </div>
   </q-page>

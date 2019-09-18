@@ -32,7 +32,7 @@ class NotifyUser {
   }
 
   static info = (message) => {
-    interface_Notify('info', 'info', message, 'bottom-right', 6000)
+    interface_Notify('info', 'info', message, 'bottom-right')
   }
 
 }

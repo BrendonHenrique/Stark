@@ -1,5 +1,5 @@
 <template>
-    <div class="row justify-center container-produto-armazenado" >
+    <div class="row justify-center container-produto-armazenado q-mb-xl" >
         <q-card style="box-shadow:0 0 8px 1px #eae5e5; font-family: 'Libre Caslon Text', serif;" 
         class="bg-grey-2 shadow-10 col-sm-10 col-xs-12 col-md-5 col-lg-4 card-produto-armazenado">
             

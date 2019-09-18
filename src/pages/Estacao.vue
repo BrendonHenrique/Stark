@@ -1,7 +1,9 @@
 <template>
+  <!-- Estação meteorológica -->
   <q-page id="wheater-content" style="" class="wheater-layout app">
     <wheater-app class="app--weather" />
   </q-page>
+  <!--  -->
 </template>
 
 <script>

@@ -5,6 +5,18 @@
     <q-card class="bg-grey-2 shadow-10 col-sm-10 col-xs-12 col-md-10 col-lg-5" 
     style="border-radius:10px;box-shadow:0 0 8px 1px #eae5e5;"
     >
+
+      <q-banner dense class="bg-grey-5 column align-center q-m">
+        <p class="q-mb-sm text-subtitle1 text-grey-9">
+          Configuração das cores dos sensores
+        </p>
+        <template v-slot:avatar>
+          <q-btn round glossy color="grey" class="q-mb-sm">
+            <q-icon name="color_lens" color="black" size="35px"/>
+          </q-btn>
+        </template>
+      </q-banner>
+
       <!-- Inputs conectado com q-color para escolher as cores -->
       <div class="row q-px-xs" v-for="item in cores" :key="item.label">
         <q-input  
@@ -108,6 +120,11 @@ export default {
 </script>
 
 <style lang="stylus" >
+
+  .q-tab-panels
+    margin-top 2rem !important
+    margin-bottom 4rem !important
+  
   .legenda-de-cores
     min-width 100%
     animation entry 1s

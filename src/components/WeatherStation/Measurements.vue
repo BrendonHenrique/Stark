@@ -25,9 +25,11 @@
     
     <!-- Sinal da unidade de medida da temperatura -->
     <span class="temperature__scale" >
-      <a href="#" @click.prevent="toggleTemperature">
-        &deg;{{ scaleSymbol }}
-      </a>
+      <q-btn round glossy class="shadow-7" size="20px" flat @click.prevent="toggleTemperature">
+        <span style="font-size:30px;margin-right:4px;">
+          &deg;{{ scaleSymbol }}
+        </span>
+      </q-btn>
     </span>
     <!--  -->
 
@@ -97,11 +99,6 @@ export default {
 
 <style scoped lang="stylus">
  
-  a
-    text-decoration none
-    color inherit
-    transition color 
-
   .measurements
     height 70px
     position relative
@@ -134,7 +131,7 @@ export default {
     margin 10px 10px
     right 20px
     float right
-    font-size 2em
+    font-size 1em
     font-weight bold
     color rgba(255, 255, 255, 0.75)
 

@@ -13,7 +13,7 @@
     <div id="desktop-footer">
       <q-toolbar>
         <q-toolbar-title class="row">
-            <div style="justify-content:center;justify-item:center;display:flex;">
+            <div style="justify-content:center;justify-item:center;margin-top:1px;display:flex;">
               <img src="statics/spinedLogo.1.svg" class="rotating">
               <img src="statics/garten3.svg" style="width:300px;margin-left:5px;">
             </div>
@@ -41,13 +41,16 @@
 <style lang="stylus">
   
   .q-router-link--exact-active
-    color black
+    color #0f0e0e
 
   .mobile-tabs
-    height 4rem
-    
-    .q-tabs__content  
-      height 100%
+    height 5rem
+  
+  #desktop-footer 
+    height 5rem
+    display flex 
+    align-items center
+
     
     .q-tab__label 
       font-size 15px

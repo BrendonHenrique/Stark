@@ -1,6 +1,6 @@
 <template>
   <q-layout view="hHh lpR fFf" class="bg-grey-10" >
-    
+
     <!-- conteúdo das páginas -->
       <q-page-container class="bg-grey-10">
           <layout-header

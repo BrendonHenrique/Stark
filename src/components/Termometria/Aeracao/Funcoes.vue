@@ -454,6 +454,7 @@ export default {
         display none
     
     .funcoes-header
+        font-family 'Libre Caslon Text', serif
         border-top-left-radius 20px
     
     .funcoes-image 

@@ -1,6 +1,6 @@
 <template>
     <!-- Card de controle de aeração -->
-    <div class='row justify-center items-center' style="width:100%;">
+    <div class='row justify-center items-center' style="width:100%;margin-bottom:5rem;">
         
         <q-card class="card-de-aeracao bg-grey-3 col-sm-12 col-xs-12 col-md-12 col-lg-8">
             

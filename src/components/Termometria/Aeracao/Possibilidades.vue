@@ -4,7 +4,7 @@
     <!-- Header do card -->
     <q-banner dense class="bg-primary text-center" 
     inline-actions style="border-top-left-radius: 20px;">
-      <span class="possibilidades-header text-h6 text-grey-3 ">
+      <span class="possibilidades-header text-grey-3 ">
         Possibilidades
       </span>
       <template v-slot:action>
@@ -66,9 +66,14 @@ export default {
 
 <style scoped lang="stylus">
 
+  .possibilidades-header
+    font-family 'Libre Caslon Text', serif
+
   @media screen and (min-width:350px)
     .possibilidades-header
-      font-size 1rem
+      font-size 1.20rem
+      font-family 'Libre Caslon Text', serif
+    
     
     .possibiilidades-label
       font-size 17px !important

@@ -25,7 +25,6 @@ export default {
 
   @media (max-width: 767px)
     .paginador-de-aerador
-      
       .q-card
         position relative
         height 4.2rem

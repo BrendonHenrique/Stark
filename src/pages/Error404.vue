@@ -1,4 +1,5 @@
 <template>
+  <!-- Page é renderizada quando o dominio é acessado com rota diferente das listadas em routes -->
   <div class="fixed-center text-center">
     <p>
       <img src="~assets/sad.svg" style="width:30vw;max-width:150px;">
