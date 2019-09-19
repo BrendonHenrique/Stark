@@ -5,7 +5,7 @@
             class="pendulo column justify-end "
             v-for="pendulo in pendulos"
             :key="pendulo.id_pendulo">
-            <sequential-entrace :delay="50">
+            <sequential-entrace :delay="50" >
                 <!-- Sensores -->
                 <div
                     v-for="sensor in pendulo.sensores"
@@ -81,10 +81,8 @@ export default {
         right 4px
 
     .pendulo
-        border-width bold  
-        border-style dotted
-        border-color #C3C3C3
         border-radius 80px
+        border 2px dotted #e4d2d2
         align-items center
         width 130px
         padding 10px 10px 20px 14px

@@ -1,6 +1,8 @@
 <template>
     <!--  container para inserir o nó do canvas com o mapa de calor -->
-    <div class='box-heatmap' :style="boxStyle"/>
+      <div class="bg-silo">
+        <div class='box-heatmap' :style="boxStyle"/>
+      </div>
     <!--  -->
 </template>
 <script>
@@ -59,16 +61,24 @@ export default {
       }
     },
     // Instancia o heatmap no nodo box-heatmap   
+    // blue #5757D7
+    // green 7AD656
+    // YELLOW D4DC5C
+    // RED E17261
     instanciarHeatMap(){
       const $ = document.querySelector.bind(document);
       this.heatmapInstance = h337.create({
         container: $(".box-heatmap"),
-        opacity: '0.5',
-        radius: 80,
+        radius: 125,
         gradient: {
-          '.1': 'blue',
-          '.9': 'red',
-          '.95': 'white'
+          // enter n keys between 0 and 1 here
+          // for gradient color customization
+          '.1': '#5757D7',
+          '.5': '#7AD656',
+          '.7': '#D4DC5C',
+          '.8': '#db9b5c',
+          '.98': '#E17261'
+
         }
       })
     },
@@ -77,23 +87,23 @@ export default {
     montarMapa(){
       this.data = []
       let penduloGerado = this.pendulos
-      let espacoEntrePontos = 100 
+      let espacoEntrePontos = 110 
       let posicaoDeInicio = 80
-      let x_position = posicaoDeInicio
-      this.setHeight(this.getMaiorPenduloLength(penduloGerado) * espacoEntrePontos  + posicaoDeInicio - 20)
-      this.setWidth(this.getQuantidadeDePendulos(penduloGerado) * espacoEntrePontos + posicaoDeInicio - 20)
+      let x_position = posicaoDeInicio + 50
+      this.setHeight(this.getMaiorPenduloLength(penduloGerado) * espacoEntrePontos  + posicaoDeInicio)
+      this.setWidth(this.getQuantidadeDePendulos(penduloGerado) * espacoEntrePontos + posicaoDeInicio)
       penduloGerado.map( (pendulo,index) => {
-        let y_position = parseInt(this.boxStyle.height)  - posicaoDeInicio  
+        let y_position = parseInt(this.boxStyle.height)  - posicaoDeInicio  - 50
         pendulo.sensores.map( sensor => {
           let ponto = {
             value: sensor.temperatura,
             x : x_position,  
             y : y_position
           } 
-          y_position = y_position - espacoEntrePontos   
+          y_position = y_position - espacoEntrePontos  + 15 
           this.data.push(ponto)
         })
-        x_position  = x_position   + espacoEntrePontos 
+        x_position  = x_position   + espacoEntrePontos - 20
       })
     },
     // Valores abaixo serão utilizados como parametro para a cor na escala do mapa de calor
@@ -128,8 +138,6 @@ export default {
   mounted(){
     this.instanciarHeatMap()
     this.inserirDados()
-    console.log(CoresController.getTemperaturaBaixa())
-    console.log(CoresController.getTemperaturaAlta())
   },
   // Observadores para recriar o mapa 
   watch:{
@@ -160,7 +168,16 @@ export default {
 }
 </script>
 
-<style lang="stylus">
-  canvas 
-    margin-left 7px
+<style lang="stylus" scoped>
+  .bg-silo
+    background-image url(../../../assets/bg-silo.png)  
+    -webkit-background-size cover
+    -moz-background-size cover
+    -o-background-size cover
+    background-size cover
+    padding-top 20rem
+    min-width 65rem
+  
+
+
 </style>

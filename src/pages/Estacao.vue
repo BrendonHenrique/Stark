@@ -1,6 +1,6 @@
 <template>
   <!-- Estação meteorológica -->
-  <q-page id="wheater-content" style="" class="wheater-layout app">
+  <q-page id="wheater-content" class="row wheater-layout app">
     <wheater-app class="app--weather" />
   </q-page>
   <!--  -->
@@ -45,10 +45,7 @@ export default {
     cursor pointer
     background: url('../assets/bg-estacao.jpg') ;
     text-shadow 2px 2px #1b1919
-    height 38rem
-    width 26rem
-    font-size 25px
-    transform scale(0.8)
+    font-size 30px
 
   .app
     a

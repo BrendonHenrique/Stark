@@ -132,7 +132,7 @@ export default {
 <style lang="stylus">
   
   .q-panel 
-    margin-bottom 0rem !important
+    margin-bottom 4.5rem !important
 
   .produto-armazenado-panel
     min-height calc(80.5vh - 129px)
@@ -159,8 +159,7 @@ export default {
     font-family 'Libre Caslon Text', serif
 
   .termometria-panel 
-    min-height calc(90.5vh)
-    margin-bottom 5rem
+    min-height calc(74.5vh)
     display flex
     align-items center
   

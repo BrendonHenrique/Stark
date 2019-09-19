@@ -2,7 +2,7 @@
   <div>
 
     <q-drawer
-      :width="240"
+      :width="260"
       :breakpoint="767"
       :value="openedDrawer" 
       class="drawer-style"
@@ -21,14 +21,6 @@ export default{
 </script>
 <style lang="stylus">
   
-  .leftDrawerShadow 
-    transition all 0.3s linear 
-    box-shadow: -30px 0px 45px 7px #dff
-
-  .rightDrawerShadow 
-    transition all 0.3s linear 
-    box-shadow: 30px 0px 45px 7px #dff
-
   .drawer-style
     .q-drawer 
       height 100%
@@ -48,8 +40,6 @@ export default{
       transition-property color
       -webkit-transition-duration 0.7s
       transition-duration 0.7s
-      background-color: #353535
-      height 4rem
       
       &:hover 
         border-left 2px solid red 

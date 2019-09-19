@@ -1,7 +1,6 @@
 <template>
   <q-list> 
       <q-item 
-      style="border-bottom: 0.2px solid #494949;"
       v-for="nav in navs" clickable exact class="text-grey-4 text-h7 text-thin"
       route :to="nav.to" :key="nav.label">
         <q-item-section avatar>

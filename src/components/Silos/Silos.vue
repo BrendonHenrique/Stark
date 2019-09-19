@@ -3,11 +3,11 @@
     
     <!-- Silos -->
     <q-item class="justify-center col-xs-12 col-sm-6 col-md-4 col-lg-4" 
-    v-for="(silo,index) in silos" :key="silo.id" style="padding: 20px 16px !important; transform: scale(0.9);">
-      <q-card style="box-shadow:0 0 8px 1px #eae5e5;" class="card-silo shadow-10" :class="`silo-${index+1}`">
+    v-for="(silo,index) in silos" :key="silo.id" style="transform: scale(0.95);">
+      <q-card class="card-silo" :class="`silo-${index+1}`">
 
            <!-- Card header  -->
-          <q-card-actions align="around" class="bg-secondary text-white">
+          <q-card-actions align="around" class="text-white" style="box-shadow" >
             <div>
               <q-tooltip :content-style="{fontSize: '20px', borderRadius: '20px'}">
                 Visualizar sensores
@@ -96,7 +96,25 @@
     transition all .4s ease-in-out 
     border-radius 30px  
     font-family 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif
+    box-shadow: 0 0 1rem 0 rgba(0, 0, 0, .2);   
+    border-radius: 5px;
+    position: relative;
+    z-index: 1;
+    background: inherit;
     font-size 20px
+
+  .card-silo:before 
+    content: "";
+    position: absolute;
+    background: inherit;
+    z-index: -1;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    box-shadow: inset 0 0 20px rgba(255, 255, 255, .5);
+    filter: blur(10px);
+    overflow: hidden;
 
   .card-silo:hover
     transform scale(1.05)

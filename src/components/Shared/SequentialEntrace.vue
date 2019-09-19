@@ -1,5 +1,5 @@
 <template>
-    <sequential-entrance fromBottom animation="bounceIn" :delay="delay">
+    <sequential-entrance fromTop animation="bounceIn" :delay="delay">
       <slot></slot>
     </sequential-entrance>
 </template>

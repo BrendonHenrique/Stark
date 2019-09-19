@@ -71,9 +71,8 @@ export default {
 </script>
 
 <style scoped lang="stylus">
-
   main
-    width 24rem
+    width 35rem
     padding 10px 15px
     background-position center
     background-size cover
@@ -85,5 +84,4 @@ export default {
     box-shadow 0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22)
     border-radius 10px
     box-shadow 1px 1px 15px 1px white
-
 </style>
