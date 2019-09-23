@@ -1,8 +1,8 @@
 <template>
     <!--  container para inserir o nó do canvas com o mapa de calor -->
-      <div class="bg-silo">
-        <div class='box-heatmap' :style="boxStyle"/>
-      </div>
+      <!-- <div class="bg-silo"> -->
+        <div class='box-heatmap' style="height:100%;width:100%;"/>
+      <!-- </div> -->
     <!--  -->
 </template>
 <script>
@@ -14,37 +14,15 @@ export default {
   props:['pendulos'],
   data(){
     return{
-      boxStyle:{
-        height: '',
-        width:  '', 
-      }, 
       data:[],
       heatmapInstance: null
     }
   },
-  // getters da propriedade do elemento box-heatmap
-  computed:{
-    boxStyleHeight(){
-      return this.boxStyle.height
-    },
-    boxStyleWidth(){
-      return this.boxStyle.width
-    }
-  },
   methods:{
-    // setters para alterar as propriedades do elemento box-heatmap
-    setHeight(value){
-      this.boxStyle.height = `${value}px`
-    },
-    setWidth(value){
-      this.boxStyle.width = `${value}px`
-    },
     // set da altura do box-heatmap com base no maior pêndulo 
     getMaiorPenduloLength(pendulos){
       let pendulosLength = [] 
-        pendulos.map( pendulo => {
-          pendulosLength.push(pendulo.sensores.length)
-      })
+        pendulos.map( pendulo =>  pendulosLength.push(pendulo.sensores.length));
       return parseInt(Math.max(...pendulosLength))
     },
     // set do width do box-heatmap
@@ -60,26 +38,11 @@ export default {
         let noRemovido = boxHeatmap.removeChild(canvas);
       }
     },
-    // Instancia o heatmap no nodo box-heatmap   
-    // blue #5757D7
-    // green 7AD656
-    // YELLOW D4DC5C
-    // RED E17261
     instanciarHeatMap(){
       const $ = document.querySelector.bind(document);
       this.heatmapInstance = h337.create({
         container: $(".box-heatmap"),
-        radius: 125,
-        gradient: {
-          // enter n keys between 0 and 1 here
-          // for gradient color customization
-          '.1': '#5757D7',
-          '.5': '#7AD656',
-          '.7': '#D4DC5C',
-          '.8': '#db9b5c',
-          '.98': '#E17261'
-
-        }
+        radius: '70',
       })
     },
     // Cria o mapa de calor baseando-se nos pêndulos vindos como props ( this.pendulos )
@@ -87,24 +50,28 @@ export default {
     montarMapa(){
       this.data = []
       let penduloGerado = this.pendulos
-      let espacoEntrePontos = 110 
-      let posicaoDeInicio = 80
-      let x_position = posicaoDeInicio + 50
-      this.setHeight(this.getMaiorPenduloLength(penduloGerado) * espacoEntrePontos  + posicaoDeInicio)
-      this.setWidth(this.getQuantidadeDePendulos(penduloGerado) * espacoEntrePontos + posicaoDeInicio)
+      let parentHeight = document.getElementsByClassName('box-heatmap')[0].clientHeight
+      let parentWidth = document.getElementsByClassName('box-heatmap')[0].clientWidth
+      
+      let y_offset = parseInt((parentHeight / this.getMaiorPenduloLength(penduloGerado)).toFixed(2))
+      let x_offset = parseInt((parentWidth / this.getQuantidadeDePendulos(penduloGerado)).toFixed(2))
+      
+      let x_position = parseInt(x_offset * 0.7)
+      
       penduloGerado.map( (pendulo,index) => {
-        let y_position = parseInt(this.boxStyle.height)  - posicaoDeInicio  - 50
+        var y_position = parentHeight - parseInt(y_offset * 1.3) 
         pendulo.sensores.map( sensor => {
           let ponto = {
             value: sensor.temperatura,
             x : x_position,  
             y : y_position
-          } 
-          y_position = y_position - espacoEntrePontos  + 15 
+          }
           this.data.push(ponto)
+          y_position = y_position - parseInt(y_offset * 0.94) 
         })
-        x_position  = x_position   + espacoEntrePontos - 20
+        x_position = x_position + parseInt(x_offset * 0.97) 
       })
+
     },
     // Valores abaixo serão utilizados como parametro para a cor na escala do mapa de calor
     // Ambos os valores são configurados na página de configurações nos inputs de temperatura baixa e alta respectivamente
@@ -125,59 +92,32 @@ export default {
       this.instanciarHeatMap()
       this.montarMapa()
       this.heatmapInstance.repaint()
-      this.heatmapInstance._renderer.ctx.canvas.height = parseInt(this.boxStyle.height)
-      this.heatmapInstance._renderer.ctx.canvas.width =  parseInt(this.boxStyle.width)
       this.inserirDados(this.data)
     },
   },
   // Antes de montar o componente o mapa de calor é montado, isso é a estrutura à ser usada é montada , mas ainda não instanciado
   beforeMount(){ 
-    this.montarMapa()   
   },
   // Instancia o mapa de calor e insere os dados
   mounted(){
+    this.montarMapa()   
     this.instanciarHeatMap()
     this.inserirDados()
   },
   // Observadores para recriar o mapa 
   watch:{
-    boxStyleHeight(newvalue, oldvalue){
-      for (let index = 0; index < 2; index++) {
-        setTimeout( () => {
-          this.reRender()
-        },10)
-      }
-    },
-    boxStyleWidth(newvalue, oldvalue){
-      for (let index = 0; index < 2; index++) {
-        setTimeout( () => {
-          this.reRender()
-        },10)
-      }
-    },
     pendulos(){
-      this.removerHeatMap()
-      this.instanciarHeatMap()
-      this.montarMapa()
-      this.heatmapInstance.repaint()
-      this.heatmapInstance._renderer.ctx.canvas.height = parseInt(this.boxStyle.height)
-      this.heatmapInstance._renderer.ctx.canvas.width =  parseInt(this.boxStyle.width)
-      this.inserirDados(this.data)
-    }
+      this.reRender()
+    } 
   }
 }
 </script>
 
-<style lang="stylus" scoped>
-  .bg-silo
-    background-image url(../../../assets/bg-silo.png)  
-    -webkit-background-size cover
-    -moz-background-size cover
-    -o-background-size cover
-    background-size cover
-    padding-top 20rem
-    min-width 65rem
-  
-
+<style lang="stylus" > 
+  .box-heatmap
+    width:100%
+    
+  .heatmap-canvas 
+    width: 100%
 
 </style>

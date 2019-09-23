@@ -1,7 +1,7 @@
 <template>
-  <div class="termometria-wrapper">
+  <div style="width:100%;height:70vh;">
     
-    <mapa-de-calor :pendulos="this.pendulos" v-show="showMapa" style="right:1rem;"/>
+    <mapa-de-calor :pendulos="this.pendulos" v-show="showMapa" />
 
     <pendulos  :pendulos="this.pendulos" v-show="showPendulos" /> 
     
@@ -39,8 +39,8 @@ export default {
     return{
       pendulos: [],
       key: 1, 
-      showPendulos: true,
-      showMapa:false
+      showPendulos: false,
+      showMapa:true
     }
   },
   // Get das temperaturas basenado-se no index so silo , caso a página seja renderizada via this.$route.push apartir da página dos silos
@@ -90,7 +90,6 @@ export default {
 
 <style lang="stylus">
   .termometria-wrapper
-    width  100%
     display flex 
     justify-content center 
     align-items center
