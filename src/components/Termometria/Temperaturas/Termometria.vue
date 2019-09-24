@@ -1,7 +1,7 @@
 <template>
   <div style="width:100%;height:70vh;">
     
-    <mapa-de-calor :pendulos="this.pendulos" v-show="showMapa" />
+    <mapa-de-calor :pendulos="this.pendulos" v-show="showMapa" :showMapa="showMapa" />
 
     <pendulos  :pendulos="this.pendulos" v-show="showPendulos" /> 
     
@@ -66,8 +66,10 @@ export default {
   methods:{ 
     // get da temperatura apartir do store, interfaceada pelo controlador
     getTemperaturas(index){
+      let siloEncontrado = SiloController.getSiloById(this.index_silo)
       this.pendulos = []
-      this.pendulos = SiloController.getSiloById(this.index_silo).pendulos
+      this.pendulos = siloEncontrado.pendulos
+      console.log(`temp\nmin ${siloEncontrado.temperatura.minima}\nMed ${siloEncontrado.temperatura.media}\nMax ${siloEncontrado.temperatura.maxima}`)
     },
     mostrarMapaDeCalor(){
       if(this.showPendulos) this.showPendulos = false

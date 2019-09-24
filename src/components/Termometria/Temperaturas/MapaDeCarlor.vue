@@ -11,11 +11,11 @@ import h337 from 'heatmap.js'
 import CoresController from '../../../Controllers/LegendaDeCores/Controller'
 
 export default {
-  props:['pendulos'],
+  props:['pendulos','showMapa'],
   data(){
     return{
       data:[],
-      heatmapInstance: null
+      heatmapInstance: null,
     }
   },
   methods:{
@@ -42,7 +42,6 @@ export default {
       const $ = document.querySelector.bind(document);
       this.heatmapInstance = h337.create({
         container: $(".box-heatmap"),
-        radius: '70',
       })
     },
     // Cria o mapa de calor baseando-se nos pêndulos vindos como props ( this.pendulos )
@@ -52,9 +51,12 @@ export default {
       let penduloGerado = this.pendulos
       let parentHeight = document.getElementsByClassName('box-heatmap')[0].clientHeight
       let parentWidth = document.getElementsByClassName('box-heatmap')[0].clientWidth
+      let qtd_pendulos =  this.getQuantidadeDePendulos(penduloGerado)
       
       let y_offset = parseInt((parentHeight / this.getMaiorPenduloLength(penduloGerado)).toFixed(2))
-      let x_offset = parseInt((parentWidth / this.getQuantidadeDePendulos(penduloGerado)).toFixed(2))
+      let x_offset = parseInt((parentWidth / qtd_pendulos).toFixed(2))
+      
+      console.log(`Altura do maior pêndulo ${this.getMaiorPenduloLength(penduloGerado)}\nQuantidade de pêndulos ${this.getQuantidadeDePendulos(penduloGerado)}`)
       
       let x_position = parseInt(x_offset * 0.7)
       
@@ -64,10 +66,11 @@ export default {
           let ponto = {
             value: sensor.temperatura,
             x : x_position,  
-            y : y_position
+            y : y_position,
+            radius: (Math.random() * (60 - 20) + 25)
           }
           this.data.push(ponto)
-          y_position = y_position - parseInt(y_offset * 0.94) 
+          y_position = y_position - parseInt(y_offset * 0.9) 
         })
         x_position = x_position + parseInt(x_offset * 0.97) 
       })
@@ -108,14 +111,17 @@ export default {
   watch:{
     pendulos(){
       this.reRender()
-    } 
+    },
+    showMapa(newValue){
+      if(newValue == true){
+        this.reRender()
+      }
+    }
   }
 }
 </script>
 
-<style lang="stylus" > 
-  .box-heatmap
-    width:100%
+<style lang="stylus" >  
     
   .heatmap-canvas 
     width: 100%

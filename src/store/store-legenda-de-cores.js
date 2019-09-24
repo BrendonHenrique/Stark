@@ -33,7 +33,7 @@ const state = {
       }],
     configuracoes_de_cores: {
       temperatura_baixa: 0,
-      temperatura_alta: 50
+      temperatura_alta: 45
     }
 }
 
