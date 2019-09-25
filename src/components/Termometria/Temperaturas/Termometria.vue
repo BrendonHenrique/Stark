@@ -69,7 +69,7 @@ export default {
       let siloEncontrado = SiloController.getSiloById(this.index_silo)
       this.pendulos = []
       this.pendulos = siloEncontrado.pendulos
-      console.log(`temp\nmin ${siloEncontrado.temperatura.minima}\nMed ${siloEncontrado.temperatura.media}\nMax ${siloEncontrado.temperatura.maxima}`)
+      // console.log(`temp\nmin ${siloEncontrado.temperatura.minima}\nMed ${siloEncontrado.temperatura.media}\nMax ${siloEncontrado.temperatura.maxima}`)
     },
     mostrarMapaDeCalor(){
       if(this.showPendulos) this.showPendulos = false

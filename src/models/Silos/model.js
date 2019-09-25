@@ -5,8 +5,7 @@ silos: [{
     minima: Number,
     media: Number,
     maxima: Number
-  },
-  co2: Number,
+  }, 
   produto_armazenado:{
     nome:null,
     variedade: null,

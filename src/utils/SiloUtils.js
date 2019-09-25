@@ -9,8 +9,7 @@ let siloSaoJoao =
       minima: 11,
       media: 21,
       maxima: 26
-    },
-    co2: parseFloat(random(100, 1000).toFixed(1)),
+    }, 
     produto_armazenado: {
       nome: '',
       variedade: '',
@@ -418,8 +417,7 @@ export function buildRandomicSilos() {
           minima: Number,
           media: Number,
           maxima: Number
-        },
-        co2: parseFloat(random(100, 1000).toFixed(1)),
+        }, 
         produto_armazenado: {
           nome: '',
           variedade: '',
@@ -464,8 +462,7 @@ export function buildSilos(silos_length) {
         minima: Number,
         media: Number,
         maxima: Number
-      },
-      co2: parseFloat(random(100, 1000).toFixed(1)),
+      }, 
       produto_armazenado: {
         nome: '',
         variedade: '',

@@ -1,5 +1,5 @@
 <template>
-    <div class="row no-wrap">
+    <div class="row no-wrap pendulo-wrapper">
         <!-- Pêndulo -->
         <div
             class="pendulo column justify-end "
@@ -100,5 +100,11 @@ export default {
         top 28px
         left 47px
         color grey
+
+    .pendulo-wrapper
+        display flex 
+        justify-content space-between 
+        margin-right 1rem
+        width 100%
 
 </style>

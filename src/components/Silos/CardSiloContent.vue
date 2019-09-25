@@ -1,5 +1,5 @@
 <template>
-  <div class="bg-grey-3">
+  <div class="bg-grey-3 card-content">
 
     <!-- Avatar com a imagem do silo e numeração do silo -->
     <q-card-section style="height:220px;">
@@ -68,22 +68,6 @@
       </section-layout>
       <!--  -->
 
-      <!-- Co2 -->
-      <section-layout class="card-infos">
-        <template v-slot:avatar>
-          <q-btn glossy dense color="secondary" size="20px" round icon="" >
-            <q-img  src="assets/icons/co2.svg" style="width: 40px;"  />
-          </q-btn>
-        </template>
-        <template v-slot:label>
-          <div>
-              <div class="text-weight-thin">Co2 </div>
-              <div class="text-grey-8">{{silo.co2}} ppm</div>
-          </div>
-        </template>
-      </section-layout>
-      <!--  -->
-
     </main>
 
   </div>
@@ -110,11 +94,12 @@
     bottom 0
     right 10px
 
-  .q-card
-    font-family 'Orbitron', sans-serif
-
+  .card-content
+    box-shadow 1px -1px 5px 1px #fff !important
+      
   .card-silo 
     .q-card__section
       padding 13px
+    
 
 </style>

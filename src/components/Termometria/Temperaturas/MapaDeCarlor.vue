@@ -56,9 +56,10 @@ export default {
       let y_offset = parseInt((parentHeight / this.getMaiorPenduloLength(penduloGerado)).toFixed(2))
       let x_offset = parseInt((parentWidth / qtd_pendulos).toFixed(2))
       
-      console.log(`Altura do maior pêndulo ${this.getMaiorPenduloLength(penduloGerado)}\nQuantidade de pêndulos ${this.getQuantidadeDePendulos(penduloGerado)}`)
+      // console.log(`Altura do maior pêndulo ${this.getMaiorPenduloLength(penduloGerado)}\nQuantidade de pêndulos ${this.getQuantidadeDePendulos(penduloGerado)}`)
+      console.log(`Offset ${(parentHeight/parentWidth) * x_offset }`)
       
-      let x_position = parseInt(x_offset * 0.7)
+      let x_position = parseInt(x_offset * 0.5)
       
       penduloGerado.map( (pendulo,index) => {
         var y_position = parentHeight - parseInt(y_offset * 1.3) 
@@ -67,12 +68,12 @@ export default {
             value: sensor.temperatura,
             x : x_position,  
             y : y_position,
-            radius: (Math.random() * (60 - 20) + 25)
+            radius :  (parentHeight/parentWidth) * x_offset  
           }
           this.data.push(ponto)
           y_position = y_position - parseInt(y_offset * 0.9) 
         })
-        x_position = x_position + parseInt(x_offset * 0.97) 
+        x_position = x_position + parseInt(x_offset) 
       })
 
     },
@@ -80,7 +81,7 @@ export default {
     // Ambos os valores são configurados na página de configurações nos inputs de temperatura baixa e alta respectivamente
     // Aqui também insiro o mapa montado na instância do heatmap
     inserirDados(){
-      var max = CoresController.getTemperaturaAlta()
+      var max = CoresController.getTemperaturaAlta() 
       var min = CoresController.getTemperaturaBaixa()
       var data = {
         max,
