@@ -1,8 +1,11 @@
 <template>
     <!--  container para inserir o nó do canvas com o mapa de calor -->
-      <!-- <div class="bg-silo"> -->
-        <div class='box-heatmap' style="height:100%;width:100%;"/>
-      <!-- </div> -->
+      <div class="row justify-center">
+        <div class='col-xs-12  col-md-9 col-sm-9 col-lg-7 box-silo'>
+          <div class='col-xs-11  col-md-8 col-sm-8 col-lg-6 box-heatmap' 
+          style="height:90vh;"/>
+        </div>
+      </div>
     <!--  -->
 </template>
 <script>
@@ -55,20 +58,16 @@ export default {
       
       let y_offset = parseInt((parentHeight / this.getMaiorPenduloLength(penduloGerado)).toFixed(2))
       let x_offset = parseInt((parentWidth / qtd_pendulos).toFixed(2))
-      
-      // console.log(`Altura do maior pêndulo ${this.getMaiorPenduloLength(penduloGerado)}\nQuantidade de pêndulos ${this.getQuantidadeDePendulos(penduloGerado)}`)
-      console.log(`Offset ${(parentHeight/parentWidth) * x_offset }`)
-      
-      let x_position = parseInt(x_offset * 0.5)
+      let x_position = parseInt(x_offset * 0.5) 
       
       penduloGerado.map( (pendulo,index) => {
-        var y_position = parentHeight - parseInt(y_offset * 1.3) 
+        var y_position = parentHeight - parseInt(y_offset) + 7
         pendulo.sensores.map( sensor => {
           let ponto = {
             value: sensor.temperatura,
             x : x_position,  
             y : y_position,
-            radius :  (parentHeight/parentWidth) * x_offset  
+            radius : ((y_offset + x_offset) / Math.PI) + parentWidth * 0.05
           }
           this.data.push(ponto)
           y_position = y_position - parseInt(y_offset * 0.9) 
@@ -99,10 +98,7 @@ export default {
       this.inserirDados(this.data)
     },
   },
-  // Antes de montar o componente o mapa de calor é montado, isso é a estrutura à ser usada é montada , mas ainda não instanciado
-  beforeMount(){ 
-  },
-  // Instancia o mapa de calor e insere os dados
+  // Cria o mapa se baseando no width da tela , instancia o mapa de calor e insere os dados
   mounted(){
     this.montarMapa()   
     this.instanciarHeatMap()
@@ -122,9 +118,20 @@ export default {
 }
 </script>
 
-<style lang="stylus" >  
+<style lang="stylus" >
+
+  .box-silo
+    background url('../../../assets/bg-silo.png') no-repeat center center
+    background-size cover
+    position relative
+    width 100%
+    height 80vh
     
   .heatmap-canvas 
-    width: 100%
+    position absolute
+    top unset !important
+    bottom 0
+    width 100%
+    height 80vh
 
 </style>

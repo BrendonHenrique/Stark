@@ -1,5 +1,5 @@
 <template>
-  <div style="width:100%;height:70vh;">
+  <div style="width:100%;">
     
     <mapa-de-calor :pendulos="this.pendulos" v-show="showMapa" :showMapa="showMapa" />
 
