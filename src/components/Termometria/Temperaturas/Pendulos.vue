@@ -11,7 +11,9 @@
                     v-for="sensor in pendulo.sensores"
                     :key="sensor.id_sensor + key"
                     class="column">
-                    <q-chip class="q-mt-sm pendulo-chip" :style="{'background-color': tempToColor(sensor.temperatura)}">
+                    <q-chip class="q-mt-sm pendulo-chip" 
+                        :style="{'background-color': parseBySensorStatus(sensor),'color':checkColorStatus(sensor)}"
+                    >
                     <q-avatar color="grey" text-color="white">
                         {{sensor.id_sensor + 1}}
                     </q-avatar>
@@ -47,6 +49,9 @@ Vue.use(SequentialEntrance)
 // Controlador do store
 import CoresController from '../../../Controllers/LegendaDeCores/Controller'
 
+// TinyColor é uma biblioteca auxiliar para verificar se a cor do background é muito escura, caso seja inverte a cor da fonte
+var tinycolor = require("tinycolor2");
+
 export default {
     props:['pendulos'],
     data(){
@@ -58,9 +63,20 @@ export default {
     ...mapGetters('legenda_de_cores',['cores_do_gradiente']), 
     }, 
     methods:{
-        tempToColor(temperatura){
-            return TempToColor.parse(this, temperatura / CoresController.getConfiguracoesDeCores().temperatura_alta)
+        // Transforma o status do sensor em cor de fundo dependendo das configurações da legenda de cor
+        parseBySensorStatus(sensor){
+            if(sensor.status === 'Ativo'){
+                return TempToColor.parse(this, sensor.temperatura / CoresController.getConfiguracoesDeCores().temperatura_alta)
+            }else{
+                return CoresController.getCorByLabel(sensor.status)
+            }
         },
+        // Verifica se a cor de fundo é escura , caso seja transforma faz o set da cor da font para branco 
+        checkColorStatus(sensor){
+            if(tinycolor(CoresController.getCorByLabel(sensor.status)).isDark()){
+                return 'white'
+            }
+        }
     },
     components:{
         'sequential-entrace': require('../../Shared/SequentialEntrace').default,

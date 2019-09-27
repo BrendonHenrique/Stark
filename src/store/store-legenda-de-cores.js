@@ -82,7 +82,7 @@ const getters = {
     return `linear-gradient(90deg, ${cores_do_gradiente[0].valor}, ${cores_do_gradiente[1].valor})` 
   },
 
-  cores_do_gradiente: (state) =>{
+  cores_do_gradiente: (state) => {
     return state.legenda_de_cores.filter( (valor) => {
       return valor.label == 'Temperaturas baixas' || valor.label == 'Temperaturas altas'
     })

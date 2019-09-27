@@ -15,9 +15,7 @@
     <!--  -->
   
     <!-- Listagem das possibilidades de aeração com sinalização 
-    vermelho(não é possivel aerar)
-    verde(é possivel aerar) 
-    seguida do nome da função -->
+    vermelho(não é possivel aerar) verde(é possivel aerar)  -->
     <q-list class="possibilidades-container">
       <q-item class="possibilidades" 
       v-for="item in possibilidades" 

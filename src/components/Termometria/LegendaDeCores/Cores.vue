@@ -1,5 +1,5 @@
 <template>
-  <div class="row legenda-de-cores">
+  <div class="legenda-de-cores">
     
     <!-- Car para criação da legenda de cores -->
     <q-card class="bg-grey-2 shadow-10 col-sm-10 col-xs-12 col-md-10 col-lg-5" 
@@ -72,11 +72,14 @@
       <!--  -->
 
       <!-- Botão para salvar as informações -->
-      <save-button 
-        class="q-ma-md float-right"
-        :mensagem="'Você gostaria de salvar a legenda de cores?'"
-        @salvarAlteracoes="salvarLegendaDeCores"
-      />
+      <div class="row">
+        <q-space />
+        <save-button 
+          class="q-ma-md"
+          :mensagem="'Você gostaria de salvar a legenda de cores?'"
+          @salvarAlteracoes="salvarLegendaDeCores"
+        />
+      </div>
       <!--  -->
 
     </q-card>
@@ -120,18 +123,10 @@ export default {
 </script>
 
 <style lang="stylus" >
-
-  .q-tab-panels
-    margin-top 2rem !important
-    margin-bottom 4rem !important
   
   .legenda-de-cores
-    min-width 100%
     animation entry 1s
-    display flex 
-    justify-content center 
-    justify-items center 
-    
+
   .input-cores
     .q-field__label
       overflow inherit

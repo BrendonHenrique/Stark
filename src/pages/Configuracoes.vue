@@ -1,6 +1,6 @@
 <template>
   <q-page>
-    <div style="height: 5rem;" class="tab-menu">
+    <div class="tab-menu">
       
       <!-- Tabs para navegação na página de configurações -->
       <q-tabs 
@@ -12,7 +12,7 @@
       </q-tabs>
       <!--  -->
 
-    <q-tab-panels class="bg-grey-10" v-model="tab" style="margin-top: 2rem;margin-bottom:5rem" > 
+    <q-tab-panels class="bg-grey-10" v-model="tab" > 
 
       <!-- Acesso as configurações de cores  -->
       <q-tab-panel class="legenda-de-cores" name="cores" >
@@ -56,4 +56,6 @@ export default {
     z-index 4
     font-family 'Libre Caslon Text', serif
 
+  .legenda-de-cores
+    margin-top 2rem
 </style>

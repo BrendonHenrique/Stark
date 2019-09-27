@@ -61,23 +61,17 @@ const mutations = {
 
   /**
    * Atualiza a função de aeração conforme os valores recebidos como parametro
-   * Param { id_silo: Number, id_aerador: Number, ligada: Boolean, label: String}
-   * exemplo @input="update_funcao_de_aeracao({id_silo: 1, id_aerador: 1, ligada:funcaoManualLigada , label:'Manual'})"
-   */
+  **/
   update_funcao_de_aeracao(state, payload) {
     
     const {
       index_silo,
-      index_aerador,
       label,
       ligada
     } = payload
       
-
     let silo = getSiloById(state.silos, index_silo)
-    let aerador = getAeradorById(silo.aeradores, index_aerador)
-
-    aerador.funcoes.forEach(funcao => {
+    silo.aerador.funcoes.forEach(funcao => {
       if (funcao.label == label) {
         funcao.ligada = ligada
       } else if (funcao.processos != undefined) {
@@ -133,11 +127,10 @@ const getters = {
     return  aeradores.length
   },
 
-  // get das funções de aeração recebendo id do silo e id do aerador
-  get_funcoes_de_aeracao: (state, getters) => (id_silo, id_aerador) => {
+  // get das funções de aeração recebendo id do silo
+  get_funcoes_de_aeracao: (state, getters) => (id_silo) => {
     let silo = getSiloById(state.silos, id_silo)
-    let aerador = getAeradorById(silo.aeradores, id_aerador)
-    return aerador.funcoes
+    return silo.aerador.funcoes
   },
 
   // get das possibilidades de aeração recebendo id do silo 

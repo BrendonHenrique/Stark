@@ -33,8 +33,6 @@
 export default {
   name: 'FlipCard',
   props:['flipped'],
-  components:{
-  }
 };
 </script>
 

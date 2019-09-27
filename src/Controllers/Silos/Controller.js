@@ -37,12 +37,12 @@ export default class SiloController {
     return this.getSiloById(id_silo).possibilidades_aeracao
   }
 
-  static getFuncoesDeAeracao(id_silo,id_aerador){
-    return getters.get_funcoes_de_aeracao(state,getters)(id_silo, id_aerador)
+  static getFuncoesDeAeracao(id_silo){
+    return getters.get_funcoes_de_aeracao(state,getters)(id_silo)
   }
 
-  static getFuncaoDeAeracaoLigada(id_silo, id_aerador){
-    let funcoes = this.getFuncoesDeAeracao(id_silo,id_aerador)
+  static getFuncaoDeAeracaoLigada(id_silo){
+    let funcoes = this.getFuncoesDeAeracao(id_silo)
     return funcoes.filter(funcao_de_aeracao => funcao_de_aeracao.ligada)
   }
   

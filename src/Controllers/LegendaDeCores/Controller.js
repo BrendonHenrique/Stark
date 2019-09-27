@@ -15,6 +15,16 @@ export default class CoresController{
         return getters.gradiente_de_temperatura(state)
     }
 
+    static getCorByLabel(status){
+        if(status != 'Ativo'){//Sensor ativos usam o gradiente de temperatura , que é o 'default'
+            return  this.getLegendaDeCores().find( statusAtual => {
+                if(statusAtual.label === status){
+                    return statusAtual.valor
+                }
+            }).valor
+        }
+    }
+
     static getCoresDoGradiente(){
         return getters.cores_do_gradiente(state)
     }

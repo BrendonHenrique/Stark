@@ -218,7 +218,7 @@ import NotifyUsers from '../../../services/NotifyUser'
 import dialogPromise from  '../../../services/DialogPromise'
 
 export default {
-    props:['isFlipped','index_silo','index_aerador'], 
+    props:['isFlipped','index_silo'], 
     data(){
         return{ 
             funcaoSelecionada:'', 
@@ -253,8 +253,8 @@ export default {
         // Pega a função ativa do store e atualiza o componente
         getFuncaoAtiva(index_silo){
 
-            let funcoes = SiloController.getFuncoesDeAeracao(index_silo, this.index_aerador)
-
+            let funcoes = SiloController.getFuncoesDeAeracao(index_silo)
+            
             this.funcaoManualLigada = funcoes[0].ligada
             this.funcaoAutomaticaLigada =  funcoes[1].ligada
             this.funcaoConservacaoLigada = funcoes[1].processos[0].ligada
@@ -276,8 +276,6 @@ export default {
             }else{
                 this.funcaoSelecionada = ''
             }
-
-
         },
 
         // Verifica se possui uma função ativa no componente
@@ -377,16 +375,16 @@ export default {
         },
 
         enviarFuncaoDeAeracaoParaStore(nomeDafuncao, variavelDaFuncao ){
-            SiloController.updateFuncaoDeAeracaoLigada( 
-            {index_silo:this.index_silo,index_aerador: this.index_aerador,
-            label:nomeDafuncao,ligada: variavelDaFuncao})
+            SiloController.updateFuncaoDeAeracaoLigada({
+                index_silo : this.index_silo, 
+                label : nomeDafuncao,
+                ligada : variavelDaFuncao
+            })
         }
- 
     },
     computed:{
-
         funcoes(){
-            return SiloController.getFuncoesDeAeracao(this.index_silo, this.index_aerador).map( element => element.label)
+            return SiloController.getFuncoesDeAeracao(this.index_silo).map( element => element.label)
         },
     },
     watch:{ 
@@ -429,9 +427,6 @@ export default {
                 this.enviarFuncaoDeAeracaoParaStore('Expurgo',this.funcaoExpurgoLigada)
             } 
         },
-        
-       
-
     },
     components:{
         'save-button': require('../../Shared/SaveButton').default,

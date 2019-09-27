@@ -1,9 +1,8 @@
 <template>
     <!--  container para inserir o nó do canvas com o mapa de calor -->
       <div class="row justify-center">
-        <div class='col-xs-12  col-md-9 col-sm-9 col-lg-7 box-silo'>
-          <div class='col-xs-11  col-md-8 col-sm-8 col-lg-6 box-heatmap' 
-          style="height:90vh;"/>
+        <div class='col-xs-12 col-md-11 col-sm-11 col-lg-7 box-silo'>
+          <div class='box-heatmap' style="height:90vh;"/>
         </div>
       </div>
     <!--  -->

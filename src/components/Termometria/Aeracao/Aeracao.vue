@@ -32,7 +32,6 @@
 
                         <template slot="front"> 
                             <possibilidades 
-                            :index_aerador="id_aerador"
                             :index_silo="index_silo"
                             /> 
                         </template>
@@ -40,7 +39,6 @@
                         <template slot="back"> 
                             <funcoes 
                             :isFlipped="flipped"
-                            :index_aerador="id_aerador"
                             :index_silo="index_silo"
                             />
                         </template>
@@ -71,18 +69,9 @@ export default {
                 Funcoes_card: false,
             }, 
             flipped: true,
-            id_aerador: 0
-        }
-    },
-    computed:{
-        quantidadeDeAeradores(){
-            return SiloController.getQuantidadeDeAeradores(this.index_silo)
         }
     },
     methods:{
-        updateAerador(id_aerador){
-            this.id_aerador = id_aerador
-        },
         // Altera a visualização entre os cards de possibilidade e de funções pelo flip-card
         changeView(){
             this.card_view.Possibilidades_card = !this.card_view.Possibilidades_card 

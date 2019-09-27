@@ -39,8 +39,7 @@ silos: [{
     atual: Number,
     equilibrio: Number,
   },
-  aeradores: [{
-    id: Number,
+  aerador: {
     funcoes: [{
         label: 'Manual',
         ligada: false
@@ -71,5 +70,5 @@ silos: [{
         ligada: false
       }
     ]
-  }],
+  }
 }]

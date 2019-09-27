@@ -131,9 +131,6 @@ export default {
 
 <style lang="stylus">
   
-  .q-panel 
-    margin-top 0.3rem !important
-
   .produto-armazenado-panel
     min-height calc(80.5vh - 129px)
     display flex
