@@ -1,6 +1,5 @@
 <template>
   <div>
-
     <q-drawer
       :width="260"
       :breakpoint="767"
@@ -10,7 +9,6 @@
       :content-class='{leftDrawerShadow : openedDrawer }'>
       <slot>  </slot>
     </q-drawer>
-     
   </div>
 </template>
 
@@ -25,7 +23,12 @@ export default{
     .q-drawer 
       height 100%
       position fixed
-    
+      box-shadow: 0 0 1rem 0 rgba(255, 255, 255, .2);   
+      border-radius: 5px;
+      z-index: 1;
+      background: inherit;
+      overflow: hidden;
+      
     .q-router-link--exact-active 
       color: #f55a66 !important
 

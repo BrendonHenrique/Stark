@@ -18,10 +18,7 @@
             class="left-drawer"
             @hideDrawerLeft="openedDrawerLeft = false"
             :openedDrawer="openedDrawerLeft">
-          
-            <sequential-entrace fromRight >
-              <drawer-nav :navs="navs" />
-            </sequential-entrace>
+            <drawer-nav :navs="navs" />
 
           </layout-drawer>
 

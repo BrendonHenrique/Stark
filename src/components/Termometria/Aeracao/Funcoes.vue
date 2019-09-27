@@ -60,7 +60,7 @@
                         <div class="row inline">   
                             
                             <q-toggle 
-                            @input="enviarFuncaoDeAeracaoParaStore('Manual',funcaoManualLigada)"
+                            @input="alterarFuncaoManual()"
                             v-model="funcaoManualLigada"  :label="funcaoManualLigada ? 'Ligada' : 'Desligada'"
                             color="green" checked-icon="check" unchecked-icon="clear"
                             />
@@ -168,8 +168,8 @@
                         Ligar/Desligar 
                         <div class='row inline'>
                             <q-toggle 
+                            @input="alterarFuncaoForcada()"
                             v-model="funcaoForcadoLigada" :label="funcaoForcadoLigada ? 'Ligada' : 'Desligada'"
-                            @input="enviarFuncaoDeAeracaoParaStore('Forçado',funcaoForcadoLigada)"
                             color="green" checked-icon="check" unchecked-icon="clear"
                             />
                             <q-icon 
@@ -188,7 +188,7 @@
                         <div class="row inline">
                             <q-toggle 
                             v-model="funcaoExpurgoLigada" :label="funcaoExpurgoLigada ? 'Ligada' : 'Desligada'"
-                            @input="enviarFuncaoDeAeracaoParaStore('Expurgo',funcaoExpurgoLigada)"
+                            @input="alterarFuncaoExpurgo()"
                             color="green" checked-icon="check" unchecked-icon="clear"
                             />
                             <q-icon 
@@ -247,6 +247,80 @@ export default {
 
     },
     methods:{
+        
+        alterarFuncaoManual(){
+            if(this.funcaoManualLigada){
+                dialogPromise(`Ligar processo de aeração manual ?`)
+                .then( ( )  => {
+                    this.enviarFuncaoDeAeracaoParaStore('Manual',this.funcaoManualLigada)
+                    NotifyUsers.success('Aeração manual ligada')
+                })
+                .catch( ( ) => {
+                    this.funcaoManualLigada = false
+                    NotifyUsers.info('A aeração manual permanecerá desligada ')
+                })
+            }else{
+                dialogPromise(`Desligar processo de aeração manual ?`)
+                .then( ( )  => {
+                    this.enviarFuncaoDeAeracaoParaStore('Manual',this.funcaoManualLigada)
+                    NotifyUsers.success('Aeração manual desligada')
+                })
+                .catch( ( ) => {
+                    this.funcaoManualLigada = true
+                    NotifyUsers.info('A aeração manual permanecerá ligada ')
+                })
+                
+            }
+        },
+        
+        alterarFuncaoForcada(){
+            if(this.funcaoForcadoLigada){
+                dialogPromise('Ligar processo de aeração forçada ?')
+                .then( () => {
+                    this.enviarFuncaoDeAeracaoParaStore('Forçado',this.funcaoForcadoLigada)
+                    NotifyUsers.success('Aeração forçada ligada')
+                })
+                .catch( () => {
+                    this.funcaoForcadoLigada = false
+                    NotifyUsers.info('A aeração forçada permanecerá desligada ')
+                })
+            }else{
+                dialogPromise(`Desligar processo de aeração forçada ?`)
+                .then( ( )  => {
+                    this.enviarFuncaoDeAeracaoParaStore('Forçado',this.funcaoForcadoLigada)
+                    NotifyUsers.success('Aeração forçada desligada')
+                })
+                .catch( ( ) => {
+                    this.funcaoForcadoLigada = true
+                    NotifyUsers.info('A aeração forçada permanecerá ligada ')
+                })
+            }
+        },
+        
+        alterarFuncaoExpurgo(){
+            if(this.funcaoExpurgoLigada){
+                dialogPromise('Ligar processo de aeração por expurgo ?')
+                .then( () => {
+                    this.enviarFuncaoDeAeracaoParaStore('Expurgo',this.funcaoExpurgoLigada)
+                    NotifyUsers.success('Aeração por expurgo ligada')
+                })
+                .catch( () => {
+                    this.funcaoExpurgoLigada = false
+                    NotifyUsers.info('A aeração por expurgo permanecerá desligada ')
+                })
+            }else{
+                dialogPromise(`Desligar processo de aeração por expurgo ?`)
+                .then( ( )  => {
+                    this.enviarFuncaoDeAeracaoParaStore('Expurgo',this.funcaoExpurgoLigada)
+                    NotifyUsers.success('Aeração por expurgo desligada')
+                })
+                .catch( ( ) => {
+                    this.funcaoExpurgoLigada = true
+                    NotifyUsers.info('A aeração por expurgo permanecerá ligada ')
+                })
+            }
+        },
+
         procuraProcessoLigado(arr){
             return arr.filter( element => element.ligada)
         },
@@ -254,7 +328,7 @@ export default {
         getFuncaoAtiva(index_silo){
 
             let funcoes = SiloController.getFuncoesDeAeracao(index_silo)
-            
+
             this.funcaoManualLigada = funcoes[0].ligada
             this.funcaoAutomaticaLigada =  funcoes[1].ligada
             this.funcaoConservacaoLigada = funcoes[1].processos[0].ligada
@@ -276,6 +350,7 @@ export default {
             }else{
                 this.funcaoSelecionada = ''
             }
+
         },
 
         // Verifica se possui uma função ativa no componente
@@ -298,7 +373,8 @@ export default {
             }else{
                 // Se houver então é necessário que o usuário confirme a sobrescrita e então é feita a atualização  
                 if(this.hasFuncaoAtiva() && this.funcaoSelecionada != opcaoSelecionada){
-                    dialogPromise(`Você selecionou outro processo de aeração, deseja realmente alterar o processo ? O processo atual será desligado.`)
+                    dialogPromise(`Você selecionou outro processo de aeração, deseja realmente alterar o processo ? 
+                    O processo atual será desligado.`)
                     .then( () => this.funcaoSelecionada = opcaoSelecionada )
                     .catch( () => NotifyUsers.info('Função de aeração não alterada.'))
                 }else{ //Se não tiver uma função já selecionada apenas sobrescreve
@@ -331,11 +407,11 @@ export default {
                     }
                     this.enviarFuncaoDeAeracaoParaStore('Secagem',this.funcaoSecagemLigada)
                     this.enviarFuncaoDeAeracaoParaStore('Conservação',this.funcaoConservacaoLigada)
-                    NotifyUsers.info(`Processo de aeração por ${funcao} iniciada`)
+                    NotifyUsers.success(`Aeração por ${funcao} iniciada`)
                     this.ultimaFuncaoAutomatica = funcao
                 })
-                .catch( ()=>{
-                    NotifyUsers.info(`Processo de aeração por ${funcao} cancelada`)
+                .catch( () =>{
+                    NotifyUsers.info(`Aeração por ${funcao} cancelada`)
                 });
 
             }else{ //Isso irá permitir fazer trigger entre on para off apertando a segunda vez   
@@ -344,8 +420,8 @@ export default {
                     
                     // Inicialização do processo de aeração automática
                     this.funcaoAutomaticaLigada = false
-                    
                     this.enviarFuncaoDeAeracaoParaStore('Automática',this.funcaoAutomaticaLigada)
+                    NotifyUsers.success(`Aeração por ${funcao} desligada`)
                    
                     if(funcao == 'Secagem' && this.funcaoSecagemLigada ){
                         this.funcaoSecagemLigada = false
@@ -357,21 +433,37 @@ export default {
 
                     this.ultimaFuncaoAutomatica = ''
                 })
-                .catch( ()=>{
+                .catch( () =>{
                     NotifyUsers.info(`Aeração não alterada`)
                 });
             }
         },
-
+    
         // Salva as informações de ambiente da função de aeração semi automática
         salvarInfosAmbiente(){
+            
             if(this.funcaoSemiAutomaticaLigada){
-                this.funcaoSemiAutomaticaLigada = false
+                dialogPromise(`Desligar aeração semi automática ?`)
+                .then( ( )  => {
+                    this.funcaoSemiAutomaticaLigada = false
+                    this.enviarFuncaoDeAeracaoParaStore('Semi Automática',this.funcaoSemiAutomaticaLigada)
+                    NotifyUsers.success('Aeração semi automática desligada.')
+                })
+                .catch( ( ) => {
+                    NotifyUsers.info('Aeração semi automática permanecerá ligada.')
+                })
             }else{
-                this.funcaoSemiAutomaticaLigada = true
-                InfosAmbienteController.updateInfosAmbiente(this.novasInfosAmbiente)
+                dialogPromise(`Ligar aeração semi automática ?`)
+                .then( ( )  => {
+                    this.funcaoSemiAutomaticaLigada = true
+                    this.enviarFuncaoDeAeracaoParaStore('Semi Automática',this.funcaoSemiAutomaticaLigada)
+                    NotifyUsers.success('Aeração semi automática ligada.')
+                    InfosAmbienteController.updateInfosAmbiente(this.novasInfosAmbiente)
+                })
+                .catch( ( ) => {
+                    NotifyUsers.info('Aeração semi automática permanecerá desligada.')
+                })
             }
-            this.enviarFuncaoDeAeracaoParaStore('Semi Automática',this.funcaoSemiAutomaticaLigada)
         },
 
         enviarFuncaoDeAeracaoParaStore(nomeDafuncao, variavelDaFuncao ){
@@ -392,8 +484,8 @@ export default {
             this.getFuncaoAtiva(novoValor)
         },
 
-        // Método serve para prevenir duas funções de aeração ligadas ao mesmo tempo, 
-        // observa o ligamento de uma função e desliga caso o usuário tenha selecionado
+        // Método serve para prevenir duas funções de aeração ligadas ao mesmo tempo
+        // observa o ligamento da funcao atual e certifica o desligamenot da antigaFuncao
         funcaoSelecionada(funcaoAtual, antigaFuncao){
             
             if(antigaFuncao == 'Manual' && this.funcaoManualLigada){

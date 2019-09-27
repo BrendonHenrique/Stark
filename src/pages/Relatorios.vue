@@ -1,8 +1,6 @@
 <template>
   <div class="container">
-    {{index_silo}}
   </div>
-
 </template>
 
 <script>

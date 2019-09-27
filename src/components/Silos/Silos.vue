@@ -2,59 +2,60 @@
   <q-list class="row">
     
     <!-- Silos -->
+    
     <q-item class="justify-center col-xs-12 col-sm-6 col-md-4 col-lg-4" 
     v-for="(silo,index) in silos" :key="silo.id" style="transform: scale(0.95);">
-      <q-card class="card-silo" :class="`silo-${index+1}`">
+        <q-card class="card-silo" :class="`silo-${index+1}`">
 
-           <!-- Card header  -->
-          <q-card-actions align="around" class="text-white" style="box-shadow" >
-            <div>
-              <q-tooltip :content-style="{fontSize: '20px', borderRadius: '20px'}">
-                Visualizar sensores
-              </q-tooltip>
-              <q-btn round class="shadow-16" glossy icon="drag_indicator" size="18px" @click="verPendulos(index)"/>
-            </div>
+            <!-- Card header  -->
+            <q-card-actions align="around" class="text-white" style="box-shadow" >
+              <div>
+                <q-tooltip :content-style="{fontSize: '20px', borderRadius: '20px'}">
+                  Visualizar sensores
+                </q-tooltip>
+                <q-btn round class="shadow-16" glossy icon="drag_indicator" size="18px" @click="verPendulos(index)"/>
+              </div>
 
-            <div>
-              <q-tooltip :content-style="{fontSize: '20px', borderRadius: '20px'}">
-                Relatórios
-              </q-tooltip>
-              <q-btn round class="shadow-16" glossy icon="assignment" size="18px" @click="verRelatorios(index)" />
-            </div>
+              <div>
+                <q-tooltip :content-style="{fontSize: '20px', borderRadius: '20px'}">
+                  Relatórios
+                </q-tooltip>
+                <q-btn round class="shadow-16" glossy icon="assignment" size="18px" @click="verRelatorios(index)" />
+              </div>
 
-            <div>
-              <q-tooltip :content-style="{fontSize: '20px', borderRadius: '20px'}">
-                Visualizar mapa de calor 
-              </q-tooltip>
-              <q-btn round class="shadow-16" glossy icon="whatshot"  size="18px" @click="verMapaDeCalor(index)"/>
-            </div>
-            
-            <div>
-              <q-tooltip :content-style="{fontSize: '20px', borderRadius: '20px'}">
-                Visualizar produto armazenado  
-              </q-tooltip>
-              <q-btn round class="shadow-16" glossy size="19px" @click="verProdutoArmazenado(index)">
-                <q-img  src="assets/icons/agronomy.svg" style="left:1px;" />
-              </q-btn>
-            </div>
-            <div>
+              <div>
+                <q-tooltip :content-style="{fontSize: '20px', borderRadius: '20px'}">
+                  Visualizar mapa de calor 
+                </q-tooltip>
+                <q-btn round class="shadow-16" glossy icon="whatshot"  size="18px" @click="verMapaDeCalor(index)"/>
+              </div>
+              
+              <div>
+                <q-tooltip :content-style="{fontSize: '20px', borderRadius: '20px'}">
+                  Visualizar produto armazenado  
+                </q-tooltip>
+                <q-btn round class="shadow-16" glossy size="18px" @click="verProdutoArmazenado(index)">
+                  <q-img  src="assets/icons/agronomy.svg" style="left:1px;" />
+                </q-btn>
+              </div>
+              <div>
 
-              <q-tooltip :content-style="{fontSize: '20px', borderRadius: '20px'}">
-                Visualizar aerador 
-              </q-tooltip>
-              <q-btn round class="shadow-16" glossy size="18px" @click="verAerador(index)">
-                <q-img  src="assets/icons/fan.svg" style="left:1px;" />
-              </q-btn>
-            </div>
-          </q-card-actions>
+                <q-tooltip :content-style="{fontSize: '20px', borderRadius: '20px'}">
+                  Visualizar aerador 
+                </q-tooltip>
+                <q-btn round class="shadow-16" glossy size="18px" @click="verAerador(index)">
+                  <q-img  src="assets/icons/fan.svg" style="left:1px;" />
+                </q-btn>
+              </div>
+            </q-card-actions>
 
-        <!-- Card content -->
-        <card-silo-content :silo="silo" />
-      
-      </q-card>
+          <!-- Card content -->
+          <card-silo-content :silo="silo" />
+        
+        </q-card>
     </q-item>
     <!--  -->
-
+ 
   </q-list>
 </template>
 

@@ -29,10 +29,6 @@ export default class SiloController {
     return this.getSiloById(id_silo).equilibrio_higroscopico
   }
 
-  static getQuantidadeDeAeradores(id_silo){
-    return this.getSiloById(id_silo).aeradores.length 
-  }
-
   static getPossibilidadesDeAeracao(id_silo){  
     return this.getSiloById(id_silo).possibilidades_aeracao
   }

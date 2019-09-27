@@ -94,7 +94,6 @@ export default {
 
     .indicador-do-pendulo
         position relative
-        right 4px
 
     .pendulo
         border-radius 80px
@@ -106,7 +105,7 @@ export default {
         
         span
             position relative
-            right 4px
+            right 2px
             display flex
             flex-direction column-reverse
                 
@@ -114,7 +113,7 @@ export default {
         content: "|"
         position absolute 
         top 28px
-        left 47px
+        left 45px
         color grey
 
     .pendulo-wrapper

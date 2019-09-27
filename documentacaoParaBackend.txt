@@ -1,0 +1,31 @@
+# Abaixo segue o modelo , algumas observações e as alterações que são feitas no front-end ( e armazenadas no store do vuex ) 
+
+- Silos
+    -  modelo 
+        - src/models/Silos/model.js  
+    
+    - Mutations no Vuex do módulo Silos ( atualizar as informações no vuex (client-side) e no server-side )
+        
+        # Atualização do equilibrio higroscópico de cada silo 
+        - Vuex : update_equilibrio_higroscopico_atual(params: index_silo, novoEquilibrio )
+
+        # Atualização do produto armazenado no silo  
+        - Vuex : update_produto_armazenado(params: id_silo,produto) 
+
+        # Atualização da função de aeração   
+        - Vuex : update_funcao_de_aeracao(params: index_silo, label, ligada) 
+        
+        
+
+
+    - observações 
+        - Temperatura minima media e maxima 
+            - Estão implementadas no load da página pela mutation no store updateMinMedMaxTemp ,
+            não é necessário o calculo, mas caso queira diminuir o peso no frontend e implementar no backend iria ser bom.
+
+
+
+- Informações sobre o ambiente 
+    - modelo 
+        - src/models/InfosAmbiente/model.js
+    - 

@@ -2,7 +2,7 @@ import {
   stat
 } from "fs";
 
-import {random,buildRandomicSilos, getSiloById, getAeradorById, buildSilos } from '../utils/SiloUtils'
+import {random, buildRandomicSilos, getSiloById, } from '../utils/SiloUtils'
 
 const state = {
   silos: buildRandomicSilos(),
@@ -120,11 +120,6 @@ const getters = {
 
   silos_length: (state) => {
     return state.silos.length
-  },
-
-  aeradores_length: (state) => (id_silo) => { 
-    const  {aeradores} =  getSiloById(id_silo)
-    return  aeradores.length
   },
 
   // get das funções de aeração recebendo id do silo
