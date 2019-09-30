@@ -31,7 +31,7 @@
 
 <script>
 // Controlador do store dos silos
-import SiloController from '../../../Controllers/Silos/Controller'
+import SiloController from '../../../controllers/Silos/Controller'
 import NotifyUser from '../../../services/NotifyUser'
 export default {
   props:['index_silo','viewType'], 

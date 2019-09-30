@@ -10,7 +10,7 @@
 <script>
 // Import para criação do heatmap
 import h337 from 'heatmap.js'
-import CoresController from '../../../Controllers/LegendaDeCores/Controller'
+import CoresController from '../../../controllers/LegendaDeCores/Controller'
 
 export default {
   props:['pendulos','showMapa'],

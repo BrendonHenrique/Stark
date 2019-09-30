@@ -89,7 +89,7 @@
 </template>
 
 <script>
-import CoresController from '../../../Controllers/LegendaDeCores/Controller'
+import CoresController from '../../../controllers/LegendaDeCores/Controller'
 
 export default {
   data() {

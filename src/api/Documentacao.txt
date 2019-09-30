@@ -1,0 +1,5 @@
+# Modelos que devem ser recebidos pelo client 
+
+- method da Api : 'silo.getSilos'
+    - Explicação : Faz get dos silos e atualiza o store
+    - Modelo de recebimento : src/models/Silos/model.js

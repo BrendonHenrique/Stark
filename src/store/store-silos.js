@@ -2,6 +2,7 @@ import {
   stat
 } from "fs";
 
+// Funções utilizadas apenas para teste no desenvolvimento , serão removidas
 import {random, buildRandomicSilos, getSiloById, } from '../utils/SiloUtils'
 
 const state = {
@@ -82,25 +83,43 @@ const mutations = {
         })
       }
     })
+  },
+
+  /**
+   * Atualiza o array de silos
+   */
+  update_silos(state, payload) {
+    state.silos = payload
   }
 
 }
 
 const actions = {
+
+  update_silos({
+    commit
+  },payload){
+    commit('update_silos', payload)
+  },
+
+  // calculo futuramente será implementado no backend
   updateMinMedMaxTemp({
     commit
   }, payload) {
     commit('updateMinMedMaxTemp', payload)
   },
+  
   update_equilibrio_higroscopico_atual({
     commit
   }, payload) {
     commit('update_equilibrio_higroscopico_atual', payload);
   },
+  
   update_produto_armazenado({commit}
   , payload) {
     commit('update_produto_armazenado', payload)
   },
+  
   update_funcao_de_aeracao({
     commit
   }, payload) {

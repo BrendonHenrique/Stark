@@ -67,7 +67,7 @@
 </template>
 
 <script>
-import SiloController from '../../../Controllers/Silos/Controller'
+import SiloController from '../../../controllers/Silos/Controller'
 
 export default {
     props:['index_silo'],

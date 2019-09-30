@@ -47,7 +47,7 @@ import 'vue-sequential-entrance/vue-sequential-entrance.css'
 import Vue from 'vue'
 Vue.use(SequentialEntrance) 
 // Controlador do store
-import CoresController from '../../../Controllers/LegendaDeCores/Controller'
+import CoresController from '../../../controllers/LegendaDeCores/Controller'
 
 // TinyColor é uma biblioteca auxiliar para verificar se a cor do background é muito escura, caso seja inverte a cor da fonte
 var tinycolor = require("tinycolor2");

@@ -53,7 +53,7 @@
 </template>
 
 <script>
-import SiloController from '../Controllers/Silos/Controller'
+import SiloController from '../controllers/Silos/Controller'
 import NotifyUser from '../services/NotifyUser'
 
 export default {

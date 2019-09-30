@@ -5,7 +5,7 @@
     
     <q-item class="justify-center col-xs-12 col-sm-6 col-md-4 col-lg-4" 
     v-for="(silo,index) in silos" :key="silo.id" style="transform: scale(0.95);">
-        <q-card class="card-silo" :class="`silo-${index+1}`">
+        <q-card class="card-silo">
 
             <!-- Card header  -->
             <q-card-actions align="around" class="text-white" style="box-shadow" >
@@ -60,7 +60,7 @@
 </template>
 
 <script>
-  import SiloController from '../../Controllers/Silos/Controller'
+  import SiloController from '../../controllers/Silos/Controller'
   import Vue from 'vue'
   export default{
     computed:{

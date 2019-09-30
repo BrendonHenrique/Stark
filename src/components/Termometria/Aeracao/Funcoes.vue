@@ -212,8 +212,8 @@
 
 <script> 
 
-import InfosAmbienteController from '../../../Controllers/InfosAmbiente/Controller'
-import SiloController from '../../../Controllers/Silos/Controller'
+import InfosAmbienteController from '../../../controllers/InfosAmbiente/Controller'
+import SiloController from '../../../controllers/Silos/Controller'
 import NotifyUsers from '../../../services/NotifyUser'
 import dialogPromise from  '../../../services/DialogPromise'
 

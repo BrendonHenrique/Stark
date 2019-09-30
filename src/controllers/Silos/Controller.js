@@ -1,6 +1,6 @@
 
 import storeSilos from '../../store/store-silos' 
-const {state,getters,mutations, actions} = storeSilos; 
+const {state,getters} = storeSilos; 
 import vuexStore from '../../store/index' 
 const store = vuexStore()
 
@@ -56,6 +56,10 @@ export default class SiloController {
 
   static updateFuncaoDeAeracaoLigada(payload){
     store.dispatch('silos/update_funcao_de_aeracao', payload)
+  }
+
+  static updateSilos(payload){
+    store.dispatch('silos/update_silos',payload)
   }
 
 }

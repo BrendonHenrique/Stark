@@ -68,7 +68,6 @@ silos: [{
       {
         label: 'Expurgo',
         ligada: false
-      }
-    ]
+    }]
   }
 }]
