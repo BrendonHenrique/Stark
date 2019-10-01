@@ -1,7 +1,8 @@
 const state = {
     status:{
         isConnected: null,
-        lastUpdatedData: null
+        lastUpdatedData: null,
+        statusDescription: 'sem conexão'
     }
 }
 

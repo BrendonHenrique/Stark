@@ -13,6 +13,7 @@ const mutations = {
   /*
    *  Atualiza a propriedade temperatura do silo , pegando pelo id do silo todos os sensores e atualiza
    *  com os valores mínimo, médio e máximo de temperatura para cada silo
+   *  implementado no front só por enquanto
    */
   updateMinMedMaxTemp(state, id_silo) {
     let siloSelecionado = state.silos.filter((element) => {

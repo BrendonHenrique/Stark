@@ -31,10 +31,10 @@ legenda_de_cores: [{
       valor: "#ff1212"
     }
   ],
-//   Valores correspondentes ao gradiente de cores , quanto mais próximo do valor 
-//  de temperatura_min mais próximo será do primeiro valor no gradiente 
-// e logo quanto mais oróximo do temperatura_alta mais próximo será do segundo valor
+// Valores correspondentes ao gradiente de cores , quanto mais próximo do valor 
+// de temperatura_min mais próximo será do primeiro valor no gradiente ( temperatura baixa )
+// quanto mais próximo do temperatura_alta mais próximo será do segundo valor ( temperatura alta )
   configuracoes_de_cores: {
-    temperatura_min: 10,
+    temperatura_baixa: 10,
     temperatura_alta: 40
   } 

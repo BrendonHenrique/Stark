@@ -45,10 +45,6 @@ export default class CoresController{
         store.dispatch('legenda_de_cores/update_legenda_de_cores',payload)
     }
 
-    static updateConfiguracoesDecores(payload){
-        store.dispatch('legenda_de_cores/update_configuracoes_de_cores', payload)
-    }
-
     static updateTemperaturaAlta(payload){
         store.dispatch('legenda_de_cores/update_temperatura_alta', payload)
     }

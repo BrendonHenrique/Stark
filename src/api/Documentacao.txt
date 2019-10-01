@@ -1,5 +1,142 @@
-# Modelos que devem ser recebidos pelo client 
+# Modelos que devem ser recebidos e que serão enviados pelo client por json-rpc
 
-- method da Api : 'silo.getSilos'
-    - Explicação : Faz get dos silos e atualiza o store
-    - Modelo de recebimento : src/models/Silos/model.js
+    - Silo methods : 
+        
+        - silo.getSilos
+            - Faz get dos silos e atualiza o store
+            - Modelo no store e de recebimento : src/models/Silos/model.js
+
+        - silo.updateEquilibrioHigroscopico
+            - Atualiza o equilibrio higroscópico atual inputado pelo usuário
+            - Modelo de envio para server : 
+            {
+                method: 'silo.updateEquilibrioHigroscopico', 
+                params: 
+                {
+                    index_silo: Number,
+                    equilibrio_higroscopico: {
+                        atual: Number,
+                        equilibrio: Number,
+                    }
+                }
+            }
+        
+        - silo.updateFuncaoDeAeracao
+            - atualiza a função de aeração ligada pelo usuário 
+            - modelo de envio para server : 
+            {   
+                index_silo: Number,
+                aerador:{    
+                    funcoes: [{
+                        label: 'Manual',
+                        ligada: false
+                    },
+                    {
+                        label: 'Automática',
+                        ligada: false,
+                        processos: [{
+                            label: 'Conservação',
+                            ligada: false
+                        },
+                        {
+                            label: 'Secagem',
+                            ligada: false
+                        }
+                        ]
+                    },
+                    {
+                        label: 'Semi Automática',
+                        ligada: false,
+                    },
+                    {
+                        label: 'Forçado',
+                        ligada: false
+                    },
+                    {
+                        label: 'Expurgo',
+                        ligada: false
+                    }]
+                }
+            }
+             
+        - silo.updateProdutoArmazenado
+            - Atualiza o produto armazenado no silo selecionado pelo usuário 
+            - Modelo de envio para server : 
+            {
+                method: 'silo.updateProdutoArmazenado', 
+                params: 
+                {
+                    index_silo: Number,
+                    produto_armazenado:{
+                        nome: String,
+                        variedade: String,
+                        safra: String
+                    }
+                }
+            }
+
+    
+    - Legenda de cores methods : 
+
+        - legendaDeCores.getLegenda
+            - Faz get da legenda de cores e atualiza o store
+            - Modelo no store e de recebimento : models/LegendaDeCores/model.js
+
+        - legendaDeCores.updateLegendaDeCores
+            - Atualiza a legenda de cores 
+            - modelo para envio é o mesmo que o para recebimento : 
+            {
+                method: 'legendaDecores.updateLegendaDeCores,
+                params:{
+                    models/LegendaDeCores/model.js 
+                }
+            } 
+
+    - Estação meteorológica methods :
+        
+        - weatherForecast.getValues
+            - Faz get dos valores da estação meteorológica 
+            - modelo para recebimento : 
+            {
+                method: 'weatherForecast.getValues,
+                params: {
+                    cloudiness: Number,
+                    windSpeed: Number,
+                    humidity: Number,
+                    temperatureValue: Number,
+                    location: String,
+                }
+            }
+
+    - Informações de ambiente methods : 
+
+        - infosAmbiente.getValues 
+            - Faz get dos valores do ambiente 
+            - modelo para recebimento :
+            {
+                method: 'infosAmbiente.getValues,
+                params:{
+                    ambiente:{
+                        umidade_relativa_do_ar_max: '',
+                        umidade_relativa_do_ar_min: '',
+                        temperatura_ambiente_max: '',
+                    }
+                }
+            } 
+
+        - infosAmbiente.updateValues 
+            - Atualiza os valores do ambiente inputados na função por aeração semi automática 
+            - modelo para envio :
+            {
+                method: 'infosAmbiente.getValues,
+                params:{
+                    ambiente:{
+                        umidade_relativa_do_ar_max: '',
+                        umidade_relativa_do_ar_min: '',
+                        temperatura_ambiente_max: '',
+                    }
+                }
+            } 
+
+      
+

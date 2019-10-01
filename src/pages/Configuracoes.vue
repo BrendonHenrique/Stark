@@ -49,7 +49,6 @@ export default {
 
   .menu-bar-configuraces
     position fixed
-    top 4.5rem
     left 0px
     right 0
     background-color $primary
