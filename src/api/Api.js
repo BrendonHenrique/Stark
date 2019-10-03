@@ -3,6 +3,7 @@ import simple_jsonrpc from 'simple-jsonrpc-js'
 import SiloController from '../controllers/Silos/Controller'
 import ConnectionStatusController from '../controllers/ConnectionStatus/Controller'
 import NotifyUser from '../services/NotifyUser'
+import { promises } from 'fs';
 
 class Api {
     
@@ -19,8 +20,8 @@ class Api {
 
         // Tratamento de erros na conexão 
         this.socket.onerror = error => this.onDisconnect() 
-        this.socket.onclose = event => this.onDisconnect() 
         const {statusDescription} = ConnectionStatusController.getConnectionStatus()
+        this.socket.onclose = event => this.onDisconnect() 
         this.onDisconnect = () => {
             if(statusDescription == 'sem conexão' || statusDescription  == 'conectado' ){
                 ConnectionStatusController.updateConnectionStatus({ 
@@ -30,10 +31,10 @@ class Api {
                 NotifyUser.error('Sem conexão')
             }
         }
-
-        // função com callback para executar após a abertura da conexão 
-        // atualiza o status da conexão e descrição , passa um callback para as funções que irão enviar métodos para o servidor
-        this.onConnected =  (callback) => this.socket.onopen = () => {
+        
+        // atualiza o status da conexão e retorna promisse para executar uma metodo no servidor após abrir a conexão 
+        // com o websockets 
+        this.socket.onopen = () => {
             if(statusDescription == 'sem conexão' || statusDescription  == 'tentando conectar' ){
                 ConnectionStatusController.updateConnectionStatus({ 
                     isConnected: true, 
@@ -41,20 +42,21 @@ class Api {
                 })
                 NotifyUser.success('Conectado')
             }
-            callback()
-        } 
+            return Promise.resolve()
+        }
 
         // listeners para os métodos enviados pelo servidor
         // teste
         this.jrpc.on('view.setTitle', title => {
             console.log(title)
+            this.add()
         })
         
     }
     
     // teste
     add = () => {
-        this.onConnected(() => {
+        this.socket.onopen().then(() => {
             this.jrpc.call('add', [2, 3]).then(function (result) {
                 console.log(result)
             })

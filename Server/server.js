@@ -24,6 +24,6 @@ var webSocketServer = new WebSocketServer.Server({
     jrpc.on('add', ['x', 'y'], add);
 
     jrpc.call('view.setTitle', 
-    ["Enviando do servidor para o browser"]);
+    ["Ping from server"]);
 
 });

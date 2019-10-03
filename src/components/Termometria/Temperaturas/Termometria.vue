@@ -90,11 +90,6 @@ export default {
 }
 </script>
 
-<style lang="stylus">
-  .termometria-wrapper
-    display flex 
-    justify-content center 
-    align-items center
-    paddig 20px
+<style lang="stylus"> 
 
 </style>

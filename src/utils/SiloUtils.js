@@ -466,7 +466,8 @@ const geradorDeStatusDoSensor = () => {
     'Sensor com erro',
     'Ativo'
   ]
-  return listaDeStatusPossiveis[Math.ceil(random(0,6))]
+  return 'Ativo'
+  // return listaDeStatusPossiveis[Math.ceil(random(0,6))]
 }
 
 export function buildRandomicPendulos() {

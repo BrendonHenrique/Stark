@@ -25,7 +25,7 @@ const state = {
       },
       {
         label: "Temperaturas baixas",
-        valor: "#f7ff00"
+        valor: "#d3d91e"
       },
       {
         label: "Temperaturas altas",

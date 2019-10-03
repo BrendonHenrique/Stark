@@ -14,8 +14,8 @@
       <q-toolbar>
         <q-toolbar-title class="row">
             <div style="justify-content:center;justify-item:center;margin-top:1px;display:flex;">
-              <img src="statics/spinedLogo.1.svg" class="rotating">
-              <img src="statics/garten3.svg" style="width:300px;margin-left:5px;">
+              <img src="static/spinedLogo.1.svg" class="rotating">
+              <img src="static/garten3.svg" style="width:300px;margin-left:5px;">
             </div>
           <q-space />
           <p class="q-mt-md" style="font-family: Libre Caslon Text">
