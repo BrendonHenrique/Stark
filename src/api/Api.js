@@ -1,4 +1,3 @@
-const baseURL = '/api' 
 import simple_jsonrpc from 'simple-jsonrpc-js'
 import SiloController from '../controllers/Silos/Controller'
 import ConnectionStatusController from '../controllers/ConnectionStatus/Controller'
@@ -48,7 +47,7 @@ class Api {
         // listeners para os métodos enviados pelo servidor
         // teste
         this.jrpc.on('view.setTitle', title => {
-            console.log(title)
+            console.log('Recebendo dados do servidor')
             this.add()
         })
         
@@ -58,7 +57,7 @@ class Api {
     add = () => {
         this.socket.onopen().then(() => {
             this.jrpc.call('add', [2, 3]).then(function (result) {
-                console.log(result)
+                // console.log(result)
             })
         })
     }

@@ -79,7 +79,7 @@ module.exports = function (ctx) {
         'QPagination',
         'QForm',
         'QFab',
-        'QFabAction'
+        'QFabAction',
       ],
 
       directives: [

@@ -1,14 +1,12 @@
 <template>
     <!--  container para inserir o nó do canvas com o mapa de calor -->
-      
     <div class="mapa-de-calor">
       <div class="row justify-center">
-        <div class='col-xs-12 col-sm-9 col-md-7 col-lg-6 box-silo'>
+        <div class='col-xs-12 col-sm-9 col-md-7 col-lg-7 box-silo'>
           <div class='box-heatmap' style="height:100vh;"/>
         </div>
       </div>
     </div>
-
     <!--  -->
 </template>
 <script>
@@ -76,7 +74,7 @@ export default {
             value: sensor.temperatura,
             x : x_position,  
             y : y_position,
-            radius : ((y_offset + x_offset) / Math.PI) + parentWidth * 0.05
+            radius : ((y_offset + x_offset) / Math.PI) + parentWidth * 0.04
           }
           this.data.push(ponto)
           y_position = y_position - parseInt(y_offset * 0.8) 
@@ -154,8 +152,6 @@ export default {
   .box-silo
     background url('../../../assets/bg-silo.png') no-repeat center center
     background-size cover
-    position relative
-    transform scale(0.9)
   
   @media (min-width: 1024px) 
     .heatmap-canvas 
@@ -172,11 +168,11 @@ export default {
     .heatmap-canvas 
       position absolute
       top unset !important
-      bottom -30px
+      bottom -15px
       justify-content center 
       display flex
       width 100%
-      height 95vh  
+      height 90vh
   
 
 </style>

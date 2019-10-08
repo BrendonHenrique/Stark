@@ -18,7 +18,6 @@ export default{
 }
 </script>
 <style lang="stylus">
-  
   .drawer-style
     .q-drawer 
       height 100%
@@ -72,6 +71,5 @@ export default{
     .q-item--clickable:hover:before, .q-item--clickable:focus:before, .q-item--clickable:active:before
       -webkit-transform scaleX(1)
       transform scaleX(1)
-    
   
 </style>

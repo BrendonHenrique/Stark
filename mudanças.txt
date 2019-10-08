@@ -1,0 +1,6 @@
+adicionar input para temperatura ambiente minima em funções de aeração  semi automática
+adicionar em configurações possibilidade de kelvin , celcius e fahrenheit
+bloqueio de horarios para poder aerar ou nao
+configuração a mais 
+    informação sobre o saco , 40,50,60kg 
+    tamanho do silo 

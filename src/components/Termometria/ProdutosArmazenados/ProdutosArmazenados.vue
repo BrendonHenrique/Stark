@@ -127,7 +127,7 @@ export default {
         this.atualizaProduto()
     },  
     components:{
-        'avatar-header': require('./AvatarHeader.vue').default,
+        'avatar-header': require('./stateless/AvatarHeader.vue').default,
         'save-button': require('../../Shared/SaveButton').default
     },
     computed:{

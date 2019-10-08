@@ -13,7 +13,6 @@
   </q-list>
 </template>
 <script>
-
   export default{
     props:['navs'],
   }

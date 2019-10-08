@@ -23,7 +23,7 @@
           </layout-drawer>
 
           <!-- Rotas -->
-          <router-view class="rotas-de-conteudo" :class='{opacityContainer: openedDrawerLeft}'/>
+          <router-view class="rotas-de-conteudo" />
           <!--  -->
       
           <!-- footer -->
@@ -71,8 +71,5 @@ export default {
 
   .rotas-de-conteudo
     transition 0.6s linear 
-
-  .opacityContainer 
-    opacity: 0.4
 
 </style>

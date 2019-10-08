@@ -23,11 +23,9 @@
         <q-item-section avatar>
           <q-btn round size="md" class="shadow-7" :color="item.isPossible ? 'positive' : 'negative' " />
         </q-item-section>
-
         <span class="text-grey-9 possibiilidades-label">
           {{item.label}}
         </span>
-
       </q-item>
     </q-list>
     <!--  -->

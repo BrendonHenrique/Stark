@@ -12,8 +12,8 @@
     </q-card-section>
     <!--  -->
     
+    <!-- Informações de cada silo -->
     <main>
-        
       <!-- Quantidade de sacos -->
       <section-layout class="card-infos">
         <template v-slot:avatar>
@@ -32,43 +32,45 @@
 
       <!-- Temperaturas mínima , média e máxima -->
       <section-layout class="card-infos">
+        
+        <!-- Avatar -->
         <template v-slot:avatar>
           <q-btn glossy  dense color="secondary"  size="20px" round >
-            <q-img  src="assets/icons/warm.svg" style="width: 40px;margin-left:4.7px"  />
+            <q-img src="assets/icons/warm.svg" style="width: 40px;margin-left:4.7px"  />
           </q-btn>
-        </template> 
+        </template>
+         <!--  -->
 
+        <!-- Temperaturas -->
         <template v-slot:label class="row">
           <div class="column items-start">
-              
             <q-item-label class="col">
               <div>
                 <div class="text-weight-thin">Temperatura min</div>
                 <div class="text-grey-8">{{silo.temperatura.minima}} ºC</div>
               </div>
             </q-item-label>
-            
             <q-item-label class="col">  
               <div>
                 <div class="text-weight-thin">Temperatura média</div>
                 <div class="text-grey-8">{{silo.temperatura.media}} ºC</div>
               </div>
             </q-item-label>
-
             <q-item-label class="col">
               <div>
                 <div class="text-weight-thin">Temperatura max</div>
                 <div class="text-grey-8">{{silo.temperatura.maxima}} ºC</div>
               </div>
             </q-item-label>
-
           </div>
         </template>
+        <!--  -->
 
       </section-layout>
       <!--  -->
 
     </main>
+    <!--  -->
 
   </div>
 </template>
@@ -81,7 +83,7 @@
       SiloController.updateMinMedMaxTemp(this.silo.id)
     },
     components:{
-      'section-layout': require('components/Silos/SectionLayout.vue').default,
+      'section-layout': require('components/Silos/stateless/SectionLayout.vue').default,
       'sequential-entrace': require('components/Shared/SequentialEntrace.vue').default,
     }
   }
@@ -100,6 +102,5 @@
   .card-silo 
     .q-card__section
       padding 13px
-    
 
 </style>

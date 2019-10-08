@@ -1,20 +1,15 @@
 <template>
     <!-- Card de controle de aeração -->
     <div class='row justify-center items-center' style="width:100%;margin-bottom:5rem;">
-        
         <q-card class="card-de-aeracao bg-grey-3 col-sm-12 col-xs-12 col-md-12 col-lg-8">
-            
             <!-- Efeito de background -->
             <particles />
             <!--  -->
-            
             <!-- Controlador de visualização altera a face do flipcard
             entre funções de aeração e possibilidades de aeração -->
             <view-controler :view="card_view" @changeView="changeView"/> 
             <!--  -->
-
             <div class="row justify-between" >
-                
                 <!-- Parte esquerda do card, contém as informações sobre equilibrio higroscópico -->
                 <div class="col-xs-5 col-sm-4 col-md-4 col-lg-4">
                     <div class="column items-center">
@@ -46,15 +41,10 @@
                     </flip-card>
                 </div>
                 <!--  -->
-
             </div>
-
         </q-card>
-    
     </div>
-    
     <!--  -->
-
 </template>
 
 <script>
@@ -81,13 +71,12 @@ export default {
     }, 
     components:{
         'particles': require('../../Shared/Particles').default,
-        'avatar': require('./Avatar').default,
+        'avatar': require('./stateless/Avatar').default,
         'infos-equilibrio': require('./InfosEquilibrio').default, 
         'view-controler': require('./ViewControler').default,
         'possibilidades': require('./Possibilidades').default,
-        'flip-card': require('./FlipCard').default,
+        'flip-card': require('./stateless/FlipCard').default,
         'funcoes': require('./Funcoes').default,
-        'paginador-de-aerador' :  require('./paginadorAerador').default 
     }, 
 } 
 </script> 

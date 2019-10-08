@@ -8,9 +8,9 @@
     <!-- Fab Button com possibilidades de visualização do mapa de calor e dos sensores  -->
     <div style="z-index:4;margin-bottom:10rem;" class="fixed-bottom-right q-mb-sm q-mr-sm">
       <q-tooltip :content-style="{fontSize:'15px'}">
-          Alterar visualização 
+          Menu de visualizações 
       </q-tooltip>
-      <q-fab  color="grey-5" persistent text-color="black" icon="keyboard_arrow_left" direction="left">
+      <q-fab  color="grey-5" persistent text-color="black" icon="menu" direction="left">
         <q-fab-action color="grey-5" text-color="black" icon="whatshot" @click="mostrarMapaDeCalor">
           <q-tooltip anchor="top middle" self="bottom middle" :offset="[10, 10]" :content-style="{fontSize:'15px'}">
             Visualizar mapa de calor
@@ -23,7 +23,9 @@
         </q-fab-action>
       </q-fab>
 
+
     </div> 
+
     <!--  -->
 
   </div>
@@ -39,8 +41,8 @@ export default {
     return{
       pendulos: [],
       key: 1, 
-      showPendulos: false,
-      showMapa:true
+      showPendulos: true,
+      showMapa:false,
     }
   },
   // Get das temperaturas basenado-se no index so silo , caso a página seja renderizada via this.$route.push apartir da página dos silos
@@ -69,8 +71,8 @@ export default {
       let siloEncontrado = SiloController.getSiloById(this.index_silo)
       this.pendulos = []
       this.pendulos = siloEncontrado.pendulos
-      // console.log(`temp\nmin ${siloEncontrado.temperatura.minima}\nMed ${siloEncontrado.temperatura.media}\nMax ${siloEncontrado.temperatura.maxima}`)
     },
+    // Controladores para visualização da termometria por mapa de calor ou sensores
     mostrarMapaDeCalor(){
       if(this.showPendulos) this.showPendulos = false
       this.showMapa = true 
@@ -89,7 +91,4 @@ export default {
   }
 }
 </script>
-
-<style lang="stylus"> 
-
-</style>
+ 

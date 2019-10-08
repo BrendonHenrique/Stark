@@ -39,18 +39,22 @@
         </q-input>
         <!--  -->
         
+        <!-- Tooltip de aviso para os valores -->
         <q-tooltip v-if="valorIncorreto">
             <span class="infos-equilibrio-input">
                 Insira um valor válido para o equilibrio higroscópico atual
             </span>
         </q-tooltip>
+        <!--  -->
 
+        <!-- botão para eviar alterações -->
         <save-button
         style="margin-top:35px;margin-left: 25px;"
         :isDisabled="valorIncorreto"
         @salvarAlteracoes="salvarNovoEquilibrio" 
         :mensagem="`Deseja salvar ${novoEquilibrioHigroscopico.atual} como o valor higroscópico atual ?`">
         </save-button>
+        <!--  -->
 
     </div>
 </template>
@@ -75,8 +79,8 @@ export default {
     methods:{
         salvarNovoEquilibrio(){
             SiloController.updateEquilibrioHigroscopicoAtual({
-            index_silo: this.index_silo,
-            novoEquilibrio: this.novoEquilibrioHigroscopico.atual
+                index_silo: this.index_silo,
+                novoEquilibrio: this.novoEquilibrioHigroscopico.atual
             })
         },
         getEquilibrioDoStore(novoIndex){
