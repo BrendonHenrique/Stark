@@ -37,8 +37,7 @@
 </template>
 
 <script>
-
-import { mapGetters } from 'vuex'
+ 
 // Service auxiliar para transformar a temperatura em cor 
 import TempToColor from '../../../services/TempToColor'
 // lib para animar a entrada dos sensores
@@ -58,15 +57,12 @@ export default {
         return{
             key: 1,  
         }
-    },
-    computed:{ 
-    ...mapGetters('legenda_de_cores',['cores_do_gradiente']), 
     }, 
     methods:{
         // Transforma o status do sensor em cor de fundo dependendo das configurações da legenda de cor
         parseBySensorStatus(sensor){
             if(sensor.status === 'Ativo'){
-                return TempToColor.parse(this, sensor.temperatura / CoresController.getConfiguracoesDeCores().temperatura_alta)
+                return TempToColor.parse(sensor.temperatura / CoresController.getConfiguracoesDeCores().temperatura_alta)
             }else{
                 return CoresController.getCorByLabel(sensor.status)
             }

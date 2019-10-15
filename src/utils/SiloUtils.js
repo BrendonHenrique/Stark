@@ -498,7 +498,7 @@ export function buildRandomicPendulos() {
 // Utilizada no momento
 export function buildRandomicSilos() {
   let silos = [],
-    silos_length = parseInt(random(10, 20).toFixed(1))
+    silos_length = parseInt(random(5, 10).toFixed(1))
 
   for (let index = 0; index < silos_length; index++) {
     if (index == 0) {

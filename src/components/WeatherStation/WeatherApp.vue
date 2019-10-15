@@ -1,5 +1,6 @@
 <template> 
   <main>
+
     <template v-if="this.forecast.temperatureValue != 0">
       
       <!-- Medidas de umidade e porcentagem de possibilidade da chuva -->
@@ -72,7 +73,7 @@ export default {
 
 <style scoped lang="stylus">
   main
-    height 40rem
+    height 33rem;
     width 35rem
     padding 10px 15px
     background-position center

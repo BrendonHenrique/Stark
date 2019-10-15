@@ -113,14 +113,14 @@ export default {
     },
     methods:{
         getProdutoArmazenado(){
-            const {produto_armazenado} = SiloController.getSiloById(this.index_silo)
-            return produto_armazenado
+            const {produto_armazenado} = SiloController.getSiloById(this.index_silo);
+            return produto_armazenado;
         },
         atualizaProduto(){
-            Object.assign(this.produto, this.getProdutoArmazenado(this.index_silo))
+            Object.assign(this.produto, this.getProdutoArmazenado(this.index_silo));
         },
         enviarProdutoParaStore(){
-            SiloController.updateProdutoArmazenado({id_silo: this.index_silo, produto: this.produto})
+            SiloController.updateProdutoArmazenado({id_silo: this.index_silo, produto: this.produto});
         }
     },
     mounted(){
@@ -132,15 +132,15 @@ export default {
     },
     computed:{
         produtoNome(){
-            return this.produto.nome
+            return this.produto.nome;
         },
         getOpcoesDeProdutos(){
-            return  this.produtos.map( (val) =>  val.label)
+            return  this.produtos.map( (val) =>  val.label);
         }
     },
     watch:{
         index_silo(index){
-            this.atualizaProduto()
+            this.atualizaProduto();
         },
     }
 }

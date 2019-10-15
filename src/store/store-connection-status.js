@@ -8,7 +8,7 @@ const state = {
 
 const mutations  = {
     update_connection_status: (state,payload) => {
-        Object.assign(state.status , payload) 
+        Object.assign(state.status , payload) ;
     }
 }
 

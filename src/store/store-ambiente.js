@@ -8,7 +8,7 @@ const state = {
 
 const mutations = {
   update_infos_ambiente(state, payload){
-    Object.assign(state.ambiente, payload) 
+    Object.assign(state.ambiente, payload);
   }
 }
 

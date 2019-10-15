@@ -39,32 +39,32 @@ const state = {
 
 const mutations =  {
   update_legenda_de_cores(state, payload){
-    state.legenda_de_cores = payload
+    state.legenda_de_cores = payload;
   },
   update_configuracoes_de_cores(state, payload){
-    Object.assign(state.configuracoes_de_cores, payload)
+    Object.assign(state.configuracoes_de_cores, payload);
   },
   update_temperatura_alta(state, payload){
-    state.configuracoes_de_cores.temperatura_alta = payload
+    state.configuracoes_de_cores.temperatura_alta = payload;
   },
   update_temperatura_baixa(state, payload){
-    state.configuracoes_de_cores.temperatura_baixa = payload
+    state.configuracoes_de_cores.temperatura_baixa = payload;
   },
 
 } 
 
 const actions = { 
   update_legenda_de_cores({commit}, payload){
-    commit('update_legenda_de_cores', payload)
+    commit('update_legenda_de_cores', payload);
   },
   update_configuracoes_de_cores({commit}, payload){
-    commit('update_configuracoes_de_cores', payload)
+    commit('update_configuracoes_de_cores', payload);
   },
   update_temperatura_alta({commit}, payload){
-    commit('update_temperatura_alta', payload)
+    commit('update_temperatura_alta', payload);
   },
   update_temperatura_baixa({commit}, payload){
-    commit('update_temperatura_baixa', payload)
+    commit('update_temperatura_baixa', payload);
   },
 
 }
@@ -72,24 +72,24 @@ const actions = {
 const getters = { 
     
   legenda_de_cores: (state) => {
-    return state.legenda_de_cores
+    return state.legenda_de_cores;
   },
 
   gradiente_de_temperatura: (state) => {
     let cores_do_gradiente = state.legenda_de_cores.filter( (valor) => {
-      return valor.label == 'Temperaturas baixas' || valor.label == 'Temperaturas altas'
+      return valor.label == 'Temperaturas baixas' || valor.label == 'Temperaturas altas';
     })
-    return `linear-gradient(90deg, ${cores_do_gradiente[0].valor}, ${cores_do_gradiente[1].valor})` 
+    return `linear-gradient(90deg, ${cores_do_gradiente[0].valor}, ${cores_do_gradiente[1].valor})` ;
   },
 
   cores_do_gradiente: (state) => {
     return state.legenda_de_cores.filter( (valor) => {
-      return valor.label == 'Temperaturas baixas' || valor.label == 'Temperaturas altas'
+      return valor.label == 'Temperaturas baixas' || valor.label == 'Temperaturas altas';
     })
   },
 
   configuracoes_de_cores: (state) => {
-    return state.configuracoes_de_cores
+    return state.configuracoes_de_cores;
   },
 
   temperatura_baixa: (state, getters) => state.configuracoes_de_cores.temperatura_baixa, 

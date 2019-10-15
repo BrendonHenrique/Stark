@@ -44,23 +44,17 @@
         <!-- Temperaturas -->
         <template v-slot:label class="row">
           <div class="column items-start">
-            <q-item-label class="col">
-              <div>
+            <q-item-label class="col" :style="tempBorder(silo.temperatura.minima)">
                 <div class="text-weight-thin">Temperatura min</div>
                 <div class="text-grey-8">{{silo.temperatura.minima}} ºC</div>
-              </div>
             </q-item-label>
-            <q-item-label class="col">  
-              <div>
+            <q-item-label class="col" :style="tempBorder(silo.temperatura.media)">  
                 <div class="text-weight-thin">Temperatura média</div>
                 <div class="text-grey-8">{{silo.temperatura.media}} ºC</div>
-              </div>
             </q-item-label>
-            <q-item-label class="col">
-              <div>
+            <q-item-label class="col" :style="tempBorder(silo.temperatura.maxima)">
                 <div class="text-weight-thin">Temperatura max</div>
                 <div class="text-grey-8">{{silo.temperatura.maxima}} ºC</div>
-              </div>
             </q-item-label>
           </div>
         </template>
@@ -76,21 +70,36 @@
 </template>
 
 <script>
-  import SiloController from '../../controllers/Silos/Controller'
+  import TempToColor  from '../../services/TempToColor';
+  import SiloController from '../../controllers/Silos/Controller';
+  import LegendaDeCoresController from '../../controllers/LegendaDeCores/Controller';
+  
   export default{
     props:['silo'], 
     mounted(){
-      SiloController.updateMinMedMaxTemp(this.silo.id)
+      SiloController.updateMinMedMaxTemp(this.silo.id);      
     },
     components:{
       'section-layout': require('components/Silos/stateless/SectionLayout.vue').default,
       'sequential-entrace': require('components/Shared/SequentialEntrace.vue').default,
+    },
+    methods:{
+      tempBorder(temp){
+        return {
+          borderLeft: `7px solid ${TempToColor.parse(temp/LegendaDeCoresController.getConfiguracoesDeCores().temperatura_alta) }`,
+          paddingLeft: '3px'
+        };
+      },
+      badgeColor(temp){
+        return {
+          backgroundColor: `${TempToColor.parse(temp/LegendaDeCoresController.getConfiguracoesDeCores().temperatura_alta)}`,
+        };
+      }
     }
   }
 </script>
 
 <style lang="stylus">
-
   .silo_id
     position absolute
     bottom 0
@@ -102,5 +111,4 @@
   .card-silo 
     .q-card__section
       padding 13px
-
 </style>

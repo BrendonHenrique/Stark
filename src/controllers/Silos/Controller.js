@@ -62,4 +62,8 @@ export default class SiloController {
     store.dispatch('silos/update_silos',payload)
   }
 
+  static onOffAerador(payload){
+    store.dispatch('silos/onOffAerador',payload)
+  }
+
 }

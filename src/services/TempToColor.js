@@ -8,11 +8,12 @@
 * @param {vm} Instância do vue
 * @param {valor} valor dentre 0 e 1
 */
-   
+import LegendaDeCoresController from '../controllers/LegendaDeCores/Controller';
 const colorBetween = require('color-between');
 class TempToColor {
-    static parse(vm,valor){
-       return colorBetween(vm.cores_do_gradiente[0].valor, vm.cores_do_gradiente[1].valor, valor, 'hex');
+    static parse(valor){
+       return colorBetween(LegendaDeCoresController.getCoresDoGradiente()[0].valor, 
+       LegendaDeCoresController.getCoresDoGradiente()[1].valor, valor, 'hex');
     }
 }
 

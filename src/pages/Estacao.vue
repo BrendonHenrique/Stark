@@ -31,7 +31,7 @@ export default {
 <style lang="stylus" >
 
   .wheater-layout
-    padding 15px
+    padding 0 15px
     display flex
     justify-content center
     align-items center 

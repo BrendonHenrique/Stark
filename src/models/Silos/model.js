@@ -40,6 +40,7 @@ silos: [{
     equilibrio: Number,
   },
   aerador: {
+    ligado: false,
     funcoes: [{
         label: 'Manual',
         ligada: false

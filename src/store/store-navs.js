@@ -26,16 +26,10 @@ const state = {
       to: '/configuracoes'
     }
   ],
-}
-
-const mutations = {}
-
-const actions = {}
+};  
 
 const getters = {
-
   navs: (state) =>  state.navs
-
 }
 
 export default {
@@ -43,7 +37,5 @@ export default {
   namespaced: true,
   // this allows me to create another one store modules
   state,
-  mutations,
-  actions,
   getters
 }

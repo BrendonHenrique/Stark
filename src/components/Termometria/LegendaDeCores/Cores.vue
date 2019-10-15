@@ -102,13 +102,13 @@ export default {
   },
   methods:{
     salvarLegendaDeCores(){
-      CoresController.updateLegendaDeCores(this.cores)
+      CoresController.updateLegendaDeCores(this.cores);
     }
   },
   mounted(){
-    this.cores = CoresController.getLegendaDeCores()
-    this.temperaturaBaixa = CoresController.getTemperaturaBaixa()
-    this.temperaturaAlta = CoresController.getTemperaturaAlta()
+    this.cores = CoresController.getLegendaDeCores();
+    this.temperaturaBaixa = CoresController.getTemperaturaBaixa();
+    this.temperaturaAlta = CoresController.getTemperaturaAlta();
   },
   components:{
     'save-button': require('../../Shared/SaveButton').default,
@@ -116,7 +116,7 @@ export default {
   },
   computed:{
     gradienteDeTemperatura(){
-      return CoresController.getGradienteDeTemperatura()
+      return CoresController.getGradienteDeTemperatura();
     }
   }
 };

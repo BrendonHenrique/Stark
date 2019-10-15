@@ -3,7 +3,7 @@ import {
 } from "fs";
 
 // Funções utilizadas apenas para teste no desenvolvimento , serão removidas
-import {random, buildRandomicSilos, getSiloById, } from '../utils/SiloUtils'
+import {buildRandomicSilos, getSiloById} from '../utils/SiloUtils';
 
 const state = {
   silos: buildRandomicSilos(),
@@ -20,27 +20,27 @@ const mutations = {
       if (element.id == id_silo) {
         return element
       }
-    })
+    });
 
-    var temperaturas = []
+    var temperaturas = [];
     const {
       pendulos
-    } = siloSelecionado[0]
+    } = siloSelecionado[0];
 
     pendulos.map((pendulo) => {
       pendulo.sensores.map((sensor) => {
-        temperaturas.push(parseFloat(sensor.temperatura))
+        temperaturas.push(parseFloat(sensor.temperatura));
       })
     })
 
-    let sum = temperaturas.reduce((previous, current) => current += previous)
-    let media = sum / temperaturas.length
+    let sum = temperaturas.reduce((previous, current) => current += previous);
+    let media = sum / temperaturas.length;
 
     Object.assign(siloSelecionado[0].temperatura, {
       minima: parseFloat(Math.min(...temperaturas).toFixed(2)),
       media: parseFloat(media.toFixed(2)),
       maxima: parseFloat(Math.max(...temperaturas).toFixed(2)),
-    })
+    });
   },
 
   /**
@@ -49,48 +49,50 @@ const mutations = {
    */
   update_equilibrio_higroscopico_atual(state, payload) {
     const { index_silo, 
-    novoEquilibrio } = payload 
-    let silo = getSiloById(state.silos, index_silo)
-    silo.equilibrio_higroscopico.atual = novoEquilibrio 
+    novoEquilibrio } = payload;
+    let silo = getSiloById(state.silos, index_silo);
+    silo.equilibrio_higroscopico.atual = novoEquilibrio;
   },
 
   // Atualiza o produto armazenado no respectivo silo correspondente ao id passado 
   update_produto_armazenado(state, payload) {
-    const {id_silo,produto} = payload
-    const silo = getSiloById(state.silos, id_silo)
-    Object.assign(silo.produto_armazenado, produto)
+    const {id_silo,produto} = payload;
+    const silo = getSiloById(state.silos, id_silo);
+    Object.assign(silo.produto_armazenado, produto);
   },
 
   /**
    * Atualiza a função de aeração conforme os valores recebidos como parametro
   **/
   update_funcao_de_aeracao(state, payload) {
-    
     const {
       index_silo,
       label,
       ligada
-    } = payload
-      
-    let silo = getSiloById(state.silos, index_silo)
+    } = payload;
+    let silo = getSiloById(state.silos, index_silo);
     silo.aerador.funcoes.forEach(funcao => {
       if (funcao.label == label) {
-        funcao.ligada = ligada
+        funcao.ligada = ligada;
       } else if (funcao.processos != undefined) {
         funcao.processos.forEach(processo_automatico => {
           if (processo_automatico.label == label) {
-            processo_automatico.ligada = ligada
+            processo_automatico.ligada = ligada;
           }
-        })
+        });
       }
-    })
+    });
   },
 
   /**
    * Atualiza o array de silos
    */
   update_silos(state, payload) {
-    state.silos = payload
+    state.silos = payload;
+  },
+  
+  onOffAerador(state, payload){
+    let silo = getSiloById(state.silos, index_silo);
   }
 
 }
@@ -100,14 +102,14 @@ const actions = {
   update_silos({
     commit
   },payload){
-    commit('update_silos', payload)
+    commit('update_silos', payload);
   },
 
   // calculo futuramente será implementado no backend
   updateMinMedMaxTemp({
     commit
   }, payload) {
-    commit('updateMinMedMaxTemp', payload)
+    commit('updateMinMedMaxTemp', payload);
   },
   
   update_equilibrio_higroscopico_atual({
@@ -118,13 +120,18 @@ const actions = {
   
   update_produto_armazenado({commit}
   , payload) {
-    commit('update_produto_armazenado', payload)
+    commit('update_produto_armazenado', payload);
   },
   
   update_funcao_de_aeracao({
     commit
   }, payload) {
-    commit('update_funcao_de_aeracao', payload)
+    commit('update_funcao_de_aeracao', payload);
+  },
+  ligarAerador({
+    commit
+  }, payload){
+    commit('onOffAerador', payload);
   }
 }
 
@@ -135,34 +142,34 @@ const getters = {
     
   // Retorna o silo pelo id buscado  
   silo_by_id: (state) => (id_silo) => {
-    return  getSiloById(state.silos, id_silo)
+    return  getSiloById(state.silos, id_silo);
   },
 
   silos_length: (state) => {
-    return state.silos.length
+    return state.silos.length;
   },
 
   // get das funções de aeração recebendo id do silo
   get_funcoes_de_aeracao: (state, getters) => (id_silo) => {
-    let silo = getSiloById(state.silos, id_silo)
-    return silo.aerador.funcoes
+    let silo = getSiloById(state.silos, id_silo);
+    return silo.aerador.funcoes;
   },
 
   // get das possibilidades de aeração recebendo id do silo 
   get_possibilidades_de_aeracao: (state, getters) => (id_silo) => {
-    let silo = getSiloById(id_silo)
-    return silo.possibilidades_aeracao
+    let silo = getSiloById(id_silo);
+    return silo.possibilidades_aeracao;
   },
 
   // get do equilibrio_higroscopico recebendo id do silo 
   get_equilibrio_higroscopico: (state, getters) => (id_silo) => {
-    return getSiloById(id_silo).equilibrio_higroscopico
+    return getSiloById(id_silo).equilibrio_higroscopico;
   },
 
   // get do produto armazenado recebendo o id do silo 
   get_produto_armazenado: (state, getters) => (id_silo) => {
-    let silo = getSiloById(id_silo)
-    return silo.produto_armazenado
+    let silo = getSiloById(id_silo);
+    return silo.produto_armazenado;
   },
 
 }

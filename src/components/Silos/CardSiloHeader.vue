@@ -2,10 +2,10 @@
 
   <!-- Card actions com evento para redirecionar o usuário apartir do card do silo -->
   <q-card-actions align="around" class="text-white" style="box-shadow">
-    
+
     <!-- Enviar para página dos pendulos -->
     <div>
-      <q-tooltip :content-style="{fontSize: '20px', borderRadius: '20px'}">
+      <q-tooltip :content-style="tooltipStyle">
         Visualizar sensores
       </q-tooltip>
       <q-btn round class="shadow-16" glossy icon="drag_indicator" size="18px" @click="verPendulos(index)" />
@@ -13,8 +13,8 @@
     <!--  -->
 
     <!-- enviar para os relatórios -->
-    <div> 
-      <q-tooltip :content-style="{fontSize: '20px', borderRadius: '20px'}">
+    <div>
+      <q-tooltip :content-style="tooltipStyle">
         Relatórios
       </q-tooltip>
       <q-btn round class="shadow-16" glossy icon="assignment" size="18px" @click="verRelatorios(index)" />
@@ -23,7 +23,7 @@
 
     <!-- enviar para o mapa de calor -->
     <div>
-      <q-tooltip :content-style="{fontSize: '20px', borderRadius: '20px'}">
+      <q-tooltip :content-style="tooltipStyle">
         Visualizar mapa de calor
       </q-tooltip>
       <q-btn round class="shadow-16" glossy icon="whatshot" size="18px" @click="verMapaDeCalor(index)" />
@@ -32,7 +32,7 @@
 
     <!-- enviar para ver o produto armazenado -->
     <div>
-      <q-tooltip :content-style="{fontSize: '20px', borderRadius: '20px'}">
+      <q-tooltip :content-style="tooltipStyle">
         Visualizar produto armazenado
       </q-tooltip>
       <q-btn round class="shadow-16" glossy size="18px" @click="verProdutoArmazenado(index)">
@@ -43,7 +43,7 @@
 
     <!-- ver o aerador (possibilidades de aeração e funções de aeração) -->
     <div>
-      <q-tooltip :content-style="{fontSize: '20px', borderRadius: '20px'}">
+      <q-tooltip :content-style="tooltipStyle">
         Visualizar aerador
       </q-tooltip>
       <q-btn round class="shadow-16" glossy size="18px" @click="verAerador(index)">
@@ -58,6 +58,14 @@
 
 <script>
   export default {
+    data() {
+      return {
+        tooltipStyle: {
+          fontSize: '20px',
+          borderRadius: '20px'
+        }
+      }
+    },
     props: ['index'],
     // eventos de redirecionamento com router
     methods: {
@@ -68,7 +76,7 @@
             id,
             viewType: 'mapaDeCalor'
           }
-        })
+        });
       },
       verPendulos(id) {
         this.$router.push({
@@ -77,7 +85,7 @@
             id,
             viewType: 'pendulos'
           }
-        })
+        });
       },
       verProdutoArmazenado(id) {
         this.$router.push({
@@ -86,7 +94,7 @@
             id,
             viewType: 'produtoArmazenado'
           }
-        })
+        });
       },
       verAerador(id) {
         this.$router.push({
@@ -95,7 +103,7 @@
             id,
             viewType: 'aerador'
           }
-        })
+        });
       },
       verRelatorios(id) {
         this.$router.push({
@@ -103,7 +111,7 @@
           params: {
             id
           }
-        })
+        });
       }
     }
   }

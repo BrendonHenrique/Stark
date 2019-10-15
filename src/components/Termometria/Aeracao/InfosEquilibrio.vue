@@ -74,23 +74,23 @@ export default {
         }
     },
     mounted(){
-        this.getEquilibrioDoStore(this.index_silo)
+        this.getEquilibrioDoStore(this.index_silo);
     },  
     methods:{
         salvarNovoEquilibrio(){
             SiloController.updateEquilibrioHigroscopicoAtual({
                 index_silo: this.index_silo,
                 novoEquilibrio: this.novoEquilibrioHigroscopico.atual
-            })
+            });
         },
         getEquilibrioDoStore(novoIndex){
             Object.assign(this.novoEquilibrioHigroscopico, 
-            SiloController.getEquilibrioHigroscopico(novoIndex))
+            SiloController.getEquilibrioHigroscopico(novoIndex));
         }
     },
     computed:{
         novoEquilibrio(){
-            return this.novoEquilibrioHigroscopico.atual
+            return this.novoEquilibrioHigroscopico.atual;
         }, 
     },
     components:{
@@ -98,10 +98,10 @@ export default {
     },
     watch:{
         novoEquilibrio(valor){
-            valor > 0 && valor < 100 ? this.valorIncorreto = false : this.valorIncorreto = true
+            valor > 0 && valor < 100 ? this.valorIncorreto = false : this.valorIncorreto = true;
         },
         index_silo(novoIndex){
-            this.getEquilibrioDoStore(novoIndex)
+            this.getEquilibrioDoStore(novoIndex);
         }
     }
 }

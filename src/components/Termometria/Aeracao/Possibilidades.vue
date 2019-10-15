@@ -46,15 +46,15 @@ export default {
   },
   methods: {
     getPossibilidadesDeAeracao(){
-      this.possibilidades = SiloController.getPossibilidadesDeAeracao(this.index_silo)
+      this.possibilidades = SiloController.getPossibilidadesDeAeracao(this.index_silo);
     }
   }, 
   mounted(){
-    this.getPossibilidadesDeAeracao()
+    this.getPossibilidadesDeAeracao();
   },
   watch:{
     index_silo(novoValor){
-      this.getPossibilidadesDeAeracao()
+      this.getPossibilidadesDeAeracao();
     }, 
   }
 }

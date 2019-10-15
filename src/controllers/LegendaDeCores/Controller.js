@@ -1,6 +1,6 @@
 import storeCores from '../../store/store-legenda-de-cores'
 
-const { state, mutations, actions, getters } = storeCores
+const { state, getters } = storeCores
 
 import vuexStore from '../../store/index' 
 const store = vuexStore()

@@ -2,18 +2,32 @@
     <!-- Card de controle de aeração -->
     <div class='row justify-center items-center' style="width:100%;margin-bottom:5rem;">
         <q-card class="card-de-aeracao bg-grey-3 col-sm-12 col-xs-12 col-md-12 col-lg-8">
+            
             <!-- Efeito de background -->
             <particles />
             <!--  -->
+            
             <!-- Controlador de visualização altera a face do flipcard
             entre funções de aeração e possibilidades de aeração -->
             <view-controler :view="card_view" @changeView="changeView"/> 
             <!--  -->
+            
             <div class="row justify-between" >
                 <!-- Parte esquerda do card, contém as informações sobre equilibrio higroscópico -->
                 <div class="col-xs-5 col-sm-4 col-md-4 col-lg-4">
                     <div class="column items-center">
                         <avatar class="q-mb-md" />
+                        
+                        <q-toggle
+                        v-show="possivelLigar" 
+                        @input="onOffAerador(index_silo)"
+                        class="q-my-md text-grey-9"
+                        style="z-index:4;"
+                        v-model="aeradorLigado"  
+                        :label="aeradorLigado ? 'Aerador Ligado' : 'Aerador Desligado'"
+                        color="green" checked-icon="check" unchecked-icon="clear"
+                        />
+
                         <infos-equilibrio  
                         :index_silo="index_silo"
                         />
@@ -35,6 +49,7 @@
                             <funcoes 
                             :isFlipped="flipped"
                             :index_silo="index_silo"
+                            @funcaoAlterada="getProcessoLigado"
                             />
                         </template>
 
@@ -42,6 +57,7 @@
                 </div>
                 <!--  -->
             </div>
+
         </q-card>
     </div>
     <!--  -->
@@ -59,15 +75,46 @@ export default {
                 Funcoes_card: false,
             }, 
             flipped: true,
+            aeradorLigado: true,
+            funcaoLigada:{},
+            possivelLigar: false
         }
+    },
+    mounted(){
+        this.getProcessoLigado(this.index_silo);
     },
     methods:{
         // Altera a visualização entre os cards de possibilidade e de funções pelo flip-card
         changeView(){
-            this.card_view.Possibilidades_card = !this.card_view.Possibilidades_card 
-            this.card_view.Funcoes_card = !this.card_view.Funcoes_card 
-            this.flipped = !this.flipped
-        }
+            this.card_view.Possibilidades_card = !this.card_view.Possibilidades_card;
+            this.card_view.Funcoes_card = !this.card_view.Funcoes_card;
+            this.flipped = !this.flipped;
+        },
+        onOffAerador(index_silo){
+            console.log(index_silo)
+        },
+        procuraProcessoLigado(arr){ 
+            arr.forEach( element => {
+                if(element.processos != undefined){
+                    element.processos.forEach(processo =>{
+                        if(processo.ligada){
+                            this.funcaoLigada = processo
+                        }    
+                    })
+                }else{
+                    if(element.ligada){
+                        this.funcaoLigada = element;
+                    }
+                }
+            }); 
+        },
+        getProcessoLigado(){
+            this.funcaoLigada = {};
+            this.procuraProcessoLigado(SiloController.getFuncoesDeAeracao(this.index_silo));
+        },
+        verificarSeExisteProcesso(obj){
+            return Object.keys(obj).length != 0;
+        } 
     }, 
     components:{
         'particles': require('../../Shared/Particles').default,
@@ -78,6 +125,21 @@ export default {
         'flip-card': require('./stateless/FlipCard').default,
         'funcoes': require('./Funcoes').default,
     }, 
+    watch:{
+        index_silo(){
+            this.getProcessoLigado();
+        },
+        funcaoLigada(funcao){
+            if(this.verificarSeExisteProcesso(funcao)){
+                console.log(funcao.label)
+                if(funcao.label === 'Manual'){
+                    this.possivelLigar = true
+                }else{
+                    this.possivelLigar = false
+                }
+            }
+        }
+    }
 } 
 </script> 
 
