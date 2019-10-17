@@ -23,4 +23,5 @@ aeração expurgo
 remover possibilidade de ligar ou desligar as funções 
 apenas seleciona a função e por default já vai estar ' ligada '  
 
-selecionou funcao manual -> funcao manual.ligada = true 
+selecionou funcao manual -> funcao manual.ligada = true
+selecionou funcao automatica ->  

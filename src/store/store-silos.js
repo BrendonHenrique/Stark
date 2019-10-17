@@ -70,18 +70,10 @@ const mutations = {
       label,
       ligada
     } = payload;
+    
     let silo = getSiloById(state.silos, index_silo);
-    silo.aerador.funcoes.forEach(funcao => {
-      if (funcao.label == label) {
-        funcao.ligada = ligada;
-      } else if (funcao.processos != undefined) {
-        funcao.processos.forEach(processo_automatico => {
-          if (processo_automatico.label == label) {
-            processo_automatico.ligada = ligada;
-          }
-        });
-      }
-    });
+
+
   },
 
   /**
@@ -128,6 +120,7 @@ const actions = {
   }, payload) {
     commit('update_funcao_de_aeracao', payload);
   },
+
   ligarAerador({
     commit
   }, payload){
@@ -149,10 +142,10 @@ const getters = {
     return state.silos.length;
   },
 
-  // get das funções de aeração recebendo id do silo
-  get_funcoes_de_aeracao: (state, getters) => (id_silo) => {
+  // get aerador pelo id do silo
+  get_aerador: (state, getters) => (id_silo) => {
     let silo = getSiloById(state.silos, id_silo);
-    return silo.aerador.funcoes;
+    return silo.aerador;
   },
 
   // get das possibilidades de aeração recebendo id do silo 

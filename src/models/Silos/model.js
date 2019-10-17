@@ -41,34 +41,31 @@ silos: [{
   },
   aerador: {
     ligado: false,
-    funcoes: [{
+    funcaoSelecionada: '',
+    funcaoAutomatica : '',
+    funcaoSemiAutomaticaLigada: false,
+    funcoes: [
+      {
         label: 'Manual',
-        ligada: false
       },
       {
         label: 'Automática',
-        ligada: false,
         processos: [{
             label: 'Conservação',
-            ligada: false
           },
           {
             label: 'Secagem',
-            ligada: false
           }
         ]
       },
       {
         label: 'Semi Automática',
-        ligada: false,
       },
       {
         label: 'Forçado',
-        ligada: false
       },
       {
         label: 'Expurgo',
-        ligada: false
     }]
   }
-}]
+}];

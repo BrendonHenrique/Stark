@@ -19,8 +19,7 @@
                         <avatar class="q-mb-md" />
                         
                         <q-toggle
-                        v-show="possivelLigar" 
-                        @input="onOffAerador(index_silo)"
+                        v-show="possivelLigarAerador" 
                         class="q-my-md text-grey-9"
                         style="z-index:4;"
                         v-model="aeradorLigado"  
@@ -49,7 +48,7 @@
                             <funcoes 
                             :isFlipped="flipped"
                             :index_silo="index_silo"
-                            @funcaoAlterada="getProcessoLigado"
+                            @funcaoManualSelecionada="atualizaVisualizacao"
                             />
                         </template>
 
@@ -64,8 +63,7 @@
 </template>
 
 <script>
-import SiloController from '../../../controllers/Silos/Controller'
-
+import {mapGetters} from 'vuex';
 export default {
     props:['index_silo'],
     data(){
@@ -75,13 +73,16 @@ export default {
                 Funcoes_card: false,
             }, 
             flipped: true,
-            aeradorLigado: true,
+            aeradorLigado: false,
             funcaoLigada:{},
-            possivelLigar: false
+            possivelLigarAerador: false
         }
     },
     mounted(){
-        this.getProcessoLigado(this.index_silo);
+        this.procuraFuncaoManual();
+    },
+    computed:{
+        ...mapGetters('silos',['get_aerador']),
     },
     methods:{
         // Altera a visualização entre os cards de possibilidade e de funções pelo flip-card
@@ -89,32 +90,29 @@ export default {
             this.card_view.Possibilidades_card = !this.card_view.Possibilidades_card;
             this.card_view.Funcoes_card = !this.card_view.Funcoes_card;
             this.flipped = !this.flipped;
-        },
-        onOffAerador(index_silo){
-            console.log(index_silo)
-        },
-        procuraProcessoLigado(arr){ 
-            arr.forEach( element => {
-                if(element.processos != undefined){
-                    element.processos.forEach(processo =>{
-                        if(processo.ligada){
-                            this.funcaoLigada = processo
-                        }    
-                    })
+        }, 
+        
+        // Procura função manual e atualiza possibilidade de ligar o aerador se ela estiver selecionada
+        procuraFuncaoManual(){ 
+            let aerador = this.get_aerador(this.index_silo);
+            if(aerador.funcaoSelecionada == 'Manual'){
+                this.possivelLigarAerador = true
+                if(this.aerador.ligado){
+                    this.aeradorLigado = true
                 }else{
-                    if(element.ligada){
-                        this.funcaoLigada = element;
-                    }
+                    this.aeradorLigado = false
                 }
-            }); 
+            }
         },
-        getProcessoLigado(){
-            this.funcaoLigada = {};
-            this.procuraProcessoLigado(SiloController.getFuncoesDeAeracao(this.index_silo));
-        },
-        verificarSeExisteProcesso(obj){
-            return Object.keys(obj).length != 0;
-        } 
+
+        // Se o usuário estiver selecionado manual irá atualizar a visualização possibilitando ligar
+        // e desligar o aerador
+        atualizaVisualizacao(valor){
+            this.possivelLigarAerador = valor
+            if(!valor){
+                this.aeradorLigado = false
+            }
+        }
     }, 
     components:{
         'particles': require('../../Shared/Particles').default,
@@ -127,17 +125,7 @@ export default {
     }, 
     watch:{
         index_silo(){
-            this.getProcessoLigado();
-        },
-        funcaoLigada(funcao){
-            if(this.verificarSeExisteProcesso(funcao)){
-                console.log(funcao.label)
-                if(funcao.label === 'Manual'){
-                    this.possivelLigar = true
-                }else{
-                    this.possivelLigar = false
-                }
-            }
+            this.procuraFuncaoManual();
         }
     }
 } 

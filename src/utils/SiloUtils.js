@@ -397,35 +397,33 @@ let siloSaoJoao = {
     atual: parseFloat(random(0, 100)).toFixed(1),
     equilibrio: parseFloat(random(0, 100)).toFixed(1),
   },
-  aerador:{
-    funcoes: [{
-      label: 'Manual',
-      ligada: false
-    },
-    {
-      label: 'Automática',
-      ligada: false,
-      processos: [{
-          label: 'Conservação',
-          ligada: false
-        },
-        {
-          label: 'Secagem',
-          ligada: false
-        }
-      ]
-    },
-    {
-      label: 'Semi Automática',
-      ligada: false,
-    },
-    {
-      label: 'Forçado',
-      ligada: false
-    },
-    {
-      label: 'Expurgo',
-      ligada: false
+  aerador: {
+    ligado: false,
+    funcaoSelecionada: '',
+    funcaoAutomatica : '',
+    funcaoSemiAutomaticaLigada: false,
+    funcoes: [
+      {
+        label: 'Manual',
+      },
+      {
+        label: 'Automática',
+        processos: [{
+            label: 'Conservação',
+          },
+          {
+            label: 'Secagem',
+          }
+        ]
+      },
+      {
+        label: 'Semi Automática',
+      },
+      {
+        label: 'Forçado',
+      },
+      {
+        label: 'Expurgo',
     }]
   }
 }
@@ -539,35 +537,33 @@ export function buildRandomicSilos() {
           atual: parseFloat(random(0, 100)).toFixed(1),
           equilibrio: parseFloat(random(0, 100)).toFixed(1),
         },
-        aerador:{
-          funcoes: [{
-            label: 'Manual',
-            ligada: false
-          },
-          {
-            label: 'Automática',
-            ligada: false,
-            processos: [{
-                label: 'Conservação',
-                ligada: false
-              },
-              {
-                label: 'Secagem',
-                ligada: false
-              }
-            ]
-          },
-          {
-            label: 'Semi Automática',
-            ligada: false,
-          },
-          {
-            label: 'Forçado',
-            ligada: false
-          },
-          {
-            label: 'Expurgo',
-            ligada: false
+        aerador: {
+          ligado: false,
+          funcaoSelecionada: '',
+          funcaoAutomatica : '',
+          funcaoSemiAutomaticaLigada: false,
+          funcoes: [
+            {
+              label: 'Manual',
+            },
+            {
+              label: 'Automática',
+              processos: [{
+                  label: 'Conservação',
+                },
+                {
+                  label: 'Secagem',
+                }
+              ]
+            },
+            {
+              label: 'Semi Automática',
+            },
+            {
+              label: 'Forçado',
+            },
+            {
+              label: 'Expurgo',
           }]
         }
       })
@@ -614,35 +610,32 @@ export function buildSilos(silos_length) {
         atual: parseFloat(random(0, 100)).toFixed(1),
         equilibrio: parseFloat(random(0, 100)).toFixed(1),
       },
-      aerador:{
-        funcoes: [{
-          label: 'Manual',
-          ligada: false
-        },
-        {
-          label: 'Automática',
-          ligada: false,
-          processos: [{
-              label: 'Conservação',
-              ligada: false
-            },
-            {
-              label: 'Secagem',
-              ligada: false
-            }
-          ]
-        },
-        {
-          label: 'Semi Automática',
-          ligada: false,
-        },
-        {
-          label: 'Forçado',
-          ligada: false
-        },
-        {
-          label: 'Expurgo',
-          ligada: false
+      aerador: {
+        ligado: false,
+        funcaoSelecionada: '',
+        funcaoAutomatica : '',
+        funcaoSemiAutomaticaLigada: false,
+        funcoes: [
+          {
+            label: 'Manual',
+          },
+          {
+            label: 'Automática',
+            processos: [{
+                label: 'Conservação',
+              },
+              {
+                label: 'Secagem',
+            }]
+          },
+          {
+            label: 'Semi Automática',
+          },
+          {
+            label: 'Forçado',
+          },
+          {
+            label: 'Expurgo',
         }]
       }
     })
