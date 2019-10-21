@@ -46,7 +46,7 @@
                     </span>
 
                     <div class="row">
-                        <strong class="q-mt-md text-h5">
+                        <strong class="q-mt-md text-h6">
                             {{funcaoSelecionada}}
                         </strong>
                         <q-icon 
@@ -189,7 +189,7 @@ export default {
         Object.assign(this.novasInfosAmbiente, InfosAmbienteController.getInfosAmbiente());
     },
     methods:{
-        ...mapActions('silos',['update_funcao_de_aeracao']),
+        ...mapActions('silos',['update_funcao_de_aeracao','update_funcao_semi_automatica']),
 
         getListaDeLabels(){
             this.listaDeLabels = this.aerador.funcoes.map( element => element.label);
@@ -208,16 +208,13 @@ export default {
             .then(()=>{
                 this.funcaoSelecionada = opcaoSelecionada
             })
-            .catch(()=>{
-                this.funcaoSelecionada = ''
-            });
         },   
          
         salvarInfosAmbiente(){
             if(this.funcaoSemiAutomaticaLigada){ // Funcao já ligada então pergunta se quer desligar
                 dialogPromise('Desativar aeração semi automática ?') //apenas desliga
                 .then(()=>{
-                    this.funcaoSemiAutomaticaLigada = false
+                    this.funcaoSemiAutomaticaLigada = false;
                 });
             }else{ //Função desliga então pergunta se quer ligar
                 dialogPromise('Ativar aeração semi automática ?') //liga e envia o form
@@ -226,22 +223,29 @@ export default {
                     this.funcaoSemiAutomaticaLigada = true
                 });
             }
+            this.update_funcao_semi_automatica({
+                indexSilo : this.index_silo, 
+                onOff : !this.funcaoSemiAutomaticaLigada,
+            });
         },
 
         ativarFuncaoAutomatica(funcaoSelecionada){
             // Se nova função for igual a antiga então desabilita
             if(this.funcaoAutomatica == funcaoSelecionada){
                 this.funcaoAutomatica = ''
-            }else{//se não habilita normal
+            }else{//se não habilita normal e armazena no store
                 this.funcaoAutomatica = funcaoSelecionada
             }
+            this.update_funcao_de_aeracao({
+                indexSilo : this.index_silo, 
+                funcaoSelecionada : this.funcaoAutomatica,
+            });
         },
         
-        enviarFuncaoDeAeracaoParaStore(nomeDafuncao, ligada ){
+        enviarFuncaoDeAeracaoParaStore(nomeDafuncao){
             this.update_funcao_de_aeracao({
-                index_silo : this.index_silo, 
-                label : nomeDafuncao,
-                ligada
+                indexSilo : this.index_silo, 
+                funcaoSelecionada : nomeDafuncao,
             });
         },
     },
@@ -250,6 +254,7 @@ export default {
     },
     watch:{ 
         index_silo(newValue){
+            this.getAerador();
             this.getFuncaoSelecionada();
         },
         funcaoSelecionada(funcaoAtual, antigaFuncao){
@@ -257,10 +262,10 @@ export default {
                 // Se for função manual possibilito o usuário ligar ou desligar o aerador
                 if(funcaoAtual == 'Manual'){
                     this.$emit('funcaoManualSelecionada',  true);
-                    this.enviarFuncaoDeAeracaoParaStore('Manual', true)
+                    this.enviarFuncaoDeAeracaoParaStore('Manual')
                 }else{
                     this.$emit('funcaoManualSelecionada',  false);
-                    this.enviarFuncaoDeAeracaoParaStore('Manual', false)
+                    this.enviarFuncaoDeAeracaoParaStore(funcaoAtual)
                 }
             }
         }

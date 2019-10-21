@@ -25,6 +25,10 @@
                         v-model="aeradorLigado"  
                         :label="aeradorLigado ? 'Aerador Ligado' : 'Aerador Desligado'"
                         color="green" checked-icon="check" unchecked-icon="clear"
+                        @input="on_off_aerador({
+                                indexSilo : index_silo, 
+                                ligado : aeradorLigado
+                            })"
                         />
 
                         <infos-equilibrio  
@@ -63,7 +67,7 @@
 </template>
 
 <script>
-import {mapGetters} from 'vuex';
+import {mapGetters, mapActions} from 'vuex';
 export default {
     props:['index_silo'],
     data(){
@@ -79,12 +83,14 @@ export default {
         }
     },
     mounted(){
-        this.procuraFuncaoManual();
+        this.verificaFuncaoManual();
     },
     computed:{
         ...mapGetters('silos',['get_aerador']),
     },
     methods:{
+        ...mapActions('silos',['on_off_aerador']),
+
         // Altera a visualização entre os cards de possibilidade e de funções pelo flip-card
         changeView(){
             this.card_view.Possibilidades_card = !this.card_view.Possibilidades_card;
@@ -93,20 +99,19 @@ export default {
         }, 
         
         // Procura função manual e atualiza possibilidade de ligar o aerador se ela estiver selecionada
-        procuraFuncaoManual(){ 
+        verificaFuncaoManual(){ 
             let aerador = this.get_aerador(this.index_silo);
-            if(aerador.funcaoSelecionada == 'Manual'){
+            if(aerador.funcaoSelecionada === 'Manual'){
                 this.possivelLigarAerador = true
-                if(this.aerador.ligado){
+                if(aerador.ligado){
                     this.aeradorLigado = true
                 }else{
                     this.aeradorLigado = false
                 }
             }
-        },
-
-        // Se o usuário estiver selecionado manual irá atualizar a visualização possibilitando ligar
-        // e desligar o aerador
+        }, 
+        // Se o usuário estiver selecionado manual irá atualizar a visualização 
+        // possibilitando ligar e desligar o aerador
         atualizaVisualizacao(valor){
             this.possivelLigarAerador = valor
             if(!valor){
@@ -125,7 +130,7 @@ export default {
     }, 
     watch:{
         index_silo(){
-            this.procuraFuncaoManual();
+            this.verificaFuncaoManual();
         }
     }
 } 

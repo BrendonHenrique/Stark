@@ -62,18 +62,50 @@ const mutations = {
   },
 
   /**
-   * Atualiza a função de aeração conforme os valores recebidos como parametro
+   * Atualiza a função de aeração conforme os valores recebidos como parametro 
   **/
   update_funcao_de_aeracao(state, payload) {
     const {
-      index_silo,
-      label,
-      ligada
+      indexSilo,
+      funcaoSelecionada
     } = payload;
-    
-    let silo = getSiloById(state.silos, index_silo);
+    state.silos.forEach(silo => { 
+      if(silo.id === indexSilo){
+        if(funcaoSelecionada == 'Conservação' || funcaoSelecionada == 'Secagem'){
+          silo.aerador.funcaoSelecionada = 'Automática'; 
+          silo.aerador.funcaoAutomatica = funcaoSelecionada;
+          silo.aerador.funcaoSemiAutomaticaLigada = false;
+        }else{
+          silo.aerador.funcaoSelecionada = funcaoSelecionada;
+          silo.aerador.funcaoAutomatica = '';
+          silo.aerador.funcaoSemiAutomaticaLigada = false;
+        }
+      }
+    });
+  },
+  update_funcao_semi_automatica(state,payload){
+    const{
+      indexSilo,
+      onOff
+    } =  payload;
+    state.silos.forEach(silo => { 
+      if(silo.id === indexSilo){
+        silo.aerador.funcaoSemiAutomaticaLigada = onOff;
+      }
+    });
+  },
 
+  on_off_aerador(state, payload){
+    const {
+      indexSilo,
+      ligado 
+    } = payload;
 
+    state.silos.forEach(silo => { 
+      if(silo.id === indexSilo){
+        silo.aerador.ligado = ligado;
+      }
+    });
   },
 
   /**
@@ -82,10 +114,7 @@ const mutations = {
   update_silos(state, payload) {
     state.silos = payload;
   },
-  
-  onOffAerador(state, payload){
-    let silo = getSiloById(state.silos, index_silo);
-  }
+
 
 }
 
@@ -121,10 +150,16 @@ const actions = {
     commit('update_funcao_de_aeracao', payload);
   },
 
-  ligarAerador({
+  on_off_aerador({
     commit
   }, payload){
-    commit('onOffAerador', payload);
+    commit('on_off_aerador', payload);
+  },
+
+  update_funcao_semi_automatica({
+    commit
+  }, payload){
+    commit('update_funcao_semi_automatica', payload)
   }
 }
 
