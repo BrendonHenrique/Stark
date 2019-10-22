@@ -68,7 +68,7 @@
       <!--  -->
       
       <!-- Prévia do gradiente de temperaturas -->
-      <gradiente-preview :gradiente="gradienteDeTemperatura"/> 
+      <gradiente-preview :gradiente="CoresController.getGradienteDeTemperatura()"/> 
       <!--  -->
 
       <!-- Botão para salvar as informações -->
@@ -77,7 +77,7 @@
         <save-button 
           class="q-ma-md"
           :mensagem="'Você gostaria de salvar a legenda de cores?'"
-          @salvarAlteracoes="salvarLegendaDeCores"
+          @salvarAlteracoes="CoresController.updateLegendaDeCores(cores)"
         />
       </div>
       <!--  -->
@@ -100,11 +100,6 @@ export default {
       temperaturaAlta: ''
     }
   },
-  methods:{
-    salvarLegendaDeCores(){
-      CoresController.updateLegendaDeCores(this.cores);
-    }
-  },
   mounted(){
     this.cores = CoresController.getLegendaDeCores();
     this.temperaturaBaixa = CoresController.getTemperaturaBaixa();
@@ -113,11 +108,6 @@ export default {
   components:{
     'save-button': require('../../Shared/SaveButton').default,
     'gradiente-preview': require('../../Termometria/LegendaDeCores/GradientePreview').default
-  },
-  computed:{
-    gradienteDeTemperatura(){
-      return CoresController.getGradienteDeTemperatura();
-    }
   }
 };
 </script>

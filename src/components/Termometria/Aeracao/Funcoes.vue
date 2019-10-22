@@ -142,7 +142,10 @@ export default {
          
         salvarInfosAmbiente(){
             dialogPromise('Deseja salvar as informações ?')
-            .then(() => this.update_infos_ambiente(this.novasInfosAmbiente));
+            .then(() => {
+                this.update_infos_ambiente(this.novasInfosAmbiente)
+                NotifyUser.success(`Configurações do ambiente foram salvas`);
+            });
         },
 
         ativarFuncaoAutomatica(funcaoSelecionada){
@@ -166,8 +169,11 @@ export default {
 
     },
     computed:{
-        ...mapGetters('silos',['get_aerador']),
-        ...mapGetters('ambiente',['get_infos_ambiente']),
+        ...mapGetters({
+            get_aerador:"silos/get_aerador",
+            infosAmbiente:"ambiente/get_infos_ambiente"
+        }),
+
         listaDeLabels(){
             return this.get_aerador(this.index_silo).funcoes.map( element => element.label);
         }
@@ -176,6 +182,7 @@ export default {
         index_silo(newValue){
             this.getAerador(newValue);
         },
+        
         funcaoSelecionada(funcaoAtual, antigaFuncao){
             if(funcaoAtual!=antigaFuncao){
                 if(funcaoAtual == 'Manual'){
@@ -189,7 +196,7 @@ export default {
     },
     mounted(){
         this.getAerador();
-        Object.assign(this.novasInfosAmbiente, this.get_infos_ambiente());
+        Object.assign(this.novasInfosAmbiente, this.infosAmbiente);
     },
     components:{
         'save-button': require('../../Shared/SaveButton').default,

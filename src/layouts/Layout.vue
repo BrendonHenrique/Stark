@@ -19,8 +19,8 @@
             @hideDrawerLeft="openedDrawerLeft = false"
             :openedDrawer="openedDrawerLeft">
             <drawer-nav :navs="navs" />
-
           </layout-drawer>
+          <!--  -->
 
           <!-- Rotas -->
           <router-view class="rotas-de-conteudo" />
@@ -68,8 +68,5 @@ export default {
 
   .q-drawer--left 
     background-color: #353535
-
-  .rotas-de-conteudo
-    transition 0.6s linear 
 
 </style>

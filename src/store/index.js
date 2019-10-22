@@ -8,7 +8,6 @@ import legenda_de_cores from './store-legenda-de-cores';
 import silos from './store-silos';
 import ambiente from './store-ambiente';
 import connection_status from './store-connection-status';
-
 Vue.use(Vuex);
 
 export default function () {
@@ -18,7 +17,7 @@ export default function () {
       ambiente,
       legenda_de_cores,
       silos, 
-      connection_status
+      connection_status,
     }
   });
   return Store;
