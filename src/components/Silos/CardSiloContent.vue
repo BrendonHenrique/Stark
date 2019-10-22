@@ -71,19 +71,19 @@
 
 <script>
   import TempToColor  from '../../services/TempToColor';
-  import SiloController from '../../controllers/Silos/Controller';
   import LegendaDeCoresController from '../../controllers/LegendaDeCores/Controller';
-  
+  import {mapActions} from 'vuex';
   export default{
     props:['silo'], 
     mounted(){
-      SiloController.updateMinMedMaxTemp(this.silo.id);      
+      this.update_min_med_max_temp(this.silo.id);      
     },
     components:{
       'section-layout': require('components/Silos/stateless/SectionLayout.vue').default,
       'sequential-entrace': require('components/Shared/SequentialEntrace.vue').default,
     },
     methods:{
+      ...mapActions('silos',['update_min_med_max_temp']),
       tempBorder(temp){
         return {
           borderLeft: `7px solid ${TempToColor.parse(temp/LegendaDeCoresController.getConfiguracoesDeCores().temperatura_alta) }`,

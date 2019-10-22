@@ -1,102 +1,65 @@
 <template>
     <div>
-       
        <!-- Header do card de funções -->
-       <q-banner dense inline-actions class="bg-primary text-center funcoes-header">
-            <span class="text-h6 text-grey-3">
-                Funcoes
-            </span>
-            <template v-slot:action>
-                <q-img src="../../../assets/icons/settings.png" 
-                class="funcoes-image" />
-            </template>
-        </q-banner>
-        <!--  -->
+       <header-funcoes />
+       <!--  -->
         
         <!-- Card de funções -->
         <div v-show="!isFlipped">
                         
-            <!-- Select com os options das funções de aeração possíveis -->
-            <p class="text-center text-subtitle1 q-pa-sm text-grey-10">
-                Selecione abaixo uma função para aerar o silo
-            </p>
-            <div class=" row justify-center q-pa-md">
-                <q-btn-dropdown glossy dense outline
-                color="primary" label="Selecionar">
-                    <q-list>
-                        <q-item v-for="item in listaDeLabels"
-                        :key="item"
-                        clickable v-close-popup 
-                        @click="selecionarOpcao(item)">
-                            <q-item-section>
-                                <q-item-label>{{item}}</q-item-label>
-                            </q-item-section>
-                        </q-item>
-                    </q-list>
-                </q-btn-dropdown>
-            </div>
+            <!-- Select com as opções de aeração -->
+            <select-funcoes 
+                :listaDeLabels="listaDeLabels"
+                @selecionarOpcao="selecionarOpcao"
+            />
             <!--  -->
             
             <!-- Parte do card com a função de aeração selecionada  -->
-            <div class="bg-grey-3 text-grey-9 card-aeracao-ativa" style="font-size: 18px;">
+            <div class="bg-grey-3 text-grey-9 card-aeracao-ativa" 
+            style="font-size: 18px;">
 
-                <div class='container-funcao-selecionada column items-center'>
-                    <span class="q-mb-sm" style="text-align: center;">
-                        Função selecionada 
-                    </span>
+                <label-funcao-selecionada 
+                :funcaoSelecionada="funcaoSelecionada" />
 
-                    <div class="row">
-                        <strong class="q-mt-md text-h6">
-                            {{funcaoSelecionada}}
-                        </strong>
-                        <q-icon 
-                            v-show="funcaoSelecionada != '' "
-                            color="red"
-                            class="icon-funcao-ativa"
-                            name="settings"
-                        />
-                    </div>
-                    
-                    
-                </div>
-            
+                <!-- Sub container para função semi automática e automática -->
                 <div class='container-funcao-selecionada q-mt-sm' 
-                v-show=' funcaoSelecionada == "Automática" || funcaoSelecionada == "Semi Automática"'>
-                    
+                v-show=' 
+                    funcaoSelecionada === "Automática" || 
+                    funcaoSelecionada === "Semi Automática" ||
+                    funcaoSelecionada === "Secagem" ||
+                    funcaoSelecionada === "Conservação"'
+                >
                     <!-- aeração automática -->
-                    <div v-show='funcaoSelecionada == "Automática"' class="row justify-center q-gutter-sm" > 
-
+                    <div v-show='
+                    funcaoSelecionada === "Automática"||
+                    funcaoSelecionada === "Secagem"||
+                    funcaoSelecionada === "Conservação"'
+                    class="row justify-center q-gutter-sm" > 
                         <q-btn 
                             label="Secagem" 
                             @click="ativarFuncaoAutomatica('Secagem') ">
                             <q-icon 
-                            v-show="funcaoAutomatica == 'Secagem'"
+                            v-show="funcaoSelecionada === 'Secagem'"
                             color="red"
                             class="icon-funcao-ativa"
                             name="settings"/>
                         </q-btn>
-
                         <q-btn 
                             label="Conservação" 
                             @click="ativarFuncaoAutomatica('Conservação')">
                             <q-icon 
-                            v-show="funcaoAutomatica == 'Conservação'"
+                            v-show="funcaoSelecionada === 'Conservação'"
                             color="red"
                             class="icon-funcao-ativa"
                             name="settings"/>
                         </q-btn>
-                        
-
                     </div>
                     <!--  -->
 
-                    <!-- aeração Semi automática -->
+                    <!-- Aeração Semi automática -->
                     <div v-show='funcaoSelecionada == "Semi Automática"'>
-                        
                         <q-form @submit="salvarInfosAmbiente">
                             <div class='row justify-between q-gutter-md q-pa-sm'>
-                                
-                                <!-- Valor de umidade ambiente máxima -->
                                 <q-input 
                                 v-model.number="novasInfosAmbiente.umidade_relativa_do_ar_max"
                                 :rules="[  
@@ -105,9 +68,6 @@
                                 ]"
                                 class="semi-automatica-inputs col-xs-11 col-sm-3 col-md-3 col-lg-3" 
                                 label="UA MAX" suffix="%"/>
-                                <!--  -->
-                            
-                                <!-- Valor de umidade ambiente mínima -->
                                 <q-input 
                                 v-model.number="novasInfosAmbiente.umidade_relativa_do_ar_min"
                                 :rules="[  
@@ -116,41 +76,26 @@
                                 ]"
                                 class="semi-automatica-inputs col-xs-11 col-sm-3 col-md-3 col-lg-3" 
                                 label="UA MIN" suffix="%"/>
-                                <!--  -->
-                            
-                                <!-- Valor de temperatura ambiente máxima -->
                                 <q-input 
                                 v-model.number="novasInfosAmbiente.temperatura_ambiente_max"
                                 :rules="[  val =>  !!val || 'Insira um valor de temperatura válido']"
                                 class="semi-automatica-inputs col-xs-11 col-sm-3 col-md-3 col-g-3" 
                                 label="TA MAX" suffix="ºC"/>
-                                <!--  -->
- 
                             </div>
-                            
-                            <!-- botão para enviar os valores acima para o store -->
                             <div class="row justify-center q-mt-lg">
                                 <q-btn 
                                 class="save-button"
-                                :label="funcaoSemiAutomaticaLigada ? 'Desativar' : 'Ativar'" 
+                                label="Salvar" 
                                 text-color="grey-9" 
-                                type="submit">
-                                    <q-icon 
-                                    v-show="funcaoSemiAutomaticaLigada"
-                                    style="margin-left:5px;"
-                                    color="red"
-                                    class="icon-funcao-ativa"
-                                    name="settings"/>
-                                </q-btn>
+                                type="submit" />
                             </div>
-                            <!--  -->
-                            
                         </q-form>
-
                     </div>
-                    <!--  -->
+                    <!-- Aeração semi automática -->
 
                 </div>
+                <!--  -->
+
             </div>
             <!--  -->
         </div>
@@ -160,10 +105,8 @@
 
 <script> 
 
-import InfosAmbienteController from '../../../controllers/InfosAmbiente/Controller'
-import NotifyUsers from '../../../services/NotifyUser'
-import dialogPromise from  '../../../services/DialogPromise'
-
+import dialogPromise from  '../../../services/DialogPromise';
+import NotifyUser from '../../../services/NotifyUser';
 import {mapGetters, mapActions} from 'vuex';
 
 export default {
@@ -176,70 +119,42 @@ export default {
                 umidade_relativa_do_ar_min: '',
                 temperatura_ambiente_max: '',
             },
-            funcaoAutomatica:'',
-            funcaoSemiAutomaticaLigada : false,
             aerador: {},
-            listaDeLabels:[],
+            auxFuncaoAutomatica: '',
         }
     }, 
-    mounted(){
-        this.getAerador();
-        this.getListaDeLabels();
-        this.getFuncaoSelecionada();
-        Object.assign(this.novasInfosAmbiente, InfosAmbienteController.getInfosAmbiente());
-    },
     methods:{
-        ...mapActions('silos',['update_funcao_de_aeracao','update_funcao_semi_automatica']),
-
-        getListaDeLabels(){
-            this.listaDeLabels = this.aerador.funcoes.map( element => element.label);
-        },
+        ...mapActions('silos',['update_funcao_de_aeracao']),
+        ...mapActions('ambiente',['update_infos_ambiente']),
         
-        getAerador(){
-            this.aerador = this.get_aerador(this.index_silo);
-        },
-
-        getFuncaoSelecionada(){
+        getAerador(Index = this.index_silo){
+            this.aerador = this.get_aerador(Index);
             this.funcaoSelecionada = this.aerador.funcaoSelecionada;
         },
 
         selecionarOpcao (opcaoSelecionada) {
             dialogPromise(`Iniciar aeração ${opcaoSelecionada}?`)
-            .then(()=>{
+            .then(()=> {
                 this.funcaoSelecionada = opcaoSelecionada
-            })
+                NotifyUser.success(`Aeração ${opcaoSelecionada} ligada`);
+            });
         },   
          
         salvarInfosAmbiente(){
-            if(this.funcaoSemiAutomaticaLigada){ // Funcao já ligada então pergunta se quer desligar
-                dialogPromise('Desativar aeração semi automática ?') //apenas desliga
-                .then(()=>{
-                    this.funcaoSemiAutomaticaLigada = false;
-                });
-            }else{ //Função desliga então pergunta se quer ligar
-                dialogPromise('Ativar aeração semi automática ?') //liga e envia o form
-                .then(()=>{
-                    InfosAmbienteController.updateInfosAmbiente(this.novasInfosAmbiente);
-                    this.funcaoSemiAutomaticaLigada = true
-                });
-            }
-            this.update_funcao_semi_automatica({
-                indexSilo : this.index_silo, 
-                onOff : !this.funcaoSemiAutomaticaLigada,
-            });
+            dialogPromise('Deseja salvar as informações ?')
+            .then(() => this.update_infos_ambiente(this.novasInfosAmbiente));
         },
 
         ativarFuncaoAutomatica(funcaoSelecionada){
-            // Se nova função for igual a antiga então desabilita
-            if(this.funcaoAutomatica == funcaoSelecionada){
-                this.funcaoAutomatica = ''
-            }else{//se não habilita normal e armazena no store
-                this.funcaoAutomatica = funcaoSelecionada
+            if(this.auxFuncaoAutomatica == this.funcaoSelecionada){
+                this.enviarFuncaoDeAeracaoParaStore('Automática');
+                this.funcaoSelecionada = 'Automática'
+            }else{
+                this.funcaoSelecionada = funcaoSelecionada;
+                this.auxFuncaoAutomatica = this.funcaoSelecionada;
+                this.enviarFuncaoDeAeracaoParaStore(this.funcaoSelecionada);
+                NotifyUser.success(`Aeração automática por ${funcaoSelecionada} ligada`)
             }
-            this.update_funcao_de_aeracao({
-                indexSilo : this.index_silo, 
-                funcaoSelecionada : this.funcaoAutomatica,
-            });
         },
         
         enviarFuncaoDeAeracaoParaStore(nomeDafuncao){
@@ -248,31 +163,40 @@ export default {
                 funcaoSelecionada : nomeDafuncao,
             });
         },
+
     },
     computed:{
         ...mapGetters('silos',['get_aerador']),
+        ...mapGetters('ambiente',['get_infos_ambiente']),
+        listaDeLabels(){
+            return this.get_aerador(this.index_silo).funcoes.map( element => element.label);
+        }
     },
     watch:{ 
         index_silo(newValue){
-            this.getAerador();
-            this.getFuncaoSelecionada();
+            this.getAerador(newValue);
         },
         funcaoSelecionada(funcaoAtual, antigaFuncao){
             if(funcaoAtual!=antigaFuncao){
-                // Se for função manual possibilito o usuário ligar ou desligar o aerador
                 if(funcaoAtual == 'Manual'){
                     this.$emit('funcaoManualSelecionada',  true);
-                    this.enviarFuncaoDeAeracaoParaStore('Manual')
                 }else{
                     this.$emit('funcaoManualSelecionada',  false);
-                    this.enviarFuncaoDeAeracaoParaStore(funcaoAtual)
                 }
+                this.enviarFuncaoDeAeracaoParaStore(funcaoAtual)
             }
         }
     },
+    mounted(){
+        this.getAerador();
+        Object.assign(this.novasInfosAmbiente, this.get_infos_ambiente());
+    },
     components:{
         'save-button': require('../../Shared/SaveButton').default,
-    },
+        'header-funcoes': require('./stateless/HeaderFuncoes').default,
+        'select-funcoes': require('./SelectFuncoes').default,
+        'label-funcao-selecionada': require('./LabelFuncaoSelecionada').default,
+    }
 }
 </script>
 
@@ -301,7 +225,7 @@ export default {
     .container-funcao-selecionada
         border-left 4px solid #b71212
         width 100%
-        padding 10px 5px
+        padding 10px 0
     
     .card-aeracao-ativa
         border-bottom-right-radius 20px

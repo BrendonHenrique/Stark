@@ -33,8 +33,9 @@
 
 <script>
 // Controlador do store dos silos
-import SiloController from '../../../controllers/Silos/Controller'
 import NotifyUser from '../../../services/NotifyUser'
+import {mapGetters} from 'vuex';
+
 export default {
   props:['index_silo','viewType'], 
   data(){
@@ -48,7 +49,7 @@ export default {
   // Get das temperaturas basenado-se no index so silo , caso a página seja renderizada via this.$route.push apartir da página dos silos
   // Atualizo a visualização do conteúdo dependendo do viewType vindo do $route
   beforeMount(){
-    this.getTemperaturas(this.index_silo) 
+    this.getTemperaturas() 
     if(this.viewType != undefined){
       if(this.viewType == 'mapaDeCalor'){
         NotifyUser.info(`Mapa de calor silo nº ${this.index_silo + 1}`)
@@ -67,10 +68,8 @@ export default {
   },
   methods:{ 
     // get da temperatura apartir do store, interfaceada pelo controlador
-    getTemperaturas(index){
-      let siloEncontrado = SiloController.getSiloById(this.index_silo)
-      this.pendulos = []
-      this.pendulos = siloEncontrado.pendulos
+    getTemperaturas(){
+      this.pendulos = this.silo_by_id(this.index_silo).pendulos
     },
     // Controladores para visualização da termometria por mapa de calor ou sensores
     mostrarMapaDeCalor(){
@@ -85,9 +84,12 @@ export default {
   watch:{
     // Observador do index do silo para atualizar as temperaturas 
     index_silo(index){
-      this.getTemperaturas(index) 
+      this.getTemperaturas() 
       this.key =  index * Math.random()
     }
+  },
+  computed:{
+    ...mapGetters('silos',['silo_by_id'])
   }
 }
 </script>

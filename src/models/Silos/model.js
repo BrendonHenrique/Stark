@@ -42,8 +42,6 @@ silos: [{
   aerador: {
     ligado: false,
     funcaoSelecionada: '',
-    funcaoAutomatica : '',
-    funcaoSemiAutomaticaLigada: false,
     funcoes: [
       {
         label: 'Manual',

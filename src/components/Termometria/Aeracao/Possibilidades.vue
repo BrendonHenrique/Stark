@@ -35,8 +35,7 @@
 </template>
 
 <script>
-import SiloController from '../../../controllers/Silos/Controller'
-
+import {mapGetters} from 'vuex';
 export default {
   props:['index_silo'],
   data(){
@@ -46,7 +45,7 @@ export default {
   },
   methods: {
     getPossibilidadesDeAeracao(){
-      this.possibilidades = SiloController.getPossibilidadesDeAeracao(this.index_silo);
+      this.possibilidades = this.get_possibilidades_de_aeracao(this.index_silo); 
     }
   }, 
   mounted(){
@@ -56,6 +55,9 @@ export default {
     index_silo(novoValor){
       this.getPossibilidadesDeAeracao();
     }, 
+  },
+  computed:{
+    ...mapGetters('silos',['get_possibilidades_de_aeracao'])
   }
 }
 </script>

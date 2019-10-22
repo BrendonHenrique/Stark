@@ -57,7 +57,7 @@
             <q-card-actions class="row justify-end q-my-sm">
                 <save-button        
                 :mensagem="'Você gostaria de salvar as informações sobre o produto armazenado ?'"
-                @salvarAlteracoes="enviarProdutoParaStore"
+                @salvarAlteracoes="update_produto_armazenado({index_silo, produto})"
                 />
             </q-card-actions>
             <!--  --> 
@@ -67,7 +67,7 @@
 </template>
 
 <script>
-import SiloController from '../../../controllers/Silos/Controller'
+import {mapGetters, mapActions} from 'vuex';
 
 export default {
     props:['index_silo'],
@@ -108,29 +108,23 @@ export default {
                 variedade: null,
                 safra: null
             },
-            SiloController
         }
     },
     methods:{
-        getProdutoArmazenado(){
-            const {produto_armazenado} = SiloController.getSiloById(this.index_silo);
-            return produto_armazenado;
+        ...mapActions('silos',['update_produto_armazenado']),
+        getProdutoDoStore(){
+            Object.assign(this.produto, this.get_produto_armazenado(this.index_silo));
         },
-        atualizaProduto(){
-            Object.assign(this.produto, this.getProdutoArmazenado(this.index_silo));
-        },
-        enviarProdutoParaStore(){
-            SiloController.updateProdutoArmazenado({id_silo: this.index_silo, produto: this.produto});
-        }
     },
     mounted(){
-        this.atualizaProduto()
+        this.getProdutoDoStore()
     },  
     components:{
         'avatar-header': require('./stateless/AvatarHeader.vue').default,
         'save-button': require('../../Shared/SaveButton').default
     },
     computed:{
+        ...mapGetters('silos',['get_produto_armazenado']),
         produtoNome(){
             return this.produto.nome;
         },
@@ -140,7 +134,7 @@ export default {
     },
     watch:{
         index_silo(index){
-            this.atualizaProduto();
+            this.getProdutoDoStore();
         },
     }
 }

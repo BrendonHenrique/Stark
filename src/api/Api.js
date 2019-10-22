@@ -1,5 +1,4 @@
 import simple_jsonrpc from 'simple-jsonrpc-js'
-import SiloController from '../controllers/Silos/Controller'
 import ConnectionStatusController from '../controllers/ConnectionStatus/Controller'
 import NotifyUser from '../services/NotifyUser'
 import { promises } from 'fs';

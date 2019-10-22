@@ -53,7 +53,7 @@
 </template>
 
 <script>
-import SiloController from '../controllers/Silos/Controller'
+import {mapGetters} from 'vuex';
 import NotifyUser from '../services/NotifyUser'
 
 export default {
@@ -102,6 +102,9 @@ export default {
     },
   },
   computed:{
+    ...mapGetters({
+      quantidadeDeSilos :'silos/silos_length',
+    }),
     // Bind para desabilitar a paginação caso não seja mais possível acessar o próximo silo ( ou anterior )
     podeNavegarParaTras(){
       return this.index_silo <= 0 ? {
@@ -116,9 +119,6 @@ export default {
       } : {
           disable: false
       }
-    },
-    quantidadeDeSilos(){
-      return SiloController.getQuantidadeDeSilos()
     },
   },
   components:{

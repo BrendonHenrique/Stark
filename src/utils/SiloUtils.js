@@ -400,8 +400,6 @@ let siloSaoJoao = {
   aerador: {
     ligado: false,
     funcaoSelecionada: '',
-    funcaoAutomatica : '',
-    funcaoSemiAutomaticaLigada: false,
     funcoes: [
       {
         label: 'Manual',
@@ -540,8 +538,6 @@ export function buildRandomicSilos() {
         aerador: {
           ligado: false,
           funcaoSelecionada: '',
-          funcaoAutomatica : '',
-          funcaoSemiAutomaticaLigada: false,
           funcoes: [
             {
               label: 'Manual',
@@ -568,77 +564,6 @@ export function buildRandomicSilos() {
         }
       })
     }
-  }
-  return silos
-}
-
-export function buildSilos(silos_length) {
-  let silos = []
-  for (let index = 0; index < silos_length; index++) {
-    silos.push({
-      id: index,
-      quantidade_sacos: parseInt(random(50000, 100000).toFixed(0)),
-      temperatura: {
-        minima: Number,
-        media: Number,
-        maxima: Number
-      },
-      produto_armazenado: {
-        nome: '',
-        variedade: '',
-        safra: ''
-      },
-      pendulos: buildRandomicPendulos(),
-      possibilidades_aeracao: [{
-          label: 'Por Conservação',
-          isPossible: false
-        },
-        {
-          label: 'Por Secagem',
-          isPossible: false
-        },
-        {
-          label: 'Por Semi-auto',
-          isPossible: false
-        },
-        {
-          label: 'Por Emergência',
-          isPossible: false
-        }
-      ],
-      equilibrio_higroscopico: {
-        atual: parseFloat(random(0, 100)).toFixed(1),
-        equilibrio: parseFloat(random(0, 100)).toFixed(1),
-      },
-      aerador: {
-        ligado: false,
-        funcaoSelecionada: '',
-        funcaoAutomatica : '',
-        funcaoSemiAutomaticaLigada: false,
-        funcoes: [
-          {
-            label: 'Manual',
-          },
-          {
-            label: 'Automática',
-            processos: [{
-                label: 'Conservação',
-              },
-              {
-                label: 'Secagem',
-            }]
-          },
-          {
-            label: 'Semi Automática',
-          },
-          {
-            label: 'Forçado',
-          },
-          {
-            label: 'Expurgo',
-        }]
-      }
-    })
   }
   return silos
 }

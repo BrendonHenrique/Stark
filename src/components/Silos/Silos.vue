@@ -22,12 +22,12 @@
 </template>
 
 <script>
-  import SiloController from '../../controllers/Silos/Controller'
+  import {mapGetters} from 'vuex';
   export default{
     computed:{
-      silos(){
-        return SiloController.getSilos();
-      }
+      ...mapGetters({
+        silos:"silos/silos"
+      })
     },  
     components:{
       'card-silo-content': require('./CardSiloContent.vue').default,

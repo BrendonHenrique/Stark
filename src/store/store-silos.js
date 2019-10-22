@@ -1,8 +1,4 @@
-import {
-  stat
-} from "fs";
-
-// Funções utilizadas apenas para teste no desenvolvimento , serão removidas
+// Funções utilizadas apenas para teste no desenvolvimento 
 import {buildRandomicSilos, getSiloById} from '../utils/SiloUtils';
 
 const state = {
@@ -10,12 +6,7 @@ const state = {
 }
 
 const mutations = {
-  /*
-   *  Atualiza a propriedade temperatura do silo , pegando pelo id do silo todos os sensores e atualiza
-   *  com os valores mínimo, médio e máximo de temperatura para cada silo
-   *  implementado no front só por enquanto
-   */
-  updateMinMedMaxTemp(state, id_silo) {
+  update_min_med_max_temp(state, id_silo) {
     let siloSelecionado = state.silos.filter((element) => {
       if (element.id == id_silo) {
         return element
@@ -43,10 +34,6 @@ const mutations = {
     });
   },
 
-  /**
-   * Recebe como parametro um objeto contendo o id do silo, equilibrio_higroscopico.atual, equilibrio_higroscopico.equilibrio 
-   * e atualiza o store
-   */
   update_equilibrio_higroscopico_atual(state, payload) {
     const { index_silo, 
     novoEquilibrio } = payload;
@@ -54,16 +41,12 @@ const mutations = {
     silo.equilibrio_higroscopico.atual = novoEquilibrio;
   },
 
-  // Atualiza o produto armazenado no respectivo silo correspondente ao id passado 
   update_produto_armazenado(state, payload) {
-    const {id_silo,produto} = payload;
-    const silo = getSiloById(state.silos, id_silo);
+    const {index_silo,produto} = payload;
+    const silo = getSiloById(state.silos, index_silo);
     Object.assign(silo.produto_armazenado, produto);
   },
 
-  /**
-   * Atualiza a função de aeração conforme os valores recebidos como parametro 
-  **/
   update_funcao_de_aeracao(state, payload) {
     const {
       indexSilo,
@@ -71,26 +54,7 @@ const mutations = {
     } = payload;
     state.silos.forEach(silo => { 
       if(silo.id === indexSilo){
-        if(funcaoSelecionada == 'Conservação' || funcaoSelecionada == 'Secagem'){
-          silo.aerador.funcaoSelecionada = 'Automática'; 
-          silo.aerador.funcaoAutomatica = funcaoSelecionada;
-          silo.aerador.funcaoSemiAutomaticaLigada = false;
-        }else{
-          silo.aerador.funcaoSelecionada = funcaoSelecionada;
-          silo.aerador.funcaoAutomatica = '';
-          silo.aerador.funcaoSemiAutomaticaLigada = false;
-        }
-      }
-    });
-  },
-  update_funcao_semi_automatica(state,payload){
-    const{
-      indexSilo,
-      onOff
-    } =  payload;
-    state.silos.forEach(silo => { 
-      if(silo.id === indexSilo){
-        silo.aerador.funcaoSemiAutomaticaLigada = onOff;
+        silo.aerador.funcaoSelecionada = funcaoSelecionada;
       }
     });
   },
@@ -108,13 +72,9 @@ const mutations = {
     });
   },
 
-  /**
-   * Atualiza o array de silos
-   */
   update_silos(state, payload) {
     state.silos = payload;
   },
-
 
 }
 
@@ -126,11 +86,10 @@ const actions = {
     commit('update_silos', payload);
   },
 
-  // calculo futuramente será implementado no backend
-  updateMinMedMaxTemp({
+  update_min_med_max_temp({
     commit
   }, payload) {
-    commit('updateMinMedMaxTemp', payload);
+    commit('update_min_med_max_temp', payload);
   },
   
   update_equilibrio_higroscopico_atual({
@@ -165,46 +124,24 @@ const actions = {
 
 const getters = {
   
-  // retorna a lista de silos 
   silos: (state) => state.silos,
     
-  // Retorna o silo pelo id buscado  
-  silo_by_id: (state) => (id_silo) => {
-    return  getSiloById(state.silos, id_silo);
-  },
+  silo_by_id: (state) => (id_silo) => getSiloById(state.silos, id_silo),
 
-  silos_length: (state) => {
-    return state.silos.length;
-  },
+  silos_length: (state) =>  state.silos.length, 
 
-  // get aerador pelo id do silo
-  get_aerador: (state, getters) => (id_silo) => {
-    let silo = getSiloById(state.silos, id_silo);
-    return silo.aerador;
-  },
+  get_aerador: (state) => (id_silo) =>  getSiloById(state.silos, id_silo).aerador,
 
-  // get das possibilidades de aeração recebendo id do silo 
-  get_possibilidades_de_aeracao: (state, getters) => (id_silo) => {
-    let silo = getSiloById(id_silo);
-    return silo.possibilidades_aeracao;
-  },
+  get_possibilidades_de_aeracao: (state) => (id_silo) => getSiloById(state.silos, id_silo).possibilidades_aeracao,
 
-  // get do equilibrio_higroscopico recebendo id do silo 
-  get_equilibrio_higroscopico: (state, getters) => (id_silo) => {
-    return getSiloById(id_silo).equilibrio_higroscopico;
-  },
+  get_equilibrio_higroscopico: (state) => (id_silo) => getSiloById(state.silos, id_silo).equilibrio_higroscopico,
 
-  // get do produto armazenado recebendo o id do silo 
-  get_produto_armazenado: (state, getters) => (id_silo) => {
-    let silo = getSiloById(id_silo);
-    return silo.produto_armazenado;
-  },
+  get_produto_armazenado: (state) => (id_silo) => getSiloById(state.silos, id_silo).produto_armazenado,
 
 }
 
 export default {
   namespaced: true,
-  // this allows me to create another one store modules
   state,
   mutations,
   actions,

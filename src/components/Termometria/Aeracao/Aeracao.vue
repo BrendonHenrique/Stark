@@ -78,7 +78,6 @@ export default {
             }, 
             flipped: true,
             aeradorLigado: false,
-            funcaoLigada:{},
             possivelLigarAerador: false
         }
     },

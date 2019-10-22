@@ -51,7 +51,10 @@
         <save-button
         style="margin-top:35px;margin-left: 25px;"
         :isDisabled="valorIncorreto"
-        @salvarAlteracoes="salvarNovoEquilibrio" 
+        @salvarAlteracoes="update_equilibrio_higroscopico_atual({
+            index_silo,
+            novoEquilibrio: novoEquilibrioHigroscopico.atual
+        })" 
         :mensagem="`Deseja salvar ${novoEquilibrioHigroscopico.atual} como o valor higroscópico atual ?`">
         </save-button>
         <!--  -->
@@ -60,8 +63,7 @@
 </template>
 
 <script>
-import SiloController from '../../../controllers/Silos/Controller'
-
+import { mapActions, mapGetters } from 'vuex';
 export default {
     props:['index_silo'], 
     data(){
@@ -74,21 +76,19 @@ export default {
         }
     },
     mounted(){
-        this.getEquilibrioDoStore(this.index_silo);
+        this.getEquilibrioDoStore();
     },  
     methods:{
-        salvarNovoEquilibrio(){
-            SiloController.updateEquilibrioHigroscopicoAtual({
-                index_silo: this.index_silo,
-                novoEquilibrio: this.novoEquilibrioHigroscopico.atual
-            });
-        },
-        getEquilibrioDoStore(novoIndex){
-            Object.assign(this.novoEquilibrioHigroscopico, 
-            SiloController.getEquilibrioHigroscopico(novoIndex));
+        ...mapActions('silos',['update_equilibrio_higroscopico_atual']),
+        getEquilibrioDoStore(){
+            Object.assign(
+                this.novoEquilibrioHigroscopico, 
+                this.get_equilibrio_higroscopico(this.index_silo)
+            );
         }
     },
     computed:{
+        ...mapGetters('silos', ['get_equilibrio_higroscopico']),
         novoEquilibrio(){
             return this.novoEquilibrioHigroscopico.atual;
         }, 
@@ -101,7 +101,7 @@ export default {
             valor > 0 && valor < 100 ? this.valorIncorreto = false : this.valorIncorreto = true;
         },
         index_silo(novoIndex){
-            this.getEquilibrioDoStore(novoIndex);
+            this.getEquilibrioDoStore();
         }
     }
 }
