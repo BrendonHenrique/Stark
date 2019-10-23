@@ -22,10 +22,7 @@
           </q-tooltip>
         </q-fab-action>
       </q-fab>
-
-
     </div> 
-
     <!--  -->
 
   </div>
@@ -46,7 +43,6 @@ export default {
       showMapa:false,
     }
   },
-  // Get das temperaturas basenado-se no index so silo , caso a página seja renderizada via this.$route.push apartir da página dos silos
   // Atualizo a visualização do conteúdo dependendo do viewType vindo do $route
   beforeMount(){
     this.getTemperaturas() 
@@ -67,7 +63,6 @@ export default {
     'pendulos': require('./Pendulos').default,
   },
   methods:{ 
-    // get da temperatura apartir do store, interfaceada pelo controlador
     getTemperaturas(){
       this.pendulos = this.silo_by_id(this.index_silo).pendulos
     },

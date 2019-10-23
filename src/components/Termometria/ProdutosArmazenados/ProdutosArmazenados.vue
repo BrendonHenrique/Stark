@@ -1,7 +1,6 @@
 <template>
-    <div class="row justify-center container-produto-armazenado q-mb-xl" >
-        <q-card style="box-shadow:0 0 8px 1px #eae5e5; font-family: 'Libre Caslon Text', serif;" 
-        class="bg-grey-2 shadow-10 col-sm-10 col-xs-12 col-md-5 col-lg-4 card-produto-armazenado">
+    <div class="row justify-center q-mt-lg container-produto-armazenado" >
+        <q-card class="bg-grey-2 shadow-10 col-sm-10 col-xs-12 col-md-5 col-lg-4 card-produto-armazenado">
             
             <!-- card header -->
             <avatar-header>
@@ -16,7 +15,8 @@
                     style="height: 280px; width: 160px;background-color:#DDDDDD;" 
                 />
             </avatar-header>
-                
+            <!--  -->
+
             <!-- Select -->
             <q-card-section>
                 <q-select outlined transition-show="jump-up" transition-hide="jump-down"
@@ -103,40 +103,24 @@ export default {
                     foto: '../../../assets/outros.jpg'
                 },
             ],
-            produto:{
-                nome:null,
-                variedade: null,
-                safra: null
-            },
         }
     },
     methods:{
         ...mapActions('silos',['update_produto_armazenado']),
-        getProdutoDoStore(){
-            Object.assign(this.produto, this.get_produto_armazenado(this.index_silo));
-        },
     },
-    mounted(){
-        this.getProdutoDoStore()
-    },  
     components:{
         'avatar-header': require('./stateless/AvatarHeader.vue').default,
         'save-button': require('../../Shared/SaveButton').default
     },
     computed:{
         ...mapGetters('silos',['get_produto_armazenado']),
-        produtoNome(){
-            return this.produto.nome;
-        },
         getOpcoesDeProdutos(){
             return  this.produtos.map( (val) =>  val.label);
+        },
+        produto(){
+            return this.get_produto_armazenado(this.index_silo)
         }
     },
-    watch:{
-        index_silo(index){
-            this.getProdutoDoStore();
-        },
-    }
 }
 </script>
 
@@ -159,6 +143,8 @@ export default {
         background-size cover
 
     .card-produto-armazenado
+        box-shadow 0 0 8px 1px #eae5e5
+        font-family 'Libre Caslon Text', serif
         border-radius 10px
         
     .container-produto-armazenado

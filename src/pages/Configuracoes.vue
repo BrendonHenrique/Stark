@@ -10,7 +10,7 @@
       <!--  -->
     </div>
 
-    <q-tab-panels class="bg-grey-10 q-pt-xl" v-model="tab" > 
+    <q-tab-panels class="bg-grey-10 q-pt-sm" v-model="tab" > 
 
       <!-- Acesso as configurações de cores  -->
       <q-tab-panel name="cores" >

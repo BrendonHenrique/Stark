@@ -451,8 +451,6 @@ export function buildPendulos(pendulos_size, sensores_size) {
 }
 
 const geradorDeStatusDoSensor = () => {
-  // Obs: Ativo é apenas uma abstração para diferenciar dos outros status 
-  // e inserir a cor dependendo da temperatura, e da configuração na legenda de cores
   const listaDeStatusPossiveis = [ 
     'Curto',
     'Aberto',
@@ -462,8 +460,8 @@ const geradorDeStatusDoSensor = () => {
     'Sensor com erro',
     'Ativo'
   ]
-  return 'Ativo'
-  // return listaDeStatusPossiveis[Math.ceil(random(0,6))]
+  // return 'Ativo'
+  return listaDeStatusPossiveis[Math.ceil(random(0,6))]
 }
 
 export function buildRandomicPendulos() {
@@ -567,8 +565,6 @@ export function buildRandomicSilos() {
   }
   return silos
 }
-
-// Buscadores
 
 export function random(min, max) {
   return Math.random() * (max - min) + min

@@ -12,12 +12,17 @@
                     :key="sensor.id_sensor + key"
                     class="column">
                     <q-chip class="q-mt-sm pendulo-chip" 
-                        :style="{'background-color': parseBySensorStatus(sensor),'color':checkColorStatus(sensor)}"
-                    >
-                    <q-avatar color="grey" text-color="white">
-                        {{sensor.id_sensor + 1}}
-                    </q-avatar>
-                       {{sensor.temperatura}} ºC
+                        :style="{'color':checkColorStatus(sensor),
+                        'background-color': parseBySensorStatus(sensor)}">
+                        
+                        <q-avatar color="grey" text-color="white">
+                            {{sensor.id_sensor + 1}}
+                        </q-avatar>
+                        
+                        <span class="text-weigth-bold">
+                         {{sensor.temperatura}} ºC
+                        </span>
+
                     </q-chip>
                 </div>
                 <!--  -->
@@ -37,7 +42,6 @@
 </template>
 
 <script>
- 
 // Service auxiliar para transformar a temperatura em cor 
 import TempToColor from '../../../services/TempToColor'
 // lib para animar a entrada dos sensores
@@ -45,11 +49,11 @@ import SequentialEntrance from 'vue-sequential-entrance'
 import 'vue-sequential-entrance/vue-sequential-entrance.css'
 import Vue from 'vue'
 Vue.use(SequentialEntrance) 
-// Controlador do store
-import CoresController from '../../../controllers/LegendaDeCores/Controller'
 
-// TinyColor é uma biblioteca auxiliar para verificar se a cor do background é muito escura, caso seja inverte a cor da fonte
+// TinyColor é uma biblioteca auxiliar para verificar se a cor de fundo q-chip é muito escura ou clara 
 var tinycolor = require("tinycolor2");
+
+import {mapGetters} from 'vuex';
 
 export default {
     props:['pendulos'],
@@ -57,20 +61,28 @@ export default {
         return{
             key: 1,  
         }
-    }, 
+    },  
+    computed:{
+        ...mapGetters('legenda_de_cores',['get_color_by_sensor_status']),
+        configuracoesDeCores(){
+            return this.$store.state.legenda_de_cores.configuracoes_de_cores;
+        }
+    },
     methods:{
         // Transforma o status do sensor em cor de fundo dependendo das configurações da legenda de cor
         parseBySensorStatus(sensor){
-            if(sensor.status === 'Ativo'){
-                return TempToColor.parse(sensor.temperatura / CoresController.getConfiguracoesDeCores().temperatura_alta)
-            }else{
-                return CoresController.getCorByLabel(sensor.status)
+            if(sensor.status === 'Ativo'){ //se tiver ativo usa o gradiente de temperatura
+                return TempToColor.parse(sensor.temperatura / this.configuracoesDeCores.temperatura_alta)
+            }else{//se não usa uma das cores da legenda
+                return this.get_color_by_sensor_status(sensor.status)
             }
         },
         // Verifica se a cor de fundo é escura , caso seja transforma faz o set da cor da font para branco 
         checkColorStatus(sensor){
-            if(tinycolor(CoresController.getCorByLabel(sensor.status)).isDark()){
+            if(tinycolor(this.get_color_by_sensor_status(sensor.status)).isDark()){
                 return 'white'
+            }else if(tinycolor(this.get_color_by_sensor_status(sensor.status)).isLight()){
+                return 'black'
             }
         }
     },
@@ -108,7 +120,7 @@ export default {
     .pendulo-chip::after
         content: "|"
         position absolute 
-        top 28px
+        top 30.8px
         left 45px
         color grey
 

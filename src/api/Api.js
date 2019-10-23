@@ -1,7 +1,6 @@
 import simple_jsonrpc from 'simple-jsonrpc-js'
 import ConnectionStatusController from '../controllers/ConnectionStatus/Controller'
 import NotifyUser from '../services/NotifyUser'
-import { promises } from 'fs';
 
 class Api {
     

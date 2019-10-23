@@ -11,7 +11,7 @@
           <!--  -->
 
           <!-- Card content -->
-          <card-silo-content :silo="silo" />
+          <card-silo-content :silo="silo"/>
           <!--  -->
         
         </q-card>

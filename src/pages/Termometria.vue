@@ -115,9 +115,9 @@ export default {
     },
     podeNavegarParaFrente(){
       return this.index_silo >= this.quantidadeDeSilos - 1 ? {
-          disable: true
+        disable: true
       } : {
-          disable: false
+        disable: false
       }
     },
   },
@@ -131,12 +131,6 @@ export default {
 
 <style lang="stylus">
   
-  .produto-armazenado-panel
-    min-height calc(80.5vh - 129px)
-    display flex
-    align-items center
-    justify-content center
-
   .paginador-de-silos-container
     height 4rem
     width 100%
@@ -156,16 +150,10 @@ export default {
     font-family 'Libre Caslon Text', serif
 
   .termometria-panel 
-    min-height calc(74.5vh)
+    min-height calc(100vh - 2rem)
     display flex
     align-items center
-  
-  .aeracao-panel
-    min-height calc(91.5vh - 129px)
-    display  flex
-    align-items center 
-    justify-content center
-    width 100% 
+    padding 15px 0
   
   .menu-bar-termometria
     background-color $primary
@@ -174,6 +162,7 @@ export default {
     font-family 'Libre Caslon Text', serif
 
   .termometria-container
+    min-height 0 !important
     margin-bottom 4rem
    
 </style>

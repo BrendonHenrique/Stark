@@ -92,10 +92,20 @@ const getters = {
     return state.configuracoes_de_cores;
   },
 
-  temperatura_baixa: (state, getters) => state.configuracoes_de_cores.temperatura_baixa, 
+  temperatura_baixa: (state) => state.configuracoes_de_cores.temperatura_baixa, 
 
-  temperatura_alta: (state, getters) =>  state.configuracoes_de_cores.temperatura_alta, 
+  temperatura_alta: (state) =>  state.configuracoes_de_cores.temperatura_alta, 
   
+  get_color_by_sensor_status: (state) => (sensorStatus) => {
+    if(sensorStatus != 'Ativo'){
+      return  state.legenda_de_cores.find( statusAtual => {
+          if(statusAtual.label === sensorStatus){
+              return statusAtual.valor;
+          }
+      }).valor;
+    }
+  }
+
 }
 
 export default {

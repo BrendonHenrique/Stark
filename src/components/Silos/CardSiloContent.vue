@@ -71,7 +71,6 @@
 
 <script>
   import TempToColor  from '../../services/TempToColor';
-  import LegendaDeCoresController from '../../controllers/LegendaDeCores/Controller';
   import {mapActions} from 'vuex';
   export default{
     props:['silo'], 
@@ -81,18 +80,23 @@
     components:{
       'section-layout': require('components/Silos/stateless/SectionLayout.vue').default,
       'sequential-entrace': require('components/Shared/SequentialEntrace.vue').default,
+    }, 
+    computed:{
+      configuracoesDeCores(){
+        return this.$store.state.legenda_de_cores.configuracoes_de_cores;
+      }
     },
     methods:{
       ...mapActions('silos',['update_min_med_max_temp']),
       tempBorder(temp){
         return {
-          borderLeft: `7px solid ${TempToColor.parse(temp/LegendaDeCoresController.getConfiguracoesDeCores().temperatura_alta) }`,
+          borderLeft: `7px solid ${TempToColor.parse(temp/this.configuracoesDeCores.temperatura_alta) }`,
           paddingLeft: '3px'
         };
       },
       badgeColor(temp){
         return {
-          backgroundColor: `${TempToColor.parse(temp/LegendaDeCoresController.getConfiguracoesDeCores().temperatura_alta)}`,
+          backgroundColor: `${TempToColor.parse(temp/this.configuracoesDeCores.temperatura_alta)}`,
         };
       }
     }

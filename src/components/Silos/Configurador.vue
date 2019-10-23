@@ -1,7 +1,6 @@
 <template>
   <div class="configurador-silos">
     
-    <!-- Car para criação da legenda de cores -->
     <q-card class="bg-grey-2 shadow-10 col-sm-10 col-xs-12 col-md-10 col-lg-5" 
     style="border-radius:10px;box-shadow:0 0 8px 1px #eae5e5;"
     >
@@ -29,8 +28,6 @@
       <!--  -->
 
     </q-card>
-    <!--  -->
-
   </div>
 </template>
 
@@ -45,7 +42,7 @@ export default {
   methods:{
   },
   mounted(){
-    console.log(this.silo_by_id(this.indexSiloSelecionado))
+    // console.log(this.silo_by_id(this.indexSiloSelecionado))
   },
   components:{
     'save-button': require('../Shared/SaveButton').default,

@@ -5,7 +5,7 @@
         text-color="grey-9" icon-right="save" 
         :disable="isDisabled"
         type="submit" > 
-        </q-btn>
+    </q-btn>
 </template>
 
 <script>
@@ -17,7 +17,6 @@ export default {
     props:['mensagem','isDisabled'],
     methods:{
         salvar(){
-        
             dialogPromise(this.mensagem)
             .then( () => {   
                 this.$emit('salvarAlteracoes')
@@ -25,7 +24,7 @@ export default {
             })
             .catch( () =>{
                 NotifyUsers.error('As alterações não foram salvas')
-            })
+            });
         }
     }
 }

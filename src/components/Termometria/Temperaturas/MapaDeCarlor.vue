@@ -12,7 +12,6 @@
 <script>
 // Import para criação do heatmap
 import h337 from 'heatmap.js'
-import CoresController from '../../../controllers/LegendaDeCores/Controller'
 
 export default {
   props:['pendulos','showMapa'],
@@ -20,6 +19,11 @@ export default {
     return{
       data:[],
       heatmapInstance: null,
+    }
+  },
+  computed:{
+    configuracoesDeCores(){
+      return this.$store.state.legenda_de_cores.configuracoes_de_cores
     }
   },
   methods:{
@@ -87,8 +91,8 @@ export default {
     // Ambos os valores são configurados na página de configurações nos inputs de temperatura baixa e alta respectivamente
     // Aqui também insiro o mapa montado na instância do heatmap
     inserirDados(){
-      var max = CoresController.getTemperaturaAlta() 
-      var min = CoresController.getTemperaturaBaixa()
+      var max = this.configuracoesDeCores.temperatura_alta 
+      var min = this.configuracoesDeCores.temperatura_baixa
       var data = {
         max,
         min, 
@@ -128,14 +132,14 @@ export default {
 <style lang="stylus" >
 
   .mapa-de-calor 
-      width 100%
-      height 100vh
-      box-shadow 0 0 1rem 0 rgba(255, 255, 255, .2)   
-      border-radius 5px
-      position relative
-      z-index 1
-      background inherit
-      overflow hidden
+    width 100%
+    height 100vh
+    box-shadow 0 0 1rem 0 rgba(255, 255, 255, .2)   
+    border-radius 5px
+    position relative
+    z-index 1
+    background inherit
+    overflow hidden
   
   .mapa-de-calor:before 
     content ""
@@ -163,7 +167,6 @@ export default {
       width 100%
       height 85vh  
   
-
   @media (min-width: 320px) and (max-width: 1023px) 
     .heatmap-canvas 
       position absolute
@@ -173,6 +176,5 @@ export default {
       display flex
       width 100%
       height 90vh
-  
 
 </style>
