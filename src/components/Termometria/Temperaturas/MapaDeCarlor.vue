@@ -23,7 +23,7 @@ export default {
   },
   computed:{
     configuracoesDeCores(){
-      return this.$store.state.legenda_de_cores.configuracoes_de_cores
+      return this.$store.state.configuracoes.configuracoes_de_cores
     }
   },
   methods:{

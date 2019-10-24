@@ -64,7 +64,7 @@
                                 v-model.number="novasInfosAmbiente.umidade_relativa_do_ar_max"
                                 :rules="[  
                                     val =>  val > 0 && val < 100 || 'Valor de porcentagem deve estar entre 0 e 100',
-                                    val =>  val > this.novasInfosAmbiente.umidade_relativa_do_ar_min || 'O valor de umidade máxima deve ser maior que a mínima'
+                                    val =>  val >= this.novasInfosAmbiente.umidade_relativa_do_ar_min || 'O valor de umidade máxima deve ser maior que a mínima'
                                 ]"
                                 class="semi-automatica-inputs col-xs-11 col-sm-3 col-md-3 col-lg-3" 
                                 label="UA MAX" suffix="%"/>
@@ -72,7 +72,7 @@
                                 v-model.number="novasInfosAmbiente.umidade_relativa_do_ar_min"
                                 :rules="[  
                                     val =>  val > 0 && val < 100 || 'Valor de porcentagem deve estar entre 0 e 100',
-                                    val =>  val < this.novasInfosAmbiente.umidade_relativa_do_ar_max || 'O valor de umidade mínima deve ser menor que a máxima'
+                                    val =>  val <= this.novasInfosAmbiente.umidade_relativa_do_ar_max || 'O valor de umidade mínima deve ser menor que a máxima'
                                 ]"
                                 class="semi-automatica-inputs col-xs-11 col-sm-3 col-md-3 col-lg-3" 
                                 label="UA MIN" suffix="%"/>
@@ -125,7 +125,7 @@ export default {
     }, 
     methods:{
         ...mapActions('silos',['update_funcao_de_aeracao']),
-        ...mapActions('ambiente',['update_infos_ambiente']),
+        ...mapActions('configuracoes',['update_infos_ambiente']),
         
         getAerador(Index = this.index_silo){
             this.aerador = this.get_aerador(Index);
@@ -171,7 +171,7 @@ export default {
     computed:{
         ...mapGetters({
             get_aerador:"silos/get_aerador",
-            infosAmbiente:"ambiente/get_infos_ambiente"
+            infosAmbiente:"configuracoes/get_infos_ambiente"
         }),
 
         listaDeLabels(){

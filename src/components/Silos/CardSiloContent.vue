@@ -3,8 +3,8 @@
 
     <!-- Avatar com a imagem do silo e numeração do silo -->
     <q-card-section style="height:220px;">
-      <q-avatar  class="silo_avatar absolute-center" size="180px" color="secondary shadow-4 ">
-        <q-img  src="assets/icons/silo.png" style="height: 180px;"  />
+      <q-avatar  class="silo_avatar absolute-center " style="margin:8px 0;" size="210px" color="bg-grey-4 shadow-6">
+        <q-img  src="assets/icons/silo.svg" style="height: 180px;width:180px;"  />
       </q-avatar>
       <q-chip color="accent" text-color="grey-4" class="silo_id"
         icon="info" size="10px" :label="`silo nº ${silo.id + 1}`">
@@ -70,8 +70,8 @@
 </template>
 
 <script>
-  import TempToColor  from '../../services/TempToColor';
-  import {mapActions} from 'vuex';
+  // import TempToColor  from '../../services/TempToColor';
+  import {mapActions,mapGetters} from 'vuex';
   export default{
     props:['silo'], 
     mounted(){
@@ -82,21 +82,22 @@
       'sequential-entrace': require('components/Shared/SequentialEntrace.vue').default,
     }, 
     computed:{
+      ...mapGetters('configuracoes',['parse_temp_to_color']),
       configuracoesDeCores(){
-        return this.$store.state.legenda_de_cores.configuracoes_de_cores;
+        return this.$store.state.configuracoes.configuracoes_de_cores;
       }
     },
     methods:{
       ...mapActions('silos',['update_min_med_max_temp']),
       tempBorder(temp){
         return {
-          borderLeft: `7px solid ${TempToColor.parse(temp/this.configuracoesDeCores.temperatura_alta) }`,
+          borderLeft: `7px solid ${this.parse_temp_to_color(temp/this.configuracoesDeCores.temperatura_alta) }`,
           paddingLeft: '3px'
         };
       },
       badgeColor(temp){
         return {
-          backgroundColor: `${TempToColor.parse(temp/this.configuracoesDeCores.temperatura_alta)}`,
+          backgroundColor: `${this.parse_temp_to_color(temp/this.configuracoesDeCores.temperatura_alta)}`,
         };
       }
     }

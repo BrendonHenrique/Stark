@@ -4,6 +4,12 @@
 // valores retirador do silo de São João
 let siloSaoJoao = {
   id: 0,
+  configuracoesDoSilo:{
+    capacidade:0,
+    pesoDaSaca:0,
+    pendulosPorAnel:0,
+    quantidadeDeAneis:0
+  },
   quantidade_sacos: parseInt(random(50000, 100000).toFixed(0)),
   temperatura: {
     minima: 11,
@@ -460,15 +466,15 @@ const geradorDeStatusDoSensor = () => {
     'Sensor com erro',
     'Ativo'
   ]
-  // return 'Ativo'
-  return listaDeStatusPossiveis[Math.ceil(random(0,6))]
+  return 'Ativo'
+  // return listaDeStatusPossiveis[Math.ceil(random(0,6))]
 }
 
 export function buildRandomicPendulos() {
   let pendulo = [],
   sensores = [],
   index_sensor = 0,
-    pendulos_size = parseInt(random(5, 25).toFixed(1))
+  pendulos_size = parseInt(random(5, 25).toFixed(1));
 
   for (let i = 0; i < pendulos_size; i++) {
     sensores = []
@@ -489,6 +495,7 @@ export function buildRandomicPendulos() {
   return pendulo
 }
 
+
 // Utilizada no momento
 export function buildRandomicSilos() {
   let silos = [],
@@ -500,6 +507,12 @@ export function buildRandomicSilos() {
     }else {
       silos.push({
         id: index,
+        configuracoesDoSilo:{
+          capacidade:0,
+          pesoDaSaca:0,
+          pendulosPorAnel:0,
+          quantidadeDeAneis:0
+        },
         quantidade_sacos: parseInt(random(50000, 100000).toFixed(0)),
         temperatura: {
           minima: Number,

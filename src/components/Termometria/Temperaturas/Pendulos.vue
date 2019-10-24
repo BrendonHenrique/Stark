@@ -43,7 +43,7 @@
 
 <script>
 // Service auxiliar para transformar a temperatura em cor 
-import TempToColor from '../../../services/TempToColor'
+// import TempToColor from '../../../services/TempToColor'
 // lib para animar a entrada dos sensores
 import SequentialEntrance from 'vue-sequential-entrance'
 import 'vue-sequential-entrance/vue-sequential-entrance.css'
@@ -61,18 +61,18 @@ export default {
         return{
             key: 1,  
         }
-    },  
+    },   
     computed:{
-        ...mapGetters('legenda_de_cores',['get_color_by_sensor_status']),
+        ...mapGetters('configuracoes',['get_color_by_sensor_status','parse_temp_to_color']),
         configuracoesDeCores(){
-            return this.$store.state.legenda_de_cores.configuracoes_de_cores;
+            return this.$store.state.configuracoes.configuracoes_de_cores;
         }
     },
     methods:{
         // Transforma o status do sensor em cor de fundo dependendo das configurações da legenda de cor
         parseBySensorStatus(sensor){
             if(sensor.status === 'Ativo'){ //se tiver ativo usa o gradiente de temperatura
-                return TempToColor.parse(sensor.temperatura / this.configuracoesDeCores.temperatura_alta)
+                return this.parse_temp_to_color(sensor.temperatura / this.configuracoesDeCores.temperatura_alta)
             }else{//se não usa uma das cores da legenda
                 return this.get_color_by_sensor_status(sensor.status)
             }

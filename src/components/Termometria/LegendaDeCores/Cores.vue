@@ -62,18 +62,18 @@ import {mapGetters, mapActions} from 'vuex';
 
 export default {
   methods:{
-    ...mapActions('legenda_de_cores',['update_temperatura_baixa','update_temperatura_alta'])
+    ...mapActions('configuracoes',['update_temperatura_baixa','update_temperatura_alta'])
   },
   computed:{
     ...mapGetters({
-      gradienteDeTemperatura: "legenda_de_cores/gradiente_de_temperatura"
+      gradienteDeTemperatura: "configuracoes/gradiente_de_temperatura"
     }),
     cores(){
-      return this.$store.state.legenda_de_cores.legenda_de_cores
+      return this.$store.state.configuracoes.legenda_de_cores
     },
     temperaturaBaixa:{
       get(){
-        return this.$store.state.legenda_de_cores.configuracoes_de_cores.temperatura_baixa;
+        return this.$store.state.configuracoes.configuracoes_de_cores.temperatura_baixa;
       },
       set(value){
         this.update_temperatura_baixa(value);
@@ -81,7 +81,7 @@ export default {
     },
     temperaturaAlta:{
       get(){
-        return this.$store.state.legenda_de_cores.configuracoes_de_cores.temperatura_alta;
+        return this.$store.state.configuracoes.configuracoes_de_cores.temperatura_alta;
       },
       set(value){
         this.update_temperatura_alta(value);
