@@ -3,9 +3,12 @@
 
     <!-- Avatar com a imagem do silo e numeração do silo -->
     <q-card-section style="height:220px;">
-      <q-avatar  class="silo_avatar absolute-center " style="margin:8px 0;" size="210px" color="bg-grey-4 shadow-6">
+      <q-avatar  
+      class="silo_avatar absolute-center " 
+      style="margin:8px 0;" size="210px" color="bg-grey-4 shadow-6">
         <q-img  src="assets/icons/silo.svg" style="height: 180px;width:180px;"  />
       </q-avatar>
+      <!-- Numeração -->
       <q-chip color="accent" text-color="grey-4" class="silo_id"
         icon="info" size="10px" :label="`silo nº ${silo.id + 1}`">
       </q-chip>
@@ -13,14 +16,14 @@
     <!--  -->
     
     <!-- Informações de cada silo -->
-    <main>
-      <!-- Quantidade de sacos -->
+    <main>  
       <section-layout class="card-infos">
         <template v-slot:avatar>
           <q-btn glossy dense color="secondary" size="20px" round>
             <q-img  src="assets/icons/bag.png" style="width: 30px;margin-left:2px"  />
           </q-btn>
         </template>
+      <!-- Quantidade de sacos -->
         <template v-slot:label>
           <div>
             <div class="text-weight-thin">Quantidade aproximada de sacos</div>
@@ -70,7 +73,6 @@
 </template>
 
 <script>
-  // import TempToColor  from '../../services/TempToColor';
   import {mapActions,mapGetters} from 'vuex';
   export default{
     props:['silo'], 

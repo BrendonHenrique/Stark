@@ -8,51 +8,40 @@
     >
       <!-- Inputs conectado com q-color para escolher as cores -->
       <div class="row q-pa-sm" v-for="item in cores" :key="item.label">
+        <q-banner class="bg-grey-4 col-12" v-show="item.label == 'Temperaturas altas' || item.label == 'Temperaturas baixas'">
+          <template v-slot:avatar>
+            <q-icon name="color_lens" color="secondary" size="30px" />
+          </template>
+            <div>
+              <p class="text-subtitle2">
+                Insira o valor para a temperatura que será considerada como {{item.label}}
+              </p>
+            </div>
+            <q-input 
+            :label="item.label" 
+            @input="handleInputs(item.label)"
+            suffix="ºC"
+            :value="item.label === 'Temperaturas altas' ? temperaturaAlta : temperaturaBaixa " 
+            />
+        </q-banner>
         <q-input  
           :rules="[val => !!val || 'Não deixe essa cor em branco']" 
           filled v-model="item.valor" class="input-cores col-12 " :label="item.label">
             <template v-slot:append>
               <q-btn class="shadow-6" round :style="{'background-color': item.valor}">
-               
                 <q-popup-proxy transition-show="scale" transition-hide="scale" class="popup-proxy-temperaturas" >
-                    
-                    <q-banner class="bg-grey-3" v-show="item.label == 'Temperaturas baixas'">
-                      <template v-slot:avatar>
-                        <q-icon name="color_lens" color="secondary" size="30px" />
-                      </template>
-                      <span class="text-subtitle2">
-                        Insira o valor para a temperatura que será considerada como baixa
-                      </span>
-                      <q-input label="Temperatura baixa" 
-                      v-model="temperaturaBaixa" 
-                      suffix="ºC"
-                      />
-                    </q-banner>
-
-                    <q-banner v-show="item.label == 'Temperaturas altas' ">
-                      <template v-slot:avatar>
-                        <q-icon name="color_lens" color="secondary" size="30px" />
-                      </template>
-                       <span class="text-subtitle2">
-                        Insira o valor para a temperatura que será considerada como alta
-                      </span>
-                      <q-input label="Temperatura alta" 
-                      v-model="temperaturaAlta" 
-                      suffix="ºC"
-                      />
-                    </q-banner>
-
                     <q-color  no-header v-model="item.valor" no-footer/>
-                
                 </q-popup-proxy>
               </q-btn>
             </template>
         </q-input>
       </div>
       <!--  -->
+
       <!-- Prévia do gradiente de temperaturas -->
       <gradiente-preview :gradiente="gradienteDeTemperatura"/> 
       <!--  -->
+
     </card-configuracao>
   </div>
 </template>
@@ -62,7 +51,10 @@ import {mapGetters, mapActions} from 'vuex';
 
 export default {
   methods:{
-    ...mapActions('configuracoes',['update_temperatura_baixa','update_temperatura_alta'])
+    ...mapActions('configuracoes',['update_temperatura_baixa','update_temperatura_alta']),
+    handleInputs(label){
+      label === 'Temperaturas baixas' ? this.temperaturaBaixa = event.target.value : this.temperaturaAlta = event.target.value;   
+    }
   },
   computed:{
     ...mapGetters({

@@ -5,7 +5,7 @@
 let siloSaoJoao = {
   id: 0,
   configuracoesDoSilo:{
-    capacidade:0,
+    capacidade:2,
     pesoDaSaca:0,
     pendulosPorAnel:0,
     quantidadeDeAneis:0

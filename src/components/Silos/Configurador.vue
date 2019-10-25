@@ -31,47 +31,28 @@
       </q-card-section>
 
       <q-card-section v-show="indexSelecionado" class="q-gutter-md justify-center">
-        <q-form
-          @submit="salvarAlteracoes"
-          class="q-gutter-md"
-        >
-          <q-input outlined v-model.number="configuracoesDoSilo.capacidade" 
-          :rules="[val => !!val || 'Informe a capacidade do silo em sacas']"
-          input-class="text-right"
-          label="Capacidade do silo"  suffix="Sacas"/>
 
-          <q-input outlined v-model.number="configuracoesDoSilo.pesoDaSaca" 
-          label="Peso da saca" suffix="Kg"
-          input-class="text-right"
-          :rules="[val => !!val || 'Informe o peso da saca em kilogramas']"
+        <q-form @submit="salvarAlteracoes" class="q-gutter-md" >
+          <q-input
+            v-for="input in inputsDeConfiguracao" :key="input.label"
+            outlined
+            input-class="text-right"
+            v-model="input.value"
+            :label="input.label"
+            :rules="[val => !!val && val > 0  || input.ruleErrorMessage]"
+            :suffix="input.sufix"
           />
-
-          <q-input outlined v-model.number="configuracoesDoSilo.quantidadeDeAneis" 
-          label="Quantidade de anéis"
-          input-class="text-right"
-          suffix="Anéis"
-          :rules="[val => !!val || 'Informe a quantidade de anéis']"
-          />
-
-          <q-input outlined v-model.number="configuracoesDoSilo.pendulosPorAnel"
-          label="Quantidade de pêndulos por anel"
-          input-class="text-right"
-          suffix="Pêndulos"
-          :rules="[val => !!val || 'Informe a quantidade de pêndulos por anel']"
-        />
-
-        <!-- Botão para salvar as informações -->
-        <div class="row">
-          <q-space />
+          <div class="row">
+            <q-space />
             <q-btn 
             label="salvar" 
             text-color="grey-9" icon-right="save" 
             type="submit" /> 
-        </div>
-        <!--  -->
-
+          </div>
         </q-form>
+
       </q-card-section>
+
     </q-card>
   </div>
 </template>
@@ -85,25 +66,70 @@ export default {
   data() {
     return {
       indexSelecionado:'',
-      configuracoesDoSilo:{
-        capacidade:null,
-        pesoDaSaca:null,
-        pendulosPorAnel:null,
-        quantidadeDeAneis:null,
-      }
+      inputsDeConfiguracao:[
+        {
+          value: null,
+          ruleErrorMessage: 'Informe a capacidade do silo em sacas',
+          label: 'Capacidade do silo',
+          sufix: 'Sacas',
+          labelVuex: 'capacidade'
+        },
+        {
+          value: null,
+          ruleErrorMessage: 'Informe o peso da saca em kilogramas',
+          label: 'Peso da saca',
+          sufix: 'Kg',
+          labelVuex: 'pesoDaSaca'
+        },
+        {
+          value: null,
+          ruleErrorMessage: 'Informe a quantidade de anéis',
+          label: 'Quantidade de anéis',
+          sufix: 'Anéis',
+          labelVuex: 'pendulosPorAnel'
+        },
+        {
+          value: null,
+          ruleErrorMessage: 'Informe a quantidade de pêndulos por anel',
+          label: 'Quantidade de pêndulos por anel',
+          sufix: 'Pêndulos',
+          labelVuex: 'quantidadeDeAneis'
+        },
+      ],
     }
   },
   methods:{
     ...mapActions('silos',['update_configuracoes']),
     getConfiguracoesAtuais(){
-      let siloEncontrado = this.silo_by_id(this.indexSelecionado - 1)
-      Object.assign(this.configuracoesDoSilo,siloEncontrado.configuracoesDoSilo);
+      let configuracoesDoSilo = this.silo_by_id(this.indexSelecionado - 1).configuracoesDoSilo
+      this.inputsDeConfiguracao.forEach( input => { 
+        if(input.label === 'Capacidade do silo'){
+          input.value = configuracoesDoSilo.capacidade
+        }else if(input.label === 'Peso da saca'){
+          input.value = configuracoesDoSilo.pesoDaSaca
+        }else if(input.label === 'Quantidade de anéis'){
+          input.value = configuracoesDoSilo.pendulosPorAnel
+        }else{
+          input.value = configuracoesDoSilo.quantidadeDeAneis
+        }
+      });
     },
     salvarAlteracoes(){
       dialogPromise('Salvar as configurações do silo ?')
       .then( () => {
-        // this.update_configuracoes(this.configuracoesDoSilo)
-        // NotifyUsers.success('Configurações salvas com sucesso');
+        let payload = this.inputsDeConfiguracao.map( input => { 
+          return{
+            value: input.value , 
+            label: input.labelVuex
+          }
+         });
+
+        this.update_configuracoes({
+          indexSilo: this.indexSelecionado,
+          payload 
+        });
+
+        NotifyUsers.success('Configurações salvas com sucesso');
       });
     }
   },

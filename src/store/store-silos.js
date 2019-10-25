@@ -76,13 +76,9 @@ const mutations = {
     state.silos = payload;
   },
 
-  update_configuracoes(state,payload){
-    let { 
-      indexSelecionado,
-      ...novasConfiguracoes
-    } = payload;
-    let siloSelecionado =  state.silos.find(silo => silo.id == indexSelecionado - 1)
-    Object.assign(siloSelecionado.configuracoesDoSilo, novasConfiguracoes)
+  update_configuracoes(state,novaConfiguracao){
+    let siloSelecionado =  state.silos.find(silo => silo.id == novaConfiguracao.indexSilo - 1)
+    novaConfiguracao.payload.forEach( configuracao => siloSelecionado.configuracoesDoSilo[configuracao.label] = configuracao.value );
   }
 }
 
