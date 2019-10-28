@@ -41,6 +41,7 @@
             :label="input.label"
             :rules="[val => !!val && val > 0  || input.ruleErrorMessage]"
             :suffix="input.sufix"
+            :disable="input.disabled"
           />
           <div class="row">
             <q-space />
@@ -63,6 +64,24 @@ import NotifyUsers from '../../services/NotifyUser';
 import {mapGetters, mapActions} from 'vuex';
 
 export default {
+  props:['configuracaoRestritiva'],
+  mounted(){
+    if(this.configuracaoRestritiva.length > 0){
+      this.configuracaoRestritiva.forEach(permission => { 
+
+        if(permission === 'configuracoes-silo'){ //pode configurar tudo
+          this.inputsDeConfiguracao.forEach( input => input.disabled = false)
+
+        }else if(permission === 'peso-das-sacas'){ //pode configurar apenas peso das sacas
+          this.inputsDeConfiguracao.forEach( input => {
+            if(input.label === 'Peso da saca'){
+              input.disabled = false
+            }
+          });
+        }
+      });
+    }
+  },
   data() {
     return {
       indexSelecionado:'',
@@ -72,28 +91,32 @@ export default {
           ruleErrorMessage: 'Informe a capacidade do silo em sacas',
           label: 'Capacidade do silo',
           sufix: 'Sacas',
-          labelVuex: 'capacidade'
+          labelVuex: 'capacidade',
+          disabled: true
         },
         {
           value: null,
           ruleErrorMessage: 'Informe o peso da saca em kilogramas',
           label: 'Peso da saca',
           sufix: 'Kg',
-          labelVuex: 'pesoDaSaca'
+          labelVuex: 'pesoDaSaca',
+          disabled: true
         },
         {
           value: null,
           ruleErrorMessage: 'Informe a quantidade de anéis',
           label: 'Quantidade de anéis',
           sufix: 'Anéis',
-          labelVuex: 'pendulosPorAnel'
+          labelVuex: 'pendulosPorAnel',
+          disabled: true
         },
         {
           value: null,
           ruleErrorMessage: 'Informe a quantidade de pêndulos por anel',
           label: 'Quantidade de pêndulos por anel',
           sufix: 'Pêndulos',
-          labelVuex: 'quantidadeDeAneis'
+          labelVuex: 'quantidadeDeAneis',
+          disabled: true
         },
       ],
     }
@@ -147,8 +170,4 @@ export default {
     }
   }
 };
-</script>
-
-<style lang="stylus" >
-
-</style>
+</script> 
