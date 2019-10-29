@@ -8,16 +8,16 @@ import {
 export let hierarchy = { 
   'GARTEN': 'GARTEN',
   'SUPERVISOR': 'SUPERVISOR',
-  'OPERATOR': 'OPERATOR',
+  'OPERADOR': 'OPERADOR',
 }
 
 class auth {
 
   static authenticateUser = (user, token) => {
-    vm.$q.sessionStorage.set('senha', user.senha)
-    vm.$q.sessionStorage.set('login', user.login)
-    vm.$q.sessionStorage.set('token', token)
-    vm.$q.sessionStorage.set('hierarchy', Encrypt(hierarchy.OPERATOR));
+    vm.$q.sessionStorage.set('login', user.login);
+    vm.$q.sessionStorage.set('senha', Encrypt(user.senha));
+    vm.$q.sessionStorage.set('token', token);
+    vm.$q.sessionStorage.set('hierarchy', Encrypt(hierarchy.OPERADOR));
   }
 
   static isAuthenticated = () => {
@@ -40,8 +40,8 @@ class auth {
   static getAuthenticatedUser = () => {
     return {
       login: vm.$q.sessionStorage.getItem('login'),
-      senha: vm.$q.sessionStorage.getItem('senha'),
-      hierarchy: vm.$q.sessionStorage.getItem('hierarchy'),
+      senha: Decrypt(vm.$q.sessionStorage.getItem('senha')),
+      hierarchy: Decrypt(vm.$q.sessionStorage.getItem('hierarchy')),
     }
   }
 
@@ -58,6 +58,7 @@ class auth {
   static removeCredentials = () => { 
     vm.$q.sessionStorage.remove('login');
     vm.$q.sessionStorage.remove('senha');
+    vm.$q.sessionStorage.remove('token');
     vm.$q.sessionStorage.remove('hierarchy');
   }
   

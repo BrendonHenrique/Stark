@@ -1,3 +1,8 @@
+ambiente:{
+  umidade_relativa_do_ar_max: '',
+  umidade_relativa_do_ar_min: '',
+  temperatura_ambiente_max: '',
+},
 legenda_de_cores: [{
       label: "Curto",
       valor: "#2d8515"
@@ -37,4 +42,4 @@ legenda_de_cores: [{
   configuracoes_de_cores: {
     temperatura_baixa: 10,
     temperatura_alta: 40
-  } 
+  },

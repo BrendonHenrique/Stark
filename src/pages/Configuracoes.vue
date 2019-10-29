@@ -16,21 +16,21 @@
     <!-- card com as credenciais do usuario -->
     <q-card class="row justify-between items-center card-informativo-user
     bg-secondary text-white" 
-    style="margin-top:5px;height:3rem; width: 40%;margin:0 auto;box-shadow:0 0 5px 0 #eae5e5;" 
+    style="margin-top:5px;height:3rem;margin:0 auto;box-shadow:0 0 5px 0 #eae5e5;" 
     v-show="login">
 
-        <q-btn round size="14px" class="q-ml-sm" title="Informações do usuário">
-          <q-icon name="person" size="40px"/>
-        </q-btn>
-        <span> 
-          {{hierarchy}}
-        </span>
-        <span> 
-          LOGIN : {{login}}
-        </span>
-        <q-btn round size="14px" class="q-mr-sm" title="Fazer logout" @click="logout">
-          <q-icon name="exit_to_app" size="35px"/>
-        </q-btn>
+      <q-btn round size="14px" class="q-ml-sm" title="Informações do usuário">
+        <q-icon name="person" size="40px"/>
+      </q-btn>
+      <span> 
+        {{hierarchy}}
+      </span>
+      <span> 
+        LOGIN : {{login}}
+      </span>
+      <q-btn round size="14px" class="q-mr-sm" title="Fazer logout" @click="logout">
+        <q-icon name="exit_to_app" size="35px"/>
+      </q-btn>
         
     </q-card>
     <!--  -->
@@ -85,14 +85,14 @@ export default {
         this.hierarchy = '';
         auth.removeCredentials();
       })
-      .catch(() =>{});
+      .catch(() => {});
     },  
     checkPermissions(authenticatedInfos){
       
       const { rules, user } = authenticatedInfos;
       
       this.login = user.login;
-      this.hierarchy = Decrypt(user.hierarchy)
+      this.hierarchy = user.hierarchy;
       
       this.permissions = rules;
       this.tabs = [];

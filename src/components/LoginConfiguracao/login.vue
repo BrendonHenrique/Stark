@@ -76,18 +76,17 @@
     methods: {
       checkHierarchy(){
         Object.assign(this.user, auth.getAuthenticatedUser())
-        let descryptedHierarchy = Decrypt(this.user.hierarchy);
-        if(descryptedHierarchy === 'GARTEN'){
+        if(this.user.hierarchy === 'GARTEN'){
           this.$emit('authenticatedUser', {
             rules:['cores','configuracoes-silo'],
             user:this.user
           });
-        }else if(descryptedHierarchy === 'SUPERVISOR'){
+        }else if(this.user.hierarchy === 'SUPERVISOR'){
           this.$emit('authenticatedUser', {
             rules:['cores','peso-das-sacas'],
             user:this.user
           })
-        }else if(descryptedHierarchy === 'OPERATOR'){
+        }else if(this.user.hierarchy === 'OPERADOR'){
           this.$emit('authenticatedUser', {
             rules:[],
             user:this.user

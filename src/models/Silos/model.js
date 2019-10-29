@@ -1,5 +1,11 @@
 silos: [{
   id: Number,
+  configuracoesDoSilo:{
+    capacidade:Number,
+    pesoDaSaca:Number,
+    pendulosPorAnel:Number,
+    quantidadeDeAneis:Number
+  },
   quantidade_sacos: Number,
   temperatura: {
     minima: Number,
