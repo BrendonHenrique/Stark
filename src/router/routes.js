@@ -7,7 +7,7 @@ const routes = [
       { path: '/', component: () => import('pages/Silos.vue') },
       { path: '/termometria', name:'termometria', component: () => import('pages/Termometria.vue') },
       { path: '/estacao_meteorologica', name:'estacao_meteorologica', component: () => import('pages/Estacao.vue') },
-      { path: '/relatorios', name:'relatorios', component: () => import('pages/Relatorios.vue') },
+      { path: '/historicos', name:'historicos', component: () => import('pages/Historicos.vue') },
       { path: '/configuracoes', name:'configuracoes', component: () => import('pages/Configuracoes.vue') },
     ]
   }

@@ -80,6 +80,10 @@ module.exports = function (ctx) {
         'QForm',
         'QFab',
         'QFabAction',
+        'QTable',
+        'QTh',
+        'QTr',
+        'QTd'
       ],
 
       directives: [

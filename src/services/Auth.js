@@ -17,7 +17,7 @@ class auth {
     vm.$q.sessionStorage.set('login', user.login);
     vm.$q.sessionStorage.set('senha', Encrypt(user.senha));
     vm.$q.sessionStorage.set('token', token);
-    vm.$q.sessionStorage.set('hierarchy', Encrypt(hierarchy.OPERADOR));
+    vm.$q.sessionStorage.set('hierarchy', Encrypt(hierarchy.GARTEN));
   }
 
   static isAuthenticated = () => {

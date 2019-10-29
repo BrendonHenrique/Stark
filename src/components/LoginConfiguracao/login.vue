@@ -105,7 +105,7 @@
 <style lang="stylus" >
   .login-painel 
     height 380px
-    animation entry 0.6s linear
+    animation entry 1s linear
     font-family 'Libre Caslon Text', serif
     box-shadow 0 0 8px 1px #eae5e5
 

@@ -1,63 +1,67 @@
 <template>
-  <q-page>
+  <q-layout>
+    <q-page-container>
+      <q-page>
 
-    <!-- Tabs para navegação na página de configurações -->
-    <div class="tab-menu"  v-show="permissions.length > 0" >
-      <q-tabs 
-        dense inline-label v-model="tab" align="justify" 
-        active-color="secundary" indicator-color="secundary"
-        narrow-indicator class="text-grey-4 menu-bar-configuraces">
-        <q-tab v-for="item in tabs " :key="item.name" :name="item.name" :label="item.label"  />
-      </q-tabs>
-    </div>
-    <!--  -->
-    
-
-    <!-- card com as credenciais do usuario -->
-    <q-card class="row justify-between items-center card-informativo-user
-    bg-secondary text-white" 
-    style="margin-top:5px;height:3rem;margin:0 auto;box-shadow:0 0 5px 0 #eae5e5;" 
-    v-show="login">
-
-      <q-btn round size="14px" class="q-ml-sm" title="Informações do usuário">
-        <q-icon name="person" size="40px"/>
-      </q-btn>
-      <span> 
-        {{hierarchy}}
-      </span>
-      <span> 
-        LOGIN : {{login}}
-      </span>
-      <q-btn round size="14px" class="q-mr-sm" title="Fazer logout" @click="logout">
-        <q-icon name="exit_to_app" size="35px"/>
-      </q-btn>
+        <!-- Tabs para navegação na página de configurações -->
+        <div class="tab-menu"  v-show="permissions.length > 0" >
+          <q-tabs 
+            dense inline-label v-model="tab" align="justify" 
+            active-color="secundary" indicator-color="secundary"
+            narrow-indicator class="text-grey-4 menu-bar-configuraces">
+            <q-tab v-for="item in tabs " :key="item.name" :name="item.name" :label="item.label"  />
+          </q-tabs>
+        </div>
+        <!--  -->
         
-    </q-card>
-    <!--  -->
 
-    <q-tab-panels class="bg-grey-10" v-model="tab"
-     v-show="permissions.length > 0" > 
+        <!-- card com as credenciais do usuario -->
+        <q-card class="row justify-between items-center card-informativo-user
+        bg-secondary text-white" 
+        style="margin-top:5px;height:3rem;margin:0 auto;box-shadow:0 0 5px 0 #eae5e5;" 
+        v-show="login">
 
-      <!-- Acesso as configurações de cores  -->
-      <q-tab-panel  name="cores"> 
-          <cores  />
-      </q-tab-panel>
-      <!--  -->
+          <q-btn round size="14px" class="q-ml-sm" title="Informações do usuário">
+            <q-icon name="person" size="40px"/>
+          </q-btn>
+          <span> 
+            {{hierarchy}}
+          </span>
+          <span> 
+            LOGIN : {{login}}
+          </span>
+          <q-btn round size="14px" class="q-mr-sm" title="Fazer logout" @click="logout">
+            <q-icon name="exit_to_app" size="35px"/>
+          </q-btn>
+            
+        </q-card>
+        <!--  -->
 
-      <!-- Acesso as configurações dos silos  -->
-      <q-tab-panel  name="configuracoes-silo">
-          <configurador-silos :configuracaoRestritiva="configuracaoRestritiva" />
-      </q-tab-panel>
-      <!--  -->
+        <q-tab-panels class="bg-grey-10" v-model="tab"
+        v-show="permissions.length > 0" > 
 
-    </q-tab-panels>
+          <!-- Acesso as configurações de cores  -->
+          <q-tab-panel  name="cores"> 
+              <cores  />
+          </q-tab-panel>
+          <!--  -->
 
-    <login-configuracao 
-      @authenticatedUser="checkPermissions" 
-      v-show="permissions.length === 0" 
-    />
+          <!-- Acesso as configurações dos silos  -->
+          <q-tab-panel  name="configuracoes-silo">
+              <configurador-silos :configuracaoRestritiva="configuracaoRestritiva" />
+          </q-tab-panel>
+          <!--  -->
 
-  </q-page>
+        </q-tab-panels>
+
+        <login-configuracao 
+          @authenticatedUser="checkPermissions" 
+          v-show="permissions.length === 0" 
+        />
+
+      </q-page>
+    </q-page-container>
+  </q-layout>
 </template>
 
 <script>

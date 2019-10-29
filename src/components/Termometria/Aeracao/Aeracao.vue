@@ -142,7 +142,7 @@ export default {
 
     .card-de-aeracao
         height 52rem !important
-        animation entry 0.2s !important
+        animation entry 1s !important
         font-family 'Libre Caslon Text', serif
         font-size 20px
         padding 15px 

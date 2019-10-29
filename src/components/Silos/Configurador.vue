@@ -171,3 +171,8 @@ export default {
   }
 };
 </script> 
+
+<style lang="stylus">
+  .configurador-silos
+    animation entry 1s
+</style>

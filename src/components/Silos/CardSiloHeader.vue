@@ -12,12 +12,12 @@
     </div>
     <!--  -->
 
-    <!-- enviar para os relatórios -->
+    <!-- enviar para os históricos -->
     <div>
       <q-tooltip :content-style="tooltipStyle">
-        Relatórios
+        Históricos
       </q-tooltip>
-      <q-btn round class="shadow-16" glossy icon="assignment" size="18px" @click="verRelatorios(index)" />
+      <q-btn round class="shadow-16" glossy icon="assignment" size="18px" @click="verHistoricos(index)" />
     </div>
     <!--  -->
 
@@ -105,9 +105,9 @@
           }
         });
       },
-      verRelatorios(id) {
+      verHistoricos(id) {
         this.$router.push({
-          name: 'relatorios',
+          name: 'historicos',
           params: {
             id
           }

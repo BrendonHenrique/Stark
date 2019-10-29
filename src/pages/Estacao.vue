@@ -1,9 +1,10 @@
 <template>
   <!-- Estação meteorológica -->
-  <q-page id="wheater-content" class="row wheater-layout app">
-    <wheater-app class="app--weather" />
-  </q-page>
+    <q-page id="wheater-content" class="row wheater-layout app">
+      <wheater-app class="app--weather" />
+    </q-page>
   <!--  -->
+
 </template>
 
 <script>

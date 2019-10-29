@@ -16,9 +16,9 @@ const state = {
       to: '/estacao_meteorologica'
     },
     {
-      label: 'Relatórios',
+      label: 'Históricos',
       icon: 'assignment',
-      to: '/relatorios'
+      to: '/historicos'
     },
     {
       label: 'Configurações',
