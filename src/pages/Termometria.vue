@@ -31,8 +31,7 @@
     <!--  -->
 
     <!-- Paginador dos silos -->
-    <div class="paginador-de-silos-container" 
-    style="position:fixed;bottom:5rem;">
+    <div class="paginador-de-silos-container">
       <q-card class="row bg-grey-5 ">
         <q-btn  flat @click="anterior()" 
         v-bind=podeNavegarParaTras class="navigate"
@@ -135,7 +134,10 @@ export default {
     height 4rem
     width 100%
     z-index 5
-    
+    top: 0
+    bottom: 35px
+    position: sticky
+
     .q-card
         position relative
         height 4.2rem
@@ -161,8 +163,6 @@ export default {
     height 3rem
     font-family 'Libre Caslon Text', serif
 
-  .termometria-container
-    min-height 0 !important
-    margin-bottom 4rem
+
    
 </style>

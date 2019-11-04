@@ -6,7 +6,7 @@
     <pendulos  :pendulos="this.pendulos" v-show="showPendulos" /> 
     
     <!-- Fab Button com possibilidades de visualização do mapa de calor e dos sensores  -->
-    <div style="z-index:4;margin-bottom:10rem;" class="fixed-bottom-right q-mb-sm q-mr-sm">
+    <div style="z-index:4;margin-bottom:6.3rem;" class="fixed-bottom-right q-mb-sm q-mr-sm">
       <q-tooltip :content-style="{fontSize:'15px'}">
           Menu de visualizações 
       </q-tooltip>

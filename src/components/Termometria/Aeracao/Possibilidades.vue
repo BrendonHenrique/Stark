@@ -13,7 +13,18 @@
       </template>
     </q-banner>
     <!--  -->
-  
+
+    <!-- Explicação sobre o card -->
+     <q-banner dense class="bg-grey-3 q-pa-md">
+      <template v-slot:avatar>
+        <q-icon name="info" color="secondary" />
+      </template>
+      As possibilidades serão informadas pelo círculo colorido abaixo, quando for possível aerar o círculo 
+      será verde se não for possível será vermelho.
+    </q-banner>
+    <!--  -->
+    
+    
     <!-- Listagem das possibilidades de aeração com sinalização 
     vermelho(não é possivel aerar) verde(é possivel aerar)  -->
     <q-list class="possibilidades-container">

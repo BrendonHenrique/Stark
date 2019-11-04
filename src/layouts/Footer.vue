@@ -13,14 +13,10 @@
     <div id="desktop-footer">
       <q-toolbar>
         <q-toolbar-title class="row">
-            <div style="justify-content:center;justify-item:center;margin-top:1px;display:flex;">
-              <img src="static/spinedLogo.1.svg" class="rotating">
-              <img src="static/garten3.svg" style="width:300px;margin-left:5px;">
-            </div>
-          <q-space />
-          <p class="q-mt-md" style="font-family: Libre Caslon Text">
-            {{date}}
-          </p>
+          <div>
+            <img src="static/spinedLogo.1.svg" class="rotating">
+            <img src="static/garten3.svg" style="width:200px;margin-left:5px;">
+          </div>
         </q-toolbar-title>
       </q-toolbar>
     </div>
@@ -30,11 +26,6 @@
 <script>
   export default{
     props:['navs'],
-    computed: {
-      date() {
-        return new Date().getFullYear();
-      }
-    }
   }
 </script>
 
@@ -47,11 +38,10 @@
     height 5rem
   
   #desktop-footer 
-    height 5rem
     display flex 
     align-items center
+    height 35px
 
-    
     .q-tab__label 
       font-size 15px
       font-weight 600
@@ -93,8 +83,8 @@
     -o-animation rotating 5s linear infinite
     animation rotating 5s linear infinite
     position absolute
-    width 60px 
+    width 35px 
     left 25px 
-    top 3px 
+    top 8px
   
 </style>

@@ -23,3 +23,15 @@ Relatórios
     data3   11        21      23            ligado            automático 
         
     **** exportar em pdf    
+
+
+[x] Diminuir header e footer na desktop view
+[x] Colocar explicação nas possibilidades de aeração :  ' Quando for possivel aerar o círculo será verde, se não vermelho' 
+[x] Colocar title nos botões de possibilidade e de função de aeração 
+[x] Alterar cor do label no select das tabelas 
+[x] Colocar uma sinalização melhor das colunas selecionadas 
+[x] Remover o primeiro select ( já que não da pra alterar essa coluna )
+[x] No card de produtos armazenados o único input obrigatório tem que ser qual é o produto
+[] Ao acessar as tebalas deve ser possível selecionar silo e qual pêndulo
+[] Nas configurações do silo deve ser possível após inserir a quantidade de anéis também informar separadamente QUANTOS pêndulos tem em CADA anel
+

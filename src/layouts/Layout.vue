@@ -4,10 +4,11 @@
     <!-- conteúdo das páginas -->
       <q-page-container class="bg-grey-10">
           <layout-header
+            class="header"
             @openDrawerLeft="openedDrawerLeft = !openedDrawerLeft"
             @openDrawerRight="openedDrawerRight = !openedDrawerRight" >
-            <q-toolbar>
-              <q-toolbar-title class="q-pt-md text-h3 text-center">
+            <q-toolbar style="min-height:0px !important;">
+              <q-toolbar-title style="font-size:35px;" class="text-center q-pt-sm">
                 Stark
               </q-toolbar-title>
             </q-toolbar>
@@ -69,4 +70,6 @@ export default {
   .q-drawer--left 
     background-color: #353535
 
+  .header
+    height 3rem
 </style>

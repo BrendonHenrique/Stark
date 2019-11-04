@@ -167,8 +167,8 @@ export default {
         options.push(index+1);
       }
       return options;
-    }
-  }
+    },
+  },
 };
 </script> 
 

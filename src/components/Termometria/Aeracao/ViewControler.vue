@@ -4,14 +4,17 @@
     cria duas faces para o card, uma na frente e o outra atrás , e ao clicar nos botões
     ele vira o card -->
     <div class="row justify-center  q-mb-lg view-controller ">
-        <q-btn style="z-index:3;" class="view-controler-button q-mr-lg"
+        
+        <q-btn title="Ver possibilidades de aeração" style="z-index:3;" class="view-controler-button q-mr-lg"
         :push="view.Funcoes_card"  @click="$emit('changeView')" round >
             <q-img src="../../../assets/icons/possibilities.png" class="view-controler-image"/>
         </q-btn>
-        <q-btn style="z-index:3;" :push="view.Possibilidades_card" 
+        
+        <q-btn  title="Configurar aerador" style="z-index:3;" :push="view.Possibilidades_card" 
         @click="$emit('changeView')" round >
             <q-img src="../../../assets/icons/settings.png" class="view-controler-image" />
         </q-btn>
+        
     </div>
     <!--  -->
 

@@ -16,7 +16,19 @@
                 <!-- Parte esquerda do card, contém as informações sobre equilibrio higroscópico -->
                 <div class="col-xs-5 col-sm-4 col-md-4 col-lg-4">
                     <div class="column items-center">
-                        <avatar class="q-mb-md" />
+
+
+                    <!-- 
+                    Verde = Desligado
+                    Azul piscante = Partindo, ligando
+                    Azul estatico = Ligado
+                    Bege estatico = bloqueado
+                    bege piscante = manutenção
+                    vermelho estatico = térmico auto trafo (quando aplicável)
+                    vermelho piscante = falha
+                    -->
+                    
+                        <avatar-ventoinha class="q-mb-md" :status="'desligado'"/>
                         
                         <q-toggle
                         v-show="possivelLigarAerador" 
@@ -120,7 +132,7 @@ export default {
     }, 
     components:{
         'particles': require('../../Shared/Particles').default,
-        'avatar': require('./stateless/Avatar').default,
+        'avatar-ventoinha': require('./stateless/Avatar').default,
         'infos-equilibrio': require('./InfosEquilibrio').default, 
         'view-controler': require('./ViewControler').default,
         'possibilidades': require('./Possibilidades').default,

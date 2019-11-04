@@ -1,25 +1,13 @@
 <template>
   <q-header elevated>
     <link href="https://fonts.googleapis.com/css?family=Great+Vibes&display=swap" rel="stylesheet">
-      <q-toolbar>
+      <q-toolbar style="font-size:2.5rem;">
           <q-btn flat class="left-nav-menu" @click="$emit('openDrawerLeft')" round dense icon="menu" />
           <q-toolbar-title class="menu-header text-h4 text-weight-thin">
             <slot>
             </slot>
           </q-toolbar-title>
-
-          <div>
-            <q-btn round icon="wifi" color="grey-10" :text-color="buttonWifiColor" />
-            <q-tooltip :content-style="{fontSize: '18px', borderRadius: '10px'}">
-              <p v-show="connectionStatus.isConnected">
-                Conectado ao servidor
-              </p>
-              <p v-show="!connectionStatus.isConnected">
-                Não conectado ao servidor, clique para tentar novamente
-              </p>
-            </q-tooltip>
-          </div>
-
+          <q-btn title="Conexão com o servidor" round icon="wifi" color="grey-10" :text-color="buttonWifiColor" />
       </q-toolbar>
   </q-header>
 </template>

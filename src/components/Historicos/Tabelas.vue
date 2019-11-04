@@ -1,53 +1,34 @@
 <template>
-  <div class="glass-card col-sm-12 col-xs-12 col-md-12 col-lg-8">
-
-    <q-table
-      loading
-      title="Histórico"
-      :data="data"
-      :columns="columns"
-      row-key="name"
-      dark
-      color="amber"
-      rows-per-page-label="Históricos por página"
-      :visible-columns="visibleColumns"
-    >
+  <div class="col-sm-12 col-xs-12 col-md-12 col-lg-10">
+    <q-table loading title="Histórico" :data="data" :columns="columns" row-key="name" dark color="amber"
+    rows-per-page-label="Históricos por página" :visible-columns="visibleColumns">
        <template v-slot:top="props">
-        
-        <div class="q-gutter-xs" 
-        style="display: flex; align-items: center; flex-direction: column;">
+        <div class="q-gutter-xs" style="display: flex; align-items: center; flex-direction: column;">
         
          <q-avatar  size="110px" color="bg-grey-4 shadow-6">
             <q-img  src="assets/icons/metrics.svg" style="margin-top:10px;height: 80px;width:80px;"  />
           </q-avatar>
 
-          <q-space />
-
-          <div>
-             <span>
-               Selecione as colunas que deseja exibir
-             </span>
-
-             <q-select
-                v-model="visibleColumns"
-                multiple
-                borderless
-                dense
-                options-dense
-                :display-value="$q.lang.table.columns"
-                emit-value
-                map-options
-                :options="columns"
-                option-value="name"
-                style="min-width: 150px"
+          <div class="q-ma-md">
+              <q-banner dense class="bg-grey-8 q-pa-md" style="border-radius:10px;">
+                <template v-slot:avatar>
+                  <q-icon name="info" color="secondary" />
+                </template>
+                <span class="text-white">
+                  Selecione abaixo as colunas que deseja exibir na tabela
+                </span>
+              </q-banner>
+            
+              <q-select options-selected-class="text-green" use-chips class="select-colunas" dark
+                v-model="visibleColumns" multiple borderless dense options-dense display-value="Selecionar"
+                emit-value map-options :options="columns" option-value="name"
               />
            </div>
+
           </div> 
           
         </template>
-
     </q-table>
-
   </div>
 </template>
 <script>
@@ -55,7 +36,7 @@ export default {
   data () {
     return {
       visibleColumns: [
-        'data',
+        'Data',
         'sensor-1',
         'sensor-2',
         'sensor-3',
@@ -65,15 +46,7 @@ export default {
         'tempo-aeracao',
       ],
       columns: [
-        {
-          name:'data',
-          required: true,
-          label: 'Data',
-          align: 'center',
-          field: row => row.date,
-          format: val => `${val}`,
-          sortable: true
-        },
+        { name: 'Data', align: 'center', label:'Data', field: 'date',sortable: true },
         { name: 'sensor-1', align: 'center', label: 'Temp sensor 1', field: 'tempSensor1', sortable: true },
         { name: 'sensor-2', align: 'center', label: 'Temp sensor 2', field: 'tempSensor2', sortable: true },
         { name: 'sensor-3', align: 'center', label: 'Temp sensor 3', field: 'tempSensor3', sortable: true },
@@ -115,12 +88,14 @@ export default {
         }
       ]
     }
+  },
+  methods:{
   }
 }
 </script>
 
-<style lang="stylus" >
-  .q-table__top{
-    justify-content:center;
-  }
+<style lang="stylus">
+  .q-table__top
+    justify-content:center
+
 </style>
