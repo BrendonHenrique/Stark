@@ -4,18 +4,12 @@
 
 
 <p align="center">
-    <img src="https://github.com/BrendonHenrique/Stark/blob/master/stark screenshots/01.png" width="400" height="900">
-    <img src="https://github.com/BrendonHenrique/Stark/blob/master/stark screenshots/03.png" width="400" height="900">
-    <img src="https://github.com/BrendonHenrique/Stark/blob/master/stark screenshots/04.png" width="400" height="900">
-    <img src="https://github.com/BrendonHenrique/Stark/blob/master/stark screenshots/06.png" width="400" height="900">
-    <img src="https://github.com/BrendonHenrique/Stark/blob/master/stark screenshots/07.png" width="400" height="900">
-    <img src="https://github.com/BrendonHenrique/Stark/blob/master/stark screenshots/10.png" width="400" height="900">
-    <img src="https://github.com/BrendonHenrique/Stark/blob/master/stark screenshots/12.png" width="400" height="900">
-    <img src="https://github.com/BrendonHenrique/Stark/blob/master/stark screenshots/14.png" width="400" height="900">
-    <img src="https://github.com/BrendonHenrique/Stark/blob/master/stark screenshots/19.png" width="400" height="900">
-    <img src="https://github.com/BrendonHenrique/Stark/blob/master/stark screenshots/20.png" width="400" height="900">
-    <img src="https://github.com/BrendonHenrique/Stark/blob/master/stark screenshots/22.png" width="400" height="900">
-    <img src="https://github.com/BrendonHenrique/Stark/blob/master/stark screenshots/23.png" width="400" height="900">
-    <img src="https://github.com/BrendonHenrique/Stark/blob/master/stark screenshots/24.png" width="400" height="900">
-    <img src="https://github.com/BrendonHenrique/Stark/blob/master/stark screenshots/29.png" width="400" height="900">
+    <img src="https://raw.githubusercontent.com/BrendonHenrique/Stark/master/stark%20screenshots/01.png">
+    <img src="https://raw.githubusercontent.com/BrendonHenrique/Stark/master/stark%20screenshots/010.png">
+    <img src="https://raw.githubusercontent.com/BrendonHenrique/Stark/master/stark%20screenshots/012.png">
+    <img src="https://raw.githubusercontent.com/BrendonHenrique/Stark/master/stark%20screenshots/014.png">
+    <img src="https://raw.githubusercontent.com/BrendonHenrique/Stark/master/stark%20screenshots/019.png">
+    <img src="https://raw.githubusercontent.com/BrendonHenrique/Stark/master/stark%20screenshots/023.png">
+    <img src="https://raw.githubusercontent.com/BrendonHenrique/Stark/master/stark%20screenshots/028.png">
+    <img src="https://raw.githubusercontent.com/BrendonHenrique/Stark/master/stark%20screenshots/07.png">
 </p>
